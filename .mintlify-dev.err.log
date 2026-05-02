@@ -1,0 +1,248 @@
+
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2557)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  digest: '2807893035'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ENOENT: no such file or directory, open 'C:\Users\semar\OneDrive\Escritorio\flyhub\docs\wiki\calendar.md'
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}
+ ⨯ Error: ENOENT: no such file or directory, open 'C:\Users\semar\.mintlify\mint\apps\client\src\_props\generatedDocsNav.json'
+    at async s (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2518)
+    at async t (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\2339.js:1:2563)
+    at async o (C:\Users\semar\.mintlify\mint\apps\client\.next\server\chunks\8512.js:1:11334) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\semar\\.mintlify\\mint\\apps\\client\\src\\_props\\generatedDocsNav.json',
+  digest: '1223782448'
+}

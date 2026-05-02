@@ -1,0 +1,149 @@
+---
+title: My Flights
+description: Manage your Free Flight queue, start flights, recover interrupted flights, reorder dispatches, and cancel bookings.
+---
+
+# My Flights
+
+My Flights is your Free Flight dispatch queue.
+
+Every route you book from Schedules, Scheduler, Historical Routes, Tours, VIP Ops, or Manual Flights appears here before you fly it.
+
+## What My Flights is for
+
+Use My Flights to:
+
+- Review upcoming bookings.
+- Start the next flight.
+- Resume an active flight.
+- Recover an interrupted flight.
+- Cancel a dispatch.
+- Reorder your Free Flight queue if you have premium access.
+- Clear your Free Flight queue when allowed.
+
+## Page layout
+
+My Flights has three main areas:
+
+| Area | What it shows |
+| --- | --- |
+| Header | Dispatch count, Reorder, and Clear All controls. |
+| Map | The active route, or the first queued route if no flight is active. |
+| Dispatch table | Your upcoming and active flights in queue order. |
+
+The table can show route, flight number, airline, aircraft, status, and actions.
+
+## Queue order
+
+FlyHub treats My Flights as an ordered queue.
+
+Only the first actionable booking can be started.
+
+The primary booking is:
+
+- The active flight, if one exists.
+- Otherwise the first upcoming flight.
+
+Later bookings wait behind the current one and may show Pending Previous.
+
+## Empty state
+
+If there are no bookings, My Flights shows an empty schedule message.
+
+Use Find Flights to open Schedules and book a route.
+
+## Starting a flight
+
+1. Open My Flights.
+2. Find the first upcoming booking.
+3. Expand the row if needed.
+4. Click Start Flight.
+5. Choose Online or Offline if FlyHub asks.
+6. Optionally save the choice as your default tracking mode.
+7. FlyHub activates the booking and opens Active Flight.
+
+If you already saved a default tracking mode, FlyHub can use that mode directly.
+
+## Online vs offline start
+
+| Tracking mode | Use it when |
+| --- | --- |
+| Online | You fly on PC with MSFS or X-Plane telemetry. |
+| Offline | You fly on console or want to complete the flight manually. |
+
+See [Tracking Methods](/tracking-methods) for the full comparison.
+
+## Resuming a flight
+
+If a booking is already active, My Flights shows Resume Flight.
+
+Click Resume Flight to return to Active Flight.
+
+Use this if you minimized FlyHub, navigated away, or returned to the app during a flight.
+
+## Recovery actions
+
+If an active online flight has a recent recovery snapshot, My Flights can show:
+
+- Recover Flight.
+- Restart from Beginning.
+
+Recover Flight opens the Recovery Wizard and attempts to continue the interrupted flight.
+
+Restart from Beginning clears the recovery state, moves the booking back to upcoming, and lets you start again from the beginning.
+
+Recovery snapshots expire after a limited time. See [Recovery Wizard](/recovery-wizard).
+
+## Reordering flights
+
+Premium users can reorder the Free Flight queue.
+
+1. Click Reorder.
+2. Drag bookings into the order you want.
+3. Click Save.
+
+Free users may see a premium message when trying to reorder.
+
+Some VIP chain bookings must stay in their chain order.
+
+## Clear All
+
+Clear All removes your visible Free Flight queue.
+
+It is not available while active tracking is recording.
+
+Use it only when you are sure you want to remove the queued flights.
+
+## Cancel Dispatch
+
+Use Cancel Dispatch to remove one booking.
+
+1. Expand the booking.
+2. Click Cancel Dispatch.
+3. Confirm the cancellation.
+
+The booking is removed from the visible queue.
+
+VIP chains may require cancelling the whole chain instead of one leg.
+
+## Booking badges
+
+My Flights can show badges such as:
+
+- Active.
+- Next.
+- Historical.
+- Tour.
+- VIP.
+- Chain.
+- Tail or private aircraft status.
+
+Badges explain where the booking came from and whether it has special rules.
+
+## Common mistakes
+
+- Trying to start a later flight before finishing the current one.
+- Cancelling a VIP chain without realizing the whole chain may be affected.
+- Clearing the queue when you meant to cancel only one dispatch.
+- Starting offline when you wanted online telemetry.
+- Forgetting to recover before the recovery window expires.

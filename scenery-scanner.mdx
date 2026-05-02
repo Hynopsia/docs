@@ -1,0 +1,86 @@
+---
+title: Scenery Scanner
+description: Scan simulator scenery packages and manually add encrypted or missing airports.
+---
+
+# Scenery Scanner
+
+The Scenery Scanner scans your installed simulator scenery packages and shows them on a world map.
+
+It supports Microsoft Flight Simulator 2020, Microsoft Flight Simulator 2024, and X-Plane 12.
+
+## Open the scanner
+
+1. Open FlyHub Desktop.
+2. Go to Settings.
+3. Select Simulator.
+4. Find Scenery Scanner.
+5. Click Open.
+
+## Scan your sceneries
+
+1. Open the Scenery Scanner.
+2. Click Scan Sceneries.
+3. Wait for FlyHub to scan supported simulators.
+4. Review the map and result counts.
+
+After scanning, FlyHub can show scenery packages by simulator. You can filter the map by All, MSFS 2020, MSFS 2024, X-Plane 12, or Manual.
+
+## Why some airports must be added manually
+
+Some Microsoft Flight Simulator scenery cannot be scanned like normal scenery.
+
+Marketplace scenery and some default scenery packages can be encrypted. When a package is encrypted, FlyHub cannot read its files directly. This is normal and does not mean the scenery is broken.
+
+If FlyHub cannot scan an airport because it is encrypted or hidden, add it manually by ICAO code.
+
+## Add a manual airport
+
+1. Open the Scenery Scanner.
+2. Click Add.
+3. Type the 4-letter ICAO code, such as `KJFK` or `EGLL`.
+4. Click Add Airport.
+
+FlyHub saves manual entries on your computer. They stay available after you close and reopen the app.
+
+## Remove a manual airport
+
+1. Open the Scenery Scanner.
+2. Click Add to show manual entries.
+3. Find the airport chip.
+4. Click the X on the chip.
+
+## Add custom simulator paths
+
+Use custom paths if your simulator is installed in a non-standard folder or if FlyHub did not find it automatically.
+
+1. Open the Scenery Scanner.
+2. Click Paths.
+3. Choose the simulator type.
+4. Click Browse.
+5. Select the folder.
+6. Run Scan Sceneries again.
+
+## Which folder should I choose?
+
+| Simulator | Choose this folder |
+| --- | --- |
+| MSFS 2020 | The Packages folder that contains Community and Official. |
+| MSFS 2024 | The Packages folder that contains Community and Official. |
+| X-Plane 12 | The X-Plane root folder. |
+
+For X-Plane, choose the main X-Plane folder, not only `Custom Scenery`.
+
+## Remove a custom path
+
+1. Open the Scenery Scanner.
+2. Click Paths.
+3. Find the saved path.
+4. Click the delete icon next to it.
+5. Scan again if needed.
+
+## Scan results
+
+The map shows scenery packages that FlyHub could identify and match to known airports.
+
+If a package appears in the scan but not on the map, FlyHub may not have been able to match it to a valid airport coordinate.

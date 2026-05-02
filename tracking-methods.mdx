@@ -1,0 +1,71 @@
+---
+title: Tracking Methods
+description: Choose between online telemetry tracking and manual offline tracking.
+---
+
+# Tracking Methods
+
+FlyHub can track a flight in two ways: Online Tracking or Manual and Offline Mode.
+
+The right method depends on your simulator, platform, and how much automatic scoring data FlyHub can receive.
+
+<CardGroup cols={2}>
+  <Card title="Online Tracking" icon="radio-tower" href="/online-tracking">
+    Use live simulator telemetry from Microsoft Flight Simulator or X-Plane.
+  </Card>
+  <Card title="Manual and Offline Mode" icon="clipboard-pen" href="/manual-mode">
+    Complete flights manually when telemetry is unavailable or when flying on console.
+  </Card>
+</CardGroup>
+
+## Quick comparison
+
+| Method | Best for | XP |
+| --- | --- | --- |
+| Online Tracking | PC pilots using MSFS or X-Plane telemetry. | Full XP before any penalties. |
+| Manual and Offline Mode | Console pilots, unsupported setups, or pilots who cannot use telemetry. | Reduced XP based on offline trust, plausibility, and punctuality. |
+
+## Online Tracking
+
+Online Tracking is the most complete tracking method.
+
+FlyHub receives live simulator data while you fly. It can detect flight phases, position, speed, altitude, landing G-force, touchdown quality, unstable approaches, runway behavior, and operational events.
+
+Use Online Tracking when:
+
+- You fly Microsoft Flight Simulator 2020 or 2024 on PC.
+- You fly X-Plane 12 on PC with the FlyHub X-Plane plugin installed.
+- You want full telemetry scoring.
+- You want crash recovery snapshots.
+- You want the in-sim overlay and close-flight prompt.
+
+See [Online Tracking](/online-tracking) for the full guide.
+
+## Manual and Offline Mode
+
+Manual and Offline Mode lets you log a flight without live telemetry.
+
+You start the flight in FlyHub, fly it in your simulator, then enter the result manually when you finish. FlyHub uses your entered flight time, route, aircraft, landing quality, and reported issues to score the flight.
+
+Use Manual and Offline Mode when:
+
+- You fly on Xbox or PlayStation.
+- Your simulator cannot connect to FlyHub.
+- You are troubleshooting telemetry.
+- You want to log the flight manually.
+
+Offline flights use an offline trust and plausibility system. This keeps manual flying useful while keeping leaderboards and XP fair.
+
+See [Manual and Offline Mode](/manual-mode) for the full guide.
+
+## Choosing a default
+
+You can choose your default tracking mode in Settings.
+
+| Setting | What it does |
+| --- | --- |
+| Ask Every Time | FlyHub asks which method to use when you start each flight. |
+| Online | FlyHub starts flights with telemetry tracking by default. |
+| Offline | FlyHub starts flights in manual/offline mode by default. |
+
+If you are not sure, use Ask Every Time.

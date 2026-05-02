@@ -1,0 +1,182 @@
+---
+title: Online Tracking
+description: Track FlyHub flights with live simulator telemetry from MSFS or X-Plane.
+---
+
+# Online Tracking
+
+Online Tracking is FlyHub's full telemetry tracking method.
+
+Use it when you fly on PC and FlyHub can connect to your simulator while the flight is active.
+
+## What Online Tracking does
+
+Online Tracking records live simulator data while you fly.
+
+FlyHub uses this data to detect:
+
+- Aircraft position.
+- Altitude.
+- Ground speed.
+- Indicated airspeed.
+- Vertical speed.
+- Heading.
+- On-ground state.
+- Flight phases.
+- Gear, lights, and other aircraft events.
+- Touchdown and landing data.
+- Crash, hard landing, bounce, and unstable approach signals.
+- Route progress and total distance.
+
+You do not need to enter the result manually. FlyHub builds the flight record from telemetry.
+
+## Supported simulators
+
+| Simulator | Requirement |
+| --- | --- |
+| Microsoft Flight Simulator 2020 | FlyHub Desktop and SimConnect. |
+| Microsoft Flight Simulator 2024 | FlyHub Desktop and SimConnect. |
+| X-Plane 12 | FlyHub Desktop and the FlyHub X-Plane plugin. |
+
+Microsoft Flight Simulator does not need a FlyHub simulator plugin. It connects through SimConnect.
+
+X-Plane needs the FlyHub X-Plane plugin. See [X-Plane Plugin](/x-plane-plugin).
+
+## Before you start
+
+Before starting an online tracked flight:
+
+1. Install FlyHub Desktop.
+2. Open your simulator.
+3. Open FlyHub Desktop.
+4. Make sure you are logged in.
+5. Book or select the flight in FlyHub.
+6. Spawn at the correct departure airport.
+7. Start the flight in FlyHub before departure.
+8. Choose Online if FlyHub asks for a tracking method.
+
+Do not wait until cruise to start the flight. FlyHub needs the beginning of the flight to understand the full operation.
+
+## Normal online flight flow
+
+1. Start the simulator.
+2. Open FlyHub Desktop.
+3. Open your booked flight.
+4. Click Start Flight.
+5. Choose Online.
+6. Fly normally.
+7. Land at the destination.
+8. Taxi in.
+9. Use Close Flight when FlyHub prompts you.
+10. Review the saved flight in your logbook.
+
+## What FlyHub expects during online tracking
+
+FlyHub expects the simulator and desktop app to stay connected during the flight.
+
+For best results:
+
+- Keep FlyHub Desktop open.
+- Do not close the simulator before closing the flight in FlyHub.
+- Start at the booked departure airport.
+- Fly the booked route honestly.
+- Land at the planned destination when possible.
+- Use the recovery wizard if the simulator crashes.
+- Install X-Plane plugin updates when FlyHub asks for them.
+
+## Flight phases
+
+FlyHub automatically tracks the flight phase.
+
+Common phases include:
+
+- Preflight.
+- Taxi.
+- Takeoff.
+- Climb.
+- Cruise.
+- Descent.
+- Approach.
+- Landing.
+- Taxi-in.
+
+These phases help FlyHub decide when to watch for certain events. For example, landing data matters at touchdown, while cruise data matters during the enroute portion.
+
+## Landing and scoring
+
+Online Tracking gives FlyHub the most complete scoring data.
+
+FlyHub can score or detect:
+
+- Touchdown G-force.
+- Crash conditions.
+- Bounces.
+- Unstable approach.
+- Runway touchdown behavior.
+- Centerline behavior.
+- Gear handling.
+- Light usage.
+- Altimeter setting.
+- Slew or teleport behavior.
+- Sim rate penalties when supported by the flight data.
+
+Online flights normally earn full XP before any penalties.
+
+XP can be reduced by serious scoring problems, crashes, cheating, or sim rate penalties.
+
+## Closing the flight
+
+After landing, FlyHub may show a Close Flight prompt on the Active Flight page or in the simulator overlay.
+
+Close the flight after arrival, not before landing.
+
+Recommended flow:
+
+1. Land.
+2. Exit the runway.
+3. Taxi to parking or the gate.
+4. Stop the aircraft.
+5. Use Close Flight in FlyHub.
+6. Confirm the result.
+
+If you close the simulator first, FlyHub may lose the final telemetry it needs to finish cleanly.
+
+## Recovery support
+
+Online Tracking supports recovery snapshots.
+
+If your simulator crashes, your PC restarts, FlyHub closes, or power is lost, FlyHub may offer the Recovery Wizard when you return.
+
+Recovery is only available when FlyHub had enough online telemetry to save recovery data. Recovery snapshots expire after a limited time.
+
+See [Recovery Wizard](/recovery-wizard) for the full guide.
+
+## Online network bonuses
+
+If you connect your VATSIM CID or IVAO VID in Settings, FlyHub can detect matching online network flights.
+
+When FlyHub confirms the network presence, the flight can receive:
+
+- A network badge.
+- A +10% XP bonus.
+
+The saved VATSIM or IVAO ID must match the account you use online.
+
+## Common online tracking issues
+
+| Problem | What to check |
+| --- | --- |
+| FlyHub does not detect MSFS | Start MSFS first, then FlyHub Desktop, and confirm SimConnect is available. |
+| FlyHub does not detect X-Plane | Install or update the FlyHub X-Plane plugin and restart X-Plane. |
+| Flight was started offline by mistake | Cancel or finish according to the current state, then start the next flight with Online selected. |
+| No close-flight prompt appears | Open the Active Flight page and check whether telemetry is still connected. |
+| Recovery does not appear | Recovery needs online telemetry snapshots and must be used before it expires. |
+
+## Best practices
+
+- Use Online Tracking whenever you fly on a supported PC simulator.
+- Start FlyHub before pushback.
+- Keep the desktop app open until the flight is saved.
+- Use the overlay if you want close-flight prompts inside the simulator.
+- Keep the X-Plane plugin updated.
+- Use Manual and Offline Mode only when telemetry is not available or not intended.

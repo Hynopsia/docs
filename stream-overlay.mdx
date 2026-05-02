@@ -1,0 +1,181 @@
+---
+title: Stream Overlay
+description: Set up the FlyHub browser-source overlay for OBS, Streamlabs, and dual-PC streaming.
+---
+
+# Stream Overlay
+
+Stream Overlay creates a local browser-source overlay for streaming software such as OBS or Streamlabs.
+
+Use it when you want your viewers to see FlyHub flight data on stream.
+
+## Open Stream Overlay settings
+
+1. Open FlyHub Desktop.
+2. Go to Settings.
+3. Select Simulator.
+4. Find Stream Overlay.
+5. Click Configure.
+
+## Start the overlay
+
+1. Open Stream Overlay settings.
+2. Turn on Run overlay now.
+3. Wait for the Browser Source URL to appear.
+4. Copy the Browser Source URL.
+
+The default local overlay URL uses port `41987`.
+
+## Add it to OBS
+
+1. Open OBS.
+2. Add a new Browser source.
+3. Paste the Browser Source URL from FlyHub.
+4. Set the width and height you want.
+5. Save the source.
+
+If OBS is on the same PC as FlyHub, use the Browser Source URL.
+
+## Add it to Streamlabs
+
+1. Open Streamlabs.
+2. Add a Browser Source.
+3. Paste the Browser Source URL from FlyHub.
+4. Set the source size.
+5. Save the source.
+
+## Start with FlyHub
+
+Turn on Start with FlyHub if you want the stream overlay server to start automatically when FlyHub Desktop opens.
+
+This is useful if you stream often and do not want to start the overlay manually every time.
+
+## Dual PC or LAN access
+
+Use Dual PC / LAN access only when your streaming software runs on another computer on the same private network.
+
+1. Turn on Run overlay now.
+2. Turn on Dual PC / LAN access.
+3. Copy the Streaming PC URL.
+4. Paste that URL into OBS or Streamlabs on the streaming PC.
+
+If FlyHub says no private LAN address was found, make sure both PCs are on the same private network.
+
+## Rotate the LAN URL
+
+If you use Dual PC / LAN access, FlyHub creates an access token in the URL.
+
+Click Rotate to create a new URL. After rotating, update the browser source on the streaming PC.
+
+Use Rotate if you accidentally shared the URL or want to invalidate an old streaming PC URL.
+
+## Change the local port
+
+Only change Local port if another app is already using the default overlay port.
+
+1. Enter a port number between 1024 and 65535.
+2. Click Apply.
+3. Copy the new Browser Source URL.
+4. Update OBS or Streamlabs.
+
+## Choose a theme
+
+The Theme setting changes the overlay look.
+
+| Theme | Use it for |
+| --- | --- |
+| Primary | Default FlyHub dark stream style. |
+| Day Mode | A lighter stream style. |
+| Custom | Custom colors, custom CSS, and layout designer edits. |
+
+## Custom colors
+
+Custom colors only apply when Theme is set to Custom.
+
+You can change:
+
+- Primary background.
+- Primary text.
+- Primary border.
+- Secondary background.
+- Secondary text.
+- Accent.
+
+Click Reset Custom if you want to return to the default custom colors.
+
+## Custom CSS
+
+Custom CSS lets advanced users change the overlay style for OBS.
+
+1. Set Theme to Custom.
+2. Edit the Custom CSS box.
+3. FlyHub saves changes automatically on this PC.
+
+Use View Default to inspect the default CSS. Use Example to insert a starter CSS example.
+
+## Layout Designer
+
+The Layout Designer lets you build a custom 16:9 overlay canvas.
+
+You can add:
+
+- Data layers.
+- Text layers.
+- Image layers.
+- Color blocks.
+
+You can move, resize, reorder, and delete layers.
+
+## Data fields
+
+Data layers can show live flight values such as:
+
+- Callsign.
+- Network.
+- Aircraft.
+- Origin and destination.
+- Ground speed.
+- Altitude.
+- Heading.
+- Vertical speed.
+- Progress.
+- ETA.
+- Status.
+- Phase.
+
+These values update while FlyHub receives flight data.
+
+## Add a data layer
+
+1. Open the Layout Designer.
+2. Click Data.
+3. Select the new layer.
+4. Choose the Sim var / data field.
+5. Adjust position, size, font, color, and suffix.
+
+## Add an image
+
+1. Open the Layout Designer.
+2. Click Image.
+3. Select the image layer.
+4. Click Import Image.
+5. Choose a PNG, JPEG, WEBP, or GIF.
+6. Adjust fit, size, and position.
+
+Imported images are saved for the local stream overlay.
+
+## Apply changes
+
+Click Apply after changing main overlay settings. Some designer and style changes are pushed automatically, but Apply is the safest way to make sure the overlay server has the latest configuration.
+
+## Live status
+
+The Live Status panel shows:
+
+- Whether the overlay is running.
+- The active address.
+- LAN access status.
+- Whether flight data is being received.
+- Any overlay error.
+
+If it says Waiting for flight data, start or resume a FlyHub flight.

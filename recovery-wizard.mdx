@@ -1,0 +1,253 @@
+---
+title: Recovery Wizard
+description: Recover an interrupted FlyHub flight after a simulator crash, app crash, power outage, or PC restart.
+---
+
+# Recovery Wizard
+
+The Recovery Wizard helps you continue a FlyHub flight after something interrupts it.
+
+Use it if your simulator crashes to desktop, FlyHub closes, your PC restarts, or you lose power during an active online flight.
+
+## What recovery can do
+
+Recovery can restore your aircraft close to the last saved state from the interrupted flight.
+
+FlyHub can restore:
+
+- Last saved position.
+- Altitude.
+- Heading.
+- Pitch and bank.
+- Airspeed.
+- Vertical speed.
+- X-Plane movement data through the FlyHub X-Plane plugin.
+
+Recovery also keeps the flight tied to the same active booking so you can continue and close the flight normally.
+
+## When recovery appears
+
+Recovery appears only when FlyHub has a recent recovery point for an active flight.
+
+You may see Recover Flight on:
+
+- Dashboard.
+- My Flights.
+- Active Flight.
+
+The button usually appears after FlyHub detects that the simulator or flight session was interrupted.
+
+## Recovery time limit
+
+Recovery points expire after about 6 hours.
+
+If more than 6 hours have passed since the last saved recovery point, FlyHub treats the flight as abandoned. In that case, start the flight again from the beginning.
+
+## Important limits
+
+Recovery is not available for every situation.
+
+Recovery usually requires:
+
+- The flight was started in FlyHub.
+- The flight was using online telemetry.
+- FlyHub had enough time after takeoff to save a recovery point.
+- The booking is still active.
+- The recovery point is less than 6 hours old.
+
+If the flight never started, never connected, or never saved a recovery point, the wizard cannot restore it.
+
+## After a crash or outage
+
+Do this first:
+
+1. Restart your PC if needed.
+2. Open FlyHub Desktop.
+3. Sign in to the same FlyHub account.
+4. Start your simulator.
+5. Load the same aircraft or a close equivalent.
+6. Open Dashboard, My Flights, or Active Flight.
+7. Click Recover Flight if it appears.
+
+Do not cancel the booking unless you want to abandon the flight.
+
+## Step 1: Simulator sync
+
+The first wizard step checks that your simulator is running and sending a valid position.
+
+You will see a comparison between:
+
+- Last known: the saved recovery point.
+- Current sim: what your simulator is reporting right now.
+
+Before clicking Next:
+
+1. Make sure the simulator is open.
+2. Make sure FlyHub is connected to the simulator.
+3. Spawn near the last known area if possible.
+4. Wait until Current sim shows valid coordinates.
+5. Click Next.
+
+If the wizard says there are no valid coordinates, reconnect the simulator first.
+
+## Step 2: Fuel and weight check
+
+The second step checks fuel and zero fuel weight.
+
+This matters because FlyHub needs the recovered aircraft to be close to the saved flight state. If fuel or payload is very different, the recovered flight may not be realistic or fair.
+
+The wizard checks:
+
+- ZFW: zero fuel weight.
+- Fuel: current fuel weight.
+
+Set your aircraft fuel and payload in the simulator or aircraft EFB until the values are green.
+
+## What ZFW means
+
+ZFW means zero fuel weight. It is the aircraft weight without usable fuel.
+
+In simple terms, it represents the aircraft, passengers, cargo, and payload before fuel is counted.
+
+Try to match the saved ZFW as closely as possible.
+
+## Fuel for ground recovery
+
+If the saved recovery point was on the ground, match the saved fuel as closely as possible.
+
+When both ZFW and fuel are within range, click Next.
+
+## Fuel for in-air recovery
+
+If the saved recovery point was in the air, FlyHub allows extra fuel.
+
+This is because you may need to take off, climb, and stabilize before FlyHub restores you to the saved position. That short setup flight burns fuel, so the wizard allows and recommends a recovery fuel buffer.
+
+Follow the fuel recommendation shown in the wizard. Do not load far more fuel than the allowed range.
+
+## Step 3: Restore state
+
+The third step restores the aircraft.
+
+What you do depends on where the interrupted flight was saved.
+
+## If the flight was saved on the ground
+
+If the last recovery point was on the ground:
+
+1. Load the aircraft at a nearby airport or parking position.
+2. Make sure the simulator is connected.
+3. Complete the fuel and ZFW check.
+4. Click Restore state.
+
+FlyHub restores the saved position and state.
+
+## If the flight was saved in the air
+
+If the last recovery point was in the air, the wizard shows autopilot values to preset.
+
+You may see values like:
+
+- IAS.
+- HDG.
+- ALT.
+- VS.
+
+Before restoring:
+
+1. Take off normally.
+2. Retract gear and flaps when appropriate.
+3. Climb above 10,000 ft AGL.
+4. Stabilize the aircraft.
+5. Dial the shown IAS, heading, altitude, and vertical speed if your aircraft supports it.
+6. Click Restore state.
+
+FlyHub requires in-air recovery to be airborne above 10,000 ft AGL before restore. This avoids restoring from an unsafe low-altitude setup.
+
+## After restore
+
+After a successful restore, FlyHub shows Position restored.
+
+For about 30 seconds after restore, FlyHub pauses some checks such as slew and sim-rate detection. This gives you time to stabilize the aircraft after the restore.
+
+After that short grace period, normal scoring rules apply again.
+
+Continue flying normally and close the flight in FlyHub after landing.
+
+## Microsoft Flight Simulator notes
+
+For Microsoft Flight Simulator, FlyHub restores the aircraft through SimConnect.
+
+Make sure:
+
+- Microsoft Flight Simulator is running.
+- FlyHub Desktop is connected.
+- The aircraft is loaded.
+- You are ready before clicking Restore state.
+
+## X-Plane notes
+
+For X-Plane, FlyHub uses the X-Plane plugin for recovery.
+
+Make sure:
+
+- X-Plane is running.
+- The FlyHub X-Plane plugin is installed and current.
+- X-Plane is not paused.
+- FlyHub Desktop is connected to X-Plane.
+
+If restore does not work in X-Plane, update the FlyHub X-Plane plugin from Settings > Simulator and restart X-Plane.
+
+## If Recover Flight does not appear
+
+Recover Flight may not appear if:
+
+- The flight was not started in FlyHub.
+- The flight was offline/manual.
+- The simulator disconnected before FlyHub saved a recovery point.
+- The booking was completed or cancelled.
+- The recovery point is older than 6 hours.
+- You are signed in to a different account.
+
+Open My Flights and confirm the booking is still active.
+
+## If the wizard says recovery expired
+
+If the wizard says the recovery expired, the saved recovery point is too old.
+
+Start the flight again from the beginning. The old recovery point cannot be used.
+
+## If fuel or ZFW will not turn green
+
+Try this:
+
+1. Check that you loaded the same aircraft or a close equivalent.
+2. Set payload and passengers first.
+3. Set fuel second.
+4. Check whether the aircraft EFB uses kilograms or pounds.
+5. Wait a few seconds for telemetry to update in FlyHub.
+
+If the aircraft model is very different, matching ZFW may be difficult.
+
+## If restore fails
+
+Try this:
+
+1. Keep the wizard open.
+2. Confirm the simulator is still connected.
+3. Confirm the aircraft is loaded and not paused.
+4. For in-air recovery, confirm you are above 10,000 ft AGL.
+5. For X-Plane, confirm the plugin is installed and up to date.
+6. Click Restore state again.
+
+If it still fails, close the wizard, reopen Recover Flight, and try again before the 6-hour window expires.
+
+## Best practices
+
+- Keep FlyHub Desktop open during online flights.
+- Start the FlyHub flight before departure.
+- Do not cancel the booking after a crash unless you want to abandon it.
+- Reopen FlyHub as soon as possible after a crash or outage.
+- Use the same aircraft when recovering.
+- Match fuel and payload carefully.
+- After restore, fly normally and close the flight in FlyHub after arrival.

@@ -1,0 +1,309 @@
+---
+title: Manual and Offline Mode
+description: Complete FlyHub flights manually when telemetry is unavailable or when flying on console.
+---
+
+# Manual and Offline Mode
+
+Manual and Offline Mode lets you complete FlyHub flights without live simulator telemetry.
+
+Use it when FlyHub cannot read your simulator directly, or when you choose to log the flight manually.
+
+## Who should use it
+
+Use Manual and Offline Mode if:
+
+- You fly on Xbox.
+- You fly on PlayStation.
+- Your PC simulator cannot connect to FlyHub.
+- You are troubleshooting telemetry.
+- You do not want automatic tracking for this flight.
+- You are flying in a setup where FlyHub Desktop is not available.
+
+If you fly Microsoft Flight Simulator or X-Plane on PC and telemetry works, use [Online Tracking](/online-tracking) instead.
+
+## What offline mode means
+
+Offline mode does not mean the flight is ignored.
+
+You still start the flight in FlyHub. You still fly the route in your simulator. You still record check-ins in FlyHub during the flight. You still complete the final debrief in FlyHub when you are done.
+
+The difference is that FlyHub does not receive live aircraft telemetry. Because of that, FlyHub asks you to confirm the flight phases, route checkpoints, and final result manually.
+
+## What FlyHub expects
+
+FlyHub expects you to enter an honest result.
+
+You should:
+
+- Start the FlyHub flight before departure.
+- Keep the Active Flight page available during the flight.
+- Record the required offline check-ins as you fly.
+- Fly the route in your simulator.
+- Use a realistic aircraft for the route.
+- Enter real UTC times for each check-in.
+- Enter the real landing quality.
+- Report major issues honestly.
+- Submit the flight after arrival.
+
+Offline mode is built on trust, but FlyHub still checks whether the entry looks realistic.
+
+## Normal offline flight flow
+
+1. Book or select a flight in FlyHub.
+2. Click Start Flight.
+3. Choose Offline if FlyHub asks for a tracking method.
+4. The Active Flight page opens the offline mission tracker.
+5. Click Start Flight and enter the actual UTC preflight time.
+6. Record pushback when you push back or begin ground movement.
+7. Record takeoff when you depart.
+8. Record required checkpoints during the route.
+9. Record landing after touchdown.
+10. Record parked when you arrive at the gate, stand, ramp, or parking spot.
+11. Open the debrief after the parked check-in is saved.
+12. Enter the requested final details.
+13. Review the XP multiplier and plausibility warning if one appears.
+14. Submit the flight.
+15. Check the saved flight in your logbook.
+
+## Offline mission check-ins
+
+The offline mission tracker is the main part of Manual and Offline Mode.
+
+It records the progress of the flight without reading telemetry from your simulator.
+
+Required check-ins can include:
+
+- Preflight start.
+- Pushback.
+- Takeoff.
+- Mandatory route checkpoints.
+- Landing.
+- Parked.
+
+FlyHub uses these check-ins to build the offline flight timeline, estimate progress, show the flight on the Live Map when available, and calculate punctuality.
+
+Check-ins must be recorded in order. FlyHub will not accept a check-in time that is earlier than your previous recorded check-in.
+
+## Required route checkpoints
+
+FlyHub creates required checkpoints from the route.
+
+When the OFP route has usable named fixes, FlyHub chooses checkpoints along the route. When there are not enough usable fixes, FlyHub creates virtual checkpoints such as CP1, CP2, and CP3.
+
+Record each required checkpoint when you reach it or as close as possible to the actual crossing time.
+
+Required checkpoints matter because they are part of offline punctuality scoring.
+
+## Optional OFP fixes
+
+Some flights also show optional OFP fixes.
+
+Optional fixes are extra route points from the OFP. They are not the same as required checkpoints.
+
+Use them if you want a more detailed manual route record.
+
+## AFK Cruise Mode
+
+During cruise, the offline tracker may offer AFK Cruise Mode.
+
+AFK Cruise Mode pauses checkpoint prompts and can auto-record OFP fixes by dead-reckoning while it is active.
+
+Use it when you will be away during cruise. Turn it off when you are ready to continue recording the flight normally.
+
+## What you enter at the end
+
+After the parked check-in, FlyHub opens the debrief. The debrief may ask for:
+
+- Landing quality.
+- Reported distance, when available.
+- Major issues.
+- Go-arounds.
+- Notes or debrief details.
+- Proof attachment, when supported by the form.
+
+The exact form may change depending on the flight type, but the goal is always the same: combine your mission check-ins with an honest debrief so FlyHub can score the flight fairly.
+
+## Landing quality
+
+Offline landing quality is selected manually.
+
+Common landing quality values are:
+
+| Landing quality | Meaning |
+| --- | --- |
+| Perfect | Excellent landing. Use this only when the landing was genuinely excellent. |
+| Smooth | Very good landing. |
+| Average | Normal safe landing. |
+| Firm | Firm but safe landing. |
+| Hard | Hard landing. |
+| Crash | The flight ended in a crash. |
+
+Do not choose Perfect for every flight. FlyHub treats very high manual scores as a normal warning signal because real landings vary.
+
+## Reported issues
+
+Report issues that happened during the flight.
+
+Examples include:
+
+- Overspeed.
+- Late departure.
+- Unstable approach.
+- Long landing.
+- Flight aborted.
+- Crash.
+
+Reported issues can reduce the final score, but they keep your logbook accurate.
+
+## XP in offline mode
+
+Offline flights earn reduced XP compared with online telemetry flights.
+
+This keeps FlyHub fair because offline flights do not provide full simulator evidence.
+
+Offline XP is based on:
+
+- Your offline trust score.
+- The flight plausibility score.
+- Whether the entry has useful debrief or proof.
+- Punctuality from your pushback, takeoff, checkpoint, landing, and parked check-ins.
+- Any penalties from the reported result.
+
+## Offline trust score
+
+Your offline trust score is a 0-100 score.
+
+It represents how reliable your manual flight submissions have been over time.
+
+New or low-trust users start with lower offline XP multipliers. As you submit realistic offline flights, your trust score can improve.
+
+## How trust changes
+
+Trust changes after offline flights.
+
+| Result | Trust effect |
+| --- | --- |
+| Plausibility score 80 or higher | Trust increases more. |
+| Plausibility score 60-79 | Trust increases slightly. |
+| Plausibility score below 50 | Trust can decrease. |
+| Plausibility score below 40 | Trust can decrease more. |
+| Good realistic landing score | Trust can improve slightly. |
+| Always reporting perfect landings | Does not build trust as strongly. |
+
+The best way to build trust is to submit realistic flight times, routes, aircraft, and landing results consistently.
+
+## Plausibility score
+
+FlyHub calculates a plausibility score from 0-100 for offline flights.
+
+The score checks whether the submitted flight makes sense.
+
+FlyHub may compare:
+
+- Origin and destination.
+- Route distance.
+- Recorded check-in times.
+- Aircraft type.
+- Implied average speed.
+- Landing score.
+- Go-around count.
+- Very short or very long flight times.
+
+A high plausibility score means the flight looks realistic.
+
+A low plausibility score means FlyHub found something unusual, such as a flight time that is too short for the route and aircraft.
+
+## Plausibility warnings
+
+FlyHub may show a plausibility alert before you submit.
+
+This does not always mean you did something wrong. It means the entry deserves a second look.
+
+Check:
+
+- Did you enter the correct flight time?
+- Did you choose the correct route?
+- Did you select the correct aircraft?
+- Did you accidentally enter minutes as hours, or hours as minutes?
+- Was the landing quality entered honestly?
+
+If the warning is caused by a mistake, correct the entry before submitting.
+
+## Offline XP multipliers
+
+Offline XP starts from a reduced baseline.
+
+The multiplier can change depending on trust and plausibility.
+
+| Situation | Approximate base XP multiplier |
+| --- | --- |
+| Normal low-trust offline flight | 50% |
+| Trusted offline flight | 65% |
+| High trust with useful debrief or proof | 80% |
+| Questionable plausibility | Reduced below the normal multiplier. |
+| Very suspicious plausibility | Can be reduced heavily. |
+
+Punctuality can add up to an additional 20% when the flight type supports punctuality scoring.
+
+The final offline multiplier is capped so offline flights do not exceed full online XP.
+
+## Why offline XP is reduced
+
+Online flights provide telemetry. FlyHub can verify the flight path, aircraft movement, landing data, and many operational events.
+
+Offline flights depend on manual entry. Reduced XP keeps the system fair for everyone while still allowing console pilots and unsupported setups to participate.
+
+## What happens in the logbook
+
+Offline flights are saved in your logbook.
+
+They may show:
+
+- Offline status.
+- Flight time.
+- Landing score.
+- XP earned.
+- Offline XP multiplier.
+- Plausibility score.
+- Trust score applied at the time of completion.
+
+Your trust score can change after the flight is processed.
+
+## What offline mode cannot do
+
+Manual and Offline Mode cannot record live telemetry.
+
+That means it cannot automatically detect:
+
+- Exact flight path.
+- Exact touchdown G-force.
+- Exact speed history.
+- Real-time altitude profile.
+- Gear timing.
+- Light usage.
+- Bounce detection from telemetry.
+- In-sim crash data.
+- Recovery snapshots.
+
+If you need those features, use Online Tracking.
+
+## Common mistakes
+
+| Mistake | Why it matters |
+| --- | --- |
+| Entering an impossible flight time | Lowers plausibility and may reduce XP. |
+| Skipping required check-ins | Hurts the offline timeline and can reduce punctuality. |
+| Choosing Perfect every time | Does not look realistic over many flights. |
+| Forgetting to report a crash | Makes the logbook inaccurate and can hurt trust if patterns look suspicious. |
+| Starting offline when online was intended | FlyHub will not collect telemetry for that flight. |
+| Waiting too long to finish | You may forget the correct details. |
+
+## Best practices
+
+- Write down block time or use your simulator's flight timer.
+- Enter the real landing quality, even if it was not great.
+- Report issues honestly.
+- Use realistic aircraft for the route.
+- Correct plausibility warnings before submitting.
+- Use Online Tracking when telemetry is available.
