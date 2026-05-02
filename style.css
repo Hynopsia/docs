@@ -1,0 +1,5 @@
+#navbar a[href="https://flyhub.app"] img {
+  height: 32px !important;
+  max-height: 32px !important;
+  width: auto !important;
+}

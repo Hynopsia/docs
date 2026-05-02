@@ -148,24 +148,13 @@
       </g>
     </g>
   </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer3"
-     inkscape:label="Text">
-    <text
-       xml:space="preserve"
-       id="text11"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:104.159px;font-family:Inter;-inkscape-font-specification:'Inter Semi-Bold';writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect11);fill:#000000;fill-opacity:1;stroke:#c40000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       transform="matrix(3.7445487,0,0,3.7445487,-3594.0774,-968.43503)"><tspan
-         x="1266"
-         y="422.41433"
-         id="tspan2"><tspan
-           style="fill:#ffffff;stroke:#0095c4"
-           id="tspan1">FlyHub</tspan></tspan></text>
-    <text
-       xml:space="preserve"
-       transform="scale(1.0000696)"
-       id="text14"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:390px;font-family:Inter;-inkscape-font-specification:'Inter Semi-Bold';writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect14);fill:#ffffff;fill-opacity:1;stroke:#0095c4;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-  </g>
+  <text
+     id="flyhub-wordmark"
+     x="1138"
+     y="640"
+     fill="#ffffff"
+     font-family="Inter, Arial, Helvetica, sans-serif"
+     font-size="390"
+     font-weight="700"
+     letter-spacing="0">FlyHub</text>
 </svg>
