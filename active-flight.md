@@ -1,6 +1,6 @@
 ---
-title: Active Flight
-description: Use the Active Flight page to prepare, file, track, and manage a booked FlyHub flight.
+title: "Active Flight"
+description: "Use the Active Flight page to prepare, file, track, and manage a booked FlyHub flight."
 ---
 
 # Active Flight
@@ -60,6 +60,8 @@ This can include:
 Use these details to set up your simulator flight, pick the correct airport, and prepare the route.
 
 If terminal or gate information is available, FlyHub shows it here so you can start and park in the right place.
+
+**Note: not every flight will have gate/terminal information**
 
 ## External flight tools
 
@@ -212,6 +214,10 @@ Use this if the OFP is too small or too large for your display.
 This is especially useful for users on smaller monitors or high-resolution screens.
 
 ## Notepad
+
+<Frame>
+  ![Screenshot 2026 05 02 205343](/images/Screenshot-2026-05-02-205343.png)
+</Frame>
 
 The Notepad button opens a flight note panel.
 
@@ -384,20 +390,3 @@ See [Simulator Overlay](/simulator-overlay) for the setup guide.
 - Finishing when the flight was not actually completed.
 - Closing the simulator before closing the flight in FlyHub.
 - Skipping offline check-ins when using Offline Mode.
-
-## Quick workflow
-
-1. Open My Flights.
-2. Open the booked flight.
-3. Review airline, flight number, route, and aircraft.
-4. Check departure and arrival details.
-5. Change aircraft if needed before planning is locked.
-6. Connect telemetry if using online tracking.
-7. Generate or refresh the OFP if needed.
-8. Review the OFP.
-9. File with VATSIM, IVAO, PilotEdge, or check FlightAware if needed.
-10. Use the notepad for clearances and reminders.
-11. Click Start Tracking when ready.
-12. Fly the route.
-13. Finish the flight when complete.
-14. Review the saved logbook entry.
