@@ -1,150 +1,403 @@
 ---
-title: "Active Flight"
-mode: "default"
+title: Active Flight
+description: Use the Active Flight page to prepare, file, track, and manage a booked FlyHub flight.
 ---
 
 # Active Flight
 
-Your cockpit companion when flying. FlyHub tracks your flight in real time on PC, or lets you log it manually on console or offline.
+The Active Flight page is where you manage the flight you are about to fly or are currently tracking.
 
----
+Use this page to review the route, file your flight plan, connect telemetry, read the OFP, change aircraft before dispatch, take notes, start tracking, and finish or abort the flight.
 
-## Overview
+<Frame>
+  ![Active Flight page](/images/Screenshot-2026-05-02-203247.png)
+</Frame>
 
-The Active Flight page appears when you’ve started a flight and are flying it. You see route info, telemetry (if connected), and controls to finish or cancel the flight. It works in both the desktop app and the web.
+## When to use Active Flight
+
+Open Active Flight after you have a booked flight in My Flights.
+
+You can reach it from:
+
+- My Flights.
+- A booked schedule route.
+- A historical route booking.
+- A manual flight.
+- A VIP booking.
+- A tour leg.
+
+The page changes depending on the flight type, whether an OFP has been generated, and whether tracking has started.
+
+## Flight header
+
+The top of the page shows the main flight information.
+
+This can include:
+
+- Airline or operator.
+- Flight number.
+- Departure airport.
+- Arrival airport.
+- Aircraft type.
+- Aircraft registration when available.
+- Current tracking actions.
+
+Use this section to confirm you are opening the correct flight before starting.
+
+## Departure and arrival information
+
+The departure and arrival panels show key airport and schedule details.
+
+This can include:
+
+- Departure time in Zulu.
+- Arrival time in Zulu.
+- Terminal.
+- Gate.
+- Origin airport.
+- Destination airport.
+
+Use these details to set up your simulator flight, pick the correct airport, and prepare the route.
+
+If terminal or gate information is available, FlyHub shows it here so you can start and park in the right place.
+
+## External flight tools
+
+The Active Flight page includes quick buttons for external flight services.
+
+Depending on the flight, you may see buttons for:
+
+- FlightAware.
+- VATSIM.
+- IVAO.
+- PilotEdge.
+
+### FlightAware
+
+Use FlightAware when you want to check real-world flight information for the route or flight number.
+
+This is useful for comparing timing, route context, or real-world operation details when available.
+
+### VATSIM
+
+Use VATSIM to file or prefill the flight plan for online flying on VATSIM.
+
+Before filing, review the aircraft, route, departure, arrival, callsign, and remarks.
+
+### IVAO
+
+Use IVAO to file or prefill the flight plan for IVAO.
+
+Review the route and aircraft details before submitting.
+
+### PilotEdge
+
+Use PilotEdge if you are flying on PilotEdge and want to file or prepare the flight for that network.
+
+These buttons are shortcuts. Always review the information before submitting anything to an online network.
+
+## Change aircraft
+
+The Active Flight page can let you change the aircraft for the booking before the flight is dispatched.
+
+Use Change Aircraft if:
+
+- You booked a route with multiple valid aircraft options.
+- You selected the wrong aircraft.
+- You want to fly another compatible aircraft type.
+- You need to match the aircraft you actually have loaded in the simulator.
+
+Aircraft changes are only available before certain steps are completed.
+
+Once an OFP has been generated or imported, FlyHub may lock the aircraft because the route planning, weights, fuel, and aircraft-specific data are already tied to that aircraft.
+
+If you need to change aircraft after that point, you may need to refresh or recreate the flight planning data depending on the flight type.
+
+## Telemetry connection
+
+The Telemetry section shows whether FlyHub is connected to your simulator.
+
+For PC tracking, this is where you confirm that FlyHub can read simulator data.
+
+You may see a telemetry provider such as:
+
+- SimConnect for Microsoft Flight Simulator.
+- X-Plane plugin telemetry for X-Plane.
+
+The connection state can show whether telemetry is connected or disconnected.
+
+If telemetry is disconnected, use the Connect button.
+
+Before starting online tracking, make sure:
+
+- The simulator is running.
+- The correct aircraft is loaded.
+- The FlyHub desktop app is open.
+- The simulator connection is working.
+- The X-Plane plugin is installed if you are using X-Plane.
+- SimConnect is available if you are using Microsoft Flight Simulator.
+
+If telemetry is not connected, FlyHub cannot track the flight online.
 
 For a full explanation of tracking choices, see [Tracking Methods](/tracking-methods), [Online Tracking](/online-tracking), and [Manual and Offline Mode](/manual-mode).
 
-<Frame>
-  ![Screenshot 2026 05 02 203247](/images/Screenshot-2026-05-02-203247.png)
-</Frame>
+## Operational Flight Plan
 
----
+The OFP section shows the route briefing for the flight.
 
-## PC Telemetry Tracking
+Use the OFP to prepare the flight before departure.
 
-### Microsoft Flight Simulator (2020 & 2024)
+The OFP can include:
 
-- FlyHub connects automatically via **SimConnect**.
-- No plugin needed.
-- Start your sim, spawn at the departure airport, then start the flight in FlyHub.
+- Route summary.
+- Fuel planning.
+- Routing.
+- Flight impacts.
+- Times and weights.
+- Flight log.
+- Wind information.
+- Runway analysis.
+- Airport weather.
+- NOTAM information.
+- Company NOTAMs when available.
 
-### X-Plane 12
+The OFP is generated from the flight data and selected aircraft.
 
-- Requires the **FlyHub plugin**.
-- Install it from **Settings → X-Plane Plugin**: select your X-Plane folder, then Install Plugin.
-- **Restart X-Plane** after installation.
+Review it before starting the flight so you understand the route, fuel, cruise planning, and expected timing.
 
----
+## Refresh OFP
 
-## What FlyHub Detects (At a User Level)
+Use Refresh OFP when you need FlyHub to regenerate the operational flight plan.
 
-When telemetry is connected, FlyHub tracks:
+This is useful if:
 
-- **Phases:** Preflight → Taxi → Takeoff → Climb → Cruise → Descent → Approach → Landing → Taxi-in
-- **Events:** Gear up/down, flaps, lights, touchdown
-- **Position, altitude, speed, G-force** at touchdown for scoring
+- The OFP is missing.
+- The OFP failed to load.
+- You changed planning information before the OFP was locked.
+- You want to regenerate the dispatch package.
 
-You don’t need to do anything special — fly normally and FlyHub records it.
+If the aircraft or route is already locked, some changes may no longer be available.
 
----
+## OFP units
 
-## Console / Manual (Offline) Mode
+The OFP can use your selected units.
 
-If you fly on Xbox or PlayStation, or prefer not to use telemetry:
+For example, fuel and weight may show in kilograms or pounds depending on your SimBrief/FlyHub unit setting.
 
-1. Choose **Offline** when starting the flight (or set it as your default in Settings).
-2. The Active Flight page opens the offline mission tracker.
-3. Click **Start Flight** and enter the actual UTC time you began preflight.
-4. Record each required check-in as the flight progresses:
-   - Pushback
-   - Takeoff
-   - Required route checkpoints
-   - Landing
-   - Parked
-5. Record optional OFP fixes if you want extra detail.
-6. After Parked is recorded, open the debrief and enter the final flight result, landing quality, and any issues.
+You can change your default SimBrief units in Settings.
+
+## OFP outline
+
+The outline on the left lets you jump through OFP sections quickly.
+
+Use it when you only need a specific part of the briefing, such as:
+
+- Summary and fuel.
+- Routing.
+- Times and weights.
+- Flight log.
+- Wind information.
+- Runway analysis.
+- Weather.
+- NOTAMs.
+
+This is useful on long OFPs where scrolling through the entire dispatch package would take too long.
+
+## OFP zoom
+
+The zoom controls let you change the OFP text size.
+
+Use this if the OFP is too small or too large for your display.
+
+This is especially useful for users on smaller monitors or high-resolution screens.
+
+## Notepad
+
+The Notepad button opens a flight note panel.
+
+Use the notepad to write anything you want to keep during the flight.
+
+Examples:
+
+- ATC clearances.
+- Assigned runway.
+- SID or STAR changes.
+- Cruise altitude.
+- Step climbs.
+- Fuel notes.
+- VATSIM, IVAO, or PilotEdge instructions.
+- Personal reminders.
+- Approach briefing notes.
+
+The notepad is meant to help you keep quick operational notes without leaving the Active Flight page.
+
+## Start Tracking
+
+Use Start Tracking when you are ready to begin the flight in FlyHub.
+
+Before clicking Start Tracking, check that:
+
+- The correct flight is open.
+- The correct aircraft is selected.
+- Your simulator is running.
+- Telemetry is connected if you are using online tracking.
+- The OFP is ready if you plan to use it.
+- You are at the correct departure airport.
+- You are ready to begin the flight flow.
+
+After tracking starts, FlyHub begins recording the flight according to the selected tracking mode.
+
+For online tracking, FlyHub records simulator telemetry.
+
+For offline/manual tracking, FlyHub follows the manual check-in flow instead.
+
+## During the flight
+
+While the flight is active, FlyHub can track or display flight progress depending on the tracking mode.
+
+For online tracking, FlyHub can record:
+
+- Position.
+- Altitude.
+- Ground speed.
+- Vertical speed.
+- Heading.
+- Aircraft state.
+- Flight phases.
+- Takeoff.
+- Landing.
+- Touchdown data.
+- Telemetry events.
+- Scoring-related events.
+
+This data is used later for the flight report, logbook entry, scoring, XP, telemetry graphs, and map review.
+
+## Console and Manual Offline Mode
+
+If you fly on Xbox or PlayStation, or prefer not to use telemetry, choose Offline when starting the flight.
+
+Offline flights use the Active Flight page as a manual mission tracker.
+
+During the flight, record the required check-ins as the flight progresses:
+
+- Preflight.
+- Pushback or departure preparation.
+- Takeoff.
+- Required route checkpoints.
+- Landing.
+- Parked or completed.
+
+After the Parked check-in is saved, open the debrief and enter the final flight result, landing quality, and any issues.
 
 Offline flights are logged and scored from your check-ins and debrief. Offline XP is based on trust, plausibility, punctuality, and reported issues.
 
----
+## Finish Flight
 
-## How to Start a Flight
+When the flight is complete, FlyHub saves the result and creates a logbook entry.
 
-1. Go to **My Flights**.
-2. Select your next or active booking.
-3. Click **Start Flight**.
-4. Choose **Online** (PC with telemetry) or **Offline** (console/manual).
-5. You’re taken to the Active Flight page.
-6. **Online:** Ensure your sim is running and you’re at the departure airport.
-7. Fly normally — FlyHub tracks everything in the background.
+For online tracking:
 
----
+1. Land and taxi in.
+2. Finish your normal shutdown or arrival flow.
+3. Use the Close Flight or Finish Flight action when FlyHub prompts you.
+4. Confirm the completion.
+5. FlyHub computes the score, saves the logbook entry, and updates XP.
 
-## How to Properly Finish a Flight
+For offline tracking:
 
-### Online (Telemetry)
+1. Record the required check-ins during the flight.
+2. Save the Parked or completed check-in.
+3. Open the debrief.
+4. Enter landing quality and any issues.
+5. Review any offline XP or plausibility warnings shown.
+6. Submit the debrief.
 
-1. Land and taxi to the gate.
-2. Shut down engines (or follow your in-sim flow).
-3. The app will prompt you to **Close Flight** — in the overlay (if enabled) or on the Active Flight page.
-4. Click **Close Flight** and confirm.
-5. FlyHub computes your score, saves the log, and updates your XP.
+After the flight is saved, you can open the flight entry from your logbook to review:
 
-### Offline (Manual)
+- Score.
+- XP.
+- Landing data.
+- Penalties.
+- Telemetry.
+- Map path.
+- Event markers.
+- Flight details.
 
-1. Use the offline mission tracker during the flight.
-2. Record pushback, takeoff, required checkpoints, landing, and parked.
-3. After the Parked check-in is saved, click **Open Debrief**.
-4. Enter the landing quality and any issues.
-5. Review the offline XP multiplier and plausibility warnings if shown.
-6. Submit the debrief. The flight is then logged with the offline XP multiplier shown in the form.
+## Abort Flight
 
----
+Use Abort Flight only when you need to cancel the active flight.
+
+This is useful if:
+
+- You started the wrong flight.
+- You selected the wrong booking.
+- You need to stop before departure.
+- You no longer want to continue the flight.
+
+Aborting a flight is different from finishing a flight.
+
+Only finish the flight when you actually completed it.
 
 ## Flight Recovery After CTD
 
 If your simulator crashes or closes mid-flight:
 
-1. **Reopen FlyHub** as soon as you can.
-2. On the **Dashboard** or **My Flights**, look for the **Recover Flight** button (amber).
+1. Reopen FlyHub as soon as you can.
+2. On the Dashboard or My Flights, look for the Recover Flight button.
 3. Click it to open the recovery flow.
-4. FlyHub restores your last known position (location, altitude, fuel, etc.).
-5. **Match your sim:** Load the same aircraft, set fuel (ZFW) and payload to match what FlyHub shows.
-6. Spawn at the restored position (or as close as possible).
-7. Continue the flight and finish normally.
+4. FlyHub restores the last known flight position and state when a recovery snapshot is available.
+5. Load the same aircraft in the simulator.
+6. Match the fuel and payload values shown by FlyHub as closely as possible.
+7. Spawn at the restored position, or as close as your simulator allows.
+8. Continue the flight and finish normally.
 
-**When recovery appears:** Only when FlyHub had telemetry and saved a snapshot.\
-**Expiry:** Recovery snapshots expire after **6 hours**. After that, start the flight again.
+Recovery only appears when FlyHub had enough telemetry to save a recovery snapshot.
+
+Recovery snapshots expire after 6 hours.
 
 For the full step-by-step recovery process, see [Recovery Wizard](/recovery-wizard).
 
----
+## Overlay in the desktop app
 
-## Overlay (Desktop App)
+When enabled in Settings, the simulator overlay can appear inside the simulator window.
 
-When enabled in Settings (desktop app only):
+The overlay can show:
 
-- A small overlay appears **inside the simulator window**.
-- It shows landing feedback (e.g. G-force, rating) and the **Close Flight** prompt when you’ve landed.
-- You can finish the flight without leaving the sim.
+- Tracking status.
+- Landing feedback.
+- Touchdown data.
+- Close Flight prompt after arrival.
 
----
+Use the overlay if you want to finish the flight without leaving the simulator window.
 
-## Quick Tips
+See [Simulator Overlay](/simulator-overlay) for the setup guide.
 
-- Keep FlyHub and your sim running together; don’t close FlyHub mid-flight.
-- In Offline Mode, keep the Active Flight page available so you can record required check-ins.
-- For X-Plane, install the plugin and restart the sim before your first flight.
-- After a crash, return to FlyHub quickly so recovery is still available.
-- Use the overlay (desktop) to close the flight without alt-tabbing.
+## Common mistakes
 
----
+- Starting tracking before the simulator is connected.
+- Forgetting to check the selected aircraft.
+- Generating an OFP before changing aircraft.
+- Filing to VATSIM, IVAO, or PilotEdge without reviewing the prefilled flight plan.
+- Ignoring the OFP fuel and route information.
+- Forgetting to use the notepad for ATC changes.
+- Aborting when you meant to finish.
+- Finishing when the flight was not actually completed.
+- Closing the simulator before closing the flight in FlyHub.
+- Skipping offline check-ins when using Offline Mode.
 
-## Common Mistakes
+## Quick workflow
 
-- **Forgetting to start the flight** — You must click Start Flight in My Flights; telemetry won’t record otherwise.
-- **Closing the sim before Close Flight** — Always close the flight in FlyHub first so it’s scored and saved.
-- **Skipping offline check-ins** — Offline Mode requires mission check-ins before the final debrief.
-- **X-Plane not connecting** — Check that the plugin is installed and X-Plane was restarted.
-- **Recovery expired** — If it’s been more than 6 hours since the crash, recovery won’t be available.
+1. Open My Flights.
+2. Open the booked flight.
+3. Review airline, flight number, route, and aircraft.
+4. Check departure and arrival details.
+5. Change aircraft if needed before planning is locked.
+6. Connect telemetry if using online tracking.
+7. Generate or refresh the OFP if needed.
+8. Review the OFP.
+9. File with VATSIM, IVAO, PilotEdge, or check FlightAware if needed.
+10. Use the notepad for clearances and reminders.
+11. Click Start Tracking when ready.
+12. Fly the route.
+13. Finish the flight when complete.
+14. Review the saved logbook entry.
