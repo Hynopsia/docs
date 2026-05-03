@@ -1,6 +1,6 @@
 ---
-title: Profile and Logbook
-description: Understand the Free Flight profile, XP, career stats, passport, type ratings, achievements, pinned badges, and flight entries.
+title: "Profile and Logbook"
+description: "Understand the Free Flight profile, XP, career stats, passport, type ratings, achievements, pinned badges, and flight entries."
 ---
 
 # Profile and Logbook
@@ -10,6 +10,10 @@ Your Free Flight profile is your pilot record.
 Use it to review your XP, rank, stats, badges, type ratings, achievements, passport, and every completed Free Flight logbook entry.
 
 Career Mode has its own career profile and career logbook. This page explains the normal Free Flight profile.
+
+<Frame>
+  ![Screenshot 2026 05 02 205444](/images/Screenshot-2026-05-02-205444.png)
+</Frame>
 
 ## Opening your profile
 
@@ -58,6 +62,10 @@ For scoring details, see [Scoring and XP](/scoring-xp).
 
 ## Career Stats tab
 
+<Frame>
+  ![Screenshot 2026 05 02 205500](/images/Screenshot-2026-05-02-205500.png)
+</Frame>
+
 The Career Stats tab is a Free Flight analytics page.
 
 It is not Career Mode progression. It is a deep statistics view for your Free Flight history.
@@ -87,6 +95,10 @@ Use this tab when you want to understand what you fly most, how often you fly, w
 
 ## Passport tab
 
+<Frame>
+  ![Screenshot 2026 05 02 205519](/images/Screenshot-2026-05-02-205519.png)
+</Frame>
+
 The Passport tab tracks the world you have visited through completed Free Flight flights.
 
 It can show:
@@ -103,6 +115,10 @@ A country stamp appears when your completed flights include an airport in that c
 Airport familiarity badges are based on repeated visits to airports. The more often you use an airport, the stronger that airport's familiarity badge can become.
 
 ## Type ratings
+
+<Frame>
+  ![Screenshot 2026 05 02 205533](/images/Screenshot-2026-05-02-205533.png)
+</Frame>
 
 Type ratings track your experience with aircraft families and aircraft types in Free Flight.
 
@@ -155,6 +171,10 @@ To remove one, open Type Ratings again and click **Unpin**.
 
 ## Achievements
 
+<Frame>
+  ![Screenshot 2026 05 02 205602](/images/Screenshot-2026-05-02-205602.png)
+</Frame>
+
 Achievements show completed tour badges and other badge-style profile rewards.
 
 Open Achievements from the profile overview card.
@@ -188,6 +208,10 @@ Pinned achievement badges appear on the profile overview.
 If you no longer want a badge displayed, open Achievements and unpin it.
 
 ## Logbook
+
+<Frame>
+  ![Screenshot 2026 05 02 205625](/images/Screenshot-2026-05-02-205625.png)
+</Frame>
 
 The Logbook section lists your completed Free Flight entries.
 
@@ -229,6 +253,14 @@ The flight detail page opens.
 ## Flight detail page
 
 The flight detail page is where you review what happened on one flight.
+
+<Frame>
+  ![Screenshot 2026 05 02 205721](/images/Screenshot-2026-05-02-205721.png)
+</Frame>
+
+<Frame>
+  ![Screenshot 2026 05 02 205730](/images/Screenshot-2026-05-02-205730.png)
+</Frame>
 
 It can show:
 
