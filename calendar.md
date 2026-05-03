@@ -1,6 +1,6 @@
 ---
-title: Calendar
-description: Plan Free Flight bookings on a monthly roster, move flights between days, and view route maps.
+title: "Calendar"
+description: "Plan Free Flight bookings on a monthly roster, move flights between days, and view route maps."
 ---
 
 # Calendar
@@ -10,6 +10,10 @@ Calendar lets you plan when to fly your Free Flight bookings.
 It shows a monthly roster, pending queue, selected-day panel, and route map.
 
 Career Mode uses a separate Career calendar and assignment rules.
+
+<Frame>
+  ![Screenshot 2026 05 02 203009](/images/Screenshot-2026-05-02-203009.png)
+</Frame>
 
 ## Monthly roster
 

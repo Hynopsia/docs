@@ -1,6 +1,6 @@
 ---
-title: Schedules
-description: Search current official routes, book flights, generate itineraries, and suggest missing recent routes.
+title: "Schedules"
+description: "Search current official routes, book flights, generate itineraries, and suggest missing recent routes."
 ---
 
 # Schedules
@@ -34,6 +34,10 @@ Premium users can book from all active official FlyHub airlines.
 Schedules only uses airlines in the official FlyHub roster. If you want to fly a non-roster airline, use [Manual Flights](/manual-flights) as a premium user.
 
 ## Manual Bid overview
+
+<Frame>
+  ![Screenshot 2026 05 02 202008](/images/Screenshot-2026-05-02-202008.png)
+</Frame>
 
 Manual Bid lets you search the current schedule database.
 
@@ -133,6 +137,10 @@ If a route has more than one aircraft option, FlyHub asks you to select one befo
 
 ## Scheduler overview
 
+<Frame>
+  ![Screenshot 2026 05 02 202110](/images/Screenshot-2026-05-02-202110.png)
+</Frame>
+
 Scheduler generates a multi-leg itinerary from your rules.
 
 Use it when you want FlyHub to build a trip instead of searching one route at a time.
@@ -182,6 +190,10 @@ Scheduler needs at least one eligible airline. Aircraft filters narrow the gener
 Distance and Flight Time work like Manual Bid filters, but they apply to every generated leg.
 
 ### Airport Rules
+
+<Frame>
+  ![Image](/images/image.png)
+</Frame>
 
 Airport Rules let you control which airports the generator can use.
 
@@ -237,6 +249,10 @@ When you save an itinerary, FlyHub adds all generated legs to My Flights.
 Each leg becomes an upcoming booking. You can then schedule them on the Calendar or start them from My Flights in order.
 
 ## Suggest a route
+
+<Frame>
+  ![Screenshot 2026 05 02 202218](/images/Screenshot-2026-05-02-202218.png)
+</Frame>
 
 Use Suggest a route only for current official schedule routes.
 

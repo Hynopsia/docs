@@ -1,11 +1,15 @@
 ---
-title: Dashboard
-description: Understand the Free Flight Dashboard, next mission card, airline rotation, monthly airline choice, stats, and quick links.
+title: "Dashboard"
+description: "Understand the Free Flight Dashboard, next mission card, airline rotation, monthly airline choice, stats, and quick links."
 ---
 
 # Dashboard
 
 The Dashboard is the main hub for Free Flight Mode.
+
+<Frame>
+  ![Dashboard Free Flight](/images/dashboard-free-flight.png)
+</Frame>
 
 Use it to see what to fly next, check your free-tier airline access, review your pilot stats, and jump to the main Free Flight pages.
 

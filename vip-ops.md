@@ -1,6 +1,6 @@
 ---
-title: VIP Ops
-description: Use FlyHub VIP Ops for charter-board missions, multi-leg chains, returning clients, manual VIP bids, private tails, and VIP progression.
+title: "VIP Ops"
+description: "Use FlyHub VIP Ops for charter-board missions, multi-leg chains, returning clients, manual VIP bids, private tails, and VIP progression."
 ---
 
 # VIP Ops
@@ -25,6 +25,10 @@ Premium users see two main tabs:
 The Charter Board is the main VIP Ops mission board.
 
 It shows available VIP charters and lets you accept missions into My Flights.
+
+<Frame>
+  ![Screenshot 2026 05 02 202555](/images/Screenshot-2026-05-02-202555.png)
+</Frame>
 
 ## Board layout
 
@@ -104,6 +108,10 @@ Manual VIP Flights are separate from the board lock.
 
 ## Multi-Leg chains
 
+<Frame>
+  ![Screenshot 2026 05 02 202613](/images/Screenshot-2026-05-02-202613.png)
+</Frame>
+
 Multi-Leg chains are packages of linked VIP legs.
 
 They can represent route chains or seasonal event chains.
@@ -182,6 +190,10 @@ It has two modes:
 
 ## Manual VIP Bid
 
+<Frame>
+  ![Screenshot 2026 05 02 202634](/images/Screenshot-2026-05-02-202634.png)
+</Frame>
+
 Manual Bid searches VIP-bookable schedules.
 
 1. Open VIP Ops.
@@ -198,6 +210,10 @@ Manual Bid searches VIP-bookable schedules.
 Manual VIP Bid is useful when you want a schedule-based VIP operation instead of a board mission.
 
 ## VIP Flight Builder
+
+<Frame>
+  ![Screenshot 2026 05 02 202648](/images/Screenshot-2026-05-02-202648.png)
+</Frame>
 
 Flight Builder creates a VIP flight from scratch.
 

@@ -1,6 +1,6 @@
 ---
-title: Stream Overlay
-description: Set up the FlyHub browser-source overlay for OBS, Streamlabs, and dual-PC streaming.
+title: "Stream Overlay"
+description: "Set up the FlyHub browser-source overlay for OBS, Streamlabs, and dual-PC streaming."
 ---
 
 # Stream Overlay
@@ -19,6 +19,10 @@ Use it when you want your viewers to see FlyHub flight data on stream.
 
 ## Start the overlay
 
+<Frame>
+  ![Image](/images/image.png)
+</Frame>
+
 1. Open Stream Overlay settings.
 2. Turn on Run overlay now.
 3. Wait for the Browser Source URL to appear.
@@ -26,7 +30,7 @@ Use it when you want your viewers to see FlyHub flight data on stream.
 
 The default local overlay URL uses port `41987`.
 
-## Add it to OBS
+## Add it to OBS 
 
 1. Open OBS.
 2. Add a new Browser source.
@@ -50,9 +54,20 @@ Turn on Start with FlyHub if you want the stream overlay server to start automat
 
 This is useful if you stream often and do not want to start the overlay manually every time.
 
-## Dual PC or LAN access
+## Dual PC or LAN acces
+
+<Frame>
+  ![Dual Pc](/images/dual-pc.png)
+</Frame>
+
+<Frame>
+</Frame>
 
 Use Dual PC / LAN access only when your streaming software runs on another computer on the same private network.
+
+<Frame>
+  ![Theme Overlay](/images/theme-overlay.png)
+</Frame>
 
 1. Turn on Run overlay now.
 2. Turn on Dual PC / LAN access.
@@ -82,6 +97,10 @@ Only change Local port if another app is already using the default overlay port.
 
 The Theme setting changes the overlay look.
 
+<Frame>
+  ![Theme Overlay](/images/theme-overlay.png)
+</Frame>
+
 | Theme | Use it for |
 | --- | --- |
 | Primary | Default FlyHub dark stream style. |
@@ -89,6 +108,10 @@ The Theme setting changes the overlay look.
 | Custom | Custom colors, custom CSS, and layout designer edits. |
 
 ## Custom colors
+
+<Frame>
+  ![Custom Colors](/images/custom-colors.png)
+</Frame>
 
 Custom colors only apply when Theme is set to Custom.
 
@@ -113,7 +136,139 @@ Custom CSS lets advanced users change the overlay style for OBS.
 
 Use View Default to inspect the default CSS. Use Example to insert a starter CSS example.
 
+Example of custom CSS\>
+
+<Frame>
+  ![Overlay Custom Css](/images/overlay-custom-css.png)
+</Frame>
+
+```text
+/*
+  FlyHub Stream Overlay — "Techwear Brutalism" Theme
+  -------------------------------------------------------
+  An aggressive, esports-inspired UI featuring chamfered 
+  corners, tactical caution stripes, and high-impact fonts.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=JetBrains+Mono:wght@800&display=swap');
+
+/* 1. Tactical Color Palette */
+.fh-overlay[data-theme="custom"] {
+  /* Matte dark gray/black */
+  --fh-bg: #0f1115; 
+  /* Off-white "paper" text */
+  --fh-text: #ece8e1; 
+  /* High-energy Esports Red */
+  --fh-primary: #ff4655; 
+  --fh-accent: #ff4655;
+  --fh-border: #2b2e36;
+  --fh-muted: #8b8f98;
+  --fh-panel-soft: transparent;
+}
+
+/* 2. The Container (Chamfered "Cut" Edges) */
+.fh-overlay[data-theme="custom"] .fh-display-grid {
+  border: 1px solid var(--fh-border);
+  /* Thick red accent line anchoring the bottom */
+  border-bottom: 4px solid var(--fh-primary);
+  border-radius: 0;
+  /* CSS magic to cut off the top-left and bottom-right corners */
+  clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+  box-shadow: none;
+}
+
+/* 3. Panel Textures (Subtle Warning Stripes) */
+.fh-overlay[data-theme="custom"] .fh-telemetry {
+  position: relative;
+  border-right: 2px solid var(--fh-border);
+  /* Faint diagonal lines in the background */
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 70, 85, 0.04),
+    rgba(255, 70, 85, 0.04) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+.fh-overlay[data-theme="custom"] .fh-ident {
+  border-left: 2px solid var(--fh-border);
+}
+
+/* 4. High-Impact Typography */
+/* Tiny tags become blocky and mechanical */
+.fh-overlay[data-theme="custom"] .fh-tag,
+.fh-overlay[data-theme="custom"] .fh-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--fh-muted);
+}
+
+/* Data fields use a tall, compressed, aggressive font */
+.fh-overlay[data-theme="custom"] .fh-data {
+  font-family: 'Teko', sans-serif;
+  font-size: 26px; /* Teko needs to be larger to read well */
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: -4px; /* Adjusts Teko's natural baseline */
+}
+
+/* Airport codes get massive presence */
+.fh-overlay[data-theme="custom"] .fh-point strong {
+  font-family: 'Teko', sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--fh-text);
+  margin-top: -6px;
+}
+
+/* 5. Progress Bar (Hazard Tape Style) */
+.fh-overlay[data-theme="custom"] .fh-progress-container {
+  height: 8px;
+  border-radius: 0;
+  background: #1e2127;
+  border: 1px solid var(--fh-border);
+}
+
+.fh-overlay[data-theme="custom"] .fh-progress-fill {
+  background: var(--fh-primary);
+  /* Adds black diagonal slashes over the red bar */
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(15, 17, 21, 0.6) 10px,
+    rgba(15, 17, 21, 0.6) 20px
+  );
+  transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* Snappy animation */
+}
+
+/* 6. Inverted "Sticker" Badges for specific data */
+.fh-overlay[data-theme="custom"] .fh-data-wide {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 800;
+  background: var(--fh-text);
+  color: var(--fh-bg); /* Inverted text */
+  padding: 4px 10px;
+  /* Another angled cut for the badge itself */
+  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  text-transform: uppercase;
+}
+
+.fh-overlay[data-theme="custom"] [data-field="phase"] {
+  color: var(--fh-primary);
+}
+```
+
 ## Layout Designer
+
+<Frame>
+  ![Canvas Overlay](/images/canvas-overlay.png)
+</Frame>
 
 The Layout Designer lets you build a custom 16:9 overlay canvas.
 
@@ -163,6 +318,10 @@ These values update while FlyHub receives flight data.
 6. Adjust fit, size, and position.
 
 Imported images are saved for the local stream overlay.
+
+<Frame>
+  ![Canvas Example](/images/canvas-example.png)
+</Frame>
 
 ## Apply changes
 
