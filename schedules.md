@@ -3,6 +3,10 @@ title: "Schedules"
 description: "Search current official routes, book flights, generate itineraries, and suggest missing recent routes."
 ---
 
+<iframe src="https://www.youtube.com/embed/2-IlgTrcdRw" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+
+<iframe src="https://www.youtube.com/embed/JtnQWu_GHqM" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+
 # Schedules
 
 Schedules is the main Free Flight page for current official airline routes.

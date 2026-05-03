@@ -194,6 +194,8 @@ It has two modes:
   ![Screenshot 2026 05 02 202634](/images/Screenshot-2026-05-02-202634.png)
 </Frame>
 
+<iframe src="https://www.youtube.com/embed/2-IlgTrcdRw" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+
 Manual Bid searches VIP-bookable schedules.
 
 1. Open VIP Ops.
