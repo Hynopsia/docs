@@ -106,6 +106,12 @@
         ]
       },
       {
+        "group": "Non-Compatible Planes",
+        "pages": [
+          "list"
+        ]
+      },
+      {
         "group": "Help",
         "pages": [
           "FAQ"
