@@ -88,6 +88,17 @@
         "group": "Career Mode",
         "pages": [
           "career-mode",
+          "career-onboarding",
+          "career-game-loop",
+          "career-dashboard",
+          "career-company",
+          "career-dispatch",
+          "career-calendar",
+          "career-my-flights",
+          "career-finance",
+          "career-job-market",
+          "career-leaderboards",
+          "career-profile",
           "settings-career-mode"
         ]
       },
