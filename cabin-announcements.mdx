@@ -8,6 +8,8 @@ Cabin Announcements is a desktop feature that plays airline-style PA audio durin
 
 The feature is built for local audio packs. You can use the bundled default pack, point FlyHub at a custom announcements folder, or create packs for specific airlines, cargo operations, VIP operations, aircraft families, airports, and times of day.
 
+FlyHub custom packs use event-style file names. Each sound starts with a known announcement name such as `BoardingWelcome` or `SafetyBriefing`, and optional variants are added with square-bracket tags.
+
 ## Requirements
 
 Cabin Announcements requires:
@@ -141,13 +143,15 @@ Use Files to select and inspect the sound pack folder.
 | File list | Shows valid announcement files FlyHub found. |
 | Preview | Plays a file directly so you can test the audio. |
 
-For FNX-style packs, select the folder named `Announcements`, not the aircraft package folder above it.
+Select the folder that directly contains the announcement pack folders or audio files. For many FNX-style community packs, this folder is named `Announcements`. If a download contains an aircraft package folder and an `Announcements` folder inside it, select the `Announcements` folder.
 
 Example:
 
 ```text
 C:\Users\<you>\AppData\Local\Packages\Microsoft.Limitless_8wekyb3d8bbwe\LocalCache\Packages\Community\FNX Announcements\Announcements
 ```
+
+In this example, the folder to select in FlyHub is `Announcements`, because that is the folder FlyHub should scan.
 
 ### Announcements Tab
 
@@ -156,7 +160,7 @@ Use Announcements to choose which announcement events are allowed to play.
 | Setting | What it does |
 | --- | --- |
 | Sound Pack | Manually selects a detected pack instead of using automatic airline or operation matching. |
-| Use Default folder if airline files are missing | Allows FlyHub to fall back to `Default` when the selected airline or operation pack does not contain a matching file. |
+| Use operation default if selected pack files are missing | Allows FlyHub to fall back to the operation default pack, such as `PAX`, `Cargo`, or `VIP`, when the selected airline or manual pack does not contain a matching file. |
 | Announcement toggles | Enables or disables individual events such as `SafetyBriefing`, `AfterLanding`, or `DisembarkStarted`. |
 
 Disabling an announcement means FlyHub will skip that event even if the file exists.
@@ -201,7 +205,7 @@ Saved settings include:
 - Resume music behavior.
 - Enabled and disabled announcements.
 - Selected or automatic sound pack mode.
-- Default-folder fallback.
+- Operation-default fallback.
 - Tweak values.
 - GSX integration state.
 - Custom announcements root folder.
@@ -212,14 +216,18 @@ These settings persist between desktop sessions.
 
 A sound pack root is the folder FlyHub scans. Inside it, create one or more pack folders.
 
+The root folder can have any name. This wiki uses `Announcements` in examples because many FNX-style packs use that name and because it makes the selected folder easy to identify. The important part is that FlyHub is pointed at the folder containing the pack folders or audio files.
+
 Basic layout:
 
 ```text
 Announcements/
-  Default/
+  PAX/
     BoardingWelcome.ogg
     SafetyBriefing.ogg
     AfterLanding.ogg
+  Default/
+    BoardingWelcome.ogg
   AAL/
     BoardingWelcome.ogg
     SafetyBriefing.ogg
@@ -251,11 +259,11 @@ Recommended folder names:
 
 | Folder name | Use |
 | --- | --- |
-| `Default` | Generic fallback pack. |
 | Airline ICAO or code, such as `AAL`, `DAL`, `UAE` | Airline-specific pack. |
 | `PAX` | Generic passenger-operation pack. |
 | `Cargo` | Generic cargo-operation pack. |
 | `VIP` | Generic VIP/private-operation pack. |
+| `Default` | Optional generic pack that can be selected manually or used when the selected root folder itself is a direct pack. |
 | `<Airline>_PAX` | Airline-specific passenger pack. |
 | `<Airline>_Cargo` | Airline-specific cargo pack. |
 | `<Airline>_VIP` | Airline-specific VIP/private pack. |
@@ -267,16 +275,16 @@ Pack folder names are matched case-insensitively.
 When automatic pack selection is enabled, FlyHub looks for audio in this order:
 
 1. Manual sound pack override from the sidebar, if one is selected.
-2. Airline plus operation folder, such as `UAE_Cargo`.
-3. Airline folder, such as `UAE`.
-4. Operation folder, such as `PAX`, `Cargo`, or `VIP`.
-5. `Default`, if default fallback is enabled.
+2. Direct selected-root pack folder, if the selected root itself contains announcement files.
+3. Airline plus operation folder, such as `UAE_Cargo`.
+4. Airline folder, such as `UAE`.
+5. Operation folder, such as `PAX`, `Cargo`, or `VIP`, if operation fallback is enabled.
 
 If no matching file is found, FlyHub skips that announcement.
 
 ## File Naming Rules
 
-Every file must start with a known announcement name. Optional tags go in square brackets after the name.
+Every file must start with a known FlyHub announcement name. Optional tags go in square brackets after the name. Files with unknown base names are ignored.
 
 Basic files:
 
@@ -408,13 +416,13 @@ This is useful when an airline pack should suppress a generic fallback file.
 
 ## Creating a Pack
 
-1. Create a root folder named `Announcements`.
-2. Inside it, create a folder for your pack, such as `Default`, `AAL`, `UAE_Cargo`, or `VIP`.
+1. Create or choose a root folder. `Announcements` is recommended, but the folder can have any name.
+2. Inside it, create a folder for your pack, such as `PAX`, `Default`, `AAL`, `UAE_Cargo`, or `VIP`.
 3. Add files using the exact announcement names from the table above.
 4. Use `.ogg`, `.wav`, or `.mp3`.
 5. Keep each file below 50 MB.
 6. Open Active Flight \> Cabin Announcements \> Files.
-7. Select the `Announcements` root folder.
+7. Select the root folder that contains your pack folders.
 8. Click Rescan.
 9. Use Preview to test files.
 10. Choose the pack in the Announcements tab or leave automatic selection enabled.
@@ -423,7 +431,7 @@ Minimal useful pack:
 
 ```text
 Announcements/
-  Default/
+  PAX/
     BoardingWelcome.ogg
     SafetyBriefing.ogg
     AfterLanding.ogg
@@ -482,17 +490,19 @@ The overlay does not replace the announcement sidebar. The sidebar is where file
 | --- | --- |
 | No audio devices appear | Click Refresh. If the device still does not appear, click Add Device, select it from the OS picker, then choose it in FlyHub. |
 | Audio plays from the wrong device | Select the device in the Audio tab. Use System default if Windows should route it. |
+| Rescan finds no files | Make sure the selected folder directly contains pack folders or audio files. For FNX-style downloads, this is often the `Announcements` folder inside the downloaded package. |
 | File appears to be ignored | Check the file extension, size, and base name. The file must start with a known announcement name. |
 | `MEDIA_ELEMENT_ERROR: Format error` | The browser audio engine could not decode the file. Confirm it is a real `.ogg`, `.wav`, or `.mp3`, not a renamed file or unsupported codec. |
 | Boarding does not auto-start | Use manual Boarding phase or Play Next. For MSFS, enable GSX integration if you rely on GSX boarding. For X-Plane, your aircraft may not expose a reliable boarding signal. |
 | Wrong airline pack plays | Check the SimBrief airline code and the pack selection priority. Use a manual sound pack override if needed. |
-| Generic Default file plays instead of airline file | Add the missing file to the airline pack or disable Default fallback. |
+| Operation default file plays instead of airline file | Add the missing file to the airline pack or disable operation fallback. |
 | Music does not resume | Enable Resume Music in the Audio tab. |
 | External view is silent | Check Camera Volume and External View Volume. |
 
 ## Best Practices
 
-- Keep a `Default` folder with generic fallbacks.
+- Keep `PAX`, `Cargo`, and `VIP` folders for operation-level fallbacks.
+- Use `Default` only when you want a manually selectable generic pack or a direct selected-root pack.
 - Use airline folders for airline identity and operation folders for passenger, cargo, or VIP differences.
 - Put aircraft-specific safety briefings in tagged files, not separate folders.
 - Use airport tags only for announcements that truly mention the airport.
