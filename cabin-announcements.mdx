@@ -1,0 +1,502 @@
+---
+title: "Cabin Announcements"
+description: "Set up automatic cabin announcements, create custom sound packs, and control playback from the Active Flight sidebar."
+---
+
+Cabin Announcements is a desktop feature that plays airline-style PA audio during a tracked flight. FlyHub watches your active flight, simulator telemetry, selected aircraft, airline code, operation type, GSX state when available, and your announcement settings to choose what to play next.
+
+The feature is built for local audio packs. You can use the bundled default pack, point FlyHub at a custom announcements folder, or create packs for specific airlines, cargo operations, VIP operations, aircraft families, airports, and times of day.
+
+## Requirements
+
+Cabin Announcements requires:
+
+- FlyHub Desktop.
+- An active tracked flight in the Active Flight page.
+- Cabin Announcements enabled from the Active Flight sidebar.
+- A readable announcements folder containing supported audio files.
+- Simulator telemetry from SimConnect, FSUIPC, X-Plane, or another supported tracking source.
+
+Supported audio formats:
+
+| Format | Notes |
+| --- | --- |
+| `.ogg` | Recommended for packs. Must be a real Ogg/Vorbis file, not a renamed file. |
+| `.wav` | Supported. Larger files use more disk space. |
+| `.mp3` | Supported by the desktop audio player. |
+
+FlyHub ignores files that are unsupported, too large, outside the selected folder, or not named with a known announcement name. Each audio file must be 50 MB or smaller.
+
+## Enable Announcements
+
+1. Open FlyHub Desktop.
+2. Start or open an active flight.
+3. Open the right sidebar on the Active Flight page.
+4. Open the Cabin Announcements panel.
+5. Enable Cabin Announcements.
+6. Open the Files tab and select your announcements root folder if you are using a custom pack.
+7. Open the Audio tab and choose the output device and volume.
+
+If no custom folder is selected, FlyHub uses the bundled announcements folder.
+
+## How Playback Works
+
+FlyHub keeps an announcement session for the current active flight. During the flight it checks:
+
+- Current flight phase.
+- Whether the aircraft is on the ground or airborne.
+- Altitude above ground level.
+- Ground speed and takeoff or landing detection.
+- Engine, parking brake, beacon, landing light, strobe, seatbelt, and camera/view state when available.
+- SimBrief flight plan details, including airline, flight number, aircraft ICAO, origin, and destination.
+- Operation type: passenger, cargo, or VIP.
+- GSX boarding and deboarding state when the MSFS integration is enabled.
+- The enabled or skipped state of each announcement in your settings.
+
+Announcements normally play in this order:
+
+| Stage | Typical announcements |
+| --- | --- |
+| Boarding | `BoardingWelcome`, `BoardingWelcomePilot`, `BoardingMusic`, `DepartureDelayed`, `BoardingComplete` |
+| Door and safety | `ArmDoors`, `PreSafetyBriefing`, `SafetyBriefing` |
+| Takeoff | `CabinDimTakeoff`, `CrewSeatsTakeoff`, `CallCabinSecureTakeoff` |
+| Climb and cruise | `AfterTakeoff`, `TopOfClimbPilot`, `FastenSeatbelt`, `CruiseElapsed` |
+| Descent and approach | `TopOfDescentPilot`, `DescentSeatbelts`, `CrewSeatsLanding`, `CallCabinSecureLanding` |
+| Landing and arrival | `AfterLanding`, `AfterLandingMusic`, `DisarmDoors`, `DisembarkStarted` |
+
+You can manually play, skip, stop, resume, or force phases from the sidebar. Manual actions only affect the current session.
+
+## GSX Behavior
+
+GSX support is for MSFS. When GSX integration is enabled:
+
+| GSX state | FlyHub behavior |
+| --- | --- |
+| Boarding state `5` | Treats boarding as started or in progress and can trigger `BoardingWelcome`. |
+| Boarding state `6` | Treats boarding as complete and can trigger `BoardingComplete`. |
+| Deboarding state `4` or `5` | Can start the disembark flow after arrival. |
+| Deboarding state `6` | Treats deboarding as complete and clears the arrival session state. |
+
+GSX does not replace the normal flight logic. It gives FlyHub stronger boarding and deboarding signals when they are available.
+
+## X-Plane Behavior
+
+X-Plane does not have a GSX equivalent. FlyHub uses available X-Plane datarefs such as ground state, AGL altitude, ground speed, engine state, parking brake, lights, seatbelt sign, aircraft ICAO, tail number, and camera/view state.
+
+Some aircraft do not expose reliable light or cabin-specific datarefs. If automatic boarding does not start in X-Plane, use the manual controls in the Cabin Announcements sidebar.
+
+## Active Flight Sidebar
+
+Open the Active Flight page and use the Cabin Announcements panel in the right sidebar.
+
+### Status Tab
+
+Use Status to see and control the current announcement session.
+
+| Control | What it does |
+| --- | --- |
+| Enable Cabin Announcements | Turns the feature on or off for desktop playback. |
+| Play Next | Plays the next eligible announcement immediately. |
+| Skip | Skips the next eligible announcement for the current session. |
+| Stop / Resume | Stops current playback or resumes paused playback. |
+| Manual Playback | Lets you choose a specific announcement and play it on demand. |
+| Phase buttons | Forces the announcement session into a phase such as Boarding, Cruise, Descent, or Postflight. |
+| Metrics | Shows connection state, phase, playing state, next announcement, aircraft, airline, operation, and selected sound pack. |
+| Waiting For | Shows why the next automatic announcement has not fired yet. |
+| Upcoming | Shows upcoming announcements and skipped items. |
+
+Use manual phase controls when telemetry or aircraft-specific data is incomplete.
+
+### Audio Tab
+
+Use Audio to control where announcements play and how loud they are.
+
+| Setting | What it does |
+| --- | --- |
+| Audio Device | Selects the speaker, headset, virtual cable, or system default output. |
+| Refresh | Re-scans available output devices. |
+| Add Device | Opens the operating system output-device picker when supported by the desktop runtime. |
+| Announcement Volume | Master volume for spoken announcements. |
+| Music Volume | Separate volume for boarding and after-landing music. |
+| Mute | Mutes announcement playback without disabling the feature. |
+| Only When Focused | Plays announcements only while FlyHub Desktop is focused. |
+| Camera Volume | Changes playback volume based on cockpit, cabin, or external camera state when the simulator exposes that data. |
+| Internal View Volume | Volume used for cockpit or internal views when Camera Volume is enabled. |
+| External View Volume | Volume used for external views when Camera Volume is enabled. |
+| Resume Music | Resumes paused boarding or arrival music after a spoken announcement finishes. |
+
+Audio device settings are saved between sessions.
+
+### Files Tab
+
+Use Files to select and inspect the sound pack folder.
+
+| Control | What it does |
+| --- | --- |
+| Root folder | Shows the announcements folder FlyHub is scanning. |
+| Select Folder | Opens a folder picker for your custom announcements root. |
+| Rescan | Re-scans the selected folder for valid audio files. |
+| Sound pack list | Shows detected pack folders and the selected pack. |
+| File list | Shows valid announcement files FlyHub found. |
+| Preview | Plays a file directly so you can test the audio. |
+
+For FNX-style packs, select the folder named `Announcements`, not the aircraft package folder above it.
+
+Example:
+
+```text
+C:\Users\<you>\AppData\Local\Packages\Microsoft.Limitless_8wekyb3d8bbwe\LocalCache\Packages\Community\FNX Announcements\Announcements
+```
+
+### Announcements Tab
+
+Use Announcements to choose which announcement events are allowed to play.
+
+| Setting | What it does |
+| --- | --- |
+| Sound Pack | Manually selects a detected pack instead of using automatic airline or operation matching. |
+| Use Default folder if airline files are missing | Allows FlyHub to fall back to `Default` when the selected airline or operation pack does not contain a matching file. |
+| Announcement toggles | Enables or disables individual events such as `SafetyBriefing`, `AfterLanding`, or `DisembarkStarted`. |
+
+Disabling an announcement means FlyHub will skip that event even if the file exists.
+
+### Tweaks Tab
+
+Use Tweaks when your simulator, aircraft, or add-on exposes signals differently.
+
+| Setting | What it changes |
+| --- | --- |
+| Boarding Repeat | How often boarding welcome or boarding music logic can repeat while boarding is still in progress. |
+| Takeoff Detection AGL | Altitude above ground used to detect that takeoff has happened. |
+| Descent Detection AGL | Altitude above ground used for descent-related announcements. |
+| Crew Seats Landing AGL | Altitude above ground for the crew-seats-for-landing call. |
+| Departure Delay Threshold | Minutes after scheduled departure before `DepartureDelayed` can play during boarding. |
+| After Landing Delay | Delay after landing before arrival announcements can play. |
+| Skip First BoardingWelcome | Skips the first boarding welcome call in the session. |
+| Auto Arm Doors | Automatically plays `ArmDoors` after boarding completes if normal aircraft movement or engine signals are missing. |
+| Landing Lights for Takeoff | Uses landing lights instead of strobe lights for the crew-seats-takeoff trigger. |
+| Ignore Incompatible Aircraft Lights | Allows light-based triggers even when the current aircraft is not known to expose compatible light states. |
+
+### Integrations Tab
+
+Use Integrations for simulator add-ons.
+
+| Setting | What it does |
+| --- | --- |
+| GSX Integration | Enables GSX boarding and deboarding signals for MSFS. |
+| Current GSX state | Shows current boarding and deboarding states when FlyHub can read them. |
+
+The Integrations tab is hidden for X-Plane because GSX is not available there.
+
+## Settings Persistence
+
+FlyHub stores Cabin Announcements settings in the desktop app data folder. The selected announcements root folder is stored separately from the audio, announcement, tweak, and integration settings.
+
+Saved settings include:
+
+- Selected audio device.
+- Volume and mute settings.
+- Camera-volume behavior.
+- Resume music behavior.
+- Enabled and disabled announcements.
+- Selected or automatic sound pack mode.
+- Default-folder fallback.
+- Tweak values.
+- GSX integration state.
+- Custom announcements root folder.
+
+These settings persist between desktop sessions.
+
+## Sound Pack Folder Layout
+
+A sound pack root is the folder FlyHub scans. Inside it, create one or more pack folders.
+
+Basic layout:
+
+```text
+Announcements/
+  Default/
+    BoardingWelcome.ogg
+    SafetyBriefing.ogg
+    AfterLanding.ogg
+  AAL/
+    BoardingWelcome.ogg
+    SafetyBriefing.ogg
+  DAL/
+    BoardingWelcome.ogg
+  Cargo/
+    BoardingWelcome.ogg
+  VIP/
+    BoardingWelcome.ogg
+```
+
+Airline and operation layout:
+
+```text
+Announcements/
+  AVA/
+    BoardingWelcome.ogg
+  AVA_PAX/
+    BoardingWelcome.ogg
+  AVA_Cargo/
+    BoardingWelcome.ogg
+  UAE_PAX/
+    BoardingWelcome.ogg
+  UAE_Cargo/
+    BoardingWelcome.ogg
+```
+
+Recommended folder names:
+
+| Folder name | Use |
+| --- | --- |
+| `Default` | Generic fallback pack. |
+| Airline ICAO or code, such as `AAL`, `DAL`, `UAE` | Airline-specific pack. |
+| `PAX` | Generic passenger-operation pack. |
+| `Cargo` | Generic cargo-operation pack. |
+| `VIP` | Generic VIP/private-operation pack. |
+| `<Airline>_PAX` | Airline-specific passenger pack. |
+| `<Airline>_Cargo` | Airline-specific cargo pack. |
+| `<Airline>_VIP` | Airline-specific VIP/private pack. |
+
+Pack folder names are matched case-insensitively.
+
+## Pack Selection Priority
+
+When automatic pack selection is enabled, FlyHub looks for audio in this order:
+
+1. Manual sound pack override from the sidebar, if one is selected.
+2. Airline plus operation folder, such as `UAE_Cargo`.
+3. Airline folder, such as `UAE`.
+4. Operation folder, such as `PAX`, `Cargo`, or `VIP`.
+5. `Default`, if default fallback is enabled.
+
+If no matching file is found, FlyHub skips that announcement.
+
+## File Naming Rules
+
+Every file must start with a known announcement name. Optional tags go in square brackets after the name.
+
+Basic files:
+
+```text
+BoardingWelcome.ogg
+SafetyBriefing.ogg
+AfterLanding.ogg
+```
+
+Tagged files:
+
+```text
+BoardingWelcome[A320].ogg
+BoardingWelcome[Morning].ogg
+AfterLanding[KJFK].ogg
+SafetyBriefing[737][1].ogg
+BoardingWelcome[mute].ogg
+```
+
+Cruise elapsed files use a percent suffix:
+
+```text
+CruiseElapsed25Percent.ogg
+CruiseElapsed50Percent.ogg
+CruiseElapsed75Percent.ogg
+```
+
+Only these characters are recommended in file names:
+
+```text
+Letters, numbers, spaces, dash, underscore, parentheses, square brackets, and dots
+```
+
+Avoid special shell characters, emojis, and hidden extensions such as `BoardingWelcome.ogg.mp3`.
+
+## Announcement Files
+
+Use these exact base names.
+
+| File base name | Trigger or use |
+| --- | --- |
+| `BoardingWelcome` | First cabin welcome when boarding starts manually or through GSX. |
+| `BoardingWelcomePilot` | Pilot welcome after boarding has started. |
+| `BoardingMusic` | Boarding music loop while boarding is in progress. |
+| `DepartureDelayed` | Delay announcement when boarding exceeds the configured delay threshold. |
+| `BoardingComplete` | Boarding complete call. |
+| `ArmDoors` | Door arming call after boarding completes or before taxi. |
+| `PreSafetyBriefing` | Lead-in before the safety briefing. |
+| `SafetyBriefing` | Safety demonstration or safety briefing. |
+| `CabinDimTakeoff` | Cabin dimming or preparation call before takeoff. |
+| `CrewSeatsTakeoff` | Crew take seats for takeoff. |
+| `CallCabinSecureTakeoff` | Cabin secure confirmation around takeoff. |
+| `AfterTakeoff` | Post-takeoff announcement. |
+| `TopOfClimbPilot` | Pilot announcement near cruise. |
+| `FastenSeatbelt` | Seatbelt sign or turbulence-related announcement after takeoff. |
+| `CruiseElapsed` | Cruise progress announcement. Use percent suffixes for timing variants. |
+| `TopOfDescentPilot` | Pilot announcement at top of descent. |
+| `DescentSeatbelts` | Seatbelt or cabin preparation call during descent. |
+| `CrewSeatsLanding` | Crew take seats for landing. |
+| `CallCabinSecureLanding` | Cabin secure confirmation for landing. |
+| `AfterLanding` | Arrival announcement after landing. |
+| `AfterLandingMusic` | Arrival or taxi-in music loop. |
+| `DisarmDoors` | Door disarming call after arrival. |
+| `DisembarkStarted` | Disembark or farewell announcement. |
+
+You do not need to provide every file. A pack can contain only the announcements you want to customize.
+
+## Tags
+
+Tags let one folder contain multiple versions of the same announcement.
+
+### Aircraft Tags
+
+Use an aircraft family or aircraft ICAO tag:
+
+```text
+SafetyBriefing[A320].ogg
+SafetyBriefing[A321].ogg
+SafetyBriefing[737].ogg
+SafetyBriefing[B738].ogg
+```
+
+Common family tags include:
+
+```text
+737, 747, 757, 767, 777, 787, 320, 330, 340, 350, 380, A220,
+MD80, DC9, CRJ, ERJ, EJET, 146, ATR, DH8, F100, Citation
+```
+
+### Time Tags
+
+Use time-of-day variants:
+
+```text
+BoardingWelcome[Morning].ogg
+BoardingWelcome[Afternoon].ogg
+BoardingWelcome[Evening].ogg
+BoardingWelcome[Night].ogg
+```
+
+### Airport Tags
+
+Use an airport ICAO code when a file is specific to an origin or destination:
+
+```text
+AfterLanding[KJFK].ogg
+AfterLanding[EGLL].ogg
+```
+
+### Variant Tags
+
+Use numeric tags for multiple versions:
+
+```text
+SafetyBriefing[1].ogg
+SafetyBriefing[2].ogg
+BoardingWelcome[A320][1].ogg
+```
+
+### Mute Tags
+
+Use `[mute]` when a pack should intentionally silence an event:
+
+```text
+BoardingWelcome[mute].ogg
+```
+
+This is useful when an airline pack should suppress a generic fallback file.
+
+## Creating a Pack
+
+1. Create a root folder named `Announcements`.
+2. Inside it, create a folder for your pack, such as `Default`, `AAL`, `UAE_Cargo`, or `VIP`.
+3. Add files using the exact announcement names from the table above.
+4. Use `.ogg`, `.wav`, or `.mp3`.
+5. Keep each file below 50 MB.
+6. Open Active Flight > Cabin Announcements > Files.
+7. Select the `Announcements` root folder.
+8. Click Rescan.
+9. Use Preview to test files.
+10. Choose the pack in the Announcements tab or leave automatic selection enabled.
+
+Minimal useful pack:
+
+```text
+Announcements/
+  Default/
+    BoardingWelcome.ogg
+    SafetyBriefing.ogg
+    AfterLanding.ogg
+    DisembarkStarted.ogg
+```
+
+Passenger airline pack:
+
+```text
+Announcements/
+  AAL_PAX/
+    BoardingWelcome.ogg
+    BoardingWelcomePilot.ogg
+    BoardingMusic.ogg
+    BoardingComplete.ogg
+    ArmDoors.ogg
+    SafetyBriefing[A320].ogg
+    SafetyBriefing[737].ogg
+    AfterTakeoff.ogg
+    TopOfDescentPilot.ogg
+    AfterLanding[KDFW].ogg
+    DisarmDoors.ogg
+    DisembarkStarted.ogg
+```
+
+Cargo pack:
+
+```text
+Announcements/
+  FDX_Cargo/
+    BoardingWelcome.ogg
+    ArmDoors.ogg
+    AfterTakeoff.ogg
+    TopOfDescentPilot.ogg
+    AfterLanding.ogg
+    DisarmDoors.ogg
+```
+
+## Overlay Use
+
+Cabin Announcements can be managed from the Active Flight sidebar while you fly. If you use the desktop overlay or stream overlay, keep the overlay focused on flight status while using the sidebar for announcement controls.
+
+Recommended workflow:
+
+1. Start the active flight in FlyHub Desktop.
+2. Open the simulator overlay if you use it for in-sim status.
+3. Keep Cabin Announcements enabled in the Active Flight sidebar.
+4. Use the sidebar to change packs, force phases, preview files, or stop playback.
+5. Use the overlay for passive monitoring during the flight.
+
+The overlay does not replace the announcement sidebar. The sidebar is where file scanning, device selection, manual playback, per-announcement toggles, tweaks, and GSX settings live.
+
+## Troubleshooting
+
+| Problem | What to check |
+| --- | --- |
+| No audio devices appear | Click Refresh. If the device still does not appear, click Add Device, select it from the OS picker, then choose it in FlyHub. |
+| Audio plays from the wrong device | Select the device in the Audio tab. Use System default if Windows should route it. |
+| File appears to be ignored | Check the file extension, size, and base name. The file must start with a known announcement name. |
+| `MEDIA_ELEMENT_ERROR: Format error` | The browser audio engine could not decode the file. Confirm it is a real `.ogg`, `.wav`, or `.mp3`, not a renamed file or unsupported codec. |
+| Boarding does not auto-start | Use manual Boarding phase or Play Next. For MSFS, enable GSX integration if you rely on GSX boarding. For X-Plane, your aircraft may not expose a reliable boarding signal. |
+| Wrong airline pack plays | Check the SimBrief airline code and the pack selection priority. Use a manual sound pack override if needed. |
+| Generic Default file plays instead of airline file | Add the missing file to the airline pack or disable Default fallback. |
+| Music does not resume | Enable Resume Music in the Audio tab. |
+| External view is silent | Check Camera Volume and External View Volume. |
+
+## Best Practices
+
+- Keep a `Default` folder with generic fallbacks.
+- Use airline folders for airline identity and operation folders for passenger, cargo, or VIP differences.
+- Put aircraft-specific safety briefings in tagged files, not separate folders.
+- Use airport tags only for announcements that truly mention the airport.
+- Preview every file after rescanning.
+- Keep file names simple and exact.
+- Prefer `.ogg` files encoded as real Ogg/Vorbis audio.
+- Use `[mute]` intentionally when a pack should suppress fallback audio.
+

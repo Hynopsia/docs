@@ -143,6 +143,14 @@ If telemetry is not connected, FlyHub cannot track the flight online.
 
 For a full explanation of tracking choices, see [Tracking Methods](/tracking-methods), [Online Tracking](/online-tracking), and [Manual and Offline Mode](/manual-mode).
 
+## Cabin Announcements
+
+FlyHub Desktop can play automatic cabin announcements during an active flight.
+
+Use the Cabin Announcements panel in the Active Flight sidebar to choose the audio device, select or scan sound packs, manually play announcements, force announcement phases, adjust trigger behavior, and enable GSX integration for MSFS.
+
+For setup, custom pack folder rules, required file names, overlay usage, and every sidebar setting, see [Cabin Announcements](/cabin-announcements).
+
 ## Operational Flight Plan
 
 The OFP section shows the route briefing for the flight.
