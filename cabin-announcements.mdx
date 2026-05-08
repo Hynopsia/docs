@@ -164,7 +164,7 @@ Use Announcements to choose which announcement events are allowed to play.
 | Setting | What it does |
 | --- | --- |
 | Sound Pack | Manually selects a detected pack instead of using automatic airline or operation matching. |
-| Use operation default if selected pack files are missing | Allows FlyHub to fall back to the operation default pack, such as `PAX`, `Cargo`, or `VIP`, when the selected airline or manual pack does not contain a matching file. |
+| Use operation default if selected pack files are missing | Allows FlyHub to fall back to the matching operation default pack, such as `PAX`, `Cargo`, or `VIP`, when the selected airline-operation or manual pack does not contain a matching file. Cargo and VIP automatic fallback stays inside Cargo/VIP defaults so passenger cabin audio is not borrowed by accident. |
 | Announcement toggles | Enables or disables individual events such as `SafetyBriefing`, `AfterLanding`, or `DisembarkStarted`. |
 
 Disabling an announcement means FlyHub will skip that event even if the file exists.
@@ -331,14 +331,14 @@ When automatic pack selection is enabled, FlyHub checks the flight context and l
 1. Manual sound pack override from the sidebar, if one is selected.
 2. Direct selected-root pack folder, if the selected root itself contains announcement files.
 3. Airline plus operation folder, such as `UAE_Cargo`.
-4. Airline folder, such as `UAE`.
+4. Airline folder, such as `UAE`, for passenger flights only.
 5. Operation folder, such as `PAX`, `Cargo`, or `VIP`, if operation fallback is enabled.
 
 If no matching file is found, FlyHub skips that announcement.
 
 Example: a passenger Emirates flight with `UAE_PAX`, `UAE`, and `PAX` installed uses `UAE_PAX` first, then `UAE`, then `PAX`.
 
-Example: a cargo Emirates flight with `UAE_Cargo`, `UAE`, and `Cargo` installed uses `UAE_Cargo` first, then `UAE`, then `Cargo`.
+Example: a cargo Emirates flight with `UAE_Cargo`, `UAE`, `PAX`, and `Cargo` installed uses `UAE_Cargo` first, then `Cargo`. It does not automatically use `UAE` or `PAX`, because those packs are assumed to contain passenger cabin language. If you really want that audio for the flight, select the pack manually.
 
 ## File Naming Rules
 
@@ -485,7 +485,7 @@ Use `[mute]` when a pack should intentionally silence an event:
 BoardingWelcome[mute].ogg
 ```
 
-This is useful when an airline pack should suppress a generic fallback file.
+This is useful when a cargo or VIP pack should suppress a fallback event instead of playing passenger wording. FlyHub's shipped Cargo and VIP defaults use this pattern for events that would be awkward or unrealistic in those operations.
 
 ## Creating a Pack
 
@@ -587,10 +587,10 @@ The overlay does not replace the announcement sidebar. The sidebar is where file
 
 - Keep `PAX`, `Cargo`, and `VIP` folders for operation-level fallbacks.
 - Use `Default` only when you want a manually selectable generic pack or a direct selected-root pack.
-- Use airline folders for airline identity and operation folders for passenger, cargo, or VIP differences.
+- Use generic airline folders for passenger cabin identity. Use airline-operation folders such as `DAL_Cargo` or `DAL_VIP` when cargo or VIP flights need their own wording.
 - Put aircraft-specific safety briefings in tagged files, not separate folders.
 - Use airport tags only for announcements that truly mention the airport.
 - Preview every file after rescanning.
 - Keep file names simple and exact.
 - Prefer `.ogg` files encoded as real Ogg/Vorbis audio.
-- Use `[mute]` intentionally when a pack should suppress fallback audio.
+- Use `[mute]` intentionally when a cargo or VIP pack should suppress an event that would sound unrealistic in that operation.
