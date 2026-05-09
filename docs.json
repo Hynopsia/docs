@@ -58,6 +58,12 @@
         ]
       },
       {
+        "group": "Cabin Announcements",
+        "pages": [
+          "cabin-announcements"
+        ]
+      },
+      {
         "group": "Free Flight Mode",
         "pages": [
           "free-flight-mode",
@@ -72,7 +78,6 @@
           "live-map",
           "leaderboard",
           "active-flight",
-          "cabin-announcements",
           "profile-logbook"
         ]
       },
