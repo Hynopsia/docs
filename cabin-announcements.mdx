@@ -340,6 +340,24 @@ Example: a passenger Emirates flight with `UAE_PAX`, `UAE`, and `PAX` installed 
 
 Example: a cargo Emirates flight with `UAE_Cargo`, `UAE`, `PAX`, and `Cargo` installed uses `UAE_Cargo` first, then `Cargo`. It does not automatically use `UAE` or `PAX`, because those packs are assumed to contain passenger cabin language. If you really want that audio for the flight, select the pack manually.
 
+### Flight Context Sources
+
+FlyHub builds announcement context from the active booking first, then uses simulator telemetry where live data is needed or where the booking does not have enough detail.
+
+| Context | Source priority |
+| --- | --- |
+| Airline folder | Callsign ICAO prefix if it differs from SimBrief airline, then SimBrief `general.icao_airline`, then booking schedule `airline_icao`, then a three-letter tail-number prefix, then `Default`. |
+| Operation type | VIP booking = `VIP`; booking schedule airline `type = cargo` means `Cargo`; booking schedule airline `type = pax/cargo` is treated as ambiguous and defaults to `PAX` until the user picks a passenger or cargo pack; all other scheduled flights use `PAX`. |
+| Aircraft type | Booking selected/effective aircraft type, then telemetry `ATC TYPE`, model, or aircraft title parsing. |
+| Origin/destination | SimBrief route airport when available, then booking schedule origin/destination. |
+| Time of day | Simulator local time when available, then announcement context local time, then the system clock. |
+| Cruise altitude | SimBrief `general.initial_altitude`, then SimBrief navlog cruise altitude. |
+| Flight number variant seed | Callsign, flight seed, or booking ID. This makes numbered variants deterministic per flight instead of random every tick. |
+
+So yes: airline, operation, route, planned times, and planned aircraft are booking/OFP-driven. Live telemetry still matters for the current aircraft model fallback, sim time, altitude, lights, seatbelt sign, engine state, GSX state, and on-ground state.
+
+For dual-operation airlines such as Emirates (`UAE`) where the airline record is `pax/cargo`, FlyHub does not guess cargo from the airline alone. Auto mode starts from the passenger operation, shows both passenger and cargo pack choices when available, and applies cargo operation rules if you select an airline-cargo or `Cargo` pack. This avoids making every Emirates passenger flight sound like SkyCargo while still letting an Emirates cargo booking use `UAE_Cargo` or `Cargo`.
+
 ## File Naming Rules
 
 Every file must start with a known FlyHub announcement name. Optional tags go in square brackets after the name. Files with unknown base names are ignored.
@@ -425,6 +443,18 @@ Use these exact base names.
 
 You do not need to provide every file. A pack can contain only the announcements you want to customize.
 
+### Operation Defaults
+
+FlyHub uses the same event logic for passenger, cargo, and VIP flights, but bundled operation packs can mute events that do not fit the operation.
+
+| Operation | Bundled default behavior |
+| --- | --- |
+| `PAX` | Full passenger cabin flow, including boarding music, safety, climb/cruise/descent, landing, arrival, and disembark calls. |
+| `Cargo` | Cargo-safe subset. Passenger cabin music and most passenger cabin calls are muted. `TopOfClimbPilot` and `TopOfDescentPilot` do not trigger for cargo operations. |
+| `VIP` | VIP-safe subset. Pilot climb/descent calls can trigger if enabled, but music and many passenger cabin crew calls are muted. |
+
+`TopOfClimbPilot` and `TopOfDescentPilot` are disabled by default. They can be enabled for passenger and VIP flights, but cargo flights always skip them.
+
 ## Tags
 
 Tags let one folder contain multiple versions of the same announcement.
@@ -447,6 +477,8 @@ Common family tags include:
 MD80, DC9, CRJ, ERJ, EJET, 146, ATR, DH8, F100, Citation
 ```
 
+Aircraft tags match the resolved aircraft ICAO or its FlyHub family. For example, an `A35K` flight can match `[A35K]` and `[350]`; a `B738` flight can match `[B738]` and `[737]`.
+
 ### Time Tags
 
 Use time-of-day variants:
@@ -458,6 +490,15 @@ BoardingWelcome[Evening].ogg
 BoardingWelcome[Night].ogg
 ```
 
+Time tags use simulator local time when available:
+
+| Tag | Time window |
+| --- | --- |
+| `[Morning]` | 06:00 to 11:59 |
+| `[Afternoon]` | 12:00 to 17:59 |
+| `[Evening]` | 18:00 to 23:59 |
+| `[Night]` | 00:00 to 05:59 |
+
 ### Airport Tags
 
 Use an airport ICAO code when a file is specific to an origin or destination:
@@ -466,6 +507,8 @@ Use an airport ICAO code when a file is specific to an origin or destination:
 AfterLanding[KJFK].ogg
 AfterLanding[EGLL].ogg
 ```
+
+Airport tags match the origin for departure-phase announcements and the destination for arrival-phase announcements. Add `[DEP]` or `[ARR]` when you want to force the tag to mean departure or arrival. Wildcards are supported with `*` or `#`, for example `KJ*`.
 
 ### Variant Tags
 
@@ -477,6 +520,8 @@ SafetyBriefing[2].ogg
 BoardingWelcome[A320][1].ogg
 ```
 
+Numeric variants are selected deterministically from the flight seed or booking ID, so the same flight keeps the same variant.
+
 ### Mute Tags
 
 Use `[mute]` when a pack should intentionally silence an event:
@@ -486,6 +531,74 @@ BoardingWelcome[mute].ogg
 ```
 
 This is useful when a cargo or VIP pack should suppress a fallback event instead of playing passenger wording. FlyHub's shipped Cargo and VIP defaults use this pattern for events that would be awkward or unrealistic in those operations.
+
+### How Tagged Files Are Picked
+
+FlyHub first chooses the best folder using the pack priority rules, then chooses the best file inside that folder.
+
+All non-numeric tags on a file must match the current flight. Unknown tags make the file ineligible. `[mute]`, `[arr]`, `[dep]`, and numeric tags are special control tags.
+
+When multiple files are eligible in the same folder, FlyHub scores them in this order:
+
+| Match | Score priority |
+| --- | --- |
+| `[Refueling]` while GSX refueling is active | Highest |
+| Numeric tag matching the flight number | Very high |
+| Exact aircraft tag, such as `[A320]` or `[B738]` | High |
+| Aircraft family tag, such as `[320]` or `[737]` | Medium-high |
+| Airport tag, such as `[KJFK]` or `[EGLL]` | Medium |
+| Time tag, such as `[Evening]` | Lower |
+| Any numeric variant | Tie-breaker |
+| Non-muted file | Tie-breaker |
+
+If tied files remain, FlyHub sorts by display name and uses a deterministic flight seed to pick one.
+
+## Flight State Transition Table
+
+This table describes the automatic state machine used by FlyHub. Manual overlay/sidebar triggers can still play an enabled file directly, but automatic flow follows these gates.
+
+| File to play | Things FlyHub checks | Timing logic |
+| --- | --- | --- |
+| `BoardingWelcome` | MSFS with GSX enabled: on ground, beacon off, GSX boarding state `5`. Otherwise manual boarding start. | Plays once when GSX boarding starts or is already active. Can repeat every configured boarding repeat interval until `BoardingComplete`. |
+| `BoardingWelcomePilot` | Enabled, `BoardingWelcome` completed, still boarding before `BoardingComplete`. | Plays once 20 seconds after the first `BoardingWelcome`. |
+| `BoardingMusic` | `BoardingWelcome` completed, optional pilot welcome is complete or disabled, `BoardingComplete` not played. | Loops until `BoardingComplete` or another PA announcement interrupts it. |
+| `DepartureDelayed` | Scheduled pushback/departure time exists, boarding has started, `BoardingComplete` not played, threshold exceeded. | Plays once per boarding session. It can interrupt boarding music; music resumes if resume is enabled. |
+| `BoardingComplete` | On ground and beacon on, or GSX boarding complete. `BoardingWelcome` must be complete and no non-loop PA may be playing. | Plays once when the gate condition is met. |
+| `ArmDoors` | On ground and engines running or ground speed above 1 kt, or Auto ArmDoors tweak enabled after `BoardingComplete`. | Auto ArmDoors tweak waits 30 seconds after `BoardingComplete`. |
+| `PreSafetyBriefing` | `ArmDoors` completed and engines running. | Plays after `ArmDoors`. |
+| `SafetyBriefing` | `PreSafetyBriefing` completed. | Plays after `PreSafetyBriefing`. |
+| `CabinDimTakeoff` | Enabled, playable file exists, `SafetyBriefing` completed, simulator time is dark. | Waits 10 seconds after `SafetyBriefing`. Daylight checks are cached for 60 seconds and stop after the takeoff window passes. |
+| `CrewSeatsTakeoff` | On ground, engines running, takeoff light is on. | Uses landing lights by default, or strobe lights if configured. |
+| `CallCabinSecureTakeoff` | `CrewSeatsTakeoff` completed and still on ground. | Waits 5 seconds after `CrewSeatsTakeoff`. |
+| `AfterTakeoff` | Aircraft is airborne and above configured takeoff AGL threshold. | Waits 2 minutes after takeoff is detected. Default threshold is 3,000 ft AGL. |
+| `TopOfClimbPilot` | Enabled, playable, not cargo, `AfterTakeoff` already played, near cruise. | With cruise altitude: altitude at least cruise altitude minus 1,500 ft and vertical speed within +/-1,500 fpm. Without cruise altitude: at least 18,000 ft AGL and vertical speed within +/-700 fpm. |
+| `FastenSeatbelt` | `AfterTakeoff` played, seatbelt sign transitions off to on. | Repeatable with a 2-minute cooldown. Manual playback is allowed in any phase and does not reseed the state machine. |
+| `CruiseElapsed` | Cruise entered, matching `CruiseElapsedXXPercent` file exists, not on ground or landing/postflight. | Checks at most every 30 seconds, plays each percent file once, then stops polling when no elapsed files remain. |
+| `TopOfDescentPilot` | Enabled, not cargo, cruise entered for more than 2 minutes, more than 50 percent progress, descending below cruise. | Requires altitude below cruise altitude minus 500 ft and vertical speed at or below -500 fpm. |
+| `DescentSeatbelts` | Landing lights just turned on, or below configured descent AGL while descending. | Sustained descent check waits 10 seconds; cooldown is 5 minutes. |
+| `CrewSeatsLanding` | AGL below configured crew landing threshold, vertical speed below -300 fpm, landing lights on. | Default threshold is 3,000 ft AGL. |
+| `CallCabinSecureLanding` | `CrewSeatsLanding` completed and AGL below crew threshold plus 2,000 ft. | Waits 10 seconds after `CrewSeatsLanding`. |
+| `AfterLanding` | On ground, aircraft was airborne, landing sequence reached, ground speed below 15 kt. | Optional after-landing delay tweak applies before playback. |
+| `AfterLandingMusic` | `AfterLanding` completed and `DisembarkStarted` not yet played. | Loops after arrival. Missing optional music is marked complete once and does not block postflight flow. |
+| `DisarmDoors` | Engines off, parking brake set, `AfterLanding` completed. | Can interrupt/resume arrival music. |
+| `DisembarkStarted` | `DisarmDoors` completed and beacon off or current GSX deboarding state is `4` or `5`. | Plays once. GSX deboarding complete state `6` resets the session for the next flight. |
+
+## Manual Phase Options
+
+Manual phase selection marks earlier announcements complete so the next automatic trigger starts from a useful point.
+
+| Manual phase | Announcements marked as played | Next automatic gate |
+| --- | --- | --- |
+| `Preflight` | None | `BoardingWelcome` |
+| `Taxi` | `BoardingWelcome`, `BoardingMusic`, `BoardingComplete` | `ArmDoors` |
+| `Takeoff` | Boarding through `CabinDimTakeoff` | `CrewSeatsTakeoff` |
+| `Climb` | Boarding through `CallCabinSecureTakeoff` | `AfterTakeoff` |
+| `Cruise` | Boarding through `AfterTakeoff` | `FastenSeatbelt`, cruise/descent gates |
+| `Descent` | Boarding through `AfterTakeoff` | `DescentSeatbelts` |
+| `Approach` | Boarding through `DescentSeatbelts` | `CrewSeatsLanding` |
+| `Landing` | Boarding through `CallCabinSecureLanding` | `AfterLanding` |
+| `Postflight` | Boarding through `AfterLanding` | `DisarmDoors` |
+| `Done` | All announcements | No further announcements |
 
 ## Creating a Pack
 
@@ -556,7 +669,7 @@ Announcements/
 
 ## Overlay Use
 
-Cabin Announcements can be managed from the Active Flight sidebar while you fly. If you use the desktop overlay or stream overlay, keep the overlay focused on flight status while using the sidebar for announcement controls.
+Cabin Announcements can be managed from the Active Flight sidebar while you fly. The desktop simulator overlay also provides quick in-sim controls for Play Next, Skip, pause/resume, manual triggers, mute, and volume. Use the sidebar for setup, sound pack selection, file scanning, device selection, and detailed tweaks.
 
 Recommended workflow:
 
