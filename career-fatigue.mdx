@@ -1,0 +1,199 @@
+---
+title: Career Fatigue
+description: Understand how Career fatigue builds, recovers, and affects scoring.
+---
+
+# Career Fatigue
+
+Career fatigue discourages unrealistic grinding without blocking normal flying.
+
+Fatigue only affects Career scoring. It does not reduce payroll. Payroll stays based on real tracked flight time.
+
+## What the dashboard shows
+
+The Career Dashboard shows your Pilot Condition:
+
+| Condition | Meaning |
+| --- | --- |
+| Fit for Duty | No fatigue scoring deduction is active. |
+| Elevated Fatigue | Fatigue pressure is rising, but no deduction is active yet. |
+| Fatigued | Career scoring is currently receiving a fatigue deduction. |
+| Severely Fatigued | The maximum fatigue deduction is active until you rest. |
+
+The dashboard also shows:
+
+- Fatigue pressure: your current fatigue score.
+- 24h duty: recent tracked time and scheduled duty in the last 24 hours.
+- Recent flights: Career flights completed inside the 48-hour activity window.
+- Rest status: when the current pressure is expected to recover.
+- Main reason: the biggest factor currently affecting fatigue, when one exists.
+
+## What increases fatigue
+
+Fatigue builds when you complete Career flights.
+
+Each completed Career flight adds pressure from:
+
+- The flight itself.
+- Real tracked flight time.
+- High sim-rate compression.
+- Short turnaround time between Career flights.
+- Heavy Career duty in the last 24 hours.
+- Very high Career flight count in the last 48 hours.
+
+This means fatigue is not only a flight counter. A busy short-haul day, one normal long-haul, and several compressed long-hauls are treated differently.
+
+## Real tracked time
+
+Real tracked time is the real-world time FlyHub tracked for the flight.
+
+Examples:
+
+| Flight | Real tracked time used by fatigue |
+| --- | --- |
+| 1-hour flight at normal speed | 1 hour |
+| 18-hour flight flown at 6x sim rate | About 3 hours |
+
+This keeps fatigue aligned with payroll. If you get paid for 3 real tracked hours, the base fatigue also starts from 3 real tracked hours.
+
+## Sim-rate pressure
+
+Sim rate does not directly reduce salary.
+
+It can increase fatigue pressure because a large Career duty is being compressed into a short real-world session.
+
+Examples:
+
+| Flight | Fatigue effect |
+| --- | --- |
+| 1x sim rate | No sim-rate pressure. |
+| 2x sim rate | Small extra pressure. |
+| 6x sim rate | Meaningful extra pressure. |
+
+This prevents sim rate from becoming a free way to stack endless long-haul Career duty in one sitting.
+
+## Short turnarounds
+
+Starting another Career flight soon after the previous one can add fatigue.
+
+| Rest between Career flights | Extra fatigue pressure |
+| --- | --- |
+| Less than 1 hour | High |
+| 1 to 2 hours | Medium |
+| 2 to 4 hours | Low |
+| 4 hours or more | None |
+
+This is why back-to-back grinding can increase pressure even if each individual flight is short.
+
+## Heavy 24-hour duty
+
+FlyHub also looks at Career duty in the last 24 hours.
+
+Real tracked time matters. Simulated scheduled duty can also matter when sim rate compresses large trips.
+
+Examples:
+
+| Last 24 hours | Fatigue effect |
+| --- | --- |
+| 6 real tracked hours | Usually normal. |
+| More than 8 real tracked hours | Extra fatigue pressure can start. |
+| More than 12 real tracked hours | More pressure. |
+| More than 24 simulated duty hours | Extra pressure can start. |
+| More than 36 simulated duty hours | More pressure. |
+
+## 48-hour activity threshold
+
+The old anti-grind guard still exists as a fallback.
+
+If you complete more than 20 Career flights inside 48 hours, FlyHub can force at least a 3-point fatigue deduction.
+
+This catches extreme short-flight grinding even if the normal fatigue score has not fully caught up yet.
+
+## How fatigue recovers
+
+Fatigue recovers with real-world rest after your last completed Career flight.
+
+Recovery rate:
+
+| Rest time away from Career flying | Fatigue recovery |
+| --- | --- |
+| 6 hours | About 3 fatigue points |
+| 12 hours | About 6 fatigue points |
+| 24 hours | About 12 fatigue points |
+| 48 hours | About 24 fatigue points |
+| 72 hours | Fully reset |
+
+If you do not complete any Career flights for 72 hours, fatigue resets to zero.
+
+## Penalty levels
+
+The maximum fatigue deduction is 4 points.
+
+| Fatigue pressure | Career scoring effect |
+| --- | --- |
+| 0 to 10 | No deduction |
+| 10 to 16 | Warning only |
+| 16 to 22 | 1-point deduction |
+| 22 to 30 | 2-point deduction |
+| 30 to 40 | 3-point deduction |
+| 40 or more | 4-point deduction |
+
+The 48-hour activity threshold can force at least a 3-point deduction when it applies, but the total fatigue deduction is still capped at 4 points.
+
+## Examples
+
+### One normal short flight
+
+A 1-hour flight at normal speed adds low fatigue pressure.
+
+Result: usually still Fit for Duty.
+
+### Six short flights in one day
+
+Six 1-hour flights at normal speed can be a busy regional day.
+
+Result: usually no scoring deduction, but fatigue pressure may be visible.
+
+### One normal long-haul
+
+An 18-hour long-haul flown at normal speed creates fatigue pressure because it was a long real-world duty.
+
+Result: usually no immediate deduction by itself, but the dashboard may show elevated pressure.
+
+### One compressed long-haul
+
+An 18-hour long-haul flown at 6x sim rate may only count as about 3 real tracked hours for payroll.
+
+Fatigue still adds extra sim-rate pressure because the Career duty was compressed.
+
+Result: usually no immediate deduction by itself, but it is not free fatigue-wise.
+
+### Several compressed long-hauls
+
+If you stack multiple long-hauls at high sim rate in one real-world day, fatigue can move from warning into active deductions.
+
+Result: the first few may be fine, but continued stacking can move you into 1, 2, 3, and eventually 4 points of fatigue deduction.
+
+## What fatigue affects
+
+Fatigue can reduce Career scoring.
+
+That can indirectly affect:
+
+- Flight score.
+- Training results.
+- Line checks.
+- Weekly performance.
+- Reputation changes.
+- Promotion readiness.
+- Airline evaluations.
+
+Fatigue does not directly reduce salary.
+
+## How to avoid fatigue penalties
+
+- Rest between intensive Career sessions.
+- Avoid very short turnarounds when already under pressure.
+- Watch the 24h duty and 48h flight counts on the dashboard.
+- Be careful stacking high sim-rate long-hauls.
+- Do not schedule line checks when the dashboard shows active fatigue pressure.
