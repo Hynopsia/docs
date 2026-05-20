@@ -34,6 +34,25 @@ Fatigue gain is based on factors such as:
 
 Fatigue does not instantly punish users after a single busy session. Instead, pressure builds progressively over time.
 
+FlyHub currently uses these main fatigue rules:
+
+- Each Career flight adds a base amount of fatigue from real tracked time.
+- Short turns add extra fatigue only when the rest between Career flights is very short.
+- Sim rate adds pressure when a large scheduled duty is compressed into fewer real tracked hours.
+- Heavy recent duty can add pressure when the last 24 hours contain a large amount of real or scheduled duty.
+- Rest away from Career flying removes fatigue at about 0.8 fatigue per real hour.
+
+Short-turn pressure is intentionally forgiving for normal airline rotations:
+
+| Rest between Career flights | Extra fatigue |
+| --- | --- |
+| Less than 20 minutes | +1.0 |
+| 20-44 minutes | +0.5 |
+| 45-89 minutes | +0.25 |
+| 90 minutes or more | 0 |
+
+There is no separate hard flight-count penalty. Recent flights matter because they raise the fatigue score itself.
+
 ## When penalties apply
 
 Fatigue deductions are based on your condition when the Career flight starts.
@@ -121,41 +140,163 @@ The total fatigue penalty can never exceed 4 points.
 
 ## Examples
 
-### Active regional pilot
+These examples use approximate values from the current fatigue tuning. The exact result can vary slightly depending on flight time, sim rate, actual departure and arrival times, and recent duty history.
+
+### Casual pilot
 
 Scenario:
 
-6 one-hour flights in one day.
+One 2-hour Career flight per day for 3 days.
 
 Result:
 
-Little or no fatigue penalty.
+| Day | Departure fatigue | Post-flight fatigue | Penalty |
+| --- | ---: | ---: | ---: |
+| 1 | 0.0 | 2.0 | 0 |
+| 2 | 0.0 | 2.0 | 0 |
+| 3 | 0.0 | 2.0 | 0 |
 
-A busy regional schedule should still be viable.
+The rest between days fully clears the small amount of fatigue. Casual flying is not punished.
 
-### Long-haul pilot
+### Normal regional day
 
 Scenario:
 
-One 14-hour long-haul.
+6 one-hour flights in one day with 45-minute turns.
 
 Result:
 
-No immediate penalty, but meaningful fatigue increase.
+| Point in day | Approx. fatigue |
+| --- | ---: |
+| After leg 1 | 1.5 |
+| After leg 3 | 3.8 |
+| After leg 6 | 7.3 |
 
-A single ultra-long-haul should not instantly punish the user.
+Penalty:
 
-### Heavy sim-rate session
+0 points.
+
+A busy regional day should still be viable. Fatigue rises, but it stays below the warning-only range.
+
+### Tight regional day
 
 Scenario:
 
-Four compressed long-hauls at high sim rate in one real-world session.
+8 short 45-minute flights with 25-minute turns.
 
 Result:
 
-Fatigue builds progressively and penalties can begin appearing.
+| Point in day | Approx. fatigue |
+| --- | ---: |
+| After leg 2 | 3.0 |
+| After leg 4 | 6.0 |
+| After leg 6 | 9.1 |
+| After leg 8 | 12.2 |
 
-This prevents unrealistic duty stacking while still allowing sim-rate usage.
+Penalty:
+
+0 points.
+
+This is a demanding day, so the pilot reaches the warning range, but the system still gives enough room for realistic short-haul operations.
+
+### Heavy short-hop grinding
+
+Scenario:
+
+14 thirty-minute flights with 10-minute turns.
+
+Result:
+
+| Point in session | Approx. fatigue |
+| --- | ---: |
+| After leg 4 | 8.9 |
+| After leg 8 | 17.9 |
+| After leg 12 | 24.6 |
+| After leg 14 | 28.8 |
+
+Penalty:
+
+Later flights can receive fatigue deductions, rising up to about -2 points in this example.
+
+This is the kind of pattern fatigue is meant to discourage: many short flights with almost no rest between them.
+
+### One long-haul per day
+
+Scenario:
+
+One 14-hour long-haul per day for 5 days.
+
+Result:
+
+| Day | Rest before flight | Departure fatigue | Post-flight fatigue | Penalty |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | - | 0.0 | 10.0 | 0 |
+| 2 | 10h | 2.0 | 13.0 | 0 |
+| 3 | 10h | 5.0 | 16.0 | 0 |
+| 4 | 10h | 8.0 | 19.0 | 0 |
+| 5 | 10h | 11.0 | 22.0 | 0 |
+
+Result:
+
+No fatigue deduction during the 5-day week.
+
+The pilot is clearly building fatigue by the end of the week, but one long-haul per day remains playable. A normal weekend break fully clears this kind of fatigue.
+
+### One sim-rate long-haul per day
+
+Scenario:
+
+One 14-hour scheduled long-haul per day at 4x sim rate for 5 days.
+
+Result:
+
+| Day | Real tracked time | Rest before next day | Departure fatigue | Post-flight fatigue | Penalty |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | 3.5h | 20.5h | 0.0 | 4.8 | 0 |
+| 2 | 3.5h | 20.5h | 0.0 | 5.8 | 0 |
+| 3 | 3.5h | 20.5h | 0.0 | 5.8 | 0 |
+| 4 | 3.5h | 20.5h | 0.0 | 5.8 | 0 |
+| 5 | 3.5h | 20.5h | 0.0 | 5.8 | 0 |
+
+Sim rate does add pressure because 14 scheduled hours are compressed into 3.5 real hours. However, the long rest before the next day clears that pressure.
+
+### Two sim-rate long-hauls per day
+
+Scenario:
+
+Two 14-hour scheduled long-hauls per day at 4x sim rate, spaced roughly 12 hours apart.
+
+Result after 7 days:
+
+- Final fatigue: about 19.4.
+- Penalized departures: 0 out of 14.
+- The pilot ends the week in the fatigue range, so continuing without rest becomes risky.
+
+If those same two daily sim-rate long-hauls are flown back-to-back every day instead of spaced out, fatigue is much higher:
+
+- Final fatigue: about 32.2.
+- Penalized departures: 3 out of 14.
+- Later flights can receive -1 to -2 point deductions.
+
+Spacing matters. Sim rate is allowed, but stacking compressed long-haul duty with no rest still creates fatigue.
+
+### Extreme long-haul stacking
+
+Scenario:
+
+Two 14-hour long-hauls every day at normal speed.
+
+Result:
+
+This is not physically possible inside a normal day because it requires 28 real tracked hours per day.
+
+If flown back-to-back as 14 consecutive 14-hour flights:
+
+- Total elapsed time: about 196 real hours.
+- Penalized departures: 12 out of 14.
+- Fatigue reaches the maximum -4 penalty range.
+
+This is the type of workload the fatigue system is designed to push back against.
 
 ## Important notes
 
