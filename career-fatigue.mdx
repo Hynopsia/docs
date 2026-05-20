@@ -69,7 +69,7 @@ This prevents sim rate from becoming a complete fatigue bypass while still keepi
 Fatigue builds more quickly when:
 
 - Many flights are completed in a short period.
-- Multiple short turnarounds are performed.
+- Multiple extremely short turnarounds are performed.
 - Very high sim rates are used repeatedly.
 - Large amounts of duty time are compressed into short real-world sessions.
 - Excessive Career activity happens over multiple consecutive days.
@@ -82,9 +82,9 @@ Longer breaks recover more fatigue.
 
 Examples:
 
-- 6h rest = partial recovery.
-- 12h rest = moderate recovery.
-- 24h rest = major recovery.
+- 6h rest = meaningful partial recovery.
+- 12h rest = strong recovery.
+- 24h rest = major recovery or full recovery for most normal sessions.
 - 72h away from Career flying = full recovery.
 
 This allows active pilots to continue flying regularly while still encouraging realistic pacing.
@@ -111,13 +111,11 @@ Fatigue penalties apply only to Career scoring systems such as:
 - Reputation calculations.
 - Airline evaluations.
 
-## Anti-grind protection
+## Recent activity
 
-FlyHub also includes an anti-grind protection system.
+FlyHub no longer applies a separate hard penalty just because you crossed a fixed number of flights in 48 hours.
 
-More than 20 Career flights within 48 hours automatically applies at least a 3-point fatigue penalty.
-
-This exists to prevent unrealistic grinding behavior that could negatively affect Career progression balance.
+Recent flights still matter because they build fatigue score through real tracked time, short rest, compressed sim-rate duty, and heavy recent workload.
 
 The total fatigue penalty can never exceed 4 points.
 
