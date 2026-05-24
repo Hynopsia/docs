@@ -325,7 +325,11 @@ The planned time comes from the SimBrief OFP scheduled OUT time when available. 
 
 Actual departure is captured when FlyHub detects the flight leaving the gate or beginning departure movement, such as pushback, taxi out, takeoff, climb, or ground movement with engines running.
 
-Every full minute early or late can deduct 0.05 points.
+Late departures are scored progressively at 0.05 points for every full minute late.
+
+Early departures have a 15-minute grace window. If you leave more than 15 minutes before the OFP OUT time, FlyHub scores only the minutes beyond that 15-minute early allowance at 0.05 points per minute.
+
+The departure punctuality penalty is capped at 2.50 points.
 
 Example:
 
@@ -336,12 +340,23 @@ Deviation: 1 minute
 Penalty: 0.05 points
 ```
 
+```text
+Planned OUT: 1930Z
+Actual departure: 1914Z
+Early departure: 16 minutes
+Scored minutes: 1 minute
+Penalty: 0.05 points
+```
+
 The flight report can show:
 
 - Planned OUT time in UTC.
 - Actual departure time in UTC.
-- Minute deviation.
+- Whether the departure was early or late.
+- Total minutes off schedule.
+- Scored minutes after any early-departure grace.
 - Penalty per minute.
+- Maximum departure punctuality penalty.
 
 This penalty is Career Mode only. It does not apply to regular Free Flight tracking.
 
