@@ -289,9 +289,11 @@ FlyHub checks taxi speed during taxi out and taxi in.
 
 The check uses ground speed while the aircraft is on the ground.
 
+Taxi-in scoring does not start immediately at touchdown or during high-speed runway rollout. After landing, FlyHub waits until the aircraft has slowed to taxi speed once before it can score taxi-in speed. This prevents normal rollout and runway-vacating speed from being treated as taxiing.
+
 The violation starts when:
 
-- The aircraft is in taxi out or taxi in.
+- The aircraft is in taxi out, or is in taxi in after the post-landing slowdown has occurred.
 - The aircraft is on the ground.
 - Ground speed is above 32 knots.
 
