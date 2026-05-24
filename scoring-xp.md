@@ -18,7 +18,7 @@ Online flights are scored from simulator telemetry. Offline flights are scored f
 
 | Tracking mode | How it is scored | XP behavior |
 | :--- | :--- | :--- |
-| Online tracking | FlyHub reads simulator telemetry during the flight. It can score the landing, runway use, lights, gear, altimeter, approach stability, bounces, crashes, and telemetry events. | Full XP is available unless penalties, crash detection, SimRate, or other modifiers reduce it. |
+| Online tracking | FlyHub reads simulator telemetry during the flight. It can score the landing, runway use, OFP weight and fuel compliance, speed restrictions, taxi speed, lights, gear, altimeter, approach stability, bounces, crashes, and telemetry events. | Full XP is available unless penalties, crash detection, SimRate, or other modifiers reduce it. |
 | Manual and Offline Mode | You complete the flight through required check-ins and a final debrief. FlyHub scores the flight from your inputs, route plausibility, timing, and trust. | Offline XP is reduced because FlyHub cannot verify full telemetry. Punctuality and trust can improve the offline multiplier. |
 
 ## What the flight score means
@@ -134,6 +134,268 @@ It can detect:
 - Difficult conditions during the takeoff roll.
 
 These checks are meant to catch unsafe runway use, not punish normal small corrections.
+
+## Operational compliance scoring
+
+Online tracked flights can also be checked against operational limits and procedures.
+
+Some operational checks use only simulator telemetry. Other checks need a SimBrief OFP because FlyHub must know the planned limits, fuel, or scheduled time for that flight.
+
+Operational compliance can affect the final flight score. The flight report shows the penalty name, the amount deducted, and the telemetry values FlyHub used for the decision.
+
+### When OFP data is required
+
+FlyHub can only apply OFP-based penalties when the needed SimBrief data is present and FlyHub can read the units safely.
+
+The OFP can be in kilograms or pounds. FlyHub converts the OFP values to match the simulator telemetry before comparing them.
+
+If FlyHub is missing a required OFP field, the OFP units are unclear, or the telemetry sample is not available, FlyHub skips that specific penalty instead of guessing.
+
+OFP-based checks include:
+
+- Maximum zero-fuel weight.
+- Maximum takeoff weight.
+- Maximum landing weight.
+- Takeoff fuel mismatch.
+- Insufficient fuel reserves.
+- Career departure punctuality.
+
+Telemetry-only checks include:
+
+- 250 KIAS below 10,000 feet AGL.
+- Taxi speed.
+
+### Maximum zero-fuel weight
+
+Maximum zero-fuel weight checks whether the aircraft's zero-fuel weight exceeded the maximum allowed by the SimBrief OFP.
+
+FlyHub checks this during the flight when online telemetry is available.
+
+The check uses:
+
+- The OFP maximum ZFW limit.
+- The aircraft zero-fuel weight reported by telemetry.
+- If direct zero-fuel weight is not available, FlyHub may derive it from total weight minus fuel weight when those values are available.
+
+The flight report can show:
+
+- The telemetry maximum ZFW observed.
+- The OFP ZFW limit.
+- How far over the limit the aircraft was.
+- When the maximum sample was seen.
+- When the exceedance was first detected.
+
+Small rounding differences are ignored. FlyHub uses a tolerance before applying the penalty.
+
+### Maximum takeoff weight
+
+Maximum takeoff weight checks whether the aircraft was too heavy for takeoff according to the SimBrief OFP.
+
+FlyHub checks this before takeoff and during the takeoff phase. It does not keep re-scoring takeoff weight later in cruise.
+
+When SimBrief provides a structural maximum takeoff weight, FlyHub uses the structural value. If a structural value is not available, FlyHub uses the regular OFP maximum takeoff weight.
+
+The flight report can show:
+
+- The maximum takeoff weight FlyHub observed.
+- The OFP maximum takeoff weight used for comparison.
+- The amount above the limit.
+- The UTC time of the maximum sampled value.
+- The UTC time when the exceedance first triggered.
+
+### Maximum landing weight
+
+Maximum landing weight checks whether the aircraft was too heavy at landing.
+
+FlyHub only samples landing weight after there is touchdown or taxi-in evidence. It does not apply a maximum landing weight penalty just because the aircraft is heavy while still airborne on final approach.
+
+Landing weight can be sampled when:
+
+- The flight has already taken off.
+- The aircraft has landed, is on the ground, or is in taxi-in.
+- Total aircraft weight telemetry is available.
+
+When SimBrief provides a structural landing-weight or maximum landing-weight value, FlyHub uses that first. If no structural value is available, FlyHub uses the regular OFP maximum landing weight.
+
+The flight report can show:
+
+- The maximum landing weight FlyHub observed after landing evidence.
+- The OFP maximum landing weight used for comparison.
+- The amount above the limit.
+- The UTC time of the maximum sampled value.
+- The UTC time when the exceedance first triggered.
+
+### Takeoff fuel mismatch
+
+Takeoff fuel mismatch checks whether the aircraft took off with less fuel than planned by the OFP.
+
+FlyHub captures takeoff fuel at the first takeoff, climb, or airborne evidence.
+
+The check uses the aircraft fuel weight reported by telemetry and compares it against the best OFP takeoff-fuel value available.
+
+FlyHub looks for the OFP value in this order:
+
+1. Minimum takeoff fuel.
+2. Planned takeoff fuel.
+3. Planned ramp fuel minus taxi fuel.
+
+The penalty is for under-fueling. FlyHub does not penalize a pilot for taking more fuel than the minimum/planned takeoff fuel.
+
+The flight report can show:
+
+- Actual fuel at takeoff.
+- Required takeoff fuel from the OFP.
+- The OFP source used for the requirement.
+- The fuel shortfall.
+- The UTC time when takeoff fuel was captured.
+
+Small rounding and unit differences are ignored before a penalty is applied.
+
+### Insufficient fuel reserves
+
+Insufficient fuel reserves checks whether the flight landed with enough reserve fuel remaining.
+
+FlyHub captures landing fuel only after the aircraft has landed, is on the ground, or is in taxi-in. It uses the simulator fuel weight telemetry.
+
+The check compares landing fuel against the stricter available reserve requirement:
+
+- At least 90% of the OFP final reserve fuel.
+- At least 25 minutes of fuel, when the OFP reserve time is available.
+
+If the OFP final reserve is available but reserve time is not available, FlyHub can still check the 90% final-reserve requirement. If the needed reserve data is missing, this penalty is skipped.
+
+Example:
+
+```text
+OFP final reserve: 1003 kg
+90% reserve requirement: 903 kg
+Landing fuel: 700 kg
+
+Result: insufficient fuel reserves
+```
+
+Insufficient fuel reserves is treated as a major fuel-management issue. When it applies, it deducts 2.00 points from the flight score.
+
+The flight report can show:
+
+- Landing fuel.
+- Required landing fuel.
+- OFP final reserve fuel.
+- Estimated reserve minutes remaining.
+- The reserve requirement that was not met.
+
+### 250 KIAS below 10,000 feet AGL
+
+FlyHub checks the common speed restriction below 10,000 feet AGL during online tracked flights.
+
+The check uses indicated airspeed and altitude above ground level.
+
+The violation starts when:
+
+- The aircraft has taken off.
+- The aircraft is airborne.
+- The aircraft is below 10,000 feet AGL.
+- Indicated airspeed is above 252 knots.
+
+The violation clears when:
+
+- The aircraft is on the ground.
+- Altitude reaches 10,100 feet AGL or higher.
+- Indicated airspeed drops to 248 knots or below.
+
+The start and stop thresholds are intentionally different. This hysteresis prevents the score from flickering on and off if the speed is hovering around the limit.
+
+FlyHub requires at least 15 seconds above the trigger threshold before this penalty can register.
+
+The flight report can show:
+
+- Maximum indicated airspeed observed during the violation.
+- Total violation time.
+- Chargeable violation time after the 15-second grace period.
+- The UTC time when the violation first started.
+
+### Taxi speed
+
+FlyHub checks taxi speed during taxi out and taxi in.
+
+The check uses ground speed while the aircraft is on the ground.
+
+The violation starts when:
+
+- The aircraft is in taxi out or taxi in.
+- The aircraft is on the ground.
+- Ground speed is above 32 knots.
+
+The violation clears when:
+
+- The aircraft leaves taxi out or taxi in.
+- The aircraft is no longer on the ground.
+- Ground speed drops to 28 knots or below.
+
+The scored taxi limit is 30 knots. The 32-knot start threshold and 28-knot stop threshold are used as hysteresis to avoid false triggers from brief speed fluctuations.
+
+FlyHub requires at least 5 seconds above the trigger threshold before the taxi-speed penalty can register.
+
+The flight report can show:
+
+- Maximum ground speed observed during the taxi violation.
+- Taxi-out violation time.
+- Taxi-in violation time.
+- Chargeable violation time after the grace period.
+- The UTC time when the violation first started.
+
+### Career departure punctuality
+
+Career Mode flights can be scored for departure punctuality.
+
+FlyHub compares the planned SimBrief OUT time against the actual departure detected by FlyHub.
+
+This check always uses real UTC time. It does not use the simulator clock, because pilots may intentionally fly with a different simulator time of day.
+
+The planned time comes from the SimBrief OFP scheduled OUT time when available. If that is unavailable, FlyHub can use the OFP estimated OUT time.
+
+Actual departure is captured when FlyHub detects the flight leaving the gate or beginning departure movement, such as pushback, taxi out, takeoff, climb, or ground movement with engines running.
+
+Every full minute early or late can deduct 0.05 points.
+
+Example:
+
+```text
+Planned OUT: 1930Z
+Actual departure: 1931Z
+Deviation: 1 minute
+Penalty: 0.05 points
+```
+
+The flight report can show:
+
+- Planned OUT time in UTC.
+- Actual departure time in UTC.
+- Minute deviation.
+- Penalty per minute.
+
+This penalty is Career Mode only. It does not apply to regular Free Flight tracking.
+
+### Operational event markers
+
+Operational penalties can create event markers on the logbook map.
+
+Markers are designed to show the first point where a penalty registered. They are not created repeatedly every telemetry sample.
+
+FlyHub can create these operational marker types:
+
+| Marker | When it appears |
+| :--- | :--- |
+| Weight exceedance | First confirmed ZFW, takeoff-weight, or landing-weight exceedance. |
+| Takeoff fuel | First confirmed takeoff fuel shortfall. |
+| 250kt restriction | First confirmed 250 KIAS below 10,000 feet AGL violation after the grace period. |
+| Taxi speed | First confirmed taxi-speed violation after the grace period. |
+| Fuel reserve | Landing or taxi-in point where insufficient reserves are confirmed. |
+| Departure time | Career departure point where planned OUT and actual departure differ enough to create a penalty. |
+
+For weight penalties, the marker shows when the exceedance first registered. The final flight report can show the maximum telemetry value that was actually scored. These can be different if the aircraft became even heavier after the first trigger.
+
+Each operational marker type is emitted only once per applicable rule for a flight. For example, a flight can have one maximum ZFW marker, one maximum takeoff-weight marker, and one maximum landing-weight marker, but it will not create a new marker every second while overweight.
 
 ## Lights scoring
 
@@ -371,6 +633,12 @@ These are the most common reasons a flight scores lower than expected:
 - Leaving the runway during rollout.
 - Forgetting beacon, strobe, or navigation lights.
 - Leaving the gear down too long after takeoff.
+- Departing with aircraft weight above the OFP limits.
+- Taking off with less fuel than the OFP required.
+- Landing below the OFP reserve fuel requirement.
+- Exceeding 250 KIAS below 10,000 feet AGL.
+- Taxiing too fast during taxi out or taxi in.
+- Departing early or late in Career Mode.
 - Flying an unstable approach below 1000 feet AGL.
 - Bouncing the landing.
 - Setting the wrong altimeter.

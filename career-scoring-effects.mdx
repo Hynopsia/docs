@@ -64,6 +64,29 @@ This can damage training, line checks, weekly performance, and reputation. Do no
 
 For examples and recovery details, see [Career Fatigue](/career-fatigue).
 
+## Departure punctuality
+
+Career Mode can also score whether you departed on time.
+
+FlyHub compares the SimBrief OFP planned OUT time against the actual departure detected by FlyHub.
+
+This check uses real UTC time. It does not use the simulator clock.
+
+Every full minute early or late can reduce the flight score by 0.05 points.
+
+Example:
+
+```text
+Planned OUT: 1930Z
+Actual departure: 1931Z
+Deviation: 1 minute
+Penalty: 0.05 points
+```
+
+This means you should generate or import the OFP before the flight, review the planned OUT time, and start the flight close to that time.
+
+For the full operational scoring explanation, including OFP weight, fuel, reserves, speed, and taxi checks, see [Scoring and XP](/scoring-xp#operational-compliance-scoring).
+
 ## Offline tracking
 
 Offline Career flights still need the required check-ins and debrief information.
@@ -85,6 +108,7 @@ For setup and use, see [Online Tracking](/online-tracking).
 - Use the correct tracking mode.
 - Do the required offline check-ins if flying offline.
 - Generate or import the OFP when needed.
+- Depart close to the OFP planned OUT time.
 - Start near the origin airport.
 - Avoid rushing setup.
 - Avoid fatigue penalties.
