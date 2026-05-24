@@ -162,7 +162,6 @@ OFP-based checks include:
 
 Telemetry-only checks include:
 
-- 250 KIAS below 10,000 feet AGL.
 - Taxi speed.
 
 ### Maximum zero-fuel weight
@@ -284,36 +283,6 @@ The flight report can show:
 - Estimated reserve minutes remaining.
 - The reserve requirement that was not met.
 
-### 250 KIAS below 10,000 feet AGL
-
-FlyHub checks the common speed restriction below 10,000 feet AGL during online tracked flights.
-
-The check uses indicated airspeed and altitude above ground level.
-
-The violation starts when:
-
-- The aircraft has taken off.
-- The aircraft is airborne.
-- The aircraft is below 10,000 feet AGL.
-- Indicated airspeed is above 252 knots.
-
-The violation clears when:
-
-- The aircraft is on the ground.
-- Altitude reaches 10,100 feet AGL or higher.
-- Indicated airspeed drops to 248 knots or below.
-
-The start and stop thresholds are intentionally different. This hysteresis prevents the score from flickering on and off if the speed is hovering around the limit.
-
-FlyHub requires at least 15 seconds above the trigger threshold before this penalty can register.
-
-The flight report can show:
-
-- Maximum indicated airspeed observed during the violation.
-- Total violation time.
-- Chargeable violation time after the 15-second grace period.
-- The UTC time when the violation first started.
-
 ### Taxi speed
 
 FlyHub checks taxi speed during taxi out and taxi in.
@@ -388,7 +357,6 @@ FlyHub can create these operational marker types:
 | :--- | :--- |
 | Weight exceedance | First confirmed ZFW, takeoff-weight, or landing-weight exceedance. |
 | Takeoff fuel | First confirmed takeoff fuel shortfall. |
-| 250kt restriction | First confirmed 250 KIAS below 10,000 feet AGL violation after the grace period. |
 | Taxi speed | First confirmed taxi-speed violation after the grace period. |
 | Fuel reserve | Landing or taxi-in point where insufficient reserves are confirmed. |
 | Departure time | Career departure point where planned OUT and actual departure differ enough to create a penalty. |
@@ -636,7 +604,6 @@ These are the most common reasons a flight scores lower than expected:
 - Departing with aircraft weight above the OFP limits.
 - Taking off with less fuel than the OFP required.
 - Landing below the OFP reserve fuel requirement.
-- Exceeding 250 KIAS below 10,000 feet AGL.
 - Taxiing too fast during taxi out or taxi in.
 - Departing early or late in Career Mode.
 - Flying an unstable approach below 1000 feet AGL.
