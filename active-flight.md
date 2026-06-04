@@ -175,6 +175,10 @@ The OFP is generated from the flight data and selected aircraft.
 
 Review it before starting the flight so you understand the route, fuel, cruise planning, and expected timing.
 
+If you saved custom SimBrief airframe profiles for the active aircraft, FlyHub asks which profile to use before generating the OFP. Choose Default to use the normal aircraft ICAO, or choose a saved profile to use that SimBrief Internal ID.
+
+See [SimBrief Custom Airframe Profiles](/simbrief-custom-profiles) for setup.
+
 ## Refresh OFP
 
 Use Refresh OFP when you need FlyHub to regenerate the operational flight plan.

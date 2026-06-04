@@ -42,7 +42,8 @@
           "game-modes",
           "getting-started",
           "installing-desktop",
-          "simbrief-ofp-generation"
+          "simbrief-ofp-generation",
+          "simbrief-custom-profiles"
         ]
       },
       {
@@ -130,6 +131,7 @@
         "pages": [
           "settings",
           "settings-general",
+          "simbrief-custom-profiles",
           "settings-integrations",
           "settings-simulator",
           "scenery-scanner",

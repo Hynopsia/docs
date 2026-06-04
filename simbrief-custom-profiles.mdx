@@ -1,0 +1,131 @@
+---
+title: "SimBrief Custom Airframe Profiles"
+description: "Create SimBrief custom airframes, save their Internal IDs in FlyHub, and choose the right profile when generating an OFP."
+---
+
+# SimBrief Custom Airframe Profiles
+
+SimBrief custom airframe profiles let FlyHub generate an OFP with the exact aircraft setup you use in the simulator.
+
+Use this when one aircraft ICAO has multiple simulator variants, engine options, layouts, or performance profiles.
+
+Examples:
+
+| Aircraft ICAO | FlyHub profile name | SimBrief Internal ID |
+| --- | --- | --- |
+| A320 | Fenix A320 CFM | `90588_1780596614666` |
+| A320 | ToLiss A320 IAE | `90588_1780582170413` |
+| B38M | iFly 737 MAX 8 | `90588_1714947818386` |
+
+FlyHub still keeps the booked aircraft as the normal aircraft ICAO. The custom profile only changes what FlyHub sends to SimBrief for OFP generation.
+
+## How this fits into the FlyHub flow
+
+The flow is the same in Free Flight and Career Mode:
+
+1. Book or receive a flight.
+2. Open My Flights.
+3. Start the flight to open Active Flight.
+4. In Active Flight, click Generate OFP.
+5. If you saved one or more profiles for that aircraft, FlyHub asks which profile to use.
+6. Choose Default or one of your saved profiles.
+7. FlyHub sends the selected aircraft value to SimBrief and saves the generated OFP to the flight.
+
+The profile picker appears only when FlyHub finds saved profiles for the aircraft on the active flight.
+
+## Default vs custom profile
+
+| Choice | What FlyHub sends to SimBrief | Use it when |
+| --- | --- | --- |
+| Default | The aircraft ICAO, such as `A320` or `B738`. | You want SimBrief's standard aircraft profile. |
+| Saved profile | The SimBrief Internal ID, such as `90588_1780596614666`. | You want a specific saved SimBrief airframe. |
+
+Default is always available when the picker appears, so you can still use the normal SimBrief aircraft type without changing settings.
+
+If there are no saved profiles for the aircraft, FlyHub skips the picker and generates the OFP normally.
+
+## Create the airframe in SimBrief first
+
+FlyHub does not create or read your private SimBrief airframes automatically. You create the airframe in SimBrief, then copy its Internal ID into FlyHub.
+
+1. Open [SimBrief Airframes](https://dispatch.simbrief.com/airframes).
+2. Sign in with your Navigraph/SimBrief account.
+3. Create a new airframe or edit an existing one.
+4. Set the aircraft details in SimBrief, such as base type, ICAO code, engine type, registration, layout, units, and comments.
+5. Click Save Airframe.
+6. Find the Internal ID near the top of the SimBrief airframe editor.
+7. Copy the Internal ID.
+
+The Internal ID looks like this:
+
+```text
+90588_1780596614666
+```
+
+Do not copy the aircraft ICAO, registration, or fin number into FlyHub's Internal ID field. FlyHub needs the SimBrief Internal ID.
+
+## Save the profile in FlyHub
+
+After you copy the Internal ID from SimBrief:
+
+1. Open FlyHub Desktop.
+2. Open Settings.
+3. Select SimBrief Profiles.
+4. Choose the aircraft ICAO, such as `A320`, `B738`, or `B38M`.
+5. Enter a profile name that helps you recognize the simulator aircraft.
+6. Paste the SimBrief Internal ID.
+7. Save the profile.
+
+Good profile names are short and specific:
+
+- Fenix A320 CFM
+- Fenix A320 IAE
+- ToLiss A320 CFM
+- PMDG 737-800 BW
+- iFly B38M MAX
+
+You can save up to 20 profiles per aircraft ICAO.
+
+## Choose the profile during OFP generation
+
+When the active flight uses an aircraft with saved profiles, FlyHub shows an Airframe Profile picker before opening the SimBrief generation flow.
+
+Choose:
+
+- Default to use the normal aircraft ICAO.
+- A saved profile name to use that SimBrief Internal ID.
+
+After you choose, continue the SimBrief flow as usual. FlyHub saves the generated OFP to the active flight.
+
+## Important behavior
+
+Custom airframe profiles are exact aircraft matches.
+
+For example, an `A320` profile appears for an `A320` flight. It does not automatically appear for `A20N`, `A321`, or other related family aircraft.
+
+Changes you make later in SimBrief apply immediately. If you edit the airframe in SimBrief, future FlyHub OFP generations using that Internal ID will use the updated airframe.
+
+If you delete the airframe in SimBrief, future OFP generation with that saved Internal ID may fail with an unknown aircraft error. Delete or update the matching FlyHub profile if that happens.
+
+## Troubleshooting
+
+### I do not see the profile picker
+
+Check these items:
+
+- The flight has been started from My Flights and is open in Active Flight.
+- You are clicking Generate OFP in Active Flight.
+- The saved FlyHub profile uses the same aircraft ICAO as the active flight.
+- The profile was saved under Settings > SimBrief Profiles.
+
+### SimBrief says the aircraft is unknown
+
+The Internal ID may be wrong, deleted, or not saved in SimBrief.
+
+Open [SimBrief Airframes](https://dispatch.simbrief.com/airframes), confirm the airframe still exists, save it again if needed, then copy the Internal ID back into FlyHub.
+
+### I picked the wrong profile
+
+Generate or import a new OFP before starting tracking.
+
+Once the OFP is generated, the plan, fuel, route data, and aircraft-specific SimBrief output are tied to that choice.
