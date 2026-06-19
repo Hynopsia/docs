@@ -22,9 +22,12 @@ Schedules has two modes:
 | Mode | Use it when |
 | --- | --- |
 | Manual Bid | You want to search specific routes and book one flight at a time. |
+| Weather Scout | You want FlyHub to find current routes by live METAR weather, VFR windows, challenging arrivals, scenery, and weather-ranked route cards. |
 | Scheduler | You want FlyHub to generate a multi-leg itinerary from your filters. |
 
-You can switch between Manual Bid and Scheduler from the top of the page.
+You can switch between Manual Bid, Weather Scout, and Scheduler from the top of the page.
+
+For the full weather-based search guide, see [Weather Scout](/weather-scout).
 
 ## Free and premium access
 

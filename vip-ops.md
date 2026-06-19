@@ -186,6 +186,7 @@ Manual VIP Flight lets premium users create VIP operations outside the live char
 It has two modes:
 
 - Manual Bid.
+- Weather Scout.
 - Flight Builder.
 
 ## Manual VIP Bid
@@ -210,6 +211,28 @@ Manual Bid searches VIP-bookable schedules.
 10. Open My Flights.
 
 Manual VIP Bid is useful when you want a schedule-based VIP operation instead of a board mission.
+
+## VIP Weather Scout
+
+Weather Scout searches VIP manual-bid schedules by current METAR weather.
+
+Use it when you want a VIP route with a specific weather style, such as a clean VFR departure, a challenging arrival, gusts, low visibility, fog, snow, rain, thunderstorm, or a route touching scanned scenery.
+
+1. Open VIP Ops.
+2. Choose Manual VIP Flight.
+3. Choose Weather Scout.
+4. Select a Weather Profile, Weather Target, and any hard condition filters.
+5. Set VIP operators, aircraft, airports, distance, block time, or scenery preference if needed.
+6. Click Search VIP Weather Routes.
+7. Review the ranked route cards.
+8. Check the origin and arrival METAR summaries.
+9. Load TAFs if you want forecast context.
+10. Choose an aircraft and click Book.
+11. Open My Flights.
+
+VIP Weather Scout books through the same VIP manual-bid booking system as Manual Bid.
+
+For the full weather-based search guide, see [Weather Scout](/weather-scout).
 
 ## VIP Flight Builder
 
