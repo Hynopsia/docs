@@ -17,7 +17,7 @@ Examples:
 - A scenic VFR flight touching airports from your scenery scanner.
 - A VIP manual-bid route with more interesting weather.
 
-Weather Scout uses current METAR data, FlyHub route databases, your filters, optional scenery data, and selected aircraft to rank route candidates.
+Weather Scout uses current METAR data, FlyHub routes, your filters, optional scenery data, and selected aircraft to rank route matches.
 
 ## Where to find it
 
@@ -26,10 +26,10 @@ Weather Scout appears in multiple FlyHub areas:
 | Page | Where it appears | Route source |
 | --- | --- | --- |
 | [Schedules](/schedules) | Free Flight route modes | Current official FlyHub schedules |
-| [Historical Routes](/historical-routes) | Historical route modes | Premium historical route database |
+| [Historical Routes](/historical-routes) | Historical route modes | Premium historical route catalog |
 | [VIP Ops](/vip-ops) | Manual VIP Flight tab | VIP manual-bid schedules |
 
-The experience is mostly the same in each place. The difference is the route pool being searched.
+The experience is mostly the same in each place. The difference is the type of route being searched.
 
 ## Access
 
@@ -43,21 +43,19 @@ Weather Scout follows the access rules of the page you use it from.
 
 Free users in Schedules still follow the same airline access rules as Manual Bid and Scheduler. Premium-only airlines are locked.
 
-## What Weather Scout searches
+## How Weather Scout works
 
-Weather Scout does not search every airport in the world for every user request.
-
-It starts from FlyHub routes, then checks the weather for the candidate airports on those routes.
+Weather Scout starts from FlyHub routes you can actually book, then ranks matching routes by the weather at the origin and destination.
 
 For example:
 
 1. You choose filters such as airline, aircraft, origin, destination, distance, or block time.
-2. FlyHub builds a limited route candidate pool from that page.
-3. FlyHub checks current weather for the airports used by those route candidates.
-4. FlyHub ranks the routes by your Weather Profile, Weather Target, condition rules, scenery preference, and aircraft filters.
+2. FlyHub finds matching bookable routes.
+3. FlyHub checks current weather for the origin and destination airports.
+4. FlyHub ranks those routes by your Weather Profile, Weather Target, condition rules, scenery preference, and aircraft filters.
 5. Weather Scout returns up to 10 ranked route cards.
 
-This keeps the feature focused on routes you can actually book in FlyHub.
+This keeps the feature focused on flights you can book, not random airports with no FlyHub route attached.
 
 ## Weather profiles
 
@@ -118,7 +116,7 @@ Available condition rules can include:
 - Crosswind.
 - VFR.
 
-Use hard filters carefully. They can easily remove every candidate if combined with a profile that points in the opposite direction.
+Use hard filters carefully. They can easily remove every route if combined with a profile that points in the opposite direction.
 
 Examples:
 
@@ -184,13 +182,9 @@ This quickly turns a weather airport into a route filter.
 
 ## Refresh countdown
 
-The leaderboard shows when FlyHub will check for refreshed persisted weather scores.
+Top Weather Airports includes a refresh countdown.
 
-Weather Scout uses stored airport weather scores when possible. This helps avoid unnecessary weather requests and keeps the feature responsive.
-
-If the countdown reaches the refresh window while you are in the Weather Scout menu, FlyHub checks for updated leaderboard data automatically.
-
-Manual leaderboard refresh is an admin-only control.
+When the countdown reaches the refresh window while you are in the Weather Scout menu, FlyHub checks for updated weather leaderboard data automatically.
 
 ## Route cards
 
@@ -230,9 +224,7 @@ Route cards show the full METAR for both airports, plus parsed information such 
 - Observed time.
 - Stale METAR warnings.
 
-TAFs are available from the route cards. They are loaded on demand instead of all at once.
-
-This keeps the page faster and avoids loading forecast data you may not inspect.
+TAFs are available from the route cards when you want forecast context.
 
 ## Weather freshness
 
@@ -255,11 +247,11 @@ Examples:
 
 - No routes match Snow + VFR Window.
 - No selected VIP operators match the selected aircraft.
-- Scenery-only removed most or all candidates.
-- No route candidates matched the selected airports, distance, block time, airlines, or aircraft.
-- Current hard condition rules rejected the available candidates.
-- Candidate airports were missing airport map data.
-- The route existed, but current METARs did not provide enough weather signal for the selected profile.
+- Scenery-only removed most or all routes.
+- No routes matched the selected airports, distance, block time, airlines, or aircraft.
+- Current hard condition rules rejected the available routes.
+- Some matching airports could not be placed on the map.
+- The route existed, but current weather did not match the selected profile strongly enough.
 
 Use those messages as the next action guide.
 
@@ -284,24 +276,6 @@ Weather Scout books through the same booking system as the page you opened it fr
 | VIP Ops | Creates a VIP manual-bid booking. |
 
 After booking, open [My Flights](/my-flights) to start the flight.
-
-## Cost-friendly weather loading
-
-Weather Scout is designed to avoid excessive weather requests.
-
-It does not fetch METARs for every airport in the world every time a user searches.
-
-Instead:
-
-- Leaderboards use persisted airport weather scores.
-- Scheduled refreshes update the stored weather scores.
-- Searches use cached persisted METARs first.
-- Searches fetch only missing or stale METARs for candidate route airports.
-- Search results are capped.
-- TAFs load on demand.
-- Manual leaderboard refresh is admin-only.
-
-This means many users can use Weather Scout without each user triggering a global weather scan.
 
 ## Tips
 
