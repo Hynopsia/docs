@@ -71,6 +71,7 @@
           "dashboard",
           "schedules",
           "weather-scout",
+          "network-events",
           "historical-routes",
           "manual-flights",
           "vip-ops",

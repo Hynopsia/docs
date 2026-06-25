@@ -1,0 +1,332 @@
+---
+title: "Network Events"
+description: "Find VATSIM and IVAO events in Free Flight, book matching FlyHub routes, and earn event credit and event-network XP bonuses."
+---
+
+# Network Events
+
+Network Events is a Free Flight page for pilots who want to join upcoming VATSIM and IVAO events through FlyHub.
+
+Use it to browse events, choose the network you want to fly on, find matching FlyHub routes, book a flight into My Flights, and earn event credit when you start the flight during the event window.
+
+## Where to find it
+
+Open **Free Flight** and select **Events** from the sidebar.
+
+The Events page has two tabs:
+
+| Tab | What it is for |
+| --- | --- |
+| Network Events | Upcoming VATSIM and IVAO events. This is the live event catalog. |
+| FlyHub Events | FlyHub-hosted events. This section is marked Coming Soon until FlyHub events are released. |
+
+## What appears on the page
+
+Network Events shows events that are happening now or scheduled soon.
+
+FlyHub only shows events within the next 7 days. Finished events are hidden from the Events page unless you already booked a flight from that event.
+
+Each event can show:
+
+- Event banner or image.
+- Network badge, such as VATSIM or IVAO.
+- Event title.
+- Event start and end time.
+- Countdown such as Starts in, Live now, or Ends in.
+- Event credit deadline.
+- Official Event button when the provider has an event page.
+- Route-scope choices such as published routes, arrivals, departures, or airport coverage.
+- FlyHub route matches for the selected scope.
+
+The sidebar also shows when the event list will update next. If FlyHub is refreshing the list, it shows an updating state.
+
+## Network filters
+
+At the top of the Events page, use the **VATSIM** and **IVAO** buttons to choose which networks you want to see.
+
+You can show:
+
+- VATSIM only.
+- IVAO only.
+- Both VATSIM and IVAO.
+
+At least one network must stay selected.
+
+## Official event page
+
+Use **Official Event** to open the event page from VATSIM or IVAO.
+
+This is useful for:
+
+- Event rules.
+- ATC coverage details.
+- Network-specific registration.
+- Briefings or scenery notes.
+- Discord/forum links when the event provider includes them.
+
+FlyHub booking is separate from the official event page. If the network event requires signup, slot booking, or special instructions, follow the official event page too.
+
+## Event route scopes
+
+Not every network event is a simple route from one airport to another.
+
+Some events are classic city pairs, such as:
+
+```text
+HECA to LGAV
+```
+
+Other events may be:
+
+- Fly to an airport.
+- Fly from an airport.
+- Fly to or from a featured airport.
+- ATC coverage around several airports.
+- FIR, division, exam, or training coverage.
+- Events with a list of airports but no single required route.
+
+FlyHub handles this with route scopes.
+
+| Scope | What it means |
+| --- | --- |
+| Published routes | Route pairs published directly by VATSIM or IVAO for the event. |
+| Arrivals | Routes ending at an airport covered by the event. |
+| Departures | Routes starting from an airport covered by the event. |
+| Between event airports | Routes where both ends are in the event airport list. |
+| Airport pair | A route between two event airports when the event provides a small airport set. |
+
+Choose the scope that best matches how you want to join the event.
+
+Example: if an event is focused on EDDF, you may see route choices like:
+
+- Arrivals to EDDF.
+- Departures from EDDF.
+
+Example: if an event covers several airports, you may see:
+
+- Between event airports.
+- Arrivals to a specific event airport.
+- Departures from a specific event airport.
+
+## FlyHub route matches
+
+After you select an event and route scope, FlyHub shows matching FlyHub routes.
+
+These are routes from FlyHub's route data that match the event scope you selected.
+
+For example:
+
+- If the event scope is SKBO to KMIA, FlyHub looks for routes from SKBO to KMIA.
+- If the scope is arrivals to LLBG, FlyHub looks for routes that end at LLBG.
+- If the scope is between event airports, FlyHub looks for routes where both airports are part of the event.
+
+The route match table can show:
+
+- Airline logo.
+- Flight number.
+- Route.
+- Distance.
+- Estimated flight time.
+- Aircraft.
+- Historical year when Historical is selected.
+- Book button.
+
+## Route sources
+
+Network Events can search different FlyHub route sources.
+
+| Source | Who can use it | What it includes |
+| --- | --- | --- |
+| Active | Free and premium users | Current active scheduled airline routes that match the event scope. |
+| Historical | Premium users | Historical route data that matches the event scope. |
+| VIP | Premium users | Eligible VIP schedule routes that match the event scope. |
+
+Free users can use event routes from the **Active** source.
+
+Premium users can also use **Historical** and **VIP** sources.
+
+## Route filters
+
+The FlyHub Route Matches section uses filters similar to Schedules Manual Bid.
+
+You can filter by:
+
+- Airline.
+- Airline search.
+- Aircraft type or family.
+- Match aircraft.
+- Distance range.
+- Flight time range.
+- Historical year when Historical is selected.
+
+Use **Search** after changing filters. This prevents the route list from refreshing on every small filter change.
+
+Use **Clear** to reset the route filters.
+
+### Airline filter
+
+The airline filter shows carriers available in the matching route results.
+
+Airline logos are shown where available. Related airline codes and aliases are grouped so the carrier list behaves like the schedule search pages.
+
+### Aircraft filter
+
+The aircraft selector shows aircraft that are available for the matching route scope.
+
+If **Match aircraft** is enabled, the airline list narrows to carriers that operate the selected aircraft in the available route results.
+
+### Historical year
+
+When **Historical** is selected, the year filter only shows years available for the current event route matches.
+
+This means the year list changes based on the event, route scope, airline filters, aircraft filters, and available historical data.
+
+## Booking an event flight
+
+To book a flight from a network event:
+
+1. Open **Free Flight > Events**.
+2. Select **Network Events**.
+3. Choose VATSIM, IVAO, or both.
+4. Select an event.
+5. Open the official event page if you need the event rules or network signup.
+6. Choose the route scope you want to fly.
+7. Select Active, Historical, or VIP depending on your plan.
+8. Apply any airline, aircraft, distance, time, or year filters.
+9. Choose the aircraft if the route has more than one aircraft option.
+10. Click **Book**.
+11. Open **My Flights** and start the booking from there.
+
+Event bookings appear in My Flights with an Event badge and event details.
+
+## Duplicate protection
+
+FlyHub tries to prevent accidental duplicate event bookings.
+
+If you already have the same event flight in your queue, active flights, or counted logbook history, FlyHub warns you before booking it again.
+
+You can still choose to book it again if you intentionally want another copy.
+
+This protects future event statistics and achievements from being inflated by accidental repeated bookings.
+
+## Event credit
+
+An event flight can count for your event stats when it is booked through the Events page and started on time.
+
+The important time is when you start tracking the flight, not when you land.
+
+To count for event progression:
+
+- The flight must be booked through the Events flow.
+- The route must match the signed event route scope.
+- The flight must be started no earlier than the event start time.
+- The flight must be started no later than the event end time plus 3 hours.
+- The flight must be completed and saved to your logbook.
+
+This allows long flights to count even if the landing happens after the event ends, as long as you started the flight within the allowed event window.
+
+Example:
+
+```text
+Event: 1800Z to 2100Z
+Credit window: starts from 1800Z and stays open until 0000Z
+
+Start tracking at 2030Z: counts if completed
+Start tracking at 2330Z: counts if completed
+Start tracking at 0015Z: does not count
+```
+
+My Flights shows a **Counts if started by** line on event bookings so you know the deadline before you fly.
+
+## Expired event bookings
+
+If an event booking is still upcoming after the event has ended, FlyHub can remove it from your queue because the flight was not started in time.
+
+Active flights and completed logbook entries are not treated as unused upcoming bookings.
+
+## Event stats
+
+Completed event flights can appear in your Free Flight profile stats.
+
+Event stats can include:
+
+- Events flown.
+- VATSIM events flown.
+- IVAO events flown.
+- Event airports.
+- Event routes.
+
+Only completed event flights that meet the event credit rules are counted.
+
+Booking an event flight without flying it does not increase event stats.
+
+## 100% event-network XP bonus
+
+Event flights can earn a special **100% XP bonus** when FlyHub verifies that the event flight was actually flown on the matching online network.
+
+This is separate from the normal VATSIM/IVAO network bonus.
+
+To earn the 100% event-network XP bonus:
+
+- The flight must be an event booking from the Events page.
+- The flight must count for event credit.
+- Your VATSIM CID or IVAO VID must be saved in Settings.
+- You must fly on the same network as the event.
+- FlyHub must detect that you were online on that network for at least 80% of the flight.
+- The flight must be completed and saved normally.
+
+Examples:
+
+| Event | You fly on | Bonus result |
+| --- | --- | --- |
+| VATSIM event | VATSIM | Eligible for the 100% event-network XP bonus if presence is verified. |
+| VATSIM event | IVAO | Not eligible for the event-network XP bonus. |
+| IVAO event | IVAO | Eligible for the 100% event-network XP bonus if presence is verified. |
+| IVAO event | VATSIM | Not eligible for the event-network XP bonus. |
+
+If the event-network bonus applies, it replaces the normal 10% network bonus for that flight. The bonuses do not stack.
+
+## How to make sure the XP bonus applies
+
+Before flying:
+
+1. Open **Settings**.
+2. Add your VATSIM CID or IVAO VID.
+3. Book the event flight from **Free Flight > Events**.
+4. Start the flight from **My Flights** within the event credit window.
+5. Connect to the same network as the event before or near the start of the flight.
+6. Stay connected for at least 80% of the flight.
+7. Complete the flight normally.
+
+If you disconnect for too much of the flight, use the wrong network, use the wrong network account, or do not have your network ID saved, FlyHub may not award the event-network XP bonus.
+
+## Manual flights and events
+
+Manual Flight is not available from the Events page right now.
+
+For event credit, book one of the FlyHub route matches shown in the Events flow.
+
+Premium users can still use Manual Flights from the regular Manual Flights page, but those flights are not treated as Events-page bookings unless FlyHub specifically supports that flow in the future.
+
+## Provider availability
+
+FlyHub reads event listings from VATSIM and IVAO.
+
+If one network is temporarily unavailable, the page may still show events from the other selected network. FlyHub will try again automatically.
+
+If no events appear, check:
+
+- Whether VATSIM or IVAO is selected.
+- Whether there are events in the next 7 days.
+- Whether the event has already ended.
+- Whether the provider is temporarily unavailable.
+
+## Related guides
+
+- [Free Flight Mode](/free-flight-mode)
+- [Schedules](/schedules)
+- [Historical Routes](/historical-routes)
+- [VIP Ops](/vip-ops)
+- [My Flights](/my-flights)
+- [Scoring and XP](/scoring-xp)
+- [Online Tracking](/online-tracking)
