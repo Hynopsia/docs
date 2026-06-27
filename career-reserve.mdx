@@ -1,6 +1,6 @@
 ---
 title: Career Reserve
-description: Go on standby, accept reserve calls, handle relocation, and understand reserve pay.
+description: Go on standby, accept reserve calls, handle relocation, deadlines, and reserve pay.
 ---
 
 # Career Reserve
@@ -11,19 +11,49 @@ Use it when you want Operations to call you for short-notice flying instead of b
 
 ## What reserve does
 
-When you go on reserve, FlyHub places you on a 72-hour standby window.
+When you go on reserve, FlyHub places you on a standby window.
 
 During that window, Operations can call you for a random assignment. A call is not guaranteed.
 
-If a call appears, you have a limited response window to accept it.
+If a call appears, you have a limited response window to accept it. This is the time you have to answer the call, not the time you have to finish the route.
 
-Current response window: 3 hours.
+## Duty types
+
+Reserve calls can use different duty types:
+
+- Long Call: more notice before you need to report.
+- Standard: normal reserve notice.
+- Ready: short-notice reserve.
+
+Ready reserve has the shortest report window. That short window is the deadline to report and start the assignment, not a requirement to complete a long-haul route inside that same window.
+
+## Reserve deadlines
+
+Reserve uses separate deadlines:
+
+- Response deadline: how long you have to accept the call.
+- Report/start deadline: how long you have to begin the assignment after accepting.
+- Route completion deadline: how long you have to complete the accepted route after starting on time.
+
+The completion deadline is route-aware. FlyHub estimates the route using expected block time, distance, multi-leg turn time, and a completion buffer.
+
+For multi-leg calls, the completion deadline covers the whole accepted reserve call, not only the first leg.
+
+## Active flight protection
+
+If you accept a reserve call and start the first leg before the report/start deadline, FlyHub treats the assignment as active.
+
+An active reserve flight should not be marked missed just because the original report window expires while you are still flying.
+
+Example: if you accept a Ready reserve call with a short report window but the first leg is a 12-hour flight, you only need to start on time. The route completion deadline is extended based on the expected time needed to fly the accepted route.
+
+FlyHub can extend an active in-progress reserve deadline in limited chunks while you are still flying, but the extension is capped. Late starts can still be missed.
 
 ## Reserve pay
 
-Accepted reserve calls pay 2.0x hourly pay.
+Accepted reserve calls pay a higher hourly multiplier than normal scheduled work.
 
-That higher pay is the main reason to use reserve. You trade schedule control for a higher pay multiplier.
+The exact multiplier can depend on the reserve duty type and call details shown in Dispatch.
 
 Reserve pay is processed through Career payroll. See [Career Payroll and Ledger](/career-payroll-ledger).
 
@@ -36,8 +66,8 @@ Reserve pay is processed through Career payroll. See [Career Payroll and Ledger]
 5. Confirm reserve duty.
 6. Watch notifications during the reserve window.
 7. Accept the call if you want the assignment.
-8. Schedule the assignment in Calendar.
-9. Fly it from Career My Flights.
+8. Start before the report/start deadline.
+9. Complete the route before the route completion deadline.
 
 ## What reserve calls can include
 
@@ -63,6 +93,14 @@ After you accept a reserve call:
 
 Reserve does not skip Calendar.
 
+## Multi-leg calls
+
+A multi-leg reserve call is treated as one reserve call.
+
+If you miss the call because you did not start on time, FlyHub should count that as one missed reserve call for reliability purposes, not one separate miss per leg.
+
+If you start on time, continue flying the legs normally and complete the route before the route completion deadline.
+
 ## When reserve can be blocked
 
 Reserve can be unavailable if:
@@ -83,20 +121,22 @@ Reserve is useful when:
 - You want higher pay.
 - You are flexible about where you fly.
 - You can respond during the next few hours.
-- You do not need a predictable schedule.
+- You can start by the report/start deadline.
 
 Reserve is not ideal when:
 
 - You can only fly a very specific route.
 - You cannot check notifications.
 - You cannot accept within the response window.
+- You cannot start before the report/start deadline.
 - You are trying to plan a fixed real-life streaming or flying session.
 
 ## Common mistakes
 
+- Treating the response window as the completion deadline.
+- Treating the Ready report window as the time allowed to finish a long-haul route.
 - Going on reserve and then ignoring notifications.
 - Expecting every reserve window to generate a call.
 - Accepting a call without checking the origin airport.
 - Forgetting that accepted reserve flights still go through Calendar.
 - Missing a needed jumpseat before departure.
-
