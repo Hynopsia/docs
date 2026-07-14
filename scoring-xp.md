@@ -18,7 +18,7 @@ Online flights are scored from simulator telemetry. Offline flights are scored f
 
 | Tracking mode | How it is scored | XP behavior |
 | :--- | :--- | :--- |
-| Online tracking | FlyHub reads simulator telemetry during the flight. It can score the landing, runway use, OFP weight and fuel compliance, speed restrictions, taxi speed, lights, gear, altimeter, approach stability, bounces, crashes, and telemetry events. | Full XP is available unless penalties, crash detection, SimRate, or other modifiers reduce it. |
+| Online tracking | FlyHub reads simulator telemetry during the flight. It can score the landing, runway use, aircraft-specific takeoff and landing limits, OFP weight and fuel compliance, speed restrictions, taxi speed, lights, gear, altimeter, approach stability, bounces, crashes, and telemetry events. | Full XP is available unless penalties, crash detection, SimRate, or other modifiers reduce it. |
 | Manual and Offline Mode | You complete the flight through required check-ins and a final debrief. FlyHub scores the flight from your inputs, route plausibility, timing, and trust. | Offline XP is reduced because FlyHub cannot verify full telemetry. Punctuality and trust can improve the offline multiplier. |
 
 ## What the flight score means
@@ -134,6 +134,59 @@ It can detect:
 - Difficult conditions during the takeoff roll.
 
 These checks are meant to catch unsafe runway use, not punish normal small corrections.
+
+## Aircraft-specific takeoff and landing limits
+
+When FlyHub can match the simulator aircraft title to a published aircraft profile, it applies the limits for that aircraft. This makes the checks more realistic than using one generic limit for every airplane.
+
+The aircraft match uses the aircraft information reported by the simulator. If FlyHub cannot confidently match the aircraft, these additional aircraft-specific checks are skipped. Your flight is not penalized for a limit FlyHub cannot verify.
+
+### Flap configuration
+
+FlyHub checks the flap setting used for takeoff and landing when a profile includes the applicable flap range.
+
+The flight report uses these penalty names:
+
+| Report penalty | What it means |
+| :--- | :--- |
+| Takeoff Flap Configuration | The flap setting at takeoff was outside the aircraft's published takeoff range. |
+| Landing Flap Configuration | The flap setting at landing was outside the aircraft's published landing range. |
+
+FlyHub converts the simulator's flap control into a normalized position before comparing it with the aircraft profile. This allows different flap axes and detent systems to be compared consistently. A missing or unmatched aircraft profile does not create an incorrect-flaps penalty.
+
+### Landing configuration below 1,000 feet
+
+For aircraft profiles that use the landing-configuration check, the landing gear must be extended and the required landing flap configuration must be complete and stable by **1,000 feet AGL** on final approach.
+
+If the configuration is incomplete below that gate, the report can show **Late Landing Configuration**. The check is associated with the landing attempt that was actually completed. A go-around gives you another landing attempt rather than permanently carrying an earlier attempt into the final landing.
+
+### Pitch and bank attitude
+
+FlyHub considers runway slope when evaluating the aircraft's pitch attitude. When reliable runway elevation is available, the pitch is interpreted relative to the runway instead of treating an uphill or downhill runway as level. If reliable runway geometry is unavailable, FlyHub avoids inventing a slope and uses the available aircraft attitude data.
+
+Aircraft-specific attitude penalties use the following report names:
+
+| Report penalty | What it means |
+| :--- | :--- |
+| Takeoff Tailstrike | Takeoff pitch exceeded the aircraft profile's tailstrike-clearance limit. |
+| Landing Tailstrike | Touchdown pitch exceeded the aircraft profile's tailstrike-clearance limit. |
+| Takeoff Wing/Pod Strike | Takeoff bank exceeded the aircraft profile's ground-clearance limit. Depending on the aircraft, this represents a wingtip, engine pod, or similar low-mounted part. |
+| Landing Wing/Pod Strike | Touchdown bank exceeded the aircraft profile's ground-clearance limit. |
+
+These checks are evaluated at the takeoff or landing transition, not continuously as a new penalty every second. Each failed check is shown once in the report and has one corresponding map marker.
+
+### Tailwind and crosswind limits
+
+FlyHub calculates the wind component along the runway and across the runway at takeoff and landing. It compares those components with the matched aircraft profile.
+
+| Report penalty | What it means |
+| :--- | :--- |
+| Takeoff Tailwind Limit | The tailwind component at takeoff exceeded the aircraft's published limit. |
+| Landing Tailwind Limit | The tailwind component at landing exceeded the aircraft's published limit. |
+| Takeoff Crosswind Limit | The crosswind component at takeoff exceeded the aircraft's published limit. |
+| Landing Crosswind Limit | The crosswind component at landing exceeded the aircraft's published limit. |
+
+Headwind is not treated as tailwind. Crosswind is measured as the component across the runway, so the direction from which the wind is coming and the runway direction both matter. The flight report shows the wind and component values used for the decision.
 
 ## Operational compliance scoring
 
@@ -388,6 +441,7 @@ FlyHub can create these operational marker types:
 | Taxi speed | First confirmed taxi-speed violation after the grace period. |
 | Fuel reserve | Landing or taxi-in point where insufficient reserves are confirmed. |
 | Departure time | Career departure point where planned OUT and actual departure differ enough to create a penalty. |
+| Aircraft limit | First confirmed flap, configuration, tailstrike, wing/pod-strike, tailwind, or crosswind limit violation. |
 
 For weight penalties, the marker shows when the exceedance first registered. The final flight report can show the maximum telemetry value that was actually scored. These can be different if the aircraft became even heavier after the first trigger.
 
@@ -454,12 +508,15 @@ Bounce penalties depend on how many bounces were detected and how severe the lan
 
 ## Crash detection
 
-Crash detection can force the flight score and XP to 0.
+Crash detection forces the flight score and XP to 0.
 
 FlyHub can treat a flight as a crash when the landing or flight data shows severe unsafe behavior, such as:
 
 - Extremely hard impact.
 - Extreme descent rate at touchdown.
+- Bank over 20° at ground contact.
+- Pitch over +20° or below -3° at ground contact. A pitch below -3° is reported as a **Nose-wheel-first landing**.
+- Positive vertical rate at ground contact.
 - Severe aircraft attitude at touchdown.
 - Crash signals from the simulator.
 - Other telemetry that indicates the aircraft did not complete a safe flight.
