@@ -538,16 +538,18 @@ Cheating detection can force the score to 0 and remove XP for the flight.
 
 ## Difficult conditions compensation
 
-Some flights are harder than others. FlyHub can account for difficult conditions when scoring runway and landing behavior.
+Some flights are harder than others. FlyHub records the conditions present at touchdown and applies limited landing leniency when any of these conditions are detected:
 
-Examples include:
+- A crosswind component of 10 knots or more.
+- A headwind component of 15 knots or more.
+- A wet, puddled, snowy, or icy runway reported by the simulator, when that simulator provides runway-surface telemetry.
+- An active windshear window.
 
-- Strong crosswind.
-- Windshear-like conditions.
-- Difficult runway alignment situations.
-- Challenging takeoff or landing conditions.
+In normal conditions, the full-rating centerline allowance remains 4 meters. Under difficult conditions it increases to 8 meters. The landing-score bands also become slightly more forgiving: a landing remains in the great range up to 1.50g instead of 1.40g, and in the average range up to 1.80g instead of 1.70g. The measured touchdown G-force is not changed; only the scoring band is adjusted.
 
-This does not erase unsafe flying. It helps avoid over-penalizing a flight when the conditions made normal handling harder.
+Centerline penalty is calculated only beyond the applicable allowance and is capped. An active windshear window suppresses the centerline precision penalty completely. The flight report shows the detected wind, runway-surface condition, active triggers, centerline tolerance, and any landing-score relief that was applied. Missing simulator data does not invent a difficult-condition trigger.
+
+This does not erase unsafe flying. Runway excursions, overruns, aircraft strikes, crashes, and aircraft wind-limit violations are still assessed normally.
 
 ## Online tracking score review
 
