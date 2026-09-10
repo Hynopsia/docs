@@ -1,0 +1,1083 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FlyHub Virtual Airlines API",
+    "version": "2026-07-21",
+    "description": "The supported Virtual Airlines integration contract. The public resources are read-only and scoped to the airline that issued the fhva_live bearer key. The management operations document the Ownership controls used by FlyHub and require a FlyHub session. The webhook entries describe the Discord-compatible request FlyHub sends to a configured Discord destination; they are not arbitrary customer-hosted callback endpoints."
+  },
+  "servers": [
+    {
+      "url": "https://flyhub.app",
+      "description": "FlyHub production API"
+    }
+  ],
+  "tags": [
+    {
+      "name": "public-api",
+      "description": "Read-only resources for airline websites, dashboards, and private integrations.",
+      "x-group": "Public VA API"
+    },
+    {
+      "name": "api-keys",
+      "description": "Ownership controls for creating and revoking public API keys.",
+      "x-group": "Ownership integrations"
+    },
+    {
+      "name": "discord-webhooks",
+      "description": "Ownership controls and event payloads for Discord notifications.",
+      "x-group": "Discord webhooks"
+    }
+  ],
+  "paths": {
+    "/api/v1/va/airline": {
+      "get": {
+        "tags": ["public-api"],
+        "summary": "Read the airline profile",
+        "description": "Returns the profile attached to the bearer key. The airline is derived from the key; no airline ID can be supplied by the caller. This resource is not paginated.",
+        "operationId": "getVaAirline",
+        "security": [{"vaApiKey": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/airline",
+          "metadata": {
+            "title": "Read airline profile",
+            "sidebarTitle": "Airline profile"
+          }
+        },
+        "responses": {
+          "200": {"$ref": "#/components/responses/AirlineResponse"},
+          "401": {"$ref": "#/components/responses/Unauthorized"},
+          "403": {"$ref": "#/components/responses/Forbidden"},
+          "429": {"$ref": "#/components/responses/RateLimited"},
+          "503": {"$ref": "#/components/responses/ServiceUnavailable"}
+        }
+      }
+    },
+    "/api/v1/va/pilots": {
+      "get": {
+        "tags": ["public-api"],
+        "summary": "List active airline pilots",
+        "description": "Returns active airline memberships with pilot statistics. Suspended, rejected, left, and removed memberships are excluded. Results are ordered by joinedAt from oldest to newest.",
+        "operationId": "listVaPilots",
+        "security": [{"vaApiKey": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/pilots",
+          "metadata": {
+            "title": "List active airline pilots",
+            "sidebarTitle": "Pilots"
+          }
+        },
+        "parameters": [
+          {"$ref": "#/components/parameters/Limit"},
+          {"$ref": "#/components/parameters/Offset"}
+        ],
+        "responses": {
+          "200": {"$ref": "#/components/responses/PilotsResponse"},
+          "401": {"$ref": "#/components/responses/Unauthorized"},
+          "403": {"$ref": "#/components/responses/Forbidden"},
+          "429": {"$ref": "#/components/responses/RateLimited"},
+          "503": {"$ref": "#/components/responses/ServiceUnavailable"}
+        }
+      }
+    },
+    "/api/v1/va/flights": {
+      "get": {
+        "tags": ["public-api"],
+        "summary": "List airline flight activity",
+        "description": "Returns airline logbook activity, newest first. Inspect each status: a row records airline flight activity and is not automatically a successful completion.",
+        "operationId": "listVaFlights",
+        "security": [{"vaApiKey": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/flights",
+          "metadata": {
+            "title": "List airline flight activity",
+            "sidebarTitle": "Flights"
+          }
+        },
+        "parameters": [
+          {"$ref": "#/components/parameters/Limit"},
+          {"$ref": "#/components/parameters/Offset"}
+        ],
+        "responses": {
+          "200": {"$ref": "#/components/responses/FlightsResponse"},
+          "401": {"$ref": "#/components/responses/Unauthorized"},
+          "403": {"$ref": "#/components/responses/Forbidden"},
+          "429": {"$ref": "#/components/responses/RateLimited"},
+          "503": {"$ref": "#/components/responses/ServiceUnavailable"}
+        }
+      }
+    },
+    "/api/v1/va/fleet": {
+      "get": {
+        "tags": ["public-api"],
+        "summary": "List active fleet aircraft",
+        "description": "Returns non-retired aircraft associated with the airline, ordered by registration. This is a public snapshot and does not expose fleet-management actions.",
+        "operationId": "listVaFleet",
+        "security": [{"vaApiKey": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/fleet",
+          "metadata": {
+            "title": "List active fleet aircraft",
+            "sidebarTitle": "Fleet"
+          }
+        },
+        "parameters": [
+          {"$ref": "#/components/parameters/Limit"},
+          {"$ref": "#/components/parameters/Offset"}
+        ],
+        "responses": {
+          "200": {"$ref": "#/components/responses/FleetResponse"},
+          "401": {"$ref": "#/components/responses/Unauthorized"},
+          "403": {"$ref": "#/components/responses/Forbidden"},
+          "429": {"$ref": "#/components/responses/RateLimited"},
+          "503": {"$ref": "#/components/responses/ServiceUnavailable"}
+        }
+      }
+    },
+    "/api/v1/va/schedules": {
+      "get": {
+        "tags": ["public-api"],
+        "summary": "List published airline schedules",
+        "description": "Returns schedules with active or suspended status, ordered by flight number. Operating-day masks are Monday-first and all date checks in Virtual Airlines use UTC.",
+        "operationId": "listVaSchedules",
+        "security": [{"vaApiKey": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/schedules",
+          "metadata": {
+            "title": "List published airline schedules",
+            "sidebarTitle": "Schedules"
+          }
+        },
+        "parameters": [
+          {"$ref": "#/components/parameters/Limit"},
+          {"$ref": "#/components/parameters/Offset"}
+        ],
+        "responses": {
+          "200": {"$ref": "#/components/responses/SchedulesResponse"},
+          "401": {"$ref": "#/components/responses/Unauthorized"},
+          "403": {"$ref": "#/components/responses/Forbidden"},
+          "429": {"$ref": "#/components/responses/RateLimited"},
+          "503": {"$ref": "#/components/responses/ServiceUnavailable"}
+        }
+      }
+    },
+    "/api/v1/va/statistics": {
+      "get": {
+        "tags": ["public-api"],
+        "summary": "Read aggregate airline statistics",
+        "description": "Returns one aggregate object. It is not paginated and consumes 25 row-budget units, so use it for summary cards rather than as a substitute for the detail resources.",
+        "operationId": "getVaStatistics",
+        "security": [{"vaApiKey": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/statistics",
+          "metadata": {
+            "title": "Read aggregate airline statistics",
+            "sidebarTitle": "Statistics"
+          }
+        },
+        "responses": {
+          "200": {"$ref": "#/components/responses/StatisticsResponse"},
+          "401": {"$ref": "#/components/responses/Unauthorized"},
+          "403": {"$ref": "#/components/responses/Forbidden"},
+          "429": {"$ref": "#/components/responses/RateLimited"},
+          "503": {"$ref": "#/components/responses/ServiceUnavailable"}
+        }
+      }
+    },
+    "/api/va/airlines/{airlineId}/integrations": {
+      "get": {
+        "tags": ["api-keys", "discord-webhooks"],
+        "summary": "List all airline integrations",
+        "description": "Returns the Ownership view of API-key and Discord-destination metadata. Requires a normal FlyHub session and the manage_ownership capability. Secrets and raw Discord URLs are never returned.",
+        "operationId": "listVaIntegrations",
+        "security": [{"flyHubSession": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/management/integrations",
+          "metadata": {
+            "title": "List all airline integrations",
+            "sidebarTitle": "List integrations",
+            "playground": "none"
+          }
+        },
+        "parameters": [{"$ref": "#/components/parameters/AirlineId"}],
+        "responses": {
+          "200": {"$ref": "#/components/responses/IntegrationOverviewResponse"},
+          "400": {"$ref": "#/components/responses/ManagerBadRequest"},
+          "401": {"$ref": "#/components/responses/ManagerUnauthorized"},
+          "403": {"$ref": "#/components/responses/ManagerForbidden"},
+          "429": {"$ref": "#/components/responses/ManagerRateLimited"},
+          "503": {"$ref": "#/components/responses/ManagerUnavailable"}
+        }
+      }
+    },
+    "/api/va/airlines/{airlineId}/integrations/api-keys": {
+      "get": {
+        "tags": ["api-keys"],
+        "summary": "List airline API keys",
+        "description": "Lists key metadata and the available read scopes. The raw secret is never returned. Requires manage_ownership and is limited to 50 records.",
+        "operationId": "listVaApiKeys",
+        "security": [{"flyHubSession": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/management/api-keys",
+          "metadata": {
+            "title": "List airline API keys",
+            "sidebarTitle": "List API keys",
+            "playground": "none"
+          }
+        },
+        "parameters": [{"$ref": "#/components/parameters/AirlineId"}],
+        "responses": {
+          "200": {"$ref": "#/components/responses/ApiKeyListResponse"},
+          "400": {"$ref": "#/components/responses/ManagerBadRequest"},
+          "401": {"$ref": "#/components/responses/ManagerUnauthorized"},
+          "403": {"$ref": "#/components/responses/ManagerForbidden"},
+          "429": {"$ref": "#/components/responses/ManagerRateLimited"},
+          "503": {"$ref": "#/components/responses/ManagerUnavailable"}
+        }
+      },
+      "post": {
+        "tags": ["api-keys"],
+        "summary": "Create an airline API key",
+        "description": "Creates a read-only key. The complete secret appears only in this 201 response; save it on a server before closing the response. Requires manage_ownership. The airline can have at most 10 active keys.",
+        "operationId": "createVaApiKey",
+        "security": [{"flyHubSession": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/management/api-keys-create",
+          "metadata": {
+            "title": "Create an airline API key",
+            "sidebarTitle": "Create API key",
+            "playground": "none"
+          }
+        },
+        "parameters": [{"$ref": "#/components/parameters/AirlineId"}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/CreateApiKeyRequest"}
+            }
+          }
+        },
+        "responses": {
+          "201": {"$ref": "#/components/responses/CreateApiKeyResponse"},
+          "400": {"$ref": "#/components/responses/ManagerBadRequest"},
+          "401": {"$ref": "#/components/responses/ManagerUnauthorized"},
+          "403": {"$ref": "#/components/responses/ManagerForbidden"},
+          "409": {"$ref": "#/components/responses/Conflict"},
+          "429": {"$ref": "#/components/responses/ManagerRateLimited"},
+          "503": {"$ref": "#/components/responses/ManagerUnavailable"}
+        }
+      }
+    },
+    "/api/va/airlines/{airlineId}/integrations/api-keys/{keyId}": {
+      "delete": {
+        "tags": ["api-keys"],
+        "summary": "Revoke an airline API key",
+        "description": "Soft-revokes an active key immediately and preserves its historical metadata. There is no restore endpoint; rotate by creating a replacement first, then revoking the old key.",
+        "operationId": "revokeVaApiKey",
+        "security": [{"flyHubSession": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/management/api-keys-revoke",
+          "metadata": {
+            "title": "Revoke an airline API key",
+            "sidebarTitle": "Revoke API key",
+            "playground": "none"
+          }
+        },
+        "parameters": [
+          {"$ref": "#/components/parameters/AirlineId"},
+          {"$ref": "#/components/parameters/KeyId"}
+        ],
+        "responses": {
+          "200": {"$ref": "#/components/responses/RevokedResponse"},
+          "400": {"$ref": "#/components/responses/ManagerBadRequest"},
+          "401": {"$ref": "#/components/responses/ManagerUnauthorized"},
+          "403": {"$ref": "#/components/responses/ManagerForbidden"},
+          "404": {"$ref": "#/components/responses/ManagerNotFound"},
+          "429": {"$ref": "#/components/responses/ManagerRateLimited"},
+          "503": {"$ref": "#/components/responses/ManagerUnavailable"}
+        }
+      }
+    },
+    "/api/va/airlines/{airlineId}/integrations/webhooks": {
+      "get": {
+        "tags": ["discord-webhooks"],
+        "summary": "List Discord destinations",
+        "description": "Lists Discord destination metadata and the complete allowed event catalog. Raw webhook URLs are never returned. Requires manage_ownership and is limited to 25 records.",
+        "operationId": "listVaDiscordWebhooks",
+        "security": [{"flyHubSession": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/management/webhooks",
+          "metadata": {
+            "title": "List Discord destinations",
+            "sidebarTitle": "List destinations",
+            "playground": "none"
+          }
+        },
+        "parameters": [{"$ref": "#/components/parameters/AirlineId"}],
+        "responses": {
+          "200": {"$ref": "#/components/responses/WebhookListResponse"},
+          "400": {"$ref": "#/components/responses/ManagerBadRequest"},
+          "401": {"$ref": "#/components/responses/ManagerUnauthorized"},
+          "403": {"$ref": "#/components/responses/ManagerForbidden"},
+          "429": {"$ref": "#/components/responses/ManagerRateLimited"},
+          "503": {"$ref": "#/components/responses/ManagerUnavailable"}
+        }
+      },
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "Create a Discord destination",
+        "description": "Creates an encrypted Discord destination for selected airline events. Only exact HTTPS Discord webhook hosts and paths are accepted. Requires manage_ownership; an airline can have at most 10 active or paused destinations.",
+        "operationId": "createVaDiscordWebhook",
+        "security": [{"flyHubSession": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/management/webhooks-create",
+          "metadata": {
+            "title": "Create a Discord destination",
+            "sidebarTitle": "Create destination",
+            "playground": "none"
+          }
+        },
+        "parameters": [{"$ref": "#/components/parameters/AirlineId"}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/CreateWebhookRequest"}
+            }
+          }
+        },
+        "responses": {
+          "201": {"$ref": "#/components/responses/WebhookMutationResponse"},
+          "400": {"$ref": "#/components/responses/ManagerBadRequest"},
+          "401": {"$ref": "#/components/responses/ManagerUnauthorized"},
+          "403": {"$ref": "#/components/responses/ManagerForbidden"},
+          "429": {"$ref": "#/components/responses/ManagerRateLimited"},
+          "503": {"$ref": "#/components/responses/ManagerUnavailable"}
+        }
+      }
+    },
+    "/api/va/airlines/{airlineId}/integrations/webhooks/{webhookId}": {
+      "patch": {
+        "tags": ["discord-webhooks"],
+        "summary": "Update a Discord destination",
+        "description": "Renames a destination, replaces its event subscription list, or changes its status between active and paused. The Discord URL cannot be edited in place, and a disabled destination cannot be reactivated.",
+        "operationId": "updateVaDiscordWebhook",
+        "security": [{"flyHubSession": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/management/webhooks-update",
+          "metadata": {
+            "title": "Update a Discord destination",
+            "sidebarTitle": "Update destination",
+            "playground": "none"
+          }
+        },
+        "parameters": [
+          {"$ref": "#/components/parameters/AirlineId"},
+          {"$ref": "#/components/parameters/WebhookId"}
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {"$ref": "#/components/schemas/UpdateWebhookRequest"}
+            }
+          }
+        },
+        "responses": {
+          "200": {"$ref": "#/components/responses/WebhookMutationResponse"},
+          "400": {"$ref": "#/components/responses/ManagerBadRequest"},
+          "401": {"$ref": "#/components/responses/ManagerUnauthorized"},
+          "403": {"$ref": "#/components/responses/ManagerForbidden"},
+          "404": {"$ref": "#/components/responses/ManagerNotFound"},
+          "429": {"$ref": "#/components/responses/ManagerRateLimited"},
+          "503": {"$ref": "#/components/responses/ManagerUnavailable"}
+        }
+      },
+      "delete": {
+        "tags": ["discord-webhooks"],
+        "summary": "Remove a Discord destination",
+        "description": "Soft-removes the destination, stops future deliveries, and preserves historical metadata. Removal cannot be undone through the API; create a replacement if needed.",
+        "operationId": "removeVaDiscordWebhook",
+        "security": [{"flyHubSession": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/management/webhooks-remove",
+          "metadata": {
+            "title": "Remove a Discord destination",
+            "sidebarTitle": "Remove destination",
+            "playground": "none"
+          }
+        },
+        "parameters": [
+          {"$ref": "#/components/parameters/AirlineId"},
+          {"$ref": "#/components/parameters/WebhookId"}
+        ],
+        "responses": {
+          "200": {"$ref": "#/components/responses/RemovedResponse"},
+          "400": {"$ref": "#/components/responses/ManagerBadRequest"},
+          "401": {"$ref": "#/components/responses/ManagerUnauthorized"},
+          "403": {"$ref": "#/components/responses/ManagerForbidden"},
+          "404": {"$ref": "#/components/responses/ManagerNotFound"},
+          "429": {"$ref": "#/components/responses/ManagerRateLimited"},
+          "503": {"$ref": "#/components/responses/ManagerUnavailable"}
+        }
+      }
+    },
+    "/api/va/airlines/{airlineId}/integrations/webhooks/{webhookId}/test": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "Send a Discord webhook test",
+        "description": "Posts a direct test message that says FlyHub webhook connected. It does not create a flight event or queue an outbox delivery. Requires manage_ownership.",
+        "operationId": "testVaDiscordWebhook",
+        "security": [{"flyHubSession": []}],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines-draft/api/management/webhooks-test",
+          "metadata": {
+            "title": "Send a Discord webhook test",
+            "sidebarTitle": "Test destination",
+            "playground": "none"
+          }
+        },
+        "parameters": [
+          {"$ref": "#/components/parameters/AirlineId"},
+          {"$ref": "#/components/parameters/WebhookId"}
+        ],
+        "responses": {
+          "200": {"$ref": "#/components/responses/TestResponse"},
+          "400": {"$ref": "#/components/responses/ManagerBadRequest"},
+          "401": {"$ref": "#/components/responses/ManagerUnauthorized"},
+          "403": {"$ref": "#/components/responses/ManagerForbidden"},
+          "404": {"$ref": "#/components/responses/ManagerNotFound"},
+          "429": {"$ref": "#/components/responses/ManagerRateLimited"},
+          "502": {"$ref": "#/components/responses/DiscordUnavailable"},
+          "503": {"$ref": "#/components/responses/ManagerUnavailable"}
+        }
+      }
+    }
+  },
+  "webhooks": {
+    "flightBooked": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "flight.booked — Flight booked",
+        "description": "FlyHub sends this Discord embed when a flight booking is recorded. The embed may include status, flight number, route, aircraft, pilot, tracking mode, and load when available.",
+        "operationId": "discordFlightBooked",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/flight-booked", "metadata": {"sidebarTitle": "flight.booked", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "flightCancelled": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "flight.cancelled — Flight cancelled",
+        "description": "FlyHub sends this Discord embed when a flight instance is cancelled. The embed may include state, reason, flight number, route, aircraft, and planned times.",
+        "operationId": "discordFlightCancelled",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/flight-cancelled", "metadata": {"sidebarTitle": "flight.cancelled", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "flightCompleted": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "flight.completed — Flight completed",
+        "description": "FlyHub sends this Discord embed when a flight result is accepted. The embed may include route, aircraft, pilot, tracking, load, distance, block time, landing rate, score, and settlement context.",
+        "operationId": "discordFlightCompleted",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/flight-completed", "metadata": {"sidebarTitle": "flight.completed", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "flightRejected": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "flight.rejected — Flight rejected",
+        "description": "FlyHub sends this Discord embed when a flight result is rejected. The embed may include classification, rejection reason, route, aircraft, pilot, performance, and score.",
+        "operationId": "discordFlightRejected",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/flight-rejected", "metadata": {"sidebarTitle": "flight.rejected", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "pilotApplied": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "pilot.applied — Application received",
+        "description": "FlyHub sends this Discord embed when a pilot application is received and remains pending.",
+        "operationId": "discordPilotApplied",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/pilot-applied", "metadata": {"sidebarTitle": "pilot.applied", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "pilotJoined": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "pilot.joined — Pilot joined",
+        "description": "FlyHub sends this Discord embed when a pilot becomes active in the airline.",
+        "operationId": "discordPilotJoined",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/pilot-joined", "metadata": {"sidebarTitle": "pilot.joined", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "pilotRejected": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "pilot.rejected — Application rejected",
+        "description": "FlyHub sends this Discord embed when a pilot application or membership is rejected.",
+        "operationId": "discordPilotRejected",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/pilot-rejected", "metadata": {"sidebarTitle": "pilot.rejected", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "pilotSuspended": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "pilot.suspended — Pilot suspended",
+        "description": "FlyHub sends this Discord embed when an active pilot is suspended.",
+        "operationId": "discordPilotSuspended",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/pilot-suspended", "metadata": {"sidebarTitle": "pilot.suspended", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "pilotRestored": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "pilot.restored — Pilot restored",
+        "description": "FlyHub sends this Discord embed when a suspended pilot becomes active again.",
+        "operationId": "discordPilotRestored",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/pilot-restored", "metadata": {"sidebarTitle": "pilot.restored", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "pilotLeft": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "pilot.left — Pilot left",
+        "description": "FlyHub sends this Discord embed when a pilot leaves the airline.",
+        "operationId": "discordPilotLeft",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/pilot-left", "metadata": {"sidebarTitle": "pilot.left", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "pilotRemoved": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "pilot.removed — Pilot removed",
+        "description": "FlyHub sends this Discord embed when a manager removes a pilot.",
+        "operationId": "discordPilotRemoved",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/pilot-removed", "metadata": {"sidebarTitle": "pilot.removed", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "pilotRoleChanged": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "pilot.role_changed — Pilot role changed",
+        "description": "FlyHub sends this Discord embed when a pilot's airline role changes.",
+        "operationId": "discordPilotRoleChanged",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/pilot-role-changed", "metadata": {"sidebarTitle": "pilot.role_changed", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "fleetChanged": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "fleet.changed — Fleet changed",
+        "description": "FlyHub sends this Discord embed when an aircraft or its operating state changes. The embed may include registration, type, station, status, condition, maintenance state, hours, and cycles.",
+        "operationId": "discordFleetChanged",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/fleet-changed", "metadata": {"sidebarTitle": "fleet.changed", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "scheduleChanged": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "schedule.changed — Schedule changed",
+        "description": "FlyHub sends this Discord embed when a published route or schedule changes. The embed may include flight number, route, operation type, days, block time, eligible aircraft, and status.",
+        "operationId": "discordScheduleChanged",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/schedule-changed", "metadata": {"sidebarTitle": "schedule.changed", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "financeFlightSettled": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "finance.flight_settled — Flight settled",
+        "description": "FlyHub sends this Discord embed when a flight settlement is recorded. It can include flight context, net result, and currency; it is not a complete accounting export.",
+        "operationId": "discordFinanceFlightSettled",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/finance-flight-settled", "metadata": {"sidebarTitle": "finance.flight_settled", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    },
+    "announcementPublished": {
+      "post": {
+        "tags": ["discord-webhooks"],
+        "summary": "announcement.published — Announcement published",
+        "description": "FlyHub sends this Discord embed when airline content is published. The embed includes the public content kind, version, and publication status when available.",
+        "operationId": "discordAnnouncementPublished",
+        "x-hidden": true,
+        "x-mint": {"href": "/virtual-airlines-draft/api/webhooks/announcement-published", "metadata": {"sidebarTitle": "announcement.published", "playground": "none"}},
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/DiscordWebhookPayload"}}}},
+        "responses": {"200": {"description": "Discord accepted the notification."}}
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "vaApiKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "fhva_live_...",
+        "description": "A read-only FlyHub VA API key created from Ownership. Keep it on your integration server."
+      },
+      "flyHubSession": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "FlyHub session JWT",
+        "description": "A normal signed-in FlyHub session for the current owner or user with manage_ownership. Never expose it in a third-party website."
+      }
+    },
+    "parameters": {
+      "Limit": {
+        "name": "limit",
+        "in": "query",
+        "description": "Requested page size. The API uses 25 by default, accepts 1–100, and caps larger values at 100. Invalid values fall back to the default.",
+        "schema": {"type": "integer", "minimum": 1, "maximum": 100, "default": 25}
+      },
+      "Offset": {
+        "name": "offset",
+        "in": "query",
+        "description": "Number of records to skip. The API uses 0 by default and caps values at 10000.",
+        "schema": {"type": "integer", "minimum": 0, "maximum": 10000, "default": 0}
+      },
+      "AirlineId": {
+        "name": "airlineId",
+        "in": "path",
+        "required": true,
+        "description": "UUID of the airline management context. This is used only by signed-in Ownership routes.",
+        "schema": {"type": "string", "format": "uuid"}
+      },
+      "KeyId": {
+        "name": "keyId",
+        "in": "path",
+        "required": true,
+        "description": "UUID of the API key metadata record.",
+        "schema": {"type": "string", "format": "uuid"}
+      },
+      "WebhookId": {
+        "name": "webhookId",
+        "in": "path",
+        "required": true,
+        "description": "UUID of the Discord destination metadata record.",
+        "schema": {"type": "string", "format": "uuid"}
+      }
+    },
+    "headers": {
+      "RateLimitLimit": {"description": "Requests allowed in the current public API window.", "schema": {"type": "integer"}},
+      "RateLimitRemaining": {"description": "Requests remaining in the current public API window.", "schema": {"type": "integer"}},
+      "RateLimitReset": {"description": "ISO timestamp when the public API request window resets.", "schema": {"type": "string", "format": "date-time"}},
+      "RowLimit": {"description": "Hourly row-cost budget.", "schema": {"type": "integer"}},
+      "RowRemaining": {"description": "Hourly row-cost units remaining.", "schema": {"type": "integer"}},
+      "RowReset": {"description": "ISO timestamp when the hourly row budget resets.", "schema": {"type": "string", "format": "date-time"}},
+      "RetryAfter": {"description": "Seconds to wait before retrying after a rate limit.", "schema": {"type": "integer"}}
+    },
+    "schemas": {
+      "Meta": {
+        "type": "object",
+        "required": ["apiVersion"],
+        "properties": {"apiVersion": {"type": "string", "example": "2026-07-21"}}
+      },
+      "Pagination": {
+        "type": "object",
+        "required": ["offset", "limit", "total"],
+        "properties": {
+          "offset": {"type": "integer", "minimum": 0},
+          "limit": {"type": "integer", "minimum": 1, "maximum": 100},
+          "total": {"type": "integer", "minimum": 0}
+        }
+      },
+      "Airline": {
+        "type": "object",
+        "required": ["name", "shortName", "slug", "summary", "icaoCode", "callsign", "homeIcao", "homeCountryCode", "status", "businessModel", "applicationMode", "pilotCount", "fleetCount", "createdAt", "updatedAt"],
+        "properties": {
+          "name": {"type": "string"},
+          "shortName": {"type": ["string", "null"]},
+          "slug": {"type": "string"},
+          "summary": {"type": ["string", "null"]},
+          "icaoCode": {"type": "string"},
+          "callsign": {"type": ["string", "null"]},
+          "homeIcao": {"type": ["string", "null"]},
+          "homeCountryCode": {"type": ["string", "null"]},
+          "status": {"type": "string", "enum": ["active", "distress", "restructuring"]},
+          "businessModel": {"type": ["string", "null"]},
+          "applicationMode": {"type": ["string", "null"]},
+          "pilotCount": {"type": "integer", "minimum": 0},
+          "fleetCount": {"type": "integer", "minimum": 0},
+          "createdAt": {"type": "string", "format": "date-time"},
+          "updatedAt": {"type": "string", "format": "date-time"}
+        }
+      },
+      "Pilot": {
+        "type": "object",
+        "required": ["displayName", "rank", "joinedAt", "lastActivityAt", "completedFlights", "completedHours", "contributionPoints", "reliabilityScore", "lastFlightAt"],
+        "properties": {
+          "displayName": {"type": "string"},
+          "rank": {"type": ["string", "null"]},
+          "joinedAt": {"type": ["string", "null"], "format": "date-time"},
+          "lastActivityAt": {"type": ["string", "null"], "format": "date-time"},
+          "completedFlights": {"type": "integer", "minimum": 0},
+          "completedHours": {"type": "number", "minimum": 0},
+          "contributionPoints": {"type": "number", "minimum": 0},
+          "reliabilityScore": {"type": "number"},
+          "lastFlightAt": {"type": ["string", "null"], "format": "date-time"}
+        }
+      },
+      "Flight": {
+        "type": "object",
+        "required": ["status", "flightNumber", "originIcao", "destinationIcao", "aircraftRegistration", "aircraftTypeIcao", "offBlockAt", "onBlockAt", "blockMinutes", "distanceNm", "score", "virtualPeriod"],
+        "properties": {
+          "status": {"type": "string"},
+          "flightNumber": {"type": "string"},
+          "originIcao": {"type": "string"},
+          "destinationIcao": {"type": "string"},
+          "aircraftRegistration": {"type": ["string", "null"]},
+          "aircraftTypeIcao": {"type": ["string", "null"]},
+          "offBlockAt": {"type": ["string", "null"], "format": "date-time"},
+          "onBlockAt": {"type": ["string", "null"], "format": "date-time"},
+          "blockMinutes": {"type": ["integer", "null"], "minimum": 0},
+          "distanceNm": {"type": "number", "minimum": 0},
+          "score": {"type": ["number", "null"]},
+          "virtualPeriod": {"type": ["string", "null"]}
+        }
+      },
+      "FleetAircraft": {
+        "type": "object",
+        "required": ["registration", "displayName", "aircraftTypeIcao", "ownershipType", "operationalStatus", "currentIcao", "conditionPercent", "maintenanceState", "airframeHours", "airframeCycles", "availableFrom", "maintenanceDueAt", "acquiredAt", "updatedAt"],
+        "properties": {
+          "registration": {"type": "string"},
+          "displayName": {"type": ["string", "null"]},
+          "aircraftTypeIcao": {"type": "string"},
+          "ownershipType": {"type": "string"},
+          "operationalStatus": {"type": "string"},
+          "currentIcao": {"type": ["string", "null"]},
+          "conditionPercent": {"type": "number", "minimum": 0, "maximum": 100},
+          "maintenanceState": {"type": "string"},
+          "airframeHours": {"type": "number", "minimum": 0},
+          "airframeCycles": {"type": "integer", "minimum": 0},
+          "availableFrom": {"type": ["string", "null"], "format": "date-time"},
+          "maintenanceDueAt": {"type": ["string", "null"], "format": "date-time"},
+          "acquiredAt": {"type": ["string", "null"], "format": "date-time"},
+          "updatedAt": {"type": "string", "format": "date-time"}
+        }
+      },
+      "Schedule": {
+        "type": "object",
+        "required": ["flightNumber", "originIcao", "destinationIcao", "operationType", "operatingDaysMask", "plannedBlockMinutes", "eligibleAircraftTypes", "status", "version", "validFrom", "validUntil", "updatedAt"],
+        "properties": {
+          "flightNumber": {"type": "string"},
+          "originIcao": {"type": ["string", "null"]},
+          "destinationIcao": {"type": ["string", "null"]},
+          "operationType": {"type": ["string", "null"]},
+          "operatingDaysMask": {"type": "integer", "minimum": 1, "maximum": 127, "description": "Monday=1, Tuesday=2, Wednesday=4, Thursday=8, Friday=16, Saturday=32, Sunday=64."},
+          "plannedBlockMinutes": {"type": "integer", "minimum": 0},
+          "eligibleAircraftTypes": {"type": "array", "items": {"type": "string"}},
+          "status": {"type": "string", "enum": ["active", "suspended"]},
+          "version": {"type": "integer", "minimum": 1},
+          "validFrom": {"type": ["string", "null"], "format": "date"},
+          "validUntil": {"type": ["string", "null"], "format": "date"},
+          "updatedAt": {"type": "string", "format": "date-time"}
+        }
+      },
+      "Statistics": {
+        "type": "object",
+        "required": ["completedFlights", "completedHours", "activePilots", "fleetSize", "activeSchedules", "contributionPoints", "averageReliabilityScore"],
+        "properties": {
+          "completedFlights": {"type": "integer", "minimum": 0},
+          "completedHours": {"type": "number", "minimum": 0},
+          "activePilots": {"type": "integer", "minimum": 0},
+          "fleetSize": {"type": "integer", "minimum": 0},
+          "activeSchedules": {"type": "integer", "minimum": 0},
+          "contributionPoints": {"type": "number", "minimum": 0},
+          "averageReliabilityScore": {"type": ["number", "null"]}
+        }
+      },
+      "ApiKeyMetadata": {
+        "type": "object",
+        "required": ["id", "name", "key_prefix", "scopes", "status", "created_at", "expires_at", "last_used_at", "request_count"],
+        "properties": {
+          "id": {"type": "string", "format": "uuid"},
+          "name": {"type": "string"},
+          "key_prefix": {"type": "string"},
+          "scopes": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/components/schemas/ApiScope"}},
+          "status": {"type": "string", "enum": ["active", "revoked"]},
+          "created_at": {"type": "string", "format": "date-time"},
+          "expires_at": {"type": ["string", "null"], "format": "date-time"},
+          "last_used_at": {"type": ["string", "null"], "format": "date-time"},
+          "request_count": {"type": "integer", "minimum": 0}
+        }
+      },
+      "ApiScope": {"type": "string", "enum": ["airline:read", "pilots:read", "flights:read", "fleet:read", "schedules:read", "statistics:read"]},
+      "WebhookEventType": {"type": "string", "enum": ["flight.booked", "flight.cancelled", "flight.completed", "flight.rejected", "pilot.applied", "pilot.joined", "pilot.rejected", "pilot.suspended", "pilot.restored", "pilot.left", "pilot.removed", "pilot.role_changed", "fleet.changed", "schedule.changed", "finance.flight_settled", "announcement.published"]},
+      "WebhookMetadata": {
+        "type": "object",
+        "required": ["id", "name", "webhook_url_preview", "event_types", "status", "created_at", "updated_at", "last_delivery_at", "consecutive_failures", "disabled_reason"],
+        "properties": {
+          "id": {"type": "string", "format": "uuid"},
+          "name": {"type": "string"},
+          "webhook_url_preview": {"type": "string"},
+          "event_types": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/components/schemas/WebhookEventType"}},
+          "status": {"type": "string", "enum": ["active", "paused", "disabled"]},
+          "created_at": {"type": "string", "format": "date-time"},
+          "updated_at": {"type": "string", "format": "date-time"},
+          "last_delivery_at": {"type": ["string", "null"], "format": "date-time"},
+          "consecutive_failures": {"type": "integer", "minimum": 0},
+          "disabled_reason": {"type": ["string", "null"]}
+        }
+      },
+      "CreateApiKeyRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "scopes"],
+        "properties": {
+          "name": {"type": "string", "minLength": 2, "maxLength": 80},
+          "scopes": {"type": "array", "minItems": 1, "maxItems": 6, "uniqueItems": true, "items": {"$ref": "#/components/schemas/ApiScope"}},
+          "expiresInDays": {"type": ["integer", "null"], "enum": [30, 90, 365, null], "default": null}
+        }
+      },
+      "CreateWebhookRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "url", "eventTypes"],
+        "properties": {
+          "name": {"type": "string", "minLength": 2, "maxLength": 80},
+          "url": {"type": "string", "minLength": 30, "maxLength": 500, "format": "uri", "description": "Must be an exact HTTPS Discord webhook URL; see the human guide for the accepted hosts and path pattern."},
+          "eventTypes": {"type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/components/schemas/WebhookEventType"}}
+        }
+      },
+      "UpdateWebhookRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "minProperties": 1,
+        "properties": {
+          "name": {"type": "string", "minLength": 2, "maxLength": 80},
+          "eventTypes": {"type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true, "items": {"$ref": "#/components/schemas/WebhookEventType"}},
+          "status": {"type": "string", "enum": ["active", "paused"]}
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": ["code", "message"],
+            "properties": {
+              "code": {"type": "string"},
+              "message": {"type": "string"}
+            }
+          }
+        }
+      },
+      "ManagerError": {
+        "type": "object",
+        "required": ["error"],
+        "properties": {"error": {"type": "string"}}
+      },
+      "AllowedMentions": {
+        "type": "object",
+        "required": ["parse"],
+        "properties": {"parse": {"type": "array", "maxItems": 0, "items": {"type": "string"}}}
+      },
+      "DiscordEmbedField": {
+        "type": "object",
+        "required": ["name", "value", "inline"],
+        "properties": {
+          "name": {"type": "string", "maxLength": 256},
+          "value": {"type": "string", "maxLength": 1024},
+          "inline": {"type": "boolean"}
+        }
+      },
+      "DiscordEmbed": {
+        "type": "object",
+        "required": ["title", "description", "fields", "footer", "timestamp"],
+        "properties": {
+          "title": {"type": "string"},
+          "url": {"type": "string", "format": "uri"},
+          "description": {"type": "string"},
+          "color": {"type": "integer"},
+          "fields": {"type": "array", "maxItems": 25, "items": {"$ref": "#/components/schemas/DiscordEmbedField"}},
+          "footer": {"type": "object", "properties": {"text": {"type": "string"}}},
+          "timestamp": {"type": "string", "format": "date-time"}
+        }
+      },
+      "DiscordWebhookPayload": {
+        "type": "object",
+        "required": ["username", "allowed_mentions", "embeds"],
+        "properties": {
+          "username": {"type": "string", "description": "Airline ICAO code followed by Operations."},
+          "allowed_mentions": {"$ref": "#/components/schemas/AllowedMentions"},
+          "embeds": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "#/components/schemas/DiscordEmbed"}}
+        }
+      }
+    },
+    "responses": {
+      "AirlineResponse": {
+        "description": "Airline profile returned.",
+        "headers": {
+          "X-RateLimit-Limit": {"$ref": "#/components/headers/RateLimitLimit"},
+          "X-RateLimit-Remaining": {"$ref": "#/components/headers/RateLimitRemaining"},
+          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"},
+          "X-RateLimit-Row-Limit": {"$ref": "#/components/headers/RowLimit"},
+          "X-RateLimit-Row-Remaining": {"$ref": "#/components/headers/RowRemaining"},
+          "X-RateLimit-Row-Reset": {"$ref": "#/components/headers/RowReset"}
+        },
+        "content": {"application/json": {"schema": {"type": "object", "required": ["data", "meta"], "properties": {"data": {"$ref": "#/components/schemas/Airline"}, "meta": {"$ref": "#/components/schemas/Meta"}}}}}
+      },
+      "PilotsResponse": {
+        "description": "Paginated active pilot roster.",
+        "headers": {
+          "X-RateLimit-Limit": {"$ref": "#/components/headers/RateLimitLimit"},
+          "X-RateLimit-Remaining": {"$ref": "#/components/headers/RateLimitRemaining"},
+          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"},
+          "X-RateLimit-Row-Limit": {"$ref": "#/components/headers/RowLimit"},
+          "X-RateLimit-Row-Remaining": {"$ref": "#/components/headers/RowRemaining"},
+          "X-RateLimit-Row-Reset": {"$ref": "#/components/headers/RowReset"}
+        },
+        "content": {"application/json": {"schema": {"type": "object", "required": ["data", "pagination", "meta"], "properties": {"data": {"type": "array", "items": {"$ref": "#/components/schemas/Pilot"}}, "pagination": {"$ref": "#/components/schemas/Pagination"}, "meta": {"$ref": "#/components/schemas/Meta"}}}}}
+      },
+      "FlightsResponse": {
+        "description": "Paginated airline flight activity.",
+        "headers": {
+          "X-RateLimit-Limit": {"$ref": "#/components/headers/RateLimitLimit"},
+          "X-RateLimit-Remaining": {"$ref": "#/components/headers/RateLimitRemaining"},
+          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"},
+          "X-RateLimit-Row-Limit": {"$ref": "#/components/headers/RowLimit"},
+          "X-RateLimit-Row-Remaining": {"$ref": "#/components/headers/RowRemaining"},
+          "X-RateLimit-Row-Reset": {"$ref": "#/components/headers/RowReset"}
+        },
+        "content": {"application/json": {"schema": {"type": "object", "required": ["data", "pagination", "meta"], "properties": {"data": {"type": "array", "items": {"$ref": "#/components/schemas/Flight"}}, "pagination": {"$ref": "#/components/schemas/Pagination"}, "meta": {"$ref": "#/components/schemas/Meta"}}}}}
+      },
+      "FleetResponse": {
+        "description": "Paginated non-retired fleet snapshot.",
+        "headers": {
+          "X-RateLimit-Limit": {"$ref": "#/components/headers/RateLimitLimit"},
+          "X-RateLimit-Remaining": {"$ref": "#/components/headers/RateLimitRemaining"},
+          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"},
+          "X-RateLimit-Row-Limit": {"$ref": "#/components/headers/RowLimit"},
+          "X-RateLimit-Row-Remaining": {"$ref": "#/components/headers/RowRemaining"},
+          "X-RateLimit-Row-Reset": {"$ref": "#/components/headers/RowReset"}
+        },
+        "content": {"application/json": {"schema": {"type": "object", "required": ["data", "pagination", "meta"], "properties": {"data": {"type": "array", "items": {"$ref": "#/components/schemas/FleetAircraft"}}, "pagination": {"$ref": "#/components/schemas/Pagination"}, "meta": {"$ref": "#/components/schemas/Meta"}}}}}
+      },
+      "SchedulesResponse": {
+        "description": "Paginated active and suspended schedules.",
+        "headers": {
+          "X-RateLimit-Limit": {"$ref": "#/components/headers/RateLimitLimit"},
+          "X-RateLimit-Remaining": {"$ref": "#/components/headers/RateLimitRemaining"},
+          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"},
+          "X-RateLimit-Row-Limit": {"$ref": "#/components/headers/RowLimit"},
+          "X-RateLimit-Row-Remaining": {"$ref": "#/components/headers/RowRemaining"},
+          "X-RateLimit-Row-Reset": {"$ref": "#/components/headers/RowReset"}
+        },
+        "content": {"application/json": {"schema": {"type": "object", "required": ["data", "pagination", "meta"], "properties": {"data": {"type": "array", "items": {"$ref": "#/components/schemas/Schedule"}}, "pagination": {"$ref": "#/components/schemas/Pagination"}, "meta": {"$ref": "#/components/schemas/Meta"}}}}}
+      },
+      "StatisticsResponse": {
+        "description": "Aggregate airline statistics.",
+        "headers": {
+          "X-RateLimit-Limit": {"$ref": "#/components/headers/RateLimitLimit"},
+          "X-RateLimit-Remaining": {"$ref": "#/components/headers/RateLimitRemaining"},
+          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"},
+          "X-RateLimit-Row-Limit": {"$ref": "#/components/headers/RowLimit"},
+          "X-RateLimit-Row-Remaining": {"$ref": "#/components/headers/RowRemaining"},
+          "X-RateLimit-Row-Reset": {"$ref": "#/components/headers/RowReset"}
+        },
+        "content": {"application/json": {"schema": {"type": "object", "required": ["data", "meta"], "properties": {"data": {"$ref": "#/components/schemas/Statistics"}, "meta": {"$ref": "#/components/schemas/Meta"}}}}}
+      },
+      "IntegrationOverviewResponse": {
+        "description": "Combined Ownership integration metadata.",
+        "content": {"application/json": {"schema": {"type": "object", "required": ["data"], "properties": {"data": {"type": "object", "required": ["keys", "webhooks"], "properties": {"keys": {"type": "array", "items": {"$ref": "#/components/schemas/ApiKeyMetadata"}}, "webhooks": {"type": "array", "items": {"$ref": "#/components/schemas/WebhookMetadata"}}}}}}}}
+      },
+      "ApiKeyListResponse": {
+        "description": "API key metadata and available scopes.",
+        "content": {"application/json": {"schema": {"type": "object", "required": ["data"], "properties": {"data": {"type": "object", "required": ["keys", "availableScopes"], "properties": {"keys": {"type": "array", "items": {"$ref": "#/components/schemas/ApiKeyMetadata"}}, "availableScopes": {"type": "array", "items": {"$ref": "#/components/schemas/ApiScope"}}}}}}}}
+      },
+      "CreateApiKeyResponse": {
+        "description": "New API key metadata and the one-time secret.",
+        "content": {"application/json": {"schema": {"type": "object", "required": ["data"], "properties": {"data": {"type": "object", "required": ["key", "secret"], "properties": {"key": {"$ref": "#/components/schemas/ApiKeyMetadata"}, "secret": {"type": "string", "pattern": "^fhva_live_"}}}}}}}
+      },
+      "WebhookListResponse": {
+        "description": "Discord destination metadata and available event types.",
+        "content": {"application/json": {"schema": {"type": "object", "required": ["data"], "properties": {"data": {"type": "object", "required": ["webhooks", "availableEventTypes"], "properties": {"webhooks": {"type": "array", "items": {"$ref": "#/components/schemas/WebhookMetadata"}}, "availableEventTypes": {"type": "array", "items": {"$ref": "#/components/schemas/WebhookEventType"}}}}}}}}
+      },
+      "WebhookMutationResponse": {
+        "description": "Discord destination metadata after creation or update.",
+        "content": {"application/json": {"schema": {"type": "object", "required": ["data"], "properties": {"data": {"type": "object", "required": ["webhook"], "properties": {"webhook": {"$ref": "#/components/schemas/WebhookMetadata"}}}}}}}
+      },
+      "RevokedResponse": {
+        "description": "API key revoked.",
+        "content": {"application/json": {"schema": {"type": "object", "properties": {"data": {"type": "object", "properties": {"revoked": {"type": "boolean", "const": true}}}}}}}
+      },
+      "RemovedResponse": {
+        "description": "Discord destination removed.",
+        "content": {"application/json": {"schema": {"type": "object", "properties": {"data": {"type": "object", "properties": {"removed": {"type": "boolean", "const": true}}}}}}}
+      },
+      "TestResponse": {
+        "description": "Direct Discord test accepted.",
+        "content": {"application/json": {"schema": {"type": "object", "properties": {"data": {"type": "object", "properties": {"delivered": {"type": "boolean", "const": true}}}}}}}
+      },
+      "Unauthorized": {"description": "A valid FlyHub VA API key is required.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+      "Forbidden": {"description": "The key does not include the required read scope.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+      "RateLimited": {"description": "The request or hourly row budget was exceeded.", "headers": {"Retry-After": {"$ref": "#/components/headers/RetryAfter"}}, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+      "ServiceUnavailable": {"description": "FlyHub cannot safely serve the request at the moment.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+      "ManagerBadRequest": {"description": "The management request is invalid.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ManagerError"}}}},
+      "ManagerUnauthorized": {"description": "A valid FlyHub session is required.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ManagerError"}}}},
+      "ManagerForbidden": {"description": "The session lacks manage_ownership for this airline.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ManagerError"}}}},
+      "ManagerNotFound": {"description": "The integration record was not found or is not active.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ManagerError"}}}},
+      "ManagerRateLimited": {"description": "The Ownership management rate limit was exceeded.", "headers": {"Retry-After": {"$ref": "#/components/headers/RetryAfter"}}, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ManagerError"}}}},
+      "ManagerUnavailable": {"description": "The integration management operation is unavailable.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ManagerError"}}}},
+      "Conflict": {"description": "The airline has reached the active API-key limit.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ManagerError"}}}},
+      "DiscordUnavailable": {"description": "Discord did not accept the test post.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ManagerError"}}}}
+    }
+  }
+}

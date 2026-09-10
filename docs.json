@@ -25,6 +25,16 @@
   "icons": {
     "library": "lucide"
   },
+  "api": {
+    "playground": {
+      "display": "interactive",
+      "proxy": true
+    },
+    "examples": {
+      "languages": ["curl", "javascript", "python"],
+      "defaults": "required"
+    }
+  },
   "navbar": {
     "links": [
       {
@@ -143,6 +153,13 @@
           "x-plane-plugin",
           "msfs-setup"
         ]
+      },
+      {
+        "group": "Virtual Airlines Integrations",
+        "openapi": {
+          "source": "virtual-airlines-draft/openapi.json",
+          "directory": "virtual-airlines-draft/api"
+        }
       },
       {
         "group": "Non-Compatible Planes",

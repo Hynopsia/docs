@@ -11,6 +11,8 @@ The Virtual Airlines API lets an approved integration read selected information 
 
 The API is designed to be understandable and safe to integrate. Every API key belongs to exactly one airline, every key has explicit read-only scopes, list results are paginated, and internal database IDs are not exposed.
 
+Mintlify also generates an interactive reference page for each endpoint from the [OpenAPI specification](https://docs.flyhub.app/virtual-airlines-draft/openapi.json). The generated pages are intentionally hidden from navigation but remain available through these direct links. Use the playground only with a disposable or appropriately scoped key; never paste a manager session token into it.
+
 ## Start here
 
 1. The airline owner opens **Manage airline → Ownership → Integrations**.
@@ -182,6 +184,18 @@ The supported public error codes are `unauthorized`, `forbidden`, `not_found`, `
 | `GET` | `/api/v1/va/statistics` | `statistics:read` | Aggregate statistics object. |
 
 There are no public `POST`, `PATCH`, or `DELETE` endpoints under `/api/v1/va`. A `POST` to a public resource is not a way to book a flight or update an airline.
+
+### Generated endpoint pages
+
+| Endpoint | Interactive reference |
+| --- | --- |
+| `GET /api/v1/va/airline` | [Airline profile](https://docs.flyhub.app/virtual-airlines-draft/api/airline) |
+| `GET /api/v1/va/pilots` | [Pilots](https://docs.flyhub.app/virtual-airlines-draft/api/pilots) |
+| `GET /api/v1/va/flights` | [Flights](https://docs.flyhub.app/virtual-airlines-draft/api/flights) |
+| `GET /api/v1/va/fleet` | [Fleet](https://docs.flyhub.app/virtual-airlines-draft/api/fleet) |
+| `GET /api/v1/va/schedules` | [Schedules](https://docs.flyhub.app/virtual-airlines-draft/api/schedules) |
+| `GET /api/v1/va/statistics` | [Statistics](https://docs.flyhub.app/virtual-airlines-draft/api/statistics) |
+| Ownership integration routes | [Integration management references](https://docs.flyhub.app/virtual-airlines-draft/api/management/integrations) |
 
 ## `GET /api/v1/va/airline`
 
@@ -602,4 +616,3 @@ Before giving an integration to your pilots:
 - do not assume a display name, flight number, or registration is a permanent UUID;
 - rotate credentials by create → deploy → verify → revoke;
 - remove the old key from logs, source control, CI output, and screenshots.
-

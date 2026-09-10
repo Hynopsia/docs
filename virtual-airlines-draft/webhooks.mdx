@@ -9,6 +9,8 @@ Virtual Airlines webhooks send selected airline activity to a Discord channel. T
 
 The current integration supports Discord destinations only. It sends formatted Discord messages asynchronously; it does not send a generic JSON callback to an arbitrary URL, and it does not provide an inbound webhook that your website can call.
 
+Mintlify also generates a reference page for every webhook event from the [OpenAPI specification](https://docs.flyhub.app/virtual-airlines-draft/openapi.json). Those pages show the Discord request schema and are hidden from navigation by design; this guide remains the place to understand setup, event meaning, retries, and operational behavior.
+
 ## What you can build
 
 With a Discord destination, an airline can announce:
@@ -276,6 +278,27 @@ FlyHub maps selected airline activity to public event names. The event name is i
 
 The same audit activity can map to a different public event depending on the resulting state. For example, a membership application that is immediately accepted can produce `pilot.joined`, while a pending application produces `pilot.applied`.
 
+### Generated event payload pages
+
+| Event | Payload reference |
+| --- | --- |
+| `flight.booked` | [flight.booked](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/flight-booked) |
+| `flight.cancelled` | [flight.cancelled](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/flight-cancelled) |
+| `flight.completed` | [flight.completed](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/flight-completed) |
+| `flight.rejected` | [flight.rejected](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/flight-rejected) |
+| `pilot.applied` | [pilot.applied](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/pilot-applied) |
+| `pilot.joined` | [pilot.joined](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/pilot-joined) |
+| `pilot.rejected` | [pilot.rejected](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/pilot-rejected) |
+| `pilot.suspended` | [pilot.suspended](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/pilot-suspended) |
+| `pilot.restored` | [pilot.restored](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/pilot-restored) |
+| `pilot.left` | [pilot.left](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/pilot-left) |
+| `pilot.removed` | [pilot.removed](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/pilot-removed) |
+| `pilot.role_changed` | [pilot.role_changed](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/pilot-role-changed) |
+| `fleet.changed` | [fleet.changed](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/fleet-changed) |
+| `schedule.changed` | [schedule.changed](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/schedule-changed) |
+| `finance.flight_settled` | [finance.flight_settled](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/finance-flight-settled) |
+| `announcement.published` | [announcement.published](https://docs.flyhub.app/virtual-airlines-draft/api/webhooks/announcement-published) |
+
 ## The Discord payload
 
 These are Discord webhook messages, not a custom FlyHub JSON event protocol. FlyHub sends an HTTP `POST` to Discord with a JSON body containing a username, disabled mentions, and one embed.
@@ -468,4 +491,3 @@ For structured, pull-based data, use the six read-only resources in the [Virtual
 - Test in a private operations channel before using a public community channel.
 - Treat `disabled` as a configuration or delivery-health problem, not as a reason to bypass the safeguards.
 - Remember that notifications may contain pilot display names, route information, scores, aircraft details, and financial net results. Choose the Discord channel's audience accordingly.
-
