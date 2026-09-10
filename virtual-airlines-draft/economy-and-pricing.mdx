@@ -1,0 +1,219 @@
+---
+title: Virtual Airlines Economy and Ticket Pricing
+description: Understand FH$, demand, fares, cargo, costs, leases, airports, routes, and airline profitability.
+---
+
+# Virtual Airlines Economy and Ticket Pricing
+
+The Virtual Airlines economy asks one practical question: can your airline offer a service customers want, operate it reliably, and keep more FH$ than it spends?
+
+You do not need to calculate every internal value by hand. Dispatch gives you the current quote and Finance gives managers the recorded result. The concepts on this page explain why those numbers move, so you can make better decisions instead of treating the quote as a mystery.
+
+## What FH$ means
+
+FH$ is the Virtual Airlines currency. In normal airline operations it belongs to the airline treasury, not to a pilot's personal wallet. Passenger fares, cargo income, ancillary income, contract income, flight costs, leases, airport fees, and schedule charges move the airline's balance.
+
+A standard new standalone airline currently receives FH$10,000,000 in opening capital. The creation screen shows the opening balance for the case being created; group or seeded cases can follow different rules, and an operating identity inside a group does not automatically mint another opening grant.
+
+Opening capital is runway, not free profit. It must fund launch leases, routes, airports, schedules, flight operations, and unexpected results until the airline's recurring income is dependable.
+
+Pilot progression is tracked separately through completed flights, hours, operational score, XP, rank, and admission history. A pilot reward appears as crew payroll in the airline settlement; the product does not promise that this line becomes a personal FH$ cash payment.
+
+## Where flight income comes from
+
+An accepted flight can create several types of income:
+
+| Income | What it represents |
+| --- | --- |
+| Passenger revenue | Recognized passengers multiplied by the applicable fare and passenger factors. |
+| Cargo revenue | Recognized and billable cargo weight multiplied by the cargo yield and applicable factors. |
+| Ancillary revenue | A small per-passenger service contribution for recognized passengers. |
+| Contract revenue | Income attached to an eligible contract, event, or other special operation. |
+
+Only recognized or carried payload earns income. Empty seats, unused cargo capacity, and payload that the completed operation does not validate do not earn revenue.
+
+## The demand funnel
+
+Passengers and cargo are not generated from the aircraft's maximum size. FlyHub moves through several layers:
+
+1. The weekly market creates finite directional demand around airports.
+2. A route receives a share of that market based on route importance and destination opportunity.
+3. The airline competes for part of the opportunity through its price, reputation, frequency, and timing.
+4. The current weekly and hourly manifest determines what is available at this moment.
+5. Aircraft seats, cargo limits, weight, condition, and configuration cap what can be offered safely.
+6. Cabin mix, reputation, condition, and other service factors adjust the likely demand.
+7. The final quote and flight validation determine what is actually recognized and carried.
+
+The eight market directions are north, northeast, east, southeast, south, southwest, west, and northwest. Airport and route demand is directional, so a busy airport does not mean every direction or every city pair is equally strong.
+
+The market is shared. Other flights can commit part of the available demand. Oversupplying a route can also reduce its yield factor, which means adding seats can make the economics worse when the market cannot fill them.
+
+## Reference fare versus final ticket price
+
+The passenger reference fare is a distance-based starting point. In plain language, FlyHub starts with a base amount, adds value for distance, and reduces the rate of increase on very long routes. It is bounded so short routes do not fall below FH$65 and long routes do not exceed FH$1,200 before later factors.
+
+The current reference curve is approximately:
+
+Reference fare = base FH$55 + 0.7 × distance in nautical miles raised to a diminishing-return curve
+
+The exact quote remains authoritative. These examples are illustrative reference fares per passenger before airline price policy, demand, cabin, aircraft, route, and recognized-payload factors:
+
+| Route distance | Illustrative reference fare |
+| ---: | ---: |
+| 0 NM | FH$65 |
+| 50 NM | FH$71 |
+| 100 NM | FH$83 |
+| 250 NM | FH$113 |
+| 500 NM | FH$156 |
+| 1,000 NM | FH$231 |
+| 2,000 NM | FH$361 |
+| 3,000 NM | FH$478 |
+| 5,000 NM | FH$692 |
+| 8,000 NM | FH$983 |
+| 10,000 NM | FH$1,164 |
+
+The reference fare is not what every passenger automatically pays. Think of it as the market's measuring stick.
+
+## Your price multiplier
+
+The airline's ticket price multiplier normally ranges from 0.50× to 2.00×. A 1.00× policy starts at the market reference. A 0.75× policy is an introductory discount, while a 1.50× policy is a premium price.
+
+Price changes two things at the same time:
+
+- It changes the amount earned per recognized passenger or cargo unit.
+- It changes how much of the market is willing to choose the airline.
+
+Lower prices can improve occupancy, especially while reputation is low, but each customer contributes less. Higher prices can increase income per customer only when enough customers remain. Price satisfaction also contributes to passenger-experience reputation.
+
+The following is an illustrative demand factor before route availability, capacity, cabin, condition, and other constraints. It is not a promise of final occupancy:
+
+| Airline reputation | 0.75× | 1.00× | 1.25× | 1.50× | 1.75× | 2.00× |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| New / low, about 1 | 1.11 | 0.84 | 0.58 | 0.31 | 0.20 | 0.20 |
+| Established, about 5 | 1.15 | 1.13 | 0.90 | 0.68 | 0.45 | 0.23 |
+| Highly trusted, about 10 | 1.15 | 1.15 | 1.15 | 1.00 | 0.83 | 0.65 |
+
+Values above 1.00 mean that price is helping demand relative to the unadjusted market quantity; they do not create unlimited passengers. The model caps the benefit and applies the final route and capacity limits afterward. If you need an exact answer for one route, use its Dispatch quote.
+
+The creation flow presents ticket and cargo pricing as settlement inputs. The manager policy editor can expose a different set of controls depending on your role and the airline setup, so do not assume that every manager page offers a live price slider. The policy and the current Dispatch quote are the authority.
+
+## Cabin classes and service value
+
+Ordinary passenger aircraft can have several cabin classes. Occupied premium economy, business, and first-class seats contribute more passenger revenue than an occupied economy seat, with current revenue weights of roughly:
+
+- Premium economy: 1.35 times economy
+- Business: 2.2 times economy
+- First: 3.5 times economy
+
+These are revenue weights for occupied passengers, not extra seats. Premium cabins are also more sensitive to reputation, aircraft condition, and comfort. A full economy cabin can still outperform an empty first-class cabin.
+
+## Cargo pricing and weight
+
+Cargo yield grows with distance in bands. The current base yield is about FH$0.85 per physical kilogram before the distance and airline factors are applied, with a bounded lower and upper yield.
+
+Physical cargo weight remains the safety and handling authority. Dimensional weight can add billable weight when freight takes more space than its physical mass would suggest; only part of that excess is billed. In the current model, 40% of the dimensional premium above physical weight is billable. This does not let an operation exceed the aircraft's physical payload or handling limits.
+
+Cargo pricing has the same trade-off as tickets: a lower multiplier can help the airline capture more of the available pool, while a higher multiplier earns more per recognized kilogram only if demand remains.
+
+## VIP operations
+
+VIP is a separate service economy. General-aviation and business-jet operations use a premium whole-aircraft service model rather than ordinary passenger and cargo demand. A VIP aircraft does not fill some seats with ordinary passengers and the rest with cargo.
+
+VIP quotes use the normal distance curve as a reference and then apply a premium, cost-aware multiplier. Current VIP multipliers are bounded between about 1.8× and 20×, and the target load grows with airline reputation without requiring a full cabin. VIP is therefore about serving fewer customers at a premium, not about maximizing ordinary seat count.
+
+VIP charters and the airline's VIP Operations policy are related but not identical. A special charter can have its own locked rules, while ordinary VIP operations follow the airline and aircraft eligibility shown by Dispatch.
+
+## What a flight costs
+
+Flight settlement costs can include:
+
+| Cost | When to think about it |
+| --- | --- |
+| Fuel | Based on the fuel required and the current fuel-price multiplier. |
+| Airport and landing | The aircraft's size, weight, and landing count affect the charge. |
+| Passenger handling | Per recognized passenger. |
+| Cargo handling | Per recognized kilogram. |
+| Navigation | A distance-based operating charge. |
+| Service | A per-passenger service or catering charge. |
+| Fleet operating | The aircraft's per-flight and per-hour operating cost. |
+| Maintenance | Block hours and cycles consume maintenance reserve. |
+| Insurance | A time-based charge tied to the aircraft's reference value. |
+| Environmental | A fuel-based environmental cost. |
+| Pilot reward / crew payroll | The crew reward line recorded in the airline's settlement. |
+| Penalties and compensation | Can be added after a poor, disrupted, or passenger-impacting result. |
+| Abnormal maintenance | Extra maintenance when the operation creates an abnormal condition. |
+
+The daily lease is not charged a second time inside flight settlement. Aircraft lease, airport network fees, hub fees, and active schedule fees are recurring airline costs recorded separately.
+
+## Recurring network costs
+
+### Opening a route and publishing a schedule
+
+Opening a route currently costs a distance-based one-time fee. It starts at FH$1,000 and rises with distance, reaching a ceiling of FH$30,000 at 8,000 NM and beyond.
+
+An active schedule also has a daily operating fee. The current formula is approximately 80% of (FH$30 plus FH$0.18 per nautical mile), or about FH$24 plus FH$0.144 per nautical mile. Even a very short schedule has a small daily charge. The schedule fee does not secretly multiply revenue or create demand; it is simply an operating commitment.
+
+The quote shown by the current Network page is authoritative if these balances change.
+
+### Airports and hubs
+
+Establishing an airport and designating a hub are separate decisions. A hub costs more to establish, and both network access and hub status have daily costs:
+
+| Airport size | Establish | Hub extra | Daily network | Daily hub |
+| --- | ---: | ---: | ---: | ---: |
+| Large | FH$200,000 | FH$400,000 | FH$800 | FH$2,000 |
+| Medium | FH$100,000 | FH$200,000 | FH$400 | FH$800 |
+| Small | FH$40,000 | FH$80,000 | FH$160 | FH$280 |
+
+These fees are commitments, not a guarantee of passengers. An airport can be strategically useful while a particular route from it is weak.
+
+### Aircraft leases
+
+Aircraft are leased for operations. The creation flow displays the daily lease, first-day balance effect, and 30-day commitment. Each launch lease has a 30-day minimum term; returning it early can still charge the frozen 30-day commitment. Fleet controls and the current lease quote are authoritative for later additions or changes.
+
+## Flight result versus airline cash flow
+
+Managers should separate three ideas:
+
+- **Flight revenue**: the income attached to one accepted operation.
+- **Flight net**: that operation's revenue minus its settlement costs.
+- **Airline cash flow**: flight results plus recurring charges, route openings, airport actions, leases, and other treasury movements in the selected period.
+
+An individual flight can be profitable while the airline loses money overall because several aircraft, airports, or schedules are being paid every day. Finance shows the cash after reserve, runway days, break-even activity, and projections to make that difference visible.
+
+Projections hold recent activity and current commitments roughly constant. Treat them as warnings and planning tools, not guaranteed future income.
+
+## A simple worked example
+
+Suppose an operation is 500 NM and the quote recognizes 100 ordinary passengers. The illustrative passenger reference fare is about FH$156. With a 0.90× airline ticket policy, the starting fare signal is about FH$140 before cabin, aircraft, route, demand, and other factors. Passenger revenue would begin around FH$14,000, and the ancillary contribution would be about FH$800, before the final quote and settlement apply their exact modifiers.
+
+That does not mean the airline earns FH$14,800. Fuel, airport, handling, navigation, service, fleet, maintenance, insurance, environmental, crew, and recurring costs still have to be deducted. If the completed flight recognizes fewer passengers than the quote, income falls with them. The settlement breakdown in Finance is the final answer.
+
+## How to make good economic decisions
+
+For a new airline:
+
+1. Keep the fleet small enough that daily leases do not consume the runway.
+2. Start near the market reference or use a modest introductory discount while reputation is low.
+3. Choose aircraft that fit observed demand instead of filling every route with the largest airframe.
+4. Keep aircraft in good condition; condition below 40% requires maintenance, and a healthy aircraft receives stronger demand.
+5. Watch route contribution and load factor before adding frequency, airports, or hubs.
+6. Keep a reserve for recurring charges and a bad week.
+7. Raise prices only after the airline can show reliable demand and enough reputation to support them.
+
+There is no single best price for every route. A short high-demand route, a thin long-haul route, a cargo corridor, and a VIP service should be evaluated separately.
+
+## Time acceleration and earnings
+
+When time acceleration is allowed, operating costs do not disappear. Positive earnings and XP are reduced to reflect accelerated time, and an already weak or empty operation can remain unprofitable. If the chosen acceleration is not allowed by the airline or operation, the result can be rejected as invalid with no normal settlement or XP.
+
+## Read next
+
+- [How Virtual Airlines Works](./how-virtual-airlines-works)
+- [From Dispatch to Settlement](./flight-lifecycle)
+- [Dispatch](./dispatch)
+- [Manage Airline: Finance](./manage-finance)
+- [Manage Airline: Market audit](./manage-market)
+- [Manage Airline: Network](./manage-network)
+- [Manage Airline: Airports](./manage-airports)
+- [Manage Airline: Fleet](./manage-fleet)

@@ -1,0 +1,146 @@
+---
+title: From Dispatch to Settlement
+description: Follow a Virtual Airlines flight from quote and booking through validation, recovery, scoring, and finance.
+---
+
+# From Dispatch to Settlement
+
+A Virtual Airlines flight has a lifecycle. The number you see in Dispatch is a forecast for a specific opportunity; the number in Finance is the recorded result after the flight has been validated. Knowing the stages helps you understand why a booked flight can still change, fail, or settle differently from its first preview.
+
+## The lifecycle at a glance
+
+| Stage | What happens | What you should check |
+| --- | --- | --- |
+| Quote | FlyHub calculates a current route, market, aircraft, price, and payload opportunity. | Is the route, aircraft, time, and quoted payload right for you? |
+| Hold | The selected opportunity is held for a short period, normally two hours. | Book before the hold expires and refresh if the market changes. |
+| Booking | Route, aircraft, airline policy, activity rules, and requested payload are recorded. | Read the final booking summary; it is authoritative. |
+| Preparation | You plan the flight and choose tracking or debrief. | Use the booked aircraft, route, operating day, and allowed simulation rate. |
+| Flight | The operation is flown, tracked, recovered, or interrupted. | Keep the flight state accurate and preserve the evidence the page asks for. |
+| Completion | FlyHub receives the end state and checks the operation. | Finish only after route, payload, timing, and result details are ready. |
+| Validation | The result is checked for eligibility, quality, payload, timing, and policy compliance. | A result can be accepted, penalized, restored, or rejected. |
+| Settlement | An accepted result is credited and debited once in the airline ledger. | Review the breakdown in My Flights or Finance. |
+
+## 1. Quote and market hold
+
+When you open [Dispatch](./dispatch), FlyHub combines:
+
+- the airline and your membership;
+- the route or activity source;
+- the current weekly and hourly market;
+- aircraft location, type, condition, seats, and weight;
+- airline ticket and cargo price policy;
+- airline reputation and service frequency;
+- departure timing and operating-day rules;
+- passenger, cargo, VIP, tour, charter, or event restrictions.
+
+The result is a quote: a snapshot of what the operation can support now. It can include passenger count, cargo weight, fuel, zero-fuel weight, takeoff weight, and expected financial information.
+
+The market hold is temporary. If another operation commits demand, the aircraft changes state, the weekly market rolls over, or the hold expires, a refreshed quote can differ.
+
+## 2. Booking freezes the important choices
+
+Booking confirms the route, airline, aircraft, operating policy, activity rules, and pilot-requested payload. An event or tour may lock even more of those fields. If the route came from a tour or charter, do not assume it can be replaced with an ordinary schedule after booking.
+
+The requested payload is the pilot's selected passenger or cargo amount within the quote ceiling. It is not yet the same as the recognized payload after a flight. FlyHub validates what the completed operation actually carried.
+
+Booking limits are deliberately stricter than some quote or scheduler previews. A normal booking currently supports up to four legs, while a scheduler can create a larger pattern within the limits shown on that page. The confirmation action and final booking result are the authority.
+
+## 3. Prepare and start
+
+In [My Flights](./my-flights), review the operation before starting:
+
+- airline and operating airline;
+- route and aircraft;
+- scheduled operating day and UTC time;
+- passengers, cargo, and weights;
+- zero-fuel and takeoff weight;
+- the flight plan or debrief method;
+- tracking, recovery, and time-acceleration choices.
+
+Online Tracking connects the operation to supported telemetry. Offline Debrief lets you enter a result after the flight when that operation permits it. The available actions depend on the current state and activity rules.
+
+## 4. Fly with the booked facts in mind
+
+The flight is evaluated against the booking. Keep the route and aircraft consistent, respect the operating window, and do not exceed the physical payload or weight envelope.
+
+Time acceleration is a policy choice, not a way to remove cost. When it is allowed, costs remain and positive earnings and XP are reduced. When it is prohibited, a result can be treated as invalid, with no normal settlement or XP and the aircraft left in its original position.
+
+Operating days and several time windows use UTC. A local midnight crossing can therefore belong to a different operating day than the one on your computer.
+
+## 5. Completion and recognized payload
+
+At completion, FlyHub checks more than whether the aircraft reached the destination. It evaluates the route, aircraft, timing, payload, operating score, and policy compliance.
+
+The difference between the requested and recognized payload matters:
+
+| Payload term | Meaning |
+| --- | --- |
+| Market availability | What the shared market could offer at quote time. |
+| Quote ceiling | The maximum passenger or cargo amount the selected operation could request. |
+| Requested payload | What you selected when booking. |
+| Physical payload | What the aircraft could safely carry under its weight and configuration limits. |
+| Recognized payload | What the completed and validated flight is allowed to earn from. |
+
+Revenue uses recognized passengers and cargo. If a flight completes with less recognized payload than requested, revenue falls with it. Unused seats and unused cargo capacity are not paid.
+
+Cabin demand can also change the mix of recognized passengers. Premium, business, and first-class passengers have higher revenue weights when occupied, but those seats are more sensitive to reputation, condition, comfort, and demand. A premium seat that is not occupied earns nothing.
+
+## 6. Scoring and operational result
+
+An accepted flight receives an operational result and a pilot-facing score. A score below 8.2 can create an airline penalty of FH$350 for each point below the threshold. Poor execution can therefore reduce the flight result even when the aircraft carried a useful payload.
+
+Other results can include:
+
+| Result or state | What it means |
+| --- | --- |
+| Normal | The operation completed under normal rules and can settle normally. |
+| Late | The operation completed outside the preferred timing and can receive a weaker result or penalties. |
+| Diverted | The aircraft did not complete the planned city pair; follow the result and recovery guidance shown by FlyHub. |
+| Restored / recoverable | FlyHub has preserved enough state for you to continue or recover the operation. |
+| Rejected / invalid | The result failed a policy, telemetry, route, aircraft, timing, or integrity check and does not receive the normal settlement. |
+| Closed | The operation is no longer open. It may include a completed, rejected, cancelled, abandoned, or expired result. |
+| MAYDAY | An irreversible emergency close. It grants no normal score, XP, progression, or settlement. |
+
+Closed does not always mean successful. Managers should use [Operations](./manage-operations) and the flight result to understand what actually happened.
+
+## 7. Settlement
+
+An accepted result is written once to the airline ledger. It combines:
+
+- passenger, cargo, ancillary, and eligible contract revenue;
+- fuel, airport, handling, navigation, service, fleet, maintenance, insurance, and environmental costs;
+- crew or pilot reward;
+- penalties, passenger compensation, or abnormal maintenance when applicable.
+
+The ledger is append-only. Finance is read-only, so a previous settlement is not silently edited. If a correction is needed, it appears as a separate accounting entry or an updated result according to the product's correction flow.
+
+The airline balance is the source of truth for the money. Pilot progression is shown through the pilot record, score, XP, flights, and hours; do not infer a personal cash payment from the crew-payroll line.
+
+## Recovery and position
+
+Use **Recover** when FlyHub marks an interrupted operation as recoverable. Read the recovery details before restarting it. A recovery can preserve the operation, while a cancellation or MAYDAY can close it with a different result.
+
+Normal, scheduled, and free flights generally move the aircraft to the operation's destination after a valid completion. Some event and charter flows keep the stored position according to their activity rules. The position shown by FlyHub after settlement is authoritative; do not manually assume that every special operation behaves like a scheduled route.
+
+## When the result does not match your expectation
+
+Check in this order:
+
+1. The final booking summary, rather than an early quote.
+2. The recognized passenger or cargo amount.
+3. The operational score and timing result.
+4. The aircraft condition, weight, and policy checks.
+5. The settlement breakdown in Finance or the economy record.
+6. Whether the market or a recurring charge changed after the first quote.
+
+Do not book a duplicate while My Flights or Finance is still refreshing. Reload the page and use its recovery action first.
+
+## Read next
+
+- [How Virtual Airlines Works](./how-virtual-airlines-works)
+- [Virtual Airlines Economy and Ticket Pricing](./economy-and-pricing)
+- [Dispatch](./dispatch)
+- [My Flights](./my-flights)
+- [Calendar](./calendar)
+- [Manage Airline: Finance](./manage-finance)
+- [Manage Airline: Operations](./manage-operations)

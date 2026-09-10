@@ -1,0 +1,74 @@
+---
+title: Manage Airline People
+description: Review applications, manage the roster, and assign staff roles for a Virtual Airline.
+---
+
+# Manage Airline: People
+
+Use **People** to manage membership applications, the active roster, staff roles, and workforce activity. This is an administrative page; the public profile's [Pilots](./airline-pilots) tab is read-only.
+
+## Open People
+
+1. Open an active airline from **Airlines**.
+2. Open its profile and select **Manage airline**.
+3. Select **People**.
+
+People uses the **shared group roster**. Applications, pilots, and staff roles belong to the group when the airline is part of a group, even though each operating airline keeps its own aircraft, routes, schedules, and flight performance.
+
+People is available to active members with People access. Owner, Manager, and Pilots Manager roles normally have it. Pilot-only roles cannot manage People. Membership actions require membership-management access, and assigning or revoking staff roles requires role-management access.
+
+## Workforce dashboard
+
+The dashboard summarizes:
+
+- active pilots;
+- pending applications;
+- pilots inactive for 30 days or more;
+- staff members.
+
+It can also show roster activity, pilot scores, flight contribution, rank distribution, membership status, pilot performance history, and participation history. Use the 30-day, 90-day, one-year, or founding range when available. Scores and participation are based on accepted VA flights.
+
+## Applications
+
+Applications contains pending membership requests. Select an applicant to review their profile, accepted flights, block time, score, strikes, contribution points, current applicant rank, application date, last flight, and inactivity information.
+
+### Accept an application
+
+1. Select a pending application.
+2. Review the applicant's profile and available flight history.
+3. Select **Accept application**.
+4. Confirm **Accept pilot**.
+
+Acceptance activates the membership, records the current policy version, creates the pilot's VA statistics, grants the Pilot role, and sends the welcome notification through Inbox. Acceptance does not ask for a separate reason.
+
+### Reject an application
+
+Select **Reject**, provide a reason of at least three characters, and confirm. The application becomes rejected and the reason is recorded.
+
+## Roster actions
+
+The roster includes active and suspended members. Search by name or rank and use **Previous** and **Next** to browse 25 records per page.
+
+- **Suspend** an active pilot with a reason.
+- **Restore** a suspended pilot; the interface asks for a reason.
+- **Remove** a suspended member with a reason.
+
+The page may require an active pilot to be suspended before it can be removed. Ending a membership revokes its active staff grants.
+
+## Ranks and staff roles
+
+**Ranks** is an informational view showing pilot counts, flights, hours, and average score by rank. It does not manually promote or demote pilots.
+
+**Staff roles** shows active staff roles and the sections each role includes. Users with role-management access can **Grant** or **Revoke** an eligible role for an active member. The Owner role cannot be changed from People; ownership is managed in [Ownership](./manage-ownership).
+
+## Limits and safeguards
+
+The standard roster view requests 25 rows and supports 10–50 rows per page. A free shared roster supports up to 20 active pilots; the Founder must unlock more capacity through the available plan before the limit can be exceeded. Admission still follows the airline's published requirements.
+
+Actions that change membership or roles require confirmation. Revocations and destructive membership actions require a reason. FlyHub protects repeated submissions, so wait for the result before submitting the same action again.
+
+## Loading, empty, and error states
+
+If no airline is selected, choose one from the management workspace. If your role does not include People, ask the Founder or Manager for access. Empty states distinguish applications, roster, ranks, and staff lists when data is available.
+
+If a list or history fails to load, refresh the relevant view or reload the page. A temporary loading problem should not be interpreted as a membership decision. Messages should be short and user-facing; technical permission names, codes, and backend details are not part of the user experience.

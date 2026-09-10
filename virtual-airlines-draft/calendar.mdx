@@ -1,0 +1,45 @@
+---
+title: Virtual Airlines Calendar
+description: Plan Virtual Airlines flights on your operating calendar.
+---
+
+# Calendar
+
+The VA Calendar shows your own Virtual Airlines roster. Use it to place eligible booked flights on operating days, review previous flights, and open the map view of your planned network.
+
+## Calendar view
+
+The calendar uses UTC and runs Monday through Sunday. Use the month controls or **Today** to move around the calendar. A route map uses different colors to distinguish planned and completed activity.
+
+The summary can include:
+
+- **Unscheduled**: booked flights that have no operating day.
+- **Booked**: flights placed on the calendar but not completed.
+- **Completed**: finished flights in the selected history window.
+- **Airports**: airports represented by the calendar's current data.
+
+Use the history controls to show the last 7 days, 30 days, 6 months, one year, or all available history. You can hide completed flights when planning future work.
+
+## Schedule a flight
+
+1. Find a flight in the unscheduled list.
+2. Drag it to an operating day, or use the available date action.
+3. Review the UTC date and the route.
+4. Open My Flights when you are ready to operate it.
+
+You can drag a flight back to **Unscheduled** to remove its planned date. Changes are applied immediately in the calendar; if the save fails, the previous placement is restored.
+
+## Rules and limits
+
+- You can manage only your own VA calendar.
+- Active and completed flights are read-only.
+- The current and queued flight data can include up to 200 operations.
+- History is paginated in batches of 500, up to 10,000 records.
+- FlyHub checks whether the selected operating day is valid for the flight.
+- An active, undated operation can count as booked while remaining locked from editing.
+
+## Empty, loading, and error states
+
+The calendar can be empty when you have no booked flights or no completed history in the selected range. A route may also be absent when its airport information is unavailable.
+
+If a date change fails, wait for the original position to return and try again. If the map is unavailable, continue using the calendar list and reload later. The page should use a short, user-facing error message rather than technical server details.

@@ -1,0 +1,81 @@
+---
+title: Manage Airline Market Audit
+description: Review weekly demand, route health, and reputation for a Virtual Airline.
+---
+
+# Manage Airline: Market Audit
+
+The management workspace separates **Network** from **Market audit**. Network manages route schedules; Market audit helps you understand passenger and cargo demand, route health, airport pressure, and reputation. Market audit is a read-only analysis view.
+
+## Open Market audit
+
+1. Open an active airline from **Airlines**.
+2. Open its profile and select **Manage airline**.
+3. Select **Market audit**.
+
+Market audit is available to active airline members with network-management visibility. Financial contribution figures are shown only when your role also has finance access.
+
+## What the audit shows
+
+The overview can show:
+
+- active routes compared with the total;
+- routes with current health data;
+- passenger demand and cargo demand;
+- the share of demand already committed;
+- average load factor;
+- route contribution when finance figures are available;
+- reputation and its change from the previous period.
+
+### Route health
+
+Route rows can include a recommendation signal, evidence weeks, aircraft load, used demand, net contribution, recent weeks, carried volume, and result. A recommendation is guidance only; it does not edit a route, change a schedule, or reserve demand automatically.
+
+If a route has no health observation yet, the page explains that a demand reservation is needed before a weekly observation can be calculated.
+
+### Demand pools
+
+Demand is shown separately for passengers and cargo. An airport can show available, committed, airline-committed, remaining, and used percentages for each of eight directions: north, northeast, east, southeast, south, southwest, west, and northwest.
+
+Use the airport search to find an airport by code, name, or city. The page can show a radial chart and a directional table for the selected airport.
+
+### Reputation
+
+The reputation view can show overall reputation out of 10, reliability, operations, passenger experience, community strength, recent periods, and change over time. If no reputation history exists, the view explains that no history is available yet.
+
+## Filters and actions
+
+Use the current view controls to:
+
+- refresh the analysis;
+- page through routes and airports;
+- sort route rows by load, demand used, or net result;
+- filter for attention, opportunity, stability, or missing data;
+- search airports;
+- open a route or airport detail.
+
+Market audit does not open or close routes, set prices, reserve demand, or suspend flights. Use [Network](./manage-network) for schedule changes and [Finance](./manage-finance) for the financial ledger.
+
+## Weekly market and groups
+
+The audit uses the currently published weekly market. A future prepared week is not the same as today's available demand. In a group, demand and network context can be shared while route schedules and operating results remain associated with the selected operating airline.
+
+The available demand can change when other operations commit it, or when aircraft capacity, payload limits, route conditions, reputation, or aircraft condition affect an operation. The audit does not expose every calculation behind the demand model.
+
+## Roles and limits
+
+Owner, Manager, Operations, Schedules Manager, and Network Planner access can vary by assigned permissions. Finance staff can see financial information in Finance without automatically receiving Network access. A pilot-only membership cannot open the management audit.
+
+The page uses paginated route and airport lists. It can display recent health and reputation periods but does not promise an unlimited history. The current data source has a fixed weekly snapshot; do not treat the view as live traffic.
+
+## Loading and recovery
+
+During loading, the page uses a skeleton. A failed initial load offers **Try again**; a refresh failure can keep the previous results visible while the new request is retried. Empty states can mean no matching routes, no health data, no airport matches, no reputation history, or no current weekly market.
+
+If Market audit cannot load, select **Try again** or reload the management page. Analysis recommendations are not commands, and missing data is not proof that the route has been deleted.
+
+## Read the market numbers
+
+Demand is finite and directional. A high-demand airport can still have a weak route if the airline's price, frequency, aircraft size, condition, or reputation does not fit the available customers. Use the audit to find the reason, then make changes in Network, Fleet, Airports, or the operating policy.
+
+[Virtual Airlines Economy and Ticket Pricing](./economy-and-pricing) explains the demand funnel and price trade-offs. [Airline Reputation and Progression](./reputation-and-progress) explains why reputation changes pricing tolerance and demand without becoming a direct cash multiplier.

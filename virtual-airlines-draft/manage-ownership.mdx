@@ -1,0 +1,105 @@
+---
+title: Manage Airline Ownership
+description: Manage the airline plan, website connections, Discord notifications, and permanent retirement.
+---
+
+# Manage Airline: Ownership
+
+**Ownership** is the owner-only area for the airline plan, website connections, Discord notifications, and permanent retirement. It is not a page for transferring ownership or managing pilots.
+
+## Open Ownership
+
+1. Open an active airline from **Airlines**.
+2. Open its profile and select **Manage airline**.
+3. Select **Ownership**.
+
+Only the current owner can open this area. The founder is the person who originally created the airline; FlyHub does not currently provide a self-service ownership transfer, co-owner system, or owner-recovery action.
+
+For a group, the normal management context is the flagship airline. The plan covers the shared group roster. Review the airline or group name shown at the top before changing billing or retiring an operating airline.
+
+## Airline plan
+
+The plan supports a larger active pilot roster:
+
+- the first 20 active pilots are included at no cost;
+- when the roster reaches 20, the airline can continue operating, but another pilot requires the plan;
+- the current plan price is **$15 USD per month**, plus applicable tax;
+- one plan covers the shared roster of the airline group rather than charging separately for each operating airline.
+
+The page can show active pilots, included pilots, the current billing state, the current period end, the plan price, and any action needed. A plan may be shown as active, trialing, needing payment attention, paused, ended, refunded, suspended, exempt, or managed by FlyHub.
+
+An overdue payment can have a short grace period. A paused, cancelled, or refunded plan does not provide capacity above the included roster. System and explicitly exempt airlines may follow different rules.
+
+### Start or manage the plan
+
+Use the action on the page to start the monthly plan. Payment opens the external billing checkout, then Ownership checks for confirmation before updating the airline status.
+
+The billing portal can provide a payment-method update and other account controls. FlyHub may not show a separate cancellation button inside Ownership. If the plan belongs to another payer, contact FlyHub Support; this is a billing-account issue, not an ownership transfer.
+
+If the plan status does not update immediately, wait for the confirmation to finish and reload Ownership. Do not start another checkout while one is already pending.
+
+## Website connections
+
+Website connections let an approved external site read selected airline information. You can:
+
+- create a connection key;
+- give it a descriptive name;
+- choose read-only scopes such as profile, pilots, flights, fleet, schedules, and statistics;
+- choose an expiry of 30 days, 90 days, one year, or no expiry;
+- copy the secret once;
+- revoke a key.
+
+You can have up to 10 active keys. The secret is shown only once, so save it before closing the dialog. Store it on your website's server, never in browser code, public source code, or Discord. A revoked key stops working immediately, cannot be restored from Ownership, and does not work for a closed airline.
+
+## Discord notifications
+
+Add a Discord destination to send selected airline events to a valid HTTPS Discord webhook. You can choose events such as:
+
+- flights booked, cancelled, completed, rejected, or settled;
+- applications received or decided;
+- pilots joining, leaving, being suspended, restored, removed, or changing roles;
+- fleet or schedule changes;
+- announcements published.
+
+The airline can have up to 10 active or paused destinations. You can test a destination, pause it, resume it, or remove it. A destination with repeated delivery failures may be disabled automatically. The current page does not provide an edit-in-place action for a webhook URL; remove the old destination and create a new one when the URL changes.
+
+Removing a destination stops future deliveries and cannot be undone. Integrations are disabled when the airline is permanently retired.
+
+## Permanently retire an airline
+
+Retirement is irreversible from FlyHub. Read the complete impact summary before continuing. Depending on whether you are retiring an independent airline or an operating airline, the summary can include:
+
+- routes and schedules that will close;
+- leased aircraft that will be returned;
+- lease payments that will stop;
+- owned aircraft that will be retired;
+- unfinished bookings that will be cancelled;
+- completed flight history that will remain available;
+- members who will lose access to an independent airline.
+
+The confirmation phrase must match exactly:
+
+- Independent airline: `I want to delete my airline`
+- Operating airline: `I want to retire this operating airline`
+
+Retirement can cancel published or reserved work, end leases, retire aircraft, close routes and schedules, and clean up the airline's active content. Completed flights, logbook records, settlements, and historical attribution remain available where the page says they will be preserved.
+
+An operating airline retirement does not dissolve the shared employer, roster, airports, treasury, admissions, or moderation of the group. It ends that operating airline's identity, fleet, routes, schedules, and current operations. A flagship cannot be retired while active operating airlines remain, and an airline with a flight currently in progress must wait for that operation to finish.
+
+There is no restore, undo, ownership transfer, co-owner, or self-service reactivation action in Ownership. Operating airlines can also expose a compact retirement action from **Group**; review the same impact carefully.
+
+## Ownership and other management pages
+
+- **Group** manages the flagship, operating airlines, shared roster, airports, and group treasury.
+- **Identity and Profile** manages the name, codes, home airport, branding, and published profile.
+- **People** manages applications, roster changes, suspensions, and staff roles.
+- **Finance** manages the internal FH$ view of cash, settlements, costs, and commitments.
+- **Ownership** manages the external airline plan, connections, notifications, and permanent retirement.
+
+The internal FH$ treasury is separate from the monthly billing plan.
+
+## Loading, empty, and recovery states
+
+Ownership can show loading, no-airline, billing, checkout-in-progress, payment-confirmation, integrations, one-time-secret, test-result, and retirement-confirmation states.
+
+If billing, an integration, or a retirement summary cannot load, use **Retry** or reload the workspace before trying again. If retirement is blocked, resolve the active flight or other item shown in the impact summary. A failed confirmation is not proof that the airline changed; reopen Ownership and verify its current state.

@@ -1,0 +1,58 @@
+---
+title: Virtual Airlines My Flights
+description: Start, track, recover, and finish your Virtual Airlines flights.
+---
+
+# My Flights
+
+**My Flights** is the operational queue for your Virtual Airlines flights. The VA view uses the same flight workspace as the rest of FlyHub, while keeping the airline, route, aircraft, and activity context attached to each operation.
+
+## The queue
+
+Flights can appear as:
+
+- **Active**: the flight is currently in progress.
+- **Next**: the next flight in your queue.
+- **Pending previous**: an earlier flight must be completed or resolved first.
+- **Pending**: booked and waiting for its operating window.
+
+The queue can also show weather and the operation's airline context. An active flight can include the aircraft, payload, zero-fuel weight, takeoff weight, operational flight plan, and tracking state.
+
+## Start or resume a flight
+
+1. Open the flight from the queue.
+2. Review the route, aircraft, payload, and operating day.
+3. Generate, import, or enter the operational flight plan.
+4. Choose **Online Tracking** or **Offline Debrief**.
+5. Select **Start** or **Resume** and follow the flight workflow.
+
+Online Tracking connects the operation to the supported telemetry flow. Offline Debrief lets you enter the result after the flight. The available controls depend on the flight state and the tracking method.
+
+## Recovery and other actions
+
+Use **Recover** when FlyHub identifies an interrupted operation that is still recoverable. Review the recovery details before continuing. You can restart or cancel only when the current state allows it.
+
+You can clear a queued flight or reorder queued flights when the queue supports it. Itineraries are kept in their planned order and cannot be rearranged like independent flights.
+
+An operational flight plan for the next booking expires after one hour if it is not used. Operating-day checks use UTC, and you cannot create a duplicate active route when another conflicting operation is already open.
+
+## Finish or abort
+
+Close the flight only after the flight is complete and the required information has been recorded. If you abort or close an operation, review the result shown by FlyHub before starting another one.
+
+**MAYDAY** is an emergency action. It is irreversible and does not grant a flight score, XP, progression, or settlement for that operation. Use it only when the flight genuinely cannot continue.
+
+## Limits and troubleshooting
+
+- The initial queue can contain up to 100 flights.
+- A scheduler can add up to 25 queued flights.
+- A Dispatch itinerary can contain 1–12 legs, subject to the operation type.
+- The next flight's operational-plan window is limited, so prepare it close to the time you intend to fly.
+
+If an action fails, keep the flight open and review its current state before trying again. Reload My Flights if a newly booked flight is not visible. Do not expose or copy technical error text; use the page's user-facing recovery guidance.
+
+## What happens after Finish
+
+Finishing a flight starts validation; it does not instantly guarantee a successful settlement. FlyHub checks the route, aircraft, timing, payload, operating score, and policy compliance. An accepted result is settled once into the airline ledger, while an invalid or emergency result can close without the normal score, XP, or airline settlement.
+
+See [From Dispatch to Settlement](./flight-lifecycle) for the complete lifecycle and [Virtual Airlines Economy and Ticket Pricing](./economy-and-pricing) for the difference between recognized payload, revenue, costs, and airline cash flow.

@@ -1,0 +1,81 @@
+---
+title: Manage Airline Network
+description: Create and manage route schedules for a Virtual Airline.
+---
+
+# Manage Airline: Network
+
+Use **Airline management → Network** to create and manage route schedules. This is different from the public profile's **Network** tab, which is view-only.
+
+## Open Network
+
+1. Open an active airline from **Airlines**.
+2. Open its profile and select **Manage airline**.
+3. Select **Network**.
+
+The management page may use a market-style address behind the scenes, but follow the visible management navigation. In a group, choose an **Operating airline** when the selector is available. Schedules and fleet belong to the selected operating airline; airports and funds can be shared by the group.
+
+Network access is available to Owners, Managers, Operations, Schedules Managers, and Network Planners according to their assigned access. Creating or editing schedules requires schedule-management access. Opening a new route also requires route and financial access.
+
+## Network summary and schedule list
+
+The summary can show available balance, active schedules, completed flights, gross revenue, and net result.
+
+Each schedule can show:
+
+- flight number and state;
+- origin, destination, and distance;
+- passenger or cargo type;
+- operating days;
+- eligible aircraft;
+- estimated duration;
+- completed flights and gross revenue.
+
+Search by flight number or airport. Filter current schedules, active schedules, suspended schedules, the retired archive, or all available records. Sort by completed flights or gross revenue and use the page controls to browse more results.
+
+Select a schedule to open its details, including operating days, duration range, daily operating cost, eligible aircraft, completed results, and flights that are available, claimed, or in progress.
+
+## Create or edit a schedule
+
+1. Select **New schedule** or choose **Edit** on an existing schedule.
+2. Select different origin and destination airports that are active in the group's network.
+3. Choose passenger or cargo.
+4. Set the flight-number suffix and operating days.
+5. Choose aircraft types, categories, sizes, or dynamic inclusions and exclusions.
+6. Review the duration and cost estimate.
+7. Save the schedule.
+
+The server checks the airports, days, aircraft eligibility, airline state, number format, distance, and duration before saving. The saved duration is recalculated from the current operating rules. Schedules with open flights cannot be edited until those flights are resolved.
+
+## Aircraft eligibility
+
+Passenger aircraft can serve passenger schedules, cargo aircraft can serve cargo schedules, and Combi aircraft can support both. A type marked **Other** is not usable until it has a valid classification.
+
+You can select concrete types or use dynamic rules based on category, size, and type. Dynamic rules can include matching aircraft added to the fleet later. If no active aircraft are eligible, add or configure an eligible aircraft in [Fleet](./manage-fleet) before saving.
+
+## Route cost and lifecycle
+
+An existing origin–destination–operation combination can be reused. A suspended route may be reopened when you have route access. Opening a new route requires sufficient group funds and the required route and finance access; FlyHub charges the current opening fee when it creates the route.
+
+Schedules can be **Active**, **Suspended**, or **Retired**.
+
+- **Suspend** stops new operations and cancels unclaimed upcoming flights. Claimed flights continue.
+- **Enable** reactivates a suspended schedule when the airline, route, airports, and aircraft remain valid.
+- **Retire** permanently archives the schedule and cannot be undone. It is blocked while flights are claimed or in progress.
+- **Delete** removes the schedule and future unclaimed inventory while preserving completed flights and logbook records.
+
+## Import and export
+
+**Export** downloads a CSV of non-retired schedules, including dynamic rules and duration information.
+
+**Import** accepts FlyHub and Newsky CSV files. The page validates the complete file and shows a preview before you confirm. The import replaces the selected operating airline's current schedules, preserves existing reservations and completed history, and removes future unclaimed inventory from schedules being replaced. It does not change other operating airlines.
+
+Current import limits include an 8 MB file, up to 10,000 schedules, and a 120-second processing window. The preview for very large files is capped separately. An invalid file is rejected before replacement.
+
+## Limits and recovery
+
+The schedule list starts with 25 rows per page and supports larger page sizes within the page's controls. Both airports must be active in the shared network. A schedule must have at least one operating day and one eligible aircraft.
+
+If Network is empty, use **New schedule** after configuring Airports and Fleet. If a schedule cannot be saved, check the airport pair, operating days, aircraft eligibility, permissions, available balance, and open flights. If a load or update fails, refresh the page and reopen the section. Imports, retirement, and deletion do not have an undo action.
+
+The public profile Network map cannot create or edit schedules. Use this management page for those actions.

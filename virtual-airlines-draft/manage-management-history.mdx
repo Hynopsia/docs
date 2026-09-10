@@ -1,0 +1,61 @@
+---
+title: Manage Airline Management History
+description: Review and filter the administrative history of a Virtual Airline.
+---
+
+# Manage Airline: Management History
+
+**Management history** is a read-only record of administrative and system changes affecting an airline. Use it to understand what changed, when it changed, who or what initiated it, and why a reason was recorded.
+
+## Open Management history
+
+1. Open an active airline from **Airlines**.
+2. Open its profile and select **Manage airline**.
+3. Select **Management history** in the management header.
+
+Management history is available to active members of the relevant group with history access. Owners, Managers, and Pilots Managers normally receive it. Custom roles depend on their assigned access. This is not the same as the **Audit** label sometimes used in People, and it is not a flight or finance history.
+
+## Read a history entry
+
+Each entry can show:
+
+- the action;
+- the area or item affected;
+- the reason, when one was supplied;
+- the person who made the change, when available;
+- an automated-system label for automatic changes;
+- the source area;
+- date and time.
+
+Expand an entry to compare **Previous details** and **Updated details**. The page intentionally hides internal event IDs, request IDs, correlation IDs, and advanced technical metadata.
+
+History can include changes to identity and profile content, banners and assets, groups and memberships, routes and schedules, fleet and leases, flights and results, finance and settlements, tours, and integrations.
+
+## Search and filter
+
+Use the available controls for:
+
+- free-text search;
+- action type;
+- start date;
+- end date.
+
+Select **Apply** to run the filters and **Clear** to return to the unfiltered list. Search is useful for actions, affected areas, reasons, and source labels. The current search does not reliably match the visible name of the person who made the change.
+
+The **Management activity** chart summarizes the last 30 days by People, Operations, Fleet, Finance, Network, and Other. The chart is a separate summary and does not change when the table filters are applied.
+
+## Pages and limits
+
+The history list shows 20 entries per page. Use **Previous** and **Next** to browse the available record. Search text and action filters have a practical length limit, and the activity chart is limited to its recent 30-day window.
+
+The list may be cached briefly. A new change can take a short time to appear. The page does not currently provide an export to CSV, JSON, or PDF, and it has no edit, delete, review, or recovery action for a history entry.
+
+## Groups and scope
+
+Some management data is shared at group level while operating airlines keep their own schedules, fleet, and performance. The history page may be opened with the selected group context, but its current record scope is not always identical to the group aggregation used by Operations or Finance. Treat the selected airline or group label as the scope shown by the page.
+
+## Empty, loading, and error states
+
+During the initial load, the page shows placeholder rows. If no entries match the current filters, clear or broaden the filters. If there is no history yet, the same empty state can appear.
+
+If the page cannot load, return to Manage airline and open it again or reload the page. There is currently no dedicated history retry button. The user-facing error should explain the recovery step without showing technical permission names, service labels, identifiers, or backend details.

@@ -1,0 +1,70 @@
+---
+title: Manage Airline Airports
+description: Build and maintain the shared airport network for a Virtual Airline.
+---
+
+# Manage Airline: Airports
+
+Use **Airports** to build the airport network that your airline can use for routes and schedules. In an airline group, the airport network is shared: adding a station makes it available to the group's operating airlines, while each operating airline still keeps its own identity, fleet, routes, and schedules.
+
+## Open Airports
+
+1. Open an active airline from **Airlines**.
+2. Open its profile and select **Manage airline**.
+3. Select **Airports**.
+
+Airport management requires the appropriate network and financial access. The page can be read-only for staff who can view the network but cannot change it. You need an active airline or group context before adding or changing a station.
+
+## Airport network overview
+
+The page can show:
+
+- the airport's name, code, country, and location;
+- whether it is the group's home base;
+- whether it is a hub;
+- the operating airlines using it;
+- routes and flights associated with the station;
+- setup, hub, and daily operating costs;
+- whether the station is active or removed.
+
+Search the network by airport name or code, then open a station to see its details. The list displays up to 20 results at a time. You can designate up to 10 hubs.
+
+## Add an airport station
+
+1. Select **Add airport**.
+2. Enter the airport's network ID and the required airport details.
+3. Review whether it will be the home base or a hub.
+4. Review the setup and recurring cost.
+5. Confirm the addition.
+
+The network ID must be 2–4 letters or numbers and must be unique within the group. The airport must be valid for the current network and must meet the page's eligibility checks. Adding a station charges the current setup cost; setting it as a hub adds the hub cost.
+
+Current cost bands are:
+
+| Airport size | Setup | Additional hub cost | Daily station cost | Daily hub cost |
+| --- | ---: | ---: | ---: | ---: |
+| Small | FH$20,000 | FH$40,000 | FH$160 | FH$280 |
+| Medium | FH$50,000 | FH$100,000 | FH$400 | FH$800 |
+| Large | FH$100,000 | FH$200,000 | FH$800 | FH$2,000 |
+
+The form is the final authority if the current economy or account rules change.
+
+## Edit, remove, or restore a station
+
+Open an airport and select **Edit** to update its network details or hub status. A home base must be an active station in the shared network before it can be selected as the airline's home airport.
+
+Select **Remove** only when the station is no longer needed. Removal is blocked while current schedules still depend on the airport. Resolve those schedules first. Removing a station preserves historical records but prevents it from being used for new operations.
+
+If the page offers **Reactivate**, use it to return a removed station to the active network after its requirements are satisfied. Review the displayed costs and route requirements before confirming.
+
+## Group behavior and related pages
+
+Airports and their treasury impact are shared by the group. Routes and schedules are still managed for an individual operating airline in [Network](./manage-network). Use [Identity and Profile](./manage-identity-profile) to change an airline's home base after the required station exists.
+
+Adding or editing a station can require both network and financial access even when the visible form mainly looks like a network task. A station change does not automatically create routes or aircraft assignments.
+
+## Empty states and recovery
+
+If no airports are configured, add a valid station before creating routes or an operating airline that needs a shared home airport. If the search returns no results, try the full airport name or code and clear any status filter.
+
+If an airport cannot be added or edited, check the network ID, available group funds, required permissions, active group state, and whether the station is already used by a current schedule. If a change fails, reload Airports and verify the station's status before trying again. Do not assume a failed confirmation changed the network.

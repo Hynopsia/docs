@@ -1,0 +1,172 @@
+---
+title: Manage Airline Fleet
+description: Lease, configure, position, maintain, and monitor a Virtual Airline fleet.
+---
+
+# Manage Airline: Fleet
+
+Use **Fleet** to control the aircraft operated by an airline. The workspace combines fleet performance with aircraft control, leasing, configuration, positioning, maintenance, and lease returns.
+
+The administrative Fleet page is different from the read-only **Fleet** tab on a public airline profile. It is also different from **Dispatch**, where a pilot selects an eligible aircraft for a flight.
+
+## Open Fleet
+
+1. Open an active airline from **Airlines**.
+2. Open its profile and select **Manage airline**.
+3. Select **Fleet**.
+
+The selected operating airline determines which aircraft and operating results you are managing. In a group, aircraft belong to their operating airline even when the airport network and treasury are shared. Your role controls whether you can view the fleet, change it, or manage leases and costs.
+
+## Fleet dashboard
+
+The **Dashboard** summarizes the last 12 months of fleet activity. It can show:
+
+- total aircraft;
+- grounded aircraft;
+- completed flights;
+- gross income;
+- operating costs;
+- net result;
+- most- and least-used aircraft;
+- best- and worst-performing aircraft;
+- aircraft with the highest or lowest costs.
+
+The rankings are limited to the most relevant aircraft shown by the workspace. A new or empty fleet may have little or no performance history yet.
+
+## Aircraft control
+
+Open **Aircraft control** to:
+
+- search by registration, aircraft type, or station;
+- sort by aircraft, station, maintenance, flights, income, costs, or net result;
+- browse pages of aircraft;
+- select an aircraft;
+- refresh the current data.
+
+The list can show the aircraft, station, maintenance condition, flights, income, costs, and net result. Select an aircraft to open details such as **Overview**, **Health**, **Economics**, **Flights**, and **Configuration**.
+
+Details can include recent flights, maintenance work, movements, and component events. A retired aircraft is not part of the active Fleet list, but its historical records can remain available elsewhere.
+
+## Lease an aircraft
+
+Select **Lease aircraft** to choose from the available FlyHub leasing catalogue.
+
+1. Search or filter the catalogue by manufacturer or family.
+2. Review the aircraft base, type, and operating information.
+3. Choose the SimBrief profile when more than one is available.
+4. Configure the registration, name, cabin, and cargo capacity.
+5. Review the daily cost and terms.
+6. Confirm the lease.
+
+The current lease flow uses a minimum 30-day term and a daily cost fixed when the lease is signed. Returning an aircraft before the minimum term can incur a penalty. The page shows the lessor, minimum end date, daily cost, and an estimated penalty; the final amount is calculated when the return is confirmed.
+
+Fleet does not provide a direct purchase action. New aircraft are acquired through the available lease or launch flow.
+
+## Configure an aircraft
+
+From an aircraft's configuration, you can change supported items such as:
+
+- registration;
+- display name;
+- SimBrief profile;
+- passenger seat distribution;
+- cargo configuration;
+- cabin presets.
+
+Current form limits include:
+
+- registration: 2–12 characters and unique within the relevant scope;
+- up to 1,000 seats per class;
+- up to 10,000 m³ of cargo;
+- up to 1,000,000 kg of cargo weight;
+- no custom technical weights beyond the published aircraft authority.
+
+Passenger aircraft need at least one passenger seat. Cargo-only aircraft cannot carry passengers. VIP aircraft use a fixed configuration. The published technical data for the aircraft remains the final authority.
+
+You can create a personal SimBrief profile when needed. It must belong to you and match the aircraft type.
+
+## Add an aircraft photo
+
+The photo flow accepts a landscape JPEG, PNG, or WebP image. The current form requires at least 1,280 × 720 pixels and a file no larger than 4 MiB. FlyHub creates an optimized private version for display.
+
+If a photo is rejected, use a supported format, a landscape image, and the size shown by the form. A missing photo does not prevent the aircraft from operating.
+
+## Move an aircraft
+
+From **Overview**, choose an active airport in the airline's network as the destination. Search by ICAO code or airport name, then select one of the displayed stations.
+
+- Moving to an established active hub is free.
+- Moving to another active network airport can cost FH$.
+- The cost is charged when the move is confirmed.
+- The destination must belong to the active network.
+- A maintenance transfer must end at an active hub.
+- A maintenance ferry operates without passengers or cargo.
+
+The aircraft must be available for a move. A reserved or active flight, or an incompatible maintenance state, can block the action.
+
+## Maintain an aircraft
+
+Maintenance is currently an immediate 24-hour service flow:
+
+1. Schedule maintenance.
+2. Start it at an active hub.
+3. Wait for the unavailable period to finish.
+4. Return the aircraft to service.
+
+The workspace can show **Serviceable**, **Monitor**, **Due**, **Grounded**, **Ferry required**, **Due at hub**, **Scheduled**, and **In progress**.
+
+Maintenance rules include:
+
+- below 90% condition can reduce demand;
+- below 40% condition requires maintenance;
+- an aircraft away from a hub may need a ferry first;
+- an aircraft due at a hub must be maintained there;
+- maintenance blocks new reservations until it finishes;
+- completing maintenance restores components to the service level defined by the current operating rules and updates the aircraft's hours and cycles.
+
+Fleet does not currently provide a future-date maintenance calendar. It also does not expose the separate temporary risk-acceptance action for a due aircraft; use maintenance when Fleet requires the aircraft to be made serviceable.
+
+## Return a leased aircraft
+
+Before selecting **Return lease**, resolve all reserved or active flights. The aircraft must be available or grounded, and the acting staff member must have the required aircraft, lease, and financial access.
+
+Review the minimum end date and penalty estimate. After confirmation, the aircraft leaves the active fleet and its history remains available. There is no direct undo action on the page.
+
+## Transfer an aircraft within a group
+
+If your group operates more than one airline, Fleet can offer a transfer to another active operating airline in the same group. Select the destination and provide the reason requested by the form.
+
+The aircraft must be available or grounded, with no reserved or active flight and no scheduled or in-progress maintenance. The source and destination must both be active group airlines and the acting staff member must have the required access in both contexts. A transfer reason is normally 3–500 characters.
+
+## Roles and blocked actions
+
+Owners and Managers normally have broad Fleet access. Fleet staff can manage aircraft-related work, while Operations and other roles may have read-only or limited access. Every action is checked against the current role and airline state.
+
+Common reasons an action is unavailable include:
+
+- an active or reserved flight;
+- maintenance in progress;
+- an aircraft outside a required hub;
+- insufficient condition;
+- insufficient group funds;
+- a duplicate registration;
+- an invalid configuration;
+- an active lease inside its minimum term;
+- a destination outside the network;
+- a missing permission in the selected operating airline.
+
+If a button is visible but the confirmation is rejected, refresh Fleet and verify the aircraft state, destination, funds, and role access before trying again.
+
+## Fleet, public profiles, and Dispatch
+
+The public profile Fleet tab is read-only and may show a group-wide fleet with filters and summarized activity. It cannot lease, configure, maintain, move, transfer, or retire aircraft.
+
+Dispatch only lists aircraft that are eligible for the selected operation. It checks the aircraft purpose, type, station, availability, condition, maintenance status, and route requirements. A maintenance ferry in Dispatch is a special no-passenger/no-cargo flight; it is not the same as an administrative Fleet move.
+
+Fleet does not provide direct purchase, individual aircraft retirement, future maintenance scheduling, or flight-execution controls. Use [Dispatch](./dispatch), [My Flights](./my-flights), and [Operations](./manage-operations) for those parts of the experience.
+
+## Loading, empty, and recovery states
+
+Fleet can show separate loading states for access, the fleet list, the selected aircraft, the leasing catalogue, SimBrief profiles, images, and commands. It can also show no selected aircraft, no search results, no completed flights, no costs, or no maintenance history.
+
+If Fleet cannot load, use **Refresh** or reload the page. If a command fails, do not assume it was applied: reopen the aircraft and confirm its station, condition, lease, and availability. Use the product message shown by the page for the next step; technical identifiers and backend details are not part of the user guidance.

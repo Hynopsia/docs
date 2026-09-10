@@ -1,0 +1,71 @@
+---
+title: Manage Airline Finance
+description: Review the cash position, flight results, commitments, and transaction history of a Virtual Airline.
+---
+
+# Manage Airline: Finance
+
+**Finance** is a read-only view of your airline's cash position, flight results, recurring commitments, forecasts, and transaction history. It does not provide controls for manual payments, adjustments, or settlement edits.
+
+## Open Finance
+
+1. Open an active airline from **Airlines**.
+2. Open its profile and select **Manage airline**.
+3. Select **Finance**.
+
+Finance is available to active airline or group members with finance access. Owners, Managers, and Finance staff normally have access. Operations, Fleet, Schedules, Pilots, Network, Dispatcher, and pilot-only roles do not receive finance access by default.
+
+## Financial overview
+
+The header shows **Available cash**, **Revenue**, **Costs**, and **Net** for the selected period. Values are shown in FH$. Choose a specific period or **All periods**; the combined view includes up to 12 periods.
+
+The overview can also show:
+
+- financial periods and their revenue, costs, and net result;
+- the most recent flight-finance results;
+- daily fixed costs for leases, airports, and active schedules;
+- maintenance already committed;
+- the 30-day reserve target and cash after reserve;
+- days of financial runway;
+- activity needed to reach break-even;
+- 30-, 60-, and 90-day cash projections;
+- active leases, airports, and schedules.
+
+Projections keep recent activity and current commitments constant. They are planning estimates, not guaranteed income.
+
+## Settlements
+
+The **Settlements** view lists completed flight finances. It can show the airline, flight, settlement date, revenue, operating costs, crew payroll, net result, and a **View breakdown** link.
+
+Select **View breakdown** to open the flight's Economy record in the VA logbook. **Net** is the final flight result. Do not add crew payroll to the operating cost a second time when interpreting the total.
+
+The list uses 25 records per page. If a completed flight has no available report, the page explains that the report is unavailable.
+
+## Ledger
+
+The **Ledger** is the transaction history. Search by flight or account, filter credits and debits, and filter by period or operating airline when the airline belongs to a group.
+
+Positive movements are credits; negative movements are debits. Flight movements can be expanded to show their accounting details. Recurring lease, airport, and schedule charges are grouped by UTC day, while route openings are grouped by UTC week.
+
+The ledger uses 25 rows per page. An expanded movement shows up to 100 detail entries. Use the page controls to move through older results.
+
+## Groups and dates
+
+In a group, cash is shared while Settlements and Ledger keep an **Airline** column so each result remains attributed to its operating airline. Current commitments use open operating airlines; historical results can include retired airlines.
+
+Periods and week boundaries use UTC. The Finance overview may use cached data, so a newly completed flight or charge can take a short time to appear.
+
+## Empty states and recovery
+
+- **No financial periods** means the airline has not created a financial period from completed flights or recurring charges yet.
+- **No settled flights** means no completed flight result is available for the selected view.
+- **No transactions match** means the period, movement filter, or search text returned no rows.
+- If Finance fails to load, use **Try again** or **Refresh finance**.
+
+If the page still fails, reload the management workspace. The user-facing message should explain what to do without exposing technical service or database details.
+
+## Read Finance with the economy model
+
+Finance answers where the airline's money went; it does not decide whether a route is attractive for you. Compare flight net with recurring leases, airport and hub fees, active schedule fees, route openings, and the reserve target. A profitable flight can still sit inside an airline that is losing cash overall when its fixed commitments are too large.
+
+Read [Virtual Airlines Economy and Ticket Pricing](./economy-and-pricing) before interpreting a settlement and [From Dispatch to Settlement](./flight-lifecycle) to understand why the final recognized payload and score can differ from the first Dispatch quote.

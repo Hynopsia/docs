@@ -1,0 +1,58 @@
+---
+title: Manage Airline Identity and Profile
+description: Configure an airline's identity, branding, public profile, and pilot-facing policies.
+---
+
+# Manage Airline: Identity and Profile
+
+Use **Identity and Profile** to maintain the airline's public identity, branding, welcome content, pilot requirements, and operating policies.
+
+## Identity fields
+
+You can configure:
+
+- airline name: 3–120 characters;
+- short name: 2–32 characters;
+- ICAO code: three letters or numbers, displayed in uppercase;
+- callsign: 2–32 letters, numbers, or spaces;
+- home airport: a valid four-letter airport code in the shared network;
+- public summary: up to 2,000 characters;
+- round logo and wide logo.
+
+The country shown on the public profile is derived from the selected home airport. It is not a separate editable field.
+
+## Branding and public content
+
+The profile can include a banner, round logo, wide logo, published home page, pilot requirements, and welcome message. Use the Basic Editor for supported formatting and media. The HTML & CSS editor is available for the home page and requirements when you need more control.
+
+Before publishing, FlyHub sanitizes content and removes unsafe scripts, forms, handlers, and links. Valid links must use HTTPS or mailto, and images must use approved sources.
+
+## Save and publish
+
+- Use **Save identity** to save the identity fields.
+- Upload a logo or wide logo to replace its current preview.
+- Change **Home base** through the confirmation step. Changing it costs FH$1,000,000 and the airport must be in the shared network.
+- Use **Publish** to make a new content revision visible to pilots.
+- Use **Publish policy** to publish the flight, admission, and moderation policy together.
+- Switching from HTML & CSS to the Basic Editor removes advanced structure and styling after confirmation.
+
+The banner position can be adjusted from the public profile with the position controls. The current page does not provide a visible delete action for branding assets or a full draft/rollback history.
+
+## Permissions and groups
+
+Viewing the section requires profile-view access. Editing identity, branding, and content requires profile-management access; policy editing also requires policy-management access. Owners and Managers receive profile access by default, while specialized roles do not automatically receive it.
+
+In a group, an operating airline keeps its own identity, ICAO, callsign, logo, fleet, routes, and schedules. The flagship shares the employer profile, policies, requirements, welcome message, and public home page with the group.
+
+## Limits
+
+- PNG, JPEG, and WebP images up to 5 MiB.
+- Alt text is required and is 1–300 characters.
+- Input images may contain up to 40 million pixels.
+- Wide logos should be at least 600×200 pixels with a 1.5:1–5:1 ratio.
+- Source content and HTML are limited to 512 KiB; CSS is limited to 128 KiB.
+- Welcome messages are limited to 16,000 characters and use the Basic Editor.
+
+## If saving or loading fails
+
+Check the field format, ICAO availability, home-base eligibility, balance, content limits, and moderation thresholds. Reload the section if it remains in a loading state. Keep technical error details out of user-facing messages; the page should provide a short action-oriented explanation.

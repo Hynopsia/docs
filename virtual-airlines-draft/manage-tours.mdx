@@ -1,0 +1,157 @@
+---
+title: Manage Airline Tours
+description: Create, publish, and maintain structured multi-leg tours for a Virtual Airline.
+---
+
+# Manage Airline: Tours
+
+Use **Tours** in Manage airline to create structured journeys for your pilots. A tour is a collection of flight legs with a defined order, operating airline, availability window, and eligible aircraft.
+
+Manage Tours is separate from the pilot-facing [Tours](./tours) board and from [Rewards](./manage-rewards). It creates and publishes tours; it does not show pilot progress or award tour badges manually.
+
+## Open Tour management
+
+1. Open an active airline from **Airlines**.
+2. Open its profile and select **Manage airline**.
+3. Select **Tours**.
+
+In a group, tours are managed from the flagship airline. Each tour is assigned to one active operating airline in that group. The operating airline determines the identity and fleet used for the tour. After a tour is first saved, its operating-airline choice cannot be changed.
+
+Tour management normally requires the role access assigned to Owners, Managers, Operations, Schedules Managers, or Network Planners. The exact actions available depend on your current role.
+
+## Tour library
+
+The library can show:
+
+- all tours;
+- drafts;
+- active tours;
+- archived tours;
+- the number of tours in each state.
+
+Search by tour title or description, select a status filter, and use the page controls to browse more results. The library normally shows 20 tours per page.
+
+A tour card can show its banner, badge, operating-airline code, status, title, first and last airports, description, number of legs, completion rule, selected aircraft types, creation date, and expiry date when one exists. The management library does not currently show enrolled pilots, pilot completion progress, earned badges, or a full change history.
+
+## Create a tour
+
+Select **New tour** to open the **Tour route studio**. Complete the required sections before saving:
+
+1. Choose the active operating airline.
+2. Enter the tour title and description.
+3. Add the badge and banner artwork.
+4. Add and arrange the flight legs.
+5. Choose the completion rule.
+6. Set optional start and expiry dates.
+7. Select the aircraft types allowed for the tour.
+8. Review the map and publication summary.
+9. Select **Save draft**.
+
+Although the action is called **Save draft**, the current form does not save an incomplete tour. It requires a valid title, artwork, operating airline, at least one aircraft type, complete legs, and valid dates when a date window is used.
+
+## Build the route
+
+Each leg has an origin and destination airport. Airports must be active, have usable location data, and use a valid four-letter airport code. The origin and destination of one leg must be different.
+
+You can:
+
+- add a leg;
+- search for an airport by code or name;
+- reorder legs;
+- remove a leg;
+- review the route on the map.
+
+A tour contains 1–100 legs. The editor keeps at least one leg in the form. When you choose **Fly in sequence**, pilots must complete the configured legs in order. **Any order** lets pilots complete the configured legs in another order.
+
+The order is the order saved in the tour. Check each transition on the map before publishing; the editor does not turn separate legs into a route automatically.
+
+## Tour identity and artwork
+
+### Text
+
+- Title: 3–160 characters.
+- Description: up to 8,000 characters.
+
+The form normalizes unsafe control characters and formatting that is not supported in tour content.
+
+### Badge
+
+- PNG, JPEG, or WebP.
+- Up to 2 MiB.
+- At least 220 × 88 pixels.
+- A 5:2 aspect ratio.
+
+### Banner
+
+- PNG, JPEG, or WebP.
+- Up to 5 MiB.
+- At least 600 × 200 pixels.
+- Landscape orientation.
+- A 3:1 final aspect ratio.
+
+The form supplies standard alternative text for tour artwork. The current editor replaces an image when you upload another one; it does not provide a separate remove-image control.
+
+## Set availability and completion
+
+The start date is optional. Without one, the tour becomes available when it is published. The expiry date is also optional, but when used it must be after the start date. A tour without an expiry remains open until it is archived or otherwise reaches an end state.
+
+Choose one completion rule:
+
+- **Fly in sequence** — complete each leg in the saved order.
+- **Any order** — complete every required leg in any order.
+
+Manage Tours does not currently provide fields for per-leg payouts, XP, custom scores, alternative rewards, or stage-specific badges. A tour badge is awarded through tour completion, not from the Rewards page.
+
+## Choose eligible aircraft
+
+Select individual aircraft types from the active fleet of the chosen operating airline. A tour requires at least one type and can list up to 500 types. Type codes are normalized and duplicates are removed.
+
+The reusable aircraft selector may display options for purpose, size, category, inclusions, exclusions, or future aircraft, but the current tour editor stores the selected individual types. Do not assume that a purpose or size selection will automatically include aircraft added later; review the saved list before publishing.
+
+## Save, publish, and archive
+
+### Drafts
+
+You can open and edit a draft until it is ready. Use **Save draft** to keep changes. The editor moves to the tour's own page after a new draft is saved.
+
+### Publish
+
+Before publishing, confirm the operating airline, route, artwork, date window, completion rule, and eligible aircraft. Publishing:
+
+- makes the tour available according to its dates;
+- records its publication;
+- locks the route and rules so pilot progress remains consistent;
+- prevents further editing from the studio.
+
+Only a complete draft can be published.
+
+### Archive
+
+Archive an active tour when it should no longer accept new progress. Archiving stops pilots from starting it, but preserves existing progress and history. The current workspace does not offer an undo or a reactivation action, and archived or completed tours cannot be edited.
+
+### Delete a draft
+
+Only drafts can be deleted from the management workspace. Review the confirmation carefully: deletion has no undo on the page. Published, archived, or completed tours use their lifecycle controls instead of draft deletion.
+
+If an operating airline is closed, its tours can be archived automatically. The group and flagship remain separate from that operating airline's tour lifecycle.
+
+## Groups and operating airlines
+
+The flagship provides the shared management context. The selected operating airline must belong to the same group and remain active. Its fleet supplies the aircraft choices, and the tour's flights operate under that airline's identity.
+
+You cannot manage a group tour from an operating airline when the page requires the flagship context. If the operating airline is closed, resolve its tour lifecycle through the available archive behavior before planning new flights.
+
+## Loading, empty, and recovery states
+
+The library and editor can show loading, no-airline, permission, no-results, and no-tours states. Airport search may return no matches without a dedicated message, so try a longer airport name or a valid code.
+
+If a list, airport search, image upload, save, publish, or archive action fails, reload the page and verify the tour state before repeating it. A draft is not published until the page confirms publication. User-facing errors should explain the next step without exposing technical permission names or service details.
+
+## How Manage Tours differs from other pages
+
+- **Tours** lets pilots find tours, join them, and book their required legs.
+- **Dispatch** creates the individual flight reservations used to progress a tour.
+- **Rewards** manages ranks, airline achievements, and aircraft access.
+- **Public profile → Tours & Awards** shows published tours and active airline achievements.
+
+Manage Tours defines the journey and its rules. It does not replace Dispatch, display a pilot roster or progress report, or grant a reward manually.
