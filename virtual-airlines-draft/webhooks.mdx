@@ -7,9 +7,9 @@ description: Send airline activity notifications to Discord and understand every
 
 Virtual Airlines webhooks send selected airline activity to a Discord channel. They are useful for an operations room, pilot community, management team, or live airline activity feed.
 
-The current integration supports Discord destinations only. It sends formatted Discord messages asynchronously; it does not send a generic JSON callback to an arbitrary URL, and it does not provide an inbound webhook that your website can call.
+Discord is the supported destination. FlyHub sends formatted messages asynchronously; it does not send a generic JSON callback to an arbitrary URL, and it does not provide an inbound webhook that your website can call.
 
-Mintlify also generates a reference page for every webhook event from the [OpenAPI specification](https://docs.flyhub.app/virtual-airlines-draft/openapi.json). Those pages show the Discord request schema and are hidden from navigation by design; this guide remains the place to understand setup, event meaning, retries, and operational behavior.
+Each event below includes the information you can expect to see in Discord. Use this guide to set up a destination, choose events, and understand delivery.
 
 ## What you can build
 
@@ -69,7 +69,7 @@ Owners and authorized managers can manage Discord destinations from **Manage air
 
 After a destination is created, FlyHub shows only a safe preview of its URL. If the URL changes, create and test the replacement before removing the old destination. A removed or disabled destination cannot be restored from the page.
 
-The generated event pages below document the notification payload that Discord receives. They are not endpoints that users call.
+The event examples below show the kind of notification that can appear in Discord.
 
 ## Event catalog
 
@@ -94,9 +94,9 @@ FlyHub maps selected airline activity to public event names. The event name is i
 | `finance.flight_settled` | Operations | A flight settlement is recorded. | Flight context when available, net result, and currency. |
 | `announcement.published` | Community | Airline content is published. | Content kind, version, and publication status. |
 
-The same audit activity can map to a different public event depending on the resulting state. For example, a membership application that is immediately accepted can produce `pilot.joined`, while a pending application produces `pilot.applied`.
+The same action can produce a different public event depending on the resulting state. For example, a membership application that is immediately accepted can produce `pilot.joined`, while a pending application produces `pilot.applied`.
 
-### Generated event payload pages
+### Event examples
 
 | Event | Payload reference |
 | --- | --- |
@@ -170,7 +170,7 @@ Representative normal payload:
 }
 ```
 
-The exact fields depend on whether FlyHub can enrich the event with the related flight, pilot, aircraft, schedule, settlement, or publication record. If enrichment is unavailable, FlyHub sends a safe fallback using the public allowlist rather than failing because an optional detail is missing.
+A notification includes related flight, pilot, aircraft, schedule, settlement, or publication details when those details are available. If a detail is unavailable, FlyHub sends the event with the information it can show.
 
 ### Payload safety and size
 
@@ -179,16 +179,16 @@ The exact fields depend on whether FlyHub can enrich the event with the related 
 - A normal message contains one embed.
 - At most 25 embed fields are included.
 - Embed field names are capped at 256 characters and values at 1,024 characters.
-- Fallback summary values are escaped for Discord formatting and shortened before sending.
+- Long text is shortened when necessary so the message stays readable in Discord.
 - The sender name is the airline ICAO code followed by `Operations`.
 
-This integration is a Discord notification, not a generic signed callback. If you need to process structured data in your own code, use the read-only VA API or your normal Discord tooling.
+These notifications are intended for Discord. If your own service needs structured data, use the read-only VA API or your normal Discord tooling.
 
 ## Delivery behavior
 
-Normal notifications are asynchronous. When a supported action occurs, FlyHub creates the matching public event and sends it to every active destination subscribed to that event. A destination must be active when the notification is processed; pausing a destination stops new notifications from being sent to it.
+Normal notifications are asynchronous. When a supported action occurs, FlyHub sends the matching notification to every active destination subscribed to that event. A destination must be active when the notification is processed; pausing a destination stops new notifications from being sent to it.
 
-Temporary failures may be retried automatically. Delivery timing is not guaranteed, so use the event context rather than arrival time as the source of truth. If your Discord workflow triggers automation, make it tolerant of an occasional duplicate notification.
+Temporary failures may be retried automatically. Delivery timing is not guaranteed, so use the event details rather than the arrival time when interpreting an update. If your Discord workflow triggers automation, make it tolerant of an occasional duplicate notification.
 
 ### Automatic destination disablement
 
@@ -232,7 +232,7 @@ Inspect the preview, check the Discord channel and webhook permissions, create a
 
 ## Limits and non-features
 
-The current webhook integration does not provide:
+Discord notifications do not provide:
 
 - arbitrary custom HTTP destinations;
 - inbound webhooks into FlyHub;

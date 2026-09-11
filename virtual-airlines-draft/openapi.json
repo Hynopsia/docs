@@ -3,7 +3,7 @@
   "info": {
     "title": "FlyHub Virtual Airlines API",
     "version": "2026-07-21",
-    "description": "The supported Virtual Airlines integration contract. The public resources are read-only and scoped to the airline that issued the fhva_live bearer key. The webhook entries describe the Discord-compatible notification payload sent for selected airline activity."
+    "description": "Read-only airline information and Discord notification payloads for Virtual Airlines integrations. Resources are scoped to the airline that issued the fhva_live bearer key."
   },
   "servers": [
     {
@@ -19,7 +19,7 @@
     },
     {
       "name": "discord-webhooks",
-      "description": "Ownership controls and event payloads for Discord notifications.",
+      "description": "Discord notification payloads for selected airline activity.",
       "x-group": "Discord webhooks"
     }
   ],
