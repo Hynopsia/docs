@@ -169,7 +169,7 @@
       "get": {
         "tags": ["public-api"],
         "summary": "Read aggregate airline statistics",
-        "description": "Returns one aggregate object. It is not paginated and consumes 25 row-budget units, so use it for summary cards rather than as a substitute for the detail resources.",
+        "description": "Returns one aggregate object. It is not paginated, so use it for summary cards rather than as a substitute for the detail resources.",
         "operationId": "getVaStatistics",
         "security": [{"vaApiKey": []}],
         "x-hidden": true,
@@ -337,7 +337,7 @@
       "post": {
         "tags": ["discord-webhooks"],
         "summary": "Create a Discord destination",
-        "description": "Creates an encrypted Discord destination for selected airline events. Only exact HTTPS Discord webhook hosts and paths are accepted. Requires manage_ownership; an airline can have at most 10 active or paused destinations.",
+        "description": "Creates a Discord destination for selected airline events. Only exact HTTPS Discord webhook hosts and paths are accepted. Requires manage_ownership; an airline can have at most 10 active or paused destinations.",
         "operationId": "createVaDiscordWebhook",
         "security": [{"flyHubSession": []}],
         "x-hidden": true,
@@ -440,7 +440,7 @@
       "post": {
         "tags": ["discord-webhooks"],
         "summary": "Send a Discord webhook test",
-        "description": "Posts a direct test message that says FlyHub webhook connected. It does not create a flight event or queue an outbox delivery. Requires manage_ownership.",
+        "description": "Posts a direct test message that says FlyHub webhook connected. It does not create a flight event. Requires manage_ownership.",
         "operationId": "testVaDiscordWebhook",
         "security": [{"flyHubSession": []}],
         "x-hidden": true,
@@ -714,12 +714,10 @@
       }
     },
     "headers": {
+      "CacheControl": {"description": "The response is private and should not be stored as a shared cache entry.", "schema": {"type": "string", "example": "private, no-store"}},
       "RateLimitLimit": {"description": "Requests allowed in the current public API window.", "schema": {"type": "integer"}},
       "RateLimitRemaining": {"description": "Requests remaining in the current public API window.", "schema": {"type": "integer"}},
       "RateLimitReset": {"description": "ISO timestamp when the public API request window resets.", "schema": {"type": "string", "format": "date-time"}},
-      "RowLimit": {"description": "Hourly row-cost budget.", "schema": {"type": "integer"}},
-      "RowRemaining": {"description": "Hourly row-cost units remaining.", "schema": {"type": "integer"}},
-      "RowReset": {"description": "ISO timestamp when the hourly row budget resets.", "schema": {"type": "string", "format": "date-time"}},
       "RetryAfter": {"description": "Seconds to wait before retrying after a rate limit.", "schema": {"type": "integer"}}
     },
     "schemas": {
@@ -965,72 +963,60 @@
       "AirlineResponse": {
         "description": "Airline profile returned.",
         "headers": {
+          "Cache-Control": {"$ref": "#/components/headers/CacheControl"},
           "X-RateLimit-Limit": {"$ref": "#/components/headers/RateLimitLimit"},
           "X-RateLimit-Remaining": {"$ref": "#/components/headers/RateLimitRemaining"},
-          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"},
-          "X-RateLimit-Row-Limit": {"$ref": "#/components/headers/RowLimit"},
-          "X-RateLimit-Row-Remaining": {"$ref": "#/components/headers/RowRemaining"},
-          "X-RateLimit-Row-Reset": {"$ref": "#/components/headers/RowReset"}
+          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"}
         },
         "content": {"application/json": {"schema": {"type": "object", "required": ["data", "meta"], "properties": {"data": {"$ref": "#/components/schemas/Airline"}, "meta": {"$ref": "#/components/schemas/Meta"}}}}}
       },
       "PilotsResponse": {
         "description": "Paginated active pilot roster.",
         "headers": {
+          "Cache-Control": {"$ref": "#/components/headers/CacheControl"},
           "X-RateLimit-Limit": {"$ref": "#/components/headers/RateLimitLimit"},
           "X-RateLimit-Remaining": {"$ref": "#/components/headers/RateLimitRemaining"},
-          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"},
-          "X-RateLimit-Row-Limit": {"$ref": "#/components/headers/RowLimit"},
-          "X-RateLimit-Row-Remaining": {"$ref": "#/components/headers/RowRemaining"},
-          "X-RateLimit-Row-Reset": {"$ref": "#/components/headers/RowReset"}
+          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"}
         },
         "content": {"application/json": {"schema": {"type": "object", "required": ["data", "pagination", "meta"], "properties": {"data": {"type": "array", "items": {"$ref": "#/components/schemas/Pilot"}}, "pagination": {"$ref": "#/components/schemas/Pagination"}, "meta": {"$ref": "#/components/schemas/Meta"}}}}}
       },
       "FlightsResponse": {
         "description": "Paginated airline flight activity.",
         "headers": {
+          "Cache-Control": {"$ref": "#/components/headers/CacheControl"},
           "X-RateLimit-Limit": {"$ref": "#/components/headers/RateLimitLimit"},
           "X-RateLimit-Remaining": {"$ref": "#/components/headers/RateLimitRemaining"},
-          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"},
-          "X-RateLimit-Row-Limit": {"$ref": "#/components/headers/RowLimit"},
-          "X-RateLimit-Row-Remaining": {"$ref": "#/components/headers/RowRemaining"},
-          "X-RateLimit-Row-Reset": {"$ref": "#/components/headers/RowReset"}
+          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"}
         },
         "content": {"application/json": {"schema": {"type": "object", "required": ["data", "pagination", "meta"], "properties": {"data": {"type": "array", "items": {"$ref": "#/components/schemas/Flight"}}, "pagination": {"$ref": "#/components/schemas/Pagination"}, "meta": {"$ref": "#/components/schemas/Meta"}}}}}
       },
       "FleetResponse": {
         "description": "Paginated non-retired fleet snapshot.",
         "headers": {
+          "Cache-Control": {"$ref": "#/components/headers/CacheControl"},
           "X-RateLimit-Limit": {"$ref": "#/components/headers/RateLimitLimit"},
           "X-RateLimit-Remaining": {"$ref": "#/components/headers/RateLimitRemaining"},
-          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"},
-          "X-RateLimit-Row-Limit": {"$ref": "#/components/headers/RowLimit"},
-          "X-RateLimit-Row-Remaining": {"$ref": "#/components/headers/RowRemaining"},
-          "X-RateLimit-Row-Reset": {"$ref": "#/components/headers/RowReset"}
+          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"}
         },
         "content": {"application/json": {"schema": {"type": "object", "required": ["data", "pagination", "meta"], "properties": {"data": {"type": "array", "items": {"$ref": "#/components/schemas/FleetAircraft"}}, "pagination": {"$ref": "#/components/schemas/Pagination"}, "meta": {"$ref": "#/components/schemas/Meta"}}}}}
       },
       "SchedulesResponse": {
         "description": "Paginated active and suspended schedules.",
         "headers": {
+          "Cache-Control": {"$ref": "#/components/headers/CacheControl"},
           "X-RateLimit-Limit": {"$ref": "#/components/headers/RateLimitLimit"},
           "X-RateLimit-Remaining": {"$ref": "#/components/headers/RateLimitRemaining"},
-          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"},
-          "X-RateLimit-Row-Limit": {"$ref": "#/components/headers/RowLimit"},
-          "X-RateLimit-Row-Remaining": {"$ref": "#/components/headers/RowRemaining"},
-          "X-RateLimit-Row-Reset": {"$ref": "#/components/headers/RowReset"}
+          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"}
         },
         "content": {"application/json": {"schema": {"type": "object", "required": ["data", "pagination", "meta"], "properties": {"data": {"type": "array", "items": {"$ref": "#/components/schemas/Schedule"}}, "pagination": {"$ref": "#/components/schemas/Pagination"}, "meta": {"$ref": "#/components/schemas/Meta"}}}}}
       },
       "StatisticsResponse": {
         "description": "Aggregate airline statistics.",
         "headers": {
+          "Cache-Control": {"$ref": "#/components/headers/CacheControl"},
           "X-RateLimit-Limit": {"$ref": "#/components/headers/RateLimitLimit"},
           "X-RateLimit-Remaining": {"$ref": "#/components/headers/RateLimitRemaining"},
-          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"},
-          "X-RateLimit-Row-Limit": {"$ref": "#/components/headers/RowLimit"},
-          "X-RateLimit-Row-Remaining": {"$ref": "#/components/headers/RowRemaining"},
-          "X-RateLimit-Row-Reset": {"$ref": "#/components/headers/RowReset"}
+          "X-RateLimit-Reset": {"$ref": "#/components/headers/RateLimitReset"}
         },
         "content": {"application/json": {"schema": {"type": "object", "required": ["data", "meta"], "properties": {"data": {"$ref": "#/components/schemas/Statistics"}, "meta": {"$ref": "#/components/schemas/Meta"}}}}}
       },
@@ -1068,7 +1054,7 @@
       },
       "Unauthorized": {"description": "A valid FlyHub VA API key is required.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
       "Forbidden": {"description": "The key does not include the required read scope.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
-      "RateLimited": {"description": "The request or hourly row budget was exceeded.", "headers": {"Retry-After": {"$ref": "#/components/headers/RetryAfter"}}, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
+      "RateLimited": {"description": "The request rate is temporarily limited.", "headers": {"Retry-After": {"$ref": "#/components/headers/RetryAfter"}}, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
       "ServiceUnavailable": {"description": "FlyHub cannot safely serve the request at the moment.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}}},
       "ManagerBadRequest": {"description": "The management request is invalid.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ManagerError"}}}},
       "ManagerUnauthorized": {"description": "A valid FlyHub session is required.", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ManagerError"}}}},

@@ -59,7 +59,7 @@ The exact rules are:
 
 FlyHub rejects look-alike domains, HTTP URLs, local addresses, redirects, and arbitrary external endpoints. This protects the airline and the FlyHub backend from accidentally turning a Discord setting into a server-side request to an unrelated service.
 
-Treat a Discord webhook URL like a password. Anyone who obtains the complete URL can post to that Discord destination. FlyHub encrypts the stored URL and shows managers only a preview after creation, such as `discord.com/api/webhooks/…123456`.
+Treat a Discord webhook URL like a password. Anyone who obtains the complete URL can post to that Discord destination. FlyHub shows managers only a preview after creation, such as `discord.com/api/webhooks/…123456`.
 
 An airline can have up to 10 active or paused destinations. A removed or automatically disabled destination does not count toward that active limit, but it cannot be restored; create a new destination instead.
 
@@ -251,7 +251,7 @@ The test posts directly to Discord and returns:
 }
 ```
 
-The test message says `FlyHub webhook connected` and identifies the airline. It does not create a flight event, does not create an outbox delivery, and does not simulate every event type. A successful test proves that FlyHub can post to that Discord URL at that moment; it does not prove that every future event will be accepted by Discord.
+The test message says `FlyHub webhook connected` and identifies the airline. It does not create a flight event or simulate every event type. A successful test proves that FlyHub can post to that Discord URL at that moment; it does not prove that every future event will be accepted by Discord.
 
 ## Event catalog
 
@@ -358,7 +358,7 @@ The exact fields depend on whether FlyHub can enrich the event with the related 
 
 - Discord mentions are disabled with `allowed_mentions.parse: []`, so airline text cannot accidentally ping everyone, a role, or a user.
 - Only explicitly approved public fields are copied into the fallback summary.
-- Internal user, aircraft, booking, and route UUIDs are not copied into the public event summary.
+- Private internal identifiers are not copied into the public event summary.
 - A normal message contains one embed.
 - At most 25 embed fields are included.
 - Embed field names are capped at 256 characters and values at 1,024 characters.
@@ -367,56 +367,23 @@ The exact fields depend on whether FlyHub can enrich the event with the related 
 
 FlyHub does not send a signature header, HMAC, or generic event ID header to Discord. Discord authenticates the post through the destination URL. If you need to process events in your own code, listen to the configured Discord channel with your normal Discord tooling, or poll the read-only VA API for structured data.
 
-## Delivery lifecycle
+## Delivery behavior
 
-Normal notifications are asynchronous. The flow is:
+Normal notifications are asynchronous. When a supported action occurs, FlyHub creates the matching public event and sends it to every active destination subscribed to that event. A destination must be active when the notification is processed; pausing a destination stops new notifications from being sent to it.
 
-1. A supported airline action is written to the airline activity stream.
-2. FlyHub maps that action to one public event name.
-3. Every active destination subscribed to that event receives one queued delivery.
-4. A delivery worker posts the Discord embed.
-5. A successful Discord response marks the delivery as delivered and resets the destination's consecutive-failure count.
-
-The destination must be `active` when the event is queued and when delivery runs. Pausing prevents new events from being queued; an item already waiting in the queue is not sent while the destination is paused and can be recorded as a retry or failure by the dispatcher.
-
-### Delivery states
-
-| State | Meaning |
-| --- | --- |
-| `pending` | Queued and waiting for a worker. |
-| `processing` | Claimed by a worker and being delivered. |
-| `delivered` | Discord accepted the message and FlyHub saved the result. |
-| `retry` | The attempt failed and a later attempt is scheduled. |
-| `failed` | The delivery reached its terminal attempt limit. |
-
-The dispatcher claims up to 10 due deliveries per run. It recovers a processing claim that has been stuck for more than five minutes. Normal retry timing is bounded exponential backoff: after attempts 1–4, the next try is scheduled about 2, 4, 8, and 16 minutes later. A delivery becomes terminal after five attempts.
+Temporary failures may be retried automatically. Delivery timing is not guaranteed, so use the event context rather than arrival time as the source of truth. If your Discord workflow triggers automation, make it tolerant of an occasional duplicate notification.
 
 ### Automatic destination disablement
 
-The destination tracks consecutive delivery failures:
-
-- a successful delivery resets the counter to `0`;
-- an unsuccessful delivery increments it;
-- after 10 consecutive failures, FlyHub changes the destination to `disabled`;
-- the destination's `disabled_reason` explains that repeated delivery failures caused the disablement.
-
-A disabled destination does not receive events. There is no re-enable endpoint for a disabled destination; fix the Discord configuration and create a replacement. A paused destination can be resumed with `PATCH` while it remains paused rather than disabled.
+Repeated delivery failures can automatically disable a destination. A disabled destination does not receive events and cannot be reactivated through the API; fix the Discord configuration and create a replacement. A paused destination can be resumed with `PATCH` while it remains paused rather than disabled.
 
 ### Duplicate tolerance
 
-FlyHub avoids inserting two queued deliveries for the same destination and source activity. However, Discord does not provide an idempotency key for this integration. In the unusual case where Discord accepts a message but FlyHub cannot save the delivery state, recovery may need to try the post again. If your Discord workflow triggers automation, make it tolerant of an occasional duplicate notification.
+Notifications are not a guaranteed exactly-once stream. Your Discord workflow should tolerate an occasional duplicate and should avoid treating the arrival of a message as proof that a flight or membership action succeeded; use the event details and the FlyHub API when you need to verify state.
 
 ## What counts as a successful post
 
-FlyHub sends a `POST` with:
-
-- `Content-Type: application/json`;
-- the user agent `FlyHub-VA-Integrations/1.0`;
-- `?wait=true` added to the Discord webhook URL so Discord returns the created message;
-- an eight-second request timeout;
-- redirects disabled.
-
-Only an HTTP success response from Discord is accepted as delivery. A timeout, network error, non-success Discord response, decryption failure, inactive destination, or inactive airline follows the retry and failure rules above.
+FlyHub sends a standard Discord webhook request with the payload described above. A notification is considered delivered when Discord accepts the request. If Discord or FlyHub is temporarily unavailable, the notification may be retried according to the delivery behavior above.
 
 ## Pause, resume, change, and rotate safely
 
