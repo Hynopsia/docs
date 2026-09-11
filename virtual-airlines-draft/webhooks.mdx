@@ -35,7 +35,7 @@ From FlyHub:
 6. Paste a Discord webhook URL and choose one or more event types.
 7. Save it, then use **Test** before relying on it for operations.
 
-Only a signed-in user with the airline's `manage_ownership` capability can create, list, edit, test, pause, resume, or remove destinations.
+Only an airline owner or manager with access to Integrations can create, list, edit, test, pause, resume, or remove destinations.
 
 ### Accepted Discord URLs
 
@@ -57,201 +57,19 @@ The exact rules are:
 - a trailing slash is allowed;
 - query strings and fragments are removed before storage.
 
-FlyHub rejects look-alike domains, HTTP URLs, local addresses, redirects, and arbitrary external endpoints. This protects the airline and the FlyHub backend from accidentally turning a Discord setting into a server-side request to an unrelated service.
+FlyHub rejects look-alike domains, HTTP URLs, local addresses, redirects, and arbitrary external endpoints. This keeps notifications limited to the Discord destination you selected.
 
 Treat a Discord webhook URL like a password. Anyone who obtains the complete URL can post to that Discord destination. FlyHub shows managers only a preview after creation, such as `discord.com/api/webhooks/…123456`.
 
-An airline can have up to 10 active or paused destinations. A removed or automatically disabled destination does not count toward that active limit, but it cannot be restored; create a new destination instead.
+An airline can have up to 10 active or paused destinations. A removed or automatically disabled destination does not count toward that active limit, but it cannot be restored; create a new destination from Integrations instead.
 
-## Webhook management endpoints
+## Manage destinations
 
-These routes are the Ownership controls behind the FlyHub UI. They use a normal FlyHub session bearer token, not a `fhva_live_` public API key.
+Owners and authorized managers can manage Discord destinations from **Manage airline → Ownership → Integrations**. From there you can list destinations, create one, choose its events, send a test, pause or resume it, and remove it.
 
-```http
-Authorization: Bearer <FlyHub-session-JWT>
-```
+After a destination is created, FlyHub shows only a safe preview of its URL. If the URL changes, create and test the replacement before removing the old destination. A removed or disabled destination cannot be restored from the page.
 
-Every route is also scoped by `{airlineId}` and requires `manage_ownership`. A token for one airline cannot manage another airline's destinations.
-
-| Method | Endpoint | Purpose |
-| --- | --- | --- |
-| `GET` | `/api/va/airlines/{airlineId}/integrations/webhooks` | List destination metadata and the allowed event catalog. |
-| `POST` | `/api/va/airlines/{airlineId}/integrations/webhooks` | Create a Discord destination. |
-| `PATCH` | `/api/va/airlines/{airlineId}/integrations/webhooks/{webhookId}` | Rename, change events, pause, or resume a destination. |
-| `DELETE` | `/api/va/airlines/{airlineId}/integrations/webhooks/{webhookId}` | Remove a destination. |
-| `POST` | `/api/va/airlines/{airlineId}/integrations/webhooks/{webhookId}/test` | Send a direct test message to Discord. |
-
-The combined Ownership view is also available at:
-
-```http
-GET /api/va/airlines/{airlineId}/integrations
-```
-
-It returns the API key and webhook metadata together. It never returns a raw API secret or a raw Discord URL.
-
-### List destinations
-
-```http
-GET /api/va/airlines/{airlineId}/integrations/webhooks
-```
-
-Response:
-
-```json
-{
-  "data": {
-    "webhooks": [
-      {
-        "id": "<webhook-id>",
-        "name": "Operations room",
-        "webhook_url_preview": "discord.com/api/webhooks/…123456",
-        "event_types": ["flight.completed", "finance.flight_settled"],
-        "status": "active",
-        "created_at": "2026-07-21T00:00:00.000Z",
-        "updated_at": "2026-07-21T00:00:00.000Z",
-        "last_delivery_at": "2026-07-21T12:00:00.000Z",
-        "consecutive_failures": 0,
-        "disabled_reason": null
-      }
-    ],
-    "availableEventTypes": [
-      "flight.booked",
-      "flight.cancelled",
-      "flight.completed",
-      "flight.rejected",
-      "pilot.applied",
-      "pilot.joined",
-      "pilot.rejected",
-      "pilot.suspended",
-      "pilot.restored",
-      "pilot.left",
-      "pilot.removed",
-      "pilot.role_changed",
-      "fleet.changed",
-      "schedule.changed",
-      "finance.flight_settled",
-      "announcement.published"
-    ]
-  }
-}
-```
-
-Up to 25 destination records are returned. The raw URL is never included.
-
-### Create a destination
-
-```http
-POST /api/va/airlines/{airlineId}/integrations/webhooks
-Content-Type: application/json
-```
-
-Body:
-
-```json
-{
-  "name": "Operations room",
-  "url": "https://discord.com/api/webhooks/<numeric-id>/<token>",
-  "eventTypes": [
-    "flight.completed",
-    "flight.rejected",
-    "finance.flight_settled"
-  ]
-}
-```
-
-Rules:
-
-- `name` is trimmed and must be 2–80 characters;
-- `url` must be 30–500 characters and pass the exact Discord validation above;
-- `eventTypes` must contain at least one allowed event;
-- duplicate event names are removed;
-- extra JSON properties are rejected;
-- no more than 10 active or paused destinations can exist for one airline.
-
-The successful response is `201` and returns destination metadata, not the URL:
-
-```json
-{
-  "data": {
-    "webhook": {
-      "id": "<webhook-id>",
-      "name": "Operations room",
-      "webhook_url_preview": "discord.com/api/webhooks/…123456",
-      "event_types": ["flight.completed", "flight.rejected", "finance.flight_settled"],
-      "status": "active",
-      "created_at": "2026-07-21T00:00:00.000Z",
-      "updated_at": "2026-07-21T00:00:00.000Z",
-      "last_delivery_at": null,
-      "consecutive_failures": 0,
-      "disabled_reason": null
-    }
-  }
-}
-```
-
-### Update a destination
-
-```http
-PATCH /api/va/airlines/{airlineId}/integrations/webhooks/{webhookId}
-Content-Type: application/json
-```
-
-Send one or more of these fields:
-
-```json
-{
-  "name": "Flight operations",
-  "eventTypes": ["flight.booked", "flight.completed", "flight.rejected"],
-  "status": "paused"
-}
-```
-
-Rules:
-
-- `name` is optional but must be 2–80 characters when provided;
-- `eventTypes` is optional but must contain valid event names when provided;
-- `status` can be only `active` or `paused`;
-- at least one field is required;
-- the raw Discord URL cannot be edited in place;
-- a disabled destination cannot be updated.
-
-Use `status: "paused"` to stop using a destination temporarily, and `status: "active"` to resume a destination that is paused. If the Discord URL changes, remove the old destination and create a new one. When a destination has been automatically disabled, create a replacement rather than trying to revive it.
-
-### Remove a destination
-
-```http
-DELETE /api/va/airlines/{airlineId}/integrations/webhooks/{webhookId}
-```
-
-Successful response:
-
-```json
-{
-  "data": {
-    "removed": true
-  }
-}
-```
-
-Removal is a soft state change that keeps historical metadata but stops the destination from receiving new messages. It cannot be undone through the API. The Discord channel itself is not deleted.
-
-### Send a test message
-
-```http
-POST /api/va/airlines/{airlineId}/integrations/webhooks/{webhookId}/test
-```
-
-The test posts directly to Discord and returns:
-
-```json
-{
-  "data": {
-    "delivered": true
-  }
-}
-```
-
-The test message says `FlyHub webhook connected` and identifies the airline. It does not create a flight event or simulate every event type. A successful test proves that FlyHub can post to that Discord URL at that moment; it does not prove that every future event will be accepted by Discord.
+The generated event pages below document the notification payload that Discord receives. They are not endpoints that users call.
 
 ## Event catalog
 
@@ -357,15 +175,14 @@ The exact fields depend on whether FlyHub can enrich the event with the related 
 ### Payload safety and size
 
 - Discord mentions are disabled with `allowed_mentions.parse: []`, so airline text cannot accidentally ping everyone, a role, or a user.
-- Only explicitly approved public fields are copied into the fallback summary.
-- Private internal identifiers are not copied into the public event summary.
+- Only public airline and operation details are copied into the summary.
 - A normal message contains one embed.
 - At most 25 embed fields are included.
 - Embed field names are capped at 256 characters and values at 1,024 characters.
 - Fallback summary values are escaped for Discord formatting and shortened before sending.
 - The sender name is the airline ICAO code followed by `Operations`.
 
-FlyHub does not send a signature header, HMAC, or generic event ID header to Discord. Discord authenticates the post through the destination URL. If you need to process events in your own code, listen to the configured Discord channel with your normal Discord tooling, or poll the read-only VA API for structured data.
+This integration is a Discord notification, not a generic signed callback. If you need to process structured data in your own code, use the read-only VA API or your normal Discord tooling.
 
 ## Delivery behavior
 
@@ -375,7 +192,7 @@ Temporary failures may be retried automatically. Delivery timing is not guarante
 
 ### Automatic destination disablement
 
-Repeated delivery failures can automatically disable a destination. A disabled destination does not receive events and cannot be reactivated through the API; fix the Discord configuration and create a replacement. A paused destination can be resumed with `PATCH` while it remains paused rather than disabled.
+Repeated delivery failures can automatically disable a destination. A disabled destination does not receive events and cannot be reactivated from the page; fix the Discord configuration and create a replacement. A paused destination can be resumed from Integrations.
 
 ### Duplicate tolerance
 
@@ -389,25 +206,13 @@ FlyHub sends a standard Discord webhook request with the payload described above
 
 ### Temporary pause
 
-Use:
+Choose **Pause** on the destination.
 
-```json
-{
-  "status": "paused"
-}
-```
-
-Resume with:
-
-```json
-{
-  "status": "active"
-}
-```
+Choose **Resume** when you want notifications to continue.
 
 ### Change the event list
 
-Send a replacement `eventTypes` array. It becomes the complete subscription list; it is not merged with the old list.
+Edit the destination and replace its event selection. The new selection becomes the complete subscription list.
 
 ### Change the Discord channel
 
@@ -417,21 +222,13 @@ Discord webhook URLs are not edited in place. Create the new destination, send a
 
 Inspect the preview, check the Discord channel and webhook permissions, create a new Discord webhook if necessary, then create a new FlyHub destination. A disabled destination is historical and cannot be reactivated.
 
-## Errors and troubleshooting
+## Troubleshooting
 
-Management routes return an `{ "error": "..." }` string for most failures, while the public read API uses the structured error envelope described in its [API reference](./api-reference).
-
-| Status | Typical integration meaning | Next action |
-| --- | --- | --- |
-| `400` | Invalid airline/webhook ID, body, event name, or Discord URL. | Check the exact request shape and URL format. |
-| `401` | Missing or expired FlyHub session. | Sign in again; do not use a public API key for manager routes. |
-| `403` | The session lacks `manage_ownership`. | Ask the airline owner to perform the action or grant the correct ownership capability. |
-| `404` | Destination is absent, belongs to another airline, or is already disabled. | Confirm the IDs; create a replacement if it was disabled. |
-| `429` | Management rate limit exceeded. | Wait for the reset and avoid repeated writes. |
-| `502` | Discord rejected or could not accept a direct test post. | Check that the URL still works in Discord and test again. |
-| `503` | FlyHub could not complete the integration operation. | Retry later and verify the destination state before creating a duplicate. |
-
-If the list shows repeated failures, do not keep pressing **Test** rapidly. Confirm the channel, regenerate the Discord webhook if needed, remove the broken destination, and create a replacement.
+- If FlyHub rejects the URL, copy it again from Discord and confirm that it is an HTTPS Discord webhook URL.
+- If **Test** fails, confirm that the Discord webhook still exists and that the destination channel accepts messages.
+- If no notifications arrive, confirm that the destination is active and that the event is selected.
+- If a destination is disabled after repeated delivery failures, create a replacement after checking the Discord channel and permissions.
+- If FlyHub reports a temporary problem, wait a moment and retry from the Integrations screen. Do not create duplicates until you have confirmed the destination's current state.
 
 ## Limits and non-features
 
@@ -439,12 +236,12 @@ The current webhook integration does not provide:
 
 - arbitrary custom HTTP destinations;
 - inbound webhooks into FlyHub;
-- HMAC signatures or a signing-secret configuration;
-- delivery-history browsing from the Ownership API;
+- signed generic callbacks or a signing-secret configuration;
+- a delivery-history page;
 - replaying a past event;
 - editing a Discord URL in place;
 - restoring a removed or automatically disabled destination;
-- event payloads with internal UUIDs or complete private audit records;
+- complete private account records;
 - guaranteed exactly-once delivery.
 
 For structured, pull-based data, use the six read-only resources in the [Virtual Airlines API Reference](./api-reference). For live community notifications, use Discord as the supported webhook destination.
