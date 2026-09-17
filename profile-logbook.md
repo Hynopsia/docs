@@ -9,7 +9,9 @@ Your Free Flight profile is your pilot record.
 
 Use it to review your XP, rank, stats, badges, type ratings, achievements, passport, and every completed Free Flight logbook entry.
 
-Career Mode has its own career profile and career logbook. This page explains the normal Free Flight profile.
+Career Mode has a separate profile and logbook for each Career save. This page explains the normal Free Flight profile.
+
+For save selection and the way Career profiles, stats, Passport, ratings, and achievements stay separate, see [Career Saves](/career-saves) and [Career Profile](/career-profile).
 
 <Frame>
   ![Screenshot 2026 05 02 205444](/images/Screenshot-2026-05-02-205444.png)
