@@ -39,7 +39,7 @@
         ],
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/airline",
+          "href": "/virtual-airlines/api/airline",
           "metadata": {
             "title": "Read airline profile",
             "sidebarTitle": "Airline profile"
@@ -79,7 +79,7 @@
         ],
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/pilots",
+          "href": "/virtual-airlines/api/pilots",
           "metadata": {
             "title": "List active airline pilots",
             "sidebarTitle": "Pilots"
@@ -127,7 +127,7 @@
         ],
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/flights",
+          "href": "/virtual-airlines/api/flights",
           "metadata": {
             "title": "List airline flight activity",
             "sidebarTitle": "Flights"
@@ -175,7 +175,7 @@
         ],
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/fleet",
+          "href": "/virtual-airlines/api/fleet",
           "metadata": {
             "title": "List active fleet aircraft",
             "sidebarTitle": "Fleet"
@@ -223,7 +223,7 @@
         ],
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/schedules",
+          "href": "/virtual-airlines/api/schedules",
           "metadata": {
             "title": "List published airline schedules",
             "sidebarTitle": "Schedules"
@@ -271,7 +271,7 @@
         ],
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/statistics",
+          "href": "/virtual-airlines/api/statistics",
           "metadata": {
             "title": "Read aggregate airline statistics",
             "sidebarTitle": "Statistics"
@@ -308,7 +308,7 @@
         "operationId": "discordFlightBooked",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/flight-booked",
+          "href": "/virtual-airlines/api/webhooks/flight-booked",
           "metadata": {
             "sidebarTitle": "flight.booked",
             "playground": "none"
@@ -341,7 +341,7 @@
         "operationId": "discordFlightCancelled",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/flight-cancelled",
+          "href": "/virtual-airlines/api/webhooks/flight-cancelled",
           "metadata": {
             "sidebarTitle": "flight.cancelled",
             "playground": "none"
@@ -374,7 +374,7 @@
         "operationId": "discordFlightCompleted",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/flight-completed",
+          "href": "/virtual-airlines/api/webhooks/flight-completed",
           "metadata": {
             "sidebarTitle": "flight.completed",
             "playground": "none"
@@ -407,7 +407,7 @@
         "operationId": "discordFlightRejected",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/flight-rejected",
+          "href": "/virtual-airlines/api/webhooks/flight-rejected",
           "metadata": {
             "sidebarTitle": "flight.rejected",
             "playground": "none"
@@ -440,7 +440,7 @@
         "operationId": "discordPilotApplied",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/pilot-applied",
+          "href": "/virtual-airlines/api/webhooks/pilot-applied",
           "metadata": {
             "sidebarTitle": "pilot.applied",
             "playground": "none"
@@ -473,7 +473,7 @@
         "operationId": "discordPilotJoined",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/pilot-joined",
+          "href": "/virtual-airlines/api/webhooks/pilot-joined",
           "metadata": {
             "sidebarTitle": "pilot.joined",
             "playground": "none"
@@ -506,7 +506,7 @@
         "operationId": "discordPilotRejected",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/pilot-rejected",
+          "href": "/virtual-airlines/api/webhooks/pilot-rejected",
           "metadata": {
             "sidebarTitle": "pilot.rejected",
             "playground": "none"
@@ -539,7 +539,7 @@
         "operationId": "discordPilotSuspended",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/pilot-suspended",
+          "href": "/virtual-airlines/api/webhooks/pilot-suspended",
           "metadata": {
             "sidebarTitle": "pilot.suspended",
             "playground": "none"
@@ -572,7 +572,7 @@
         "operationId": "discordPilotRestored",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/pilot-restored",
+          "href": "/virtual-airlines/api/webhooks/pilot-restored",
           "metadata": {
             "sidebarTitle": "pilot.restored",
             "playground": "none"
@@ -605,7 +605,7 @@
         "operationId": "discordPilotLeft",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/pilot-left",
+          "href": "/virtual-airlines/api/webhooks/pilot-left",
           "metadata": {
             "sidebarTitle": "pilot.left",
             "playground": "none"
@@ -638,7 +638,7 @@
         "operationId": "discordPilotRemoved",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/pilot-removed",
+          "href": "/virtual-airlines/api/webhooks/pilot-removed",
           "metadata": {
             "sidebarTitle": "pilot.removed",
             "playground": "none"
@@ -671,7 +671,7 @@
         "operationId": "discordPilotRoleChanged",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/pilot-role-changed",
+          "href": "/virtual-airlines/api/webhooks/pilot-role-changed",
           "metadata": {
             "sidebarTitle": "pilot.role_changed",
             "playground": "none"
@@ -704,7 +704,7 @@
         "operationId": "discordFleetChanged",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/fleet-changed",
+          "href": "/virtual-airlines/api/webhooks/fleet-changed",
           "metadata": {
             "sidebarTitle": "fleet.changed",
             "playground": "none"
@@ -737,7 +737,7 @@
         "operationId": "discordScheduleChanged",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/schedule-changed",
+          "href": "/virtual-airlines/api/webhooks/schedule-changed",
           "metadata": {
             "sidebarTitle": "schedule.changed",
             "playground": "none"
@@ -770,7 +770,7 @@
         "operationId": "discordFinanceFlightSettled",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/finance-flight-settled",
+          "href": "/virtual-airlines/api/webhooks/finance-flight-settled",
           "metadata": {
             "sidebarTitle": "finance.flight_settled",
             "playground": "none"
@@ -803,7 +803,7 @@
         "operationId": "discordAnnouncementPublished",
         "x-hidden": true,
         "x-mint": {
-          "href": "/virtual-airlines-draft/api/webhooks/announcement-published",
+          "href": "/virtual-airlines/api/webhooks/announcement-published",
           "metadata": {
             "sidebarTitle": "announcement.published",
             "playground": "none"

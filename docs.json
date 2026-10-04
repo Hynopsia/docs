@@ -31,7 +31,11 @@
       "proxy": true
     },
     "examples": {
-      "languages": ["curl", "javascript", "python"],
+      "languages": [
+        "curl",
+        "javascript",
+        "python"
+      ],
       "defaults": "required"
     }
   },
@@ -158,10 +162,60 @@
         ]
       },
       {
+        "group": "Virtual Airlines",
+        "pages": [
+          "virtual-airlines/index",
+          "virtual-airlines/quickstart",
+          "virtual-airlines/owner-quickstart",
+          "virtual-airlines/billing",
+          "virtual-airlines/troubleshooting",
+          "virtual-airlines/airline-awards",
+          "virtual-airlines/airline-fleet",
+          "virtual-airlines/airline-flights",
+          "virtual-airlines/airline-network",
+          "virtual-airlines/airline-overview",
+          "virtual-airlines/airline-pilots",
+          "virtual-airlines/airline-tours",
+          "virtual-airlines/airlines",
+          "virtual-airlines/api-reference",
+          "virtual-airlines/calendar",
+          "virtual-airlines/charters",
+          "virtual-airlines/community",
+          "virtual-airlines/dashboard",
+          "virtual-airlines/dispatch",
+          "virtual-airlines/economy-and-pricing",
+          "virtual-airlines/events",
+          "virtual-airlines/find-airlines",
+          "virtual-airlines/flight-lifecycle",
+          "virtual-airlines/glossary",
+          "virtual-airlines/how-virtual-airlines-works",
+          "virtual-airlines/inbox",
+          "virtual-airlines/manage-airports",
+          "virtual-airlines/manage-audit",
+          "virtual-airlines/manage-finance",
+          "virtual-airlines/manage-fleet",
+          "virtual-airlines/manage-group",
+          "virtual-airlines/manage-identity-profile",
+          "virtual-airlines/manage-management-history",
+          "virtual-airlines/manage-market",
+          "virtual-airlines/manage-network",
+          "virtual-airlines/manage-operations",
+          "virtual-airlines/manage-overview",
+          "virtual-airlines/manage-ownership",
+          "virtual-airlines/manage-people",
+          "virtual-airlines/manage-rewards",
+          "virtual-airlines/manage-tours",
+          "virtual-airlines/my-flights",
+          "virtual-airlines/reputation-and-progress",
+          "virtual-airlines/tours",
+          "virtual-airlines/webhooks"
+        ]
+      },
+      {
         "group": "Virtual Airlines Integrations",
         "openapi": {
-          "source": "virtual-airlines-draft/openapi.json",
-          "directory": "virtual-airlines-draft/api"
+          "source": "virtual-airlines/openapi.json",
+          "directory": "virtual-airlines/api"
         }
       },
       {
@@ -173,9 +227,23 @@
       {
         "group": "Help",
         "pages": [
-          "FAQ"
+          "faq"
         ]
       }
     ]
-  }
+  },
+  "redirects": [
+    {
+      "source": "/FAQ",
+      "destination": "/faq"
+    },
+    {
+      "source": "/virtual-airlines-draft",
+      "destination": "/virtual-airlines/index"
+    },
+    {
+      "source": "/virtual-airlines-draft/:slug*",
+      "destination": "/virtual-airlines/:slug*"
+    }
+  ]
 }

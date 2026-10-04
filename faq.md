@@ -164,3 +164,6 @@ See [Tracking Methods](/tracking-methods) for the full comparison.
 
 - Join the **FlyHub Discord** for support from the community and team: [https://discord.com/invite/87FYbV7EjZ](https://discord.com/invite/87FYbV7EjZ)
 - Describe your issue: sim, tracking mode (online/offline), and what you expected vs. what happened.
+## Virtual Airlines help
+
+Free accounts can join and fly in VA. For occupied aircraft, unavailable demand, rejected or interrupted flights, sanctions, and pending payments, see [VA troubleshooting](./virtual-airlines/troubleshooting). Start with [your first flight](./virtual-airlines/quickstart) or [the owner setup guide](./virtual-airlines/owner-quickstart).
