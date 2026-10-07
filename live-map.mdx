@@ -37,12 +37,12 @@ The header lets you toggle:
 
 On the [FlyHub website live map](https://flyhub.app/live-map), you can also filter by:
 
-- **Airline:** enter the three-letter airline ICAO, such as `BVX`. This matches the flight's airline, not part of its callsign.
+- **Airline:** enter the three-letter airline ICAO, such as `FHW`. This matches the flight's airline, not part of its callsign.
 - **Aircraft:** enter an aircraft ICAO type, such as `A320`.
 - **Airport:** enter a four-letter airport ICAO, such as `EGLL`. Flights departing from or arriving at that airport can appear.
 - **Tracking:** choose all flights, online tracking, or offline tracking. This refers to the tracking method, not whether a pilot is connected to VATSIM or IVAO.
 
-Filters work together. For example, airline `BVX` and airport `EGLL` show only BVX flights departing from or arriving at EGLL.
+Filters work together. For example, airline `FHW` and airport `EGLL` show only FHW flights departing from or arriving at EGLL.
 
 The counter shows how many flights are visible out of the active flights matching the airline, aircraft, airport, and tracking filters. Turning off a traffic type hides its flights from the map.
 
@@ -138,9 +138,11 @@ You can embed the public live map on any website that supports HTML iframes, inc
     Go to [flyhub.app/live-map](https://flyhub.app/live-map).
   </Step>
   <Step title="Choose the starting filters">
-    Set the airline, aircraft, airport, and tracking filters you want. Toggle the traffic types to show.
+    Choose which flights your map should show. Each filter is optional: leave **Airline**, **Aircraft**, or **Airport** blank to include all values, and use **All flights** under **Tracking** to include both tracking methods.
 
-    For Osprey Airways, enter `BVX` in **Airline**. To show only Virtual Airline operations, turn off **Free Flight** and **Career**.
+    To show one airline, enter its three-letter ICAO code in **Airline**. For example, FlyHub First Wings uses `FHW`. Replace this example with your own airline's ICAO code.
+
+    Use the **Free Flight**, **Career**, and **Virtual Airlines** toggles to choose the types of operations to display. If you want only your Virtual Airline's flights, keep **Virtual Airlines** on and turn the other two off. This is optional; you can include any combination of traffic types.
   </Step>
   <Step title="Copy the embed code">
     Select **Embed map**. Click the code box to select its contents, then copy it.
@@ -152,12 +154,12 @@ You can embed the public live map on any website that supports HTML iframes, inc
   </Step>
 </Steps>
 
-For example, this embed starts with BVX Virtual Airline traffic and the dark map theme:
+For example, this embed shows FlyHub First Wings Virtual Airline traffic in the dark theme. Replace `FHW` with your airline's ICAO code, or remove `airline=FHW` to show traffic from all airlines:
 
 ```html
 <iframe
-  src="https://flyhub.app/embed/live-map?airline=BVX&amp;traffic=virtual_airlines&amp;theme=dark"
-  title="Osprey Airways live traffic"
+  src="https://flyhub.app/embed/live-map?airline=FHW&amp;traffic=virtual_airlines&amp;theme=dark"
+  title="FlyHub First Wings live traffic"
   width="100%"
   height="650"
   style="border:0"
@@ -171,7 +173,7 @@ You can change the embed URL's optional settings:
 
 | Setting | Example | What it does |
 | --- | --- | --- |
-| `airline` | `airline=BVX` | Shows flights belonging to that airline ICAO. |
+| `airline` | `airline=FHW` | Shows flights belonging to that airline ICAO. |
 | `aircraft` | `aircraft=A320` | Shows that aircraft type. |
 | `airport` | `airport=EGLL` | Shows departures or arrivals at that airport. |
 | `tracking` | `tracking=offline` | Accepts `all`, `online`, or `offline`. |
