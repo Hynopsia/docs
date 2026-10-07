@@ -1,6 +1,6 @@
 ---
 title: "Live Map"
-description: "View active Free Flight and Career traffic, select flights, and understand online and offline map behavior."
+description: "Watch live FlyHub traffic, filter flights, and embed an airline map on your website."
 ---
 
 # Live Map
@@ -19,6 +19,7 @@ Live Map can show:
 
 - Free Flight traffic.
 - Career traffic.
+- Virtual Airline traffic.
 - Online tracked flights.
 - Offline/manual flights with synthetic progress.
 - Route lines.
@@ -32,8 +33,20 @@ The header lets you toggle:
 
 - Free Flight traffic.
 - Career traffic.
+- Virtual Airline traffic.
 
-The counter shows how many flights are shown out of the active total.
+On the [FlyHub website live map](https://flyhub.app/live-map), you can also filter by:
+
+- **Airline:** enter the three-letter airline ICAO, such as `BVX`. This matches the flight's airline, not part of its callsign.
+- **Aircraft:** enter an aircraft ICAO type, such as `A320`.
+- **Airport:** enter a four-letter airport ICAO, such as `EGLL`. Flights departing from or arriving at that airport can appear.
+- **Tracking:** choose all flights, online tracking, or offline tracking. This refers to the tracking method, not whether a pilot is connected to VATSIM or IVAO.
+
+Filters work together. For example, airline `BVX` and airport `EGLL` show only BVX flights departing from or arriving at EGLL.
+
+The counter shows how many flights are visible out of the active flights matching the airline, aircraft, airport, and tracking filters. Turning off a traffic type hides its flights from the map.
+
+Choose **Reset filters** to clear these filters and turn all traffic types back on.
 
 If the map is reconnecting, the counter may show the last known traffic count.
 
@@ -111,6 +124,72 @@ The map can show:
 - OFP route and waypoint labels.
 
 The map style follows light or dark mode.
+
+## Embed Live Map on your website
+
+You can embed the public live map on any website that supports HTML iframes, including a custom website, WordPress, Squarespace, Webflow, or Wix. Visitors can watch traffic, use the filters, search, and select flights without signing into FlyHub.
+
+<Note>
+  If **Embed map** is not available in the version of the FlyHub website you are using, embedding is not available there yet.
+</Note>
+
+<Steps>
+  <Step title="Open the website live map">
+    Go to [flyhub.app/live-map](https://flyhub.app/live-map).
+  </Step>
+  <Step title="Choose the starting filters">
+    Set the airline, aircraft, airport, and tracking filters you want. Toggle the traffic types to show.
+
+    For Osprey Airways, enter `BVX` in **Airline**. To show only Virtual Airline operations, turn off **Free Flight** and **Career**.
+  </Step>
+  <Step title="Copy the embed code">
+    Select **Embed map**. Click the code box to select its contents, then copy it.
+  </Step>
+  <Step title="Add it to your website">
+    Paste the code into your website's custom HTML or embed element, or directly into the HTML of a custom website. For example, use a **Custom HTML** block in WordPress or an **Embed HTML** element in Wix.
+
+    Give the element enough height for the map and filters. The generated code starts at 650 pixels high and fills the available width.
+  </Step>
+</Steps>
+
+For example, this embed starts with BVX Virtual Airline traffic and the dark map theme:
+
+```html
+<iframe
+  src="https://flyhub.app/embed/live-map?airline=BVX&amp;traffic=virtual_airlines&amp;theme=dark"
+  title="Osprey Airways live traffic"
+  width="100%"
+  height="650"
+  style="border:0"
+  loading="lazy">
+</iframe>
+```
+
+### Customise the starting view
+
+You can change the embed URL's optional settings:
+
+| Setting | Example | What it does |
+| --- | --- | --- |
+| `airline` | `airline=BVX` | Shows flights belonging to that airline ICAO. |
+| `aircraft` | `aircraft=A320` | Shows that aircraft type. |
+| `airport` | `airport=EGLL` | Shows departures or arrivals at that airport. |
+| `tracking` | `tracking=offline` | Accepts `all`, `online`, or `offline`. |
+| `traffic` | `traffic=virtual_airlines` | Accepts `free_flight`, `career`, and `virtual_airlines`, separated by commas. Use `none` to start with every traffic type hidden. |
+| `theme` | `theme=light` | Accepts `dark` or `light`. The default embed theme is dark. |
+
+Leave a filter out to include all flights for that filter. With no `traffic` setting, all three traffic types start enabled.
+
+These settings choose the starting view. Visitors can change the filters, including the airline. The embed shows public traffic; it does not grant access to private data or require an API key.
+
+The map refreshes automatically. The **FlyHub** link opens the full website live map in a new tab.
+
+### An empty map or an embed that does not load
+
+- **No live flights match these filters:** there may be no active flights for the selected airline, or the other filters may exclude them. Try **Reset filters** or turn more traffic types on.
+- **Expecting the entire route network:** Live Map shows flights currently being tracked. It does not show every scheduled route when nobody is flying it.
+- **Blank or cropped embed:** use the `/embed/live-map` URL and increase the HTML element's height. The regular `/live-map` page and other FlyHub pages cannot be embedded.
+- **Your website blocks external embeds:** check that its embed settings allow content from `https://flyhub.app`.
 
 ## Refresh behavior
 
