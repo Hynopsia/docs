@@ -35,18 +35,7 @@ The header lets you toggle:
 - Career traffic.
 - Virtual Airline traffic.
 
-On the [FlyHub website live map](https://flyhub.app/live-map), you can also filter by:
-
-- **Airline:** enter the three-letter airline ICAO, such as `FHW`. This matches the flight's airline, not part of its callsign.
-- **Aircraft:** enter an aircraft ICAO type, such as `A320`.
-- **Airport:** enter a four-letter airport ICAO, such as `EGLL`. Flights departing from or arriving at that airport can appear.
-- **Tracking:** choose all flights, online tracking, or offline tracking. This refers to the tracking method, not whether a pilot is connected to VATSIM or IVAO.
-
-Filters work together. For example, airline `FHW` and airport `EGLL` show only FHW flights departing from or arriving at EGLL.
-
-The counter shows how many flights are visible out of the active flights matching the airline, aircraft, airport, and tracking filters. Turning off a traffic type hides its flights from the map.
-
-Choose **Reset filters** to clear these filters and turn all traffic types back on.
+The counter shows how many flights are visible out of the active flights. Turning off a traffic type hides its flights from the map.
 
 If the map is reconnecting, the counter may show the last known traffic count.
 
@@ -127,30 +116,20 @@ The map style follows light or dark mode.
 
 ## Embed Live Map on your website
 
-You can embed the public live map on any website that supports HTML iframes, including a custom website, WordPress, Squarespace, Webflow, or Wix. Visitors can watch traffic, use the filters, search, and select flights without signing into FlyHub.
+You can embed the public live map on any website that supports HTML iframes, including a custom website, WordPress, Squarespace, Webflow, or Wix. Visitors can watch traffic, search, and select flights without signing into FlyHub.
 
-<Note>
-  If **Embed map** is not available in the version of the FlyHub website you are using, embedding is not available there yet.
-</Note>
+The embedded map keeps its interface clean. Set the traffic filters in the iframe URL; there is no filter toolbar or embed setup panel on the map.
 
 <Steps>
-  <Step title="Open the website live map">
-    Go to [flyhub.app/live-map](https://flyhub.app/live-map).
-  </Step>
-  <Step title="Choose the starting filters">
-    Choose which flights your map should show. Each filter is optional: leave **Airline**, **Aircraft**, or **Airport** blank to include all values, and use **All flights** under **Tracking** to include both tracking methods.
+  <Step title="Choose your map URL">
+    Start with `https://flyhub.app/embed/live-map` to show all public traffic. Add the optional URL parameters below to choose an airline, aircraft type, airport, tracking method, or traffic types.
 
-    To show one airline, enter its three-letter ICAO code in **Airline**. For example, FlyHub First Wings uses `FHW`. Replace this example with your own airline's ICAO code.
-
-    Use the **Free Flight**, **Career**, and **Virtual Airlines** toggles to choose the types of operations to display. If you want only your Virtual Airline's flights, keep **Virtual Airlines** on and turn the other two off. This is optional; you can include any combination of traffic types.
+    For example, `?airline=FHW&traffic=virtual_airlines` shows only FlyHub First Wings Virtual Airline operations. Replace `FHW` with your own airline's three-letter ICAO code. Omit `airline` to include all airlines.
   </Step>
-  <Step title="Copy the embed code">
-    Select **Embed map**. Click the code box to select its contents, then copy it.
-  </Step>
-  <Step title="Add it to your website">
-    Paste the code into your website's custom HTML or embed element, or directly into the HTML of a custom website. For example, use a **Custom HTML** block in WordPress or an **Embed HTML** element in Wix.
+  <Step title="Add the iframe to your website">
+    Copy the HTML example below and edit its `src` URL for your filters. Paste it into your website's custom HTML or embed element, or directly into the HTML of a custom website.
 
-    Give the element enough height for the map and filters. The generated code starts at 650 pixels high and fills the available width.
+    For example, use a **Custom HTML** block in WordPress or an **Embed HTML** element in Wix. The example fills the available width and is 650 pixels high; adjust the height to suit your page.
   </Step>
 </Steps>
 
@@ -167,7 +146,7 @@ For example, this embed shows FlyHub First Wings Virtual Airline traffic in the 
 </iframe>
 ```
 
-### Customise the starting view
+### Filter traffic using the URL
 
 You can change the embed URL's optional settings:
 
@@ -177,18 +156,20 @@ You can change the embed URL's optional settings:
 | `aircraft` | `aircraft=A320` | Shows that aircraft type. |
 | `airport` | `airport=EGLL` | Shows departures or arrivals at that airport. |
 | `tracking` | `tracking=offline` | Accepts `all`, `online`, or `offline`. |
-| `traffic` | `traffic=virtual_airlines` | Accepts `free_flight`, `career`, and `virtual_airlines`, separated by commas. Use `none` to start with every traffic type hidden. |
+| `traffic` | `traffic=virtual_airlines` | Accepts `free_flight`, `career`, and `virtual_airlines`, separated by commas. Use `none` to hide every traffic type. |
 | `theme` | `theme=light` | Accepts `dark` or `light`. The default embed theme is dark. |
 
-Leave a filter out to include all flights for that filter. With no `traffic` setting, all three traffic types start enabled.
+Leave a filter out to include all flights for that filter. With no `traffic` setting, all three traffic types are included.
 
-These settings choose the starting view. Visitors can change the filters, including the airline. The embed shows public traffic; it does not grant access to private data or require an API key.
+Filters combine: `airline=FHW&airport=EGLL` shows only FHW flights departing from or arriving at EGLL. Airline filtering matches the flight's airline ICAO, not a callsign prefix. Tracking refers to online telemetry or offline progress, not VATSIM or IVAO.
+
+To change the displayed traffic, edit the iframe's `src` URL. These filters control the display of public traffic; they do not grant access to private data or require an API key.
 
 The map refreshes automatically. The **FlyHub** link opens the full website live map in a new tab.
 
 ### An empty map or an embed that does not load
 
-- **No live flights match these filters:** there may be no active flights for the selected airline, or the other filters may exclude them. Try **Reset filters** or turn more traffic types on.
+- **No live flights match these filters:** there may be no active flights for the selected airline, or the other filters may exclude them. Remove or broaden the filter parameters in the iframe URL.
 - **Expecting the entire route network:** Live Map shows flights currently being tracked. It does not show every scheduled route when nobody is flying it.
 - **Blank or cropped embed:** use the `/embed/live-map` URL and increase the HTML element's height. The regular `/live-map` page and other FlyHub pages cannot be embedded.
 - **Your website blocks external embeds:** check that its embed settings allow content from `https://flyhub.app`.
