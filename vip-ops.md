@@ -1,6 +1,6 @@
 ---
 title: "VIP Ops"
-description: "Use FlyHub VIP Ops for charter-board missions, multi-leg chains, returning clients, manual VIP bids, private tails, and VIP progression."
+description: "Use FlyHub VIP Ops for charter-board missions, real-world event charters, multi-leg chains, returning clients, manual VIP bids, private tails, and VIP progression."
 ---
 
 # VIP Ops
@@ -36,15 +36,16 @@ The Charter Board includes:
 
 - Route map.
 - Mission list.
+- Events tab with charters built from real-world events.
 - Multi-Leg tab when chains are available.
 - Returning tab when returning-client requests are available.
 - Visible charter count.
-- Refresh countdown.
+- Refresh countdown. On the Events tab it counts down to the next event board instead.
 - Board mix information for short, medium, long, ultra, request, and rush missions.
 
-The map uses different route styles for standard charters, rush missions, returning clients, route chains, and seasonal event chains.
+The map shows the routes for the tab you have open. It uses different route styles for standard charters, rush missions, returning clients, event charters, route chains, and seasonal event chains.
 
-Selecting a route on the map focuses the matching mission or chain.
+Selecting a route on the map focuses the matching mission, event charter, or chain and opens its tab. Click an empty part of the map to clear the selection.
 
 ## Mission filters
 
@@ -105,6 +106,63 @@ VIP board missions use a live-booking lock.
 If you already have an active board mission or chain, the board can show a lock state and block another board mission.
 
 Manual VIP Flights are separate from the board lock.
+
+## Event charters
+
+Event charters are custom VIP missions created from real-world events happening around the world, such as football matches, concerts, festivals, and summits.
+
+FlyHub publishes a new set of events every few days. Each event gets exactly one charter, with its own client and story explaining who is flying and why.
+
+### What an event charter shows
+
+- Event name, category, venue, and city.
+- Event date.
+- Client type and party size. A sports team, an artist and crew, an official delegation, or hospitality guests.
+- The story behind the flight.
+- Route and distance.
+- Fastest flight time among the available jets.
+- Base XP.
+
+### Booking an event charter
+
+1. Open VIP Ops.
+2. Choose Charter Board.
+3. Open the Events tab, or click an event route on the map.
+4. Click Choose jet on the event.
+5. Pick a FlyHub business jet operator and aircraft. You can filter the list by operator.
+6. Optionally change the aircraft you will fly. The picker suggests the selected operator's fleet first, and you can search the full aircraft catalog.
+7. Optionally enter a flight number. Leave it blank to use the operator's schedule number for the route, when it has one.
+8. Confirm with Fly with the operator.
+9. FlyHub adds the charter to My Flights.
+
+### Choosing the right jet
+
+The operator list only shows jets that can seat the whole party and reach the destination nonstop.
+
+Each option is graded for how well it suits the client:
+
+| Fit | Meaning |
+| --- | --- |
+| Ideal for this client | The cabin this client wants. Earns the most XP. |
+| Good fit | A suitable cabin. Earns normal XP. |
+| Will do | Gets the job done. Earns a little less XP. |
+
+The XP shown next to each option is what that choice earns.
+
+### Event charter rules
+
+- One event charter can be live at a time. Complete or cancel it before booking another.
+- Event charters do not use the charter board lock, so you can hold one alongside a board mission.
+- There is no landing deadline. Fly it whenever you like while the event is on the board.
+- Each event can be flown once. If you cancel the booking, the event becomes available again.
+- Events stay available until the event board resets.
+
+### Event achievements
+
+| Achievement | How to earn it |
+| --- | --- |
+| Showtime | Fly your first VIP charter to a real-world event. |
+| Front Row | Fly 10 VIP charters to real-world events. |
 
 ## Multi-Leg chains
 
@@ -304,13 +362,14 @@ Tail rules:
 
 | Feature | Use it for |
 | --- | --- |
-| VIP Ops Charter Board | Client missions, reputation, returning clients, and chains. |
+| VIP Ops Charter Board | Client missions, real-world event charters, reputation, returning clients, and chains. |
 | VIP Manual Flight | Custom VIP operations inside VIP Ops. |
 | Manual Flights | General premium custom route filing outside VIP Ops. |
 
 ## Common mistakes
 
 - Trying to accept another board mission while one is already live.
+- Trying to book a second event charter before completing or cancelling the first one.
 - Starting a chain without understanding that all legs are queued together.
 - Cancelling a VIP chain when you only meant to stop one leg.
 - Forgetting that VIP flights still start from My Flights.
