@@ -40,7 +40,25 @@ FlyHub currently uses these main fatigue rules:
 - Short turns add extra fatigue only when the rest between Career flights is very short.
 - Sim rate adds pressure when a large scheduled duty is compressed into fewer real tracked hours.
 - Heavy recent duty can add pressure when the last 24 hours contain a large amount of real or scheduled duty.
-- Rest away from Career flying removes fatigue at about 0.8 fatigue per real hour.
+- Rest away from Career flying removes fatigue at a base rate of 0.8 points per real hour, increased by accommodation and meal benefits.
+
+## Recovery upgrades
+
+Recovery bonuses multiply the base rate. A multiplier such as ×1.62 means 62% faster recovery, not 1.62 points per hour.
+
+| Upgrade | Recovery multiplier | Where it applies |
+| --- | --- | --- |
+| Premium rental | ×1.35 | At base |
+| Owned home | ×1.50 | At its matching base |
+| Premium hotel | ×1.35 | Away from base |
+| Reliable meals | ×1.10 | At base and away |
+| Premium meals | ×1.20 | At base and away |
+
+Accommodation and meals multiply together. Home and hotel bonuses do not stack: your resting location determines which accommodation applies. Employer-provided premium hotels give the same recovery benefit as paid premium upgrades. Paid meal and hotel benefits apply during their covered periods.
+
+Premium accommodation plus premium meals gives **0.8 × 1.35 × 1.20 ≈ 1.30 points/hour**, instead of 0.80. With no further Career flying or changes in benefits, 15 fatigue clears in roughly **11.5 hours**, compared with **18.75 hours** at the base rate.
+
+The combined multiplier is capped at ×1.80. Illness can reduce recovery. If benefits change during a rest period, the recovery calculation accounts for the time each benefit was active; the rate used for that period can differ from your current setup's multiplier. The dashboard shows points per hour to two decimal places, and Personal Operations also explains the current multiplier.
 
 Short-turn pressure is intentionally forgiving for normal airline rotations:
 

@@ -207,7 +207,7 @@ Example response:
     "homeIcao": "SKBO",
     "homeCountryCode": "CO",
     "status": "active",
-    "businessModel": "scheduled",
+    "businessModel": null,
     "applicationMode": "open",
     "pilotCount": 18,
     "fleetCount": 7,
@@ -220,7 +220,7 @@ Example response:
 }
 ```
 
-`pilotCount` counts active airline memberships. `fleetCount` excludes aircraft whose operational status is `retired`.
+`pilotCount` counts active airline memberships. `fleetCount` excludes aircraft whose operational status is `retired` and uses the same airline-group scope as the fleet endpoint.
 
 ## `GET /api/v1/va/pilots`
 
@@ -279,7 +279,7 @@ The public record does not expose private identifiers for bookings, results, pil
 
 ## `GET /api/v1/va/fleet`
 
-Returns active and non-retired aircraft associated with the airline, ordered by registration.
+Returns non-retired aircraft associated with the airline, ordered by registration. A flagship airline's API key also includes aircraft from all non-closed subsidiaries in its own group. A subsidiary's API key returns only that subsidiary's fleet; an independent airline's key returns only its own fleet. Pagination and its total apply to the combined fleet.
 
 ```bash
 curl \

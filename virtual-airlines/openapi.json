@@ -166,7 +166,7 @@
           "public-api"
         ],
         "summary": "List active fleet aircraft",
-        "description": "Returns non-retired aircraft associated with the airline, ordered by registration. This is a public snapshot and does not expose fleet-management actions.",
+        "description": "Returns non-retired aircraft ordered by registration. A flagship key includes all non-closed subsidiaries in its own group; a subsidiary or independent airline key includes only its own fleet. Pagination and total apply to the combined fleet. This is a public snapshot and does not expose fleet-management actions.",
         "operationId": "listVaFleet",
         "security": [
           {
@@ -998,6 +998,8 @@
             ]
           },
           "businessModel": {
+            "description": "Deprecated compatibility field; always null. Airlines no longer have a business-model classification.",
+            "deprecated": true,
             "type": [
               "string",
               "null"
