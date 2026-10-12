@@ -58,7 +58,7 @@ The profile shows:
 - XP needed for the next rank.
 - A progress bar for the current rank.
 
-XP comes from completed Free Flight flights. Distance, score, penalties, bonuses, and tracking method can change the final XP earned.
+XP comes from completed Free Flight flights. Hours flown, score, penalties, bonuses, and tracking method can change the final XP earned.
 
 For scoring details, see [Scoring and XP](/scoring-xp).
 

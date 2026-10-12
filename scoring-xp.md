@@ -10,7 +10,7 @@ FlyHub uses scoring to measure how safely and realistically a flight was complet
 There are two separate results:
 
 - **Flight score** is the performance score for the flight, shown out of 10.
-- **XP** is the experience earned from the flight, based on distance, final score, and any XP modifiers.
+- **XP** is the experience earned from the flight, based on the hours flown, final score, and any XP modifiers.
 
 Online flights are scored from simulator telemetry. Offline flights are scored from your check-ins, debrief, trust, plausibility, and punctuality.
 
@@ -40,21 +40,30 @@ The final score is capped to the normal 0 to 10 range. A severe crash or cheatin
 
 ## XP formula
 
-FlyHub calculates base XP from distance and final score:
+FlyHub calculates base XP from the hours you actually flew and your final score. The same formula is used in Free Flight, Career Mode and VA World.
 
 ```text
-XP = (Distance NM x 0.5) + (Final Score x 50)
+Hours = time in the air, capped at (Distance NM / 250) + 0.5
+XP    = (270 + 345 x Hours^0.75) x (Final Score / 9)^2
 ```
 
 Example:
 
 ```text
-1000 NM flight with a 9.5 final score
+1000 NM flight, 2 h 20 min in the air, 9.5 final score
 
-(1000 x 0.5) + (9.5 x 50) = 975 XP
+(270 + 345 x 2.33^0.75) x (9.5 / 9)^2 = 1027 XP
 ```
 
-This means long flights matter, but a clean flight still matters. A long flight with a poor final score earns less than the same route flown well.
+- **Real hours count, not distance.** Flying faster, or using time acceleration, does not earn extra XP. The distance cap only stops holding patterns or loitering from adding hours.
+- **Long flights pay more, with diminishing returns.** A 12 hour flight earns about four times the XP of a 1 hour flight, not twelve times.
+- **The score multiplies the XP.** A 9 is the reference score:
+
+| Final score | 10 | 9.5 | 9 | 8 | 7 | 5 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| XP multiplier | x1.23 | x1.11 | x1.00 | x0.79 | x0.60 | x0.31 |
+
+XP is saved with each flight when it is completed. Flights completed before this formula was introduced keep the XP they earned.
 
 ## XP modifiers
 
