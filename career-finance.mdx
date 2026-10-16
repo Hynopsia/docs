@@ -9,18 +9,19 @@ Career Finance is where you manage money in Career Mode.
 
 Use it to understand what already happened, what costs are coming, and whether you can afford loans, relocation, property, or career moves.
 
-## Account and Bank
+## Finance tabs
 
-Finance has two main views:
+Finance has three tabs:
 
-| View | Use it for |
+| Tab | Use it for |
 | --- | --- |
-| Account | Reviewing past transactions and ledger history. |
-| Bank | Planning around balance, cash flow, debt, credit, loans, property, and medical checks. |
+| Pilot life | Readiness, your monthly budget, home, medical cover, meals, transport, union, and what your airline covers. |
+| Investments | Planning around balance, cash flow, debt, credit, loans, property, and your next paycheck. |
+| Ledger | Reviewing past transactions and ledger history. |
 
-## Account
+## Ledger
 
-The Account view can show:
+The Ledger tab can show:
 
 - Lifetime income.
 - Lifetime expenses.
@@ -30,7 +31,7 @@ The Account view can show:
 - First record date.
 - Account ledger.
 
-Use Account when you want to audit what happened.
+Use the Ledger when you want to audit what happened.
 
 Examples:
 
@@ -42,27 +43,20 @@ Examples:
 - Penalty.
 - Expense.
 
-## Bank
+## Investments
 
-The Bank view is for planning and financial decisions.
+The Investments tab is for planning and financial decisions. From top to bottom it shows:
 
-It can show:
-
-- Current balance.
-- 30-day cash flow.
-- Loan payments.
-- Outstanding debt.
-- Credit score.
-- Rental income.
-- Pay rate.
-- Weekly loan due.
-- Financial runway.
-- Monthly budget.
-- Next paycheck.
-- Medical clearance.
-- Loan offers.
-- Property investment.
-- Active liabilities.
+| Section | What it tells you |
+| --- | --- |
+| Balance | Your cash now and one column per day for the last 30 days. Hover a day to see its closing balance, net change, and biggest transaction. |
+| Debt | What you owe, how much is paid off, your monthly payments, credit score, and the date your last loan ends. |
+| Income | Your hourly flight pay and your recent paychecks. Hover a paycheck for its date and amount. |
+| Monthly budget | A normal month laid out like a load sheet: pay at the top, each cost taking its share, and what is left over at the bottom. |
+| Reserve | How many months of costs your cash covers if pay stopped, measured against the 1-month and 3-month marks. |
+| Next paycheck | The current pay week with your flights on it, your take-home pay slip, and the flights that will be paid. Hover a flight on the week strip or in the list to match them up. |
+| Credit and loans | Your credit score, which loan each score unlocks, the loan offers, and the loans you hold. |
+| Property | Rental properties you can buy and what each one pays you. |
 
 ## Pilot life
 
@@ -216,11 +210,29 @@ Credit can change when:
 - You miss a payment.
 - A loan defaults.
 
+The **Credit** strip shows your score on a 300 to 850 scale with a flag where each loan product unlocks. Locked offers still show the rate, term, and weekly payment you would get today, so you can see what you are working toward.
+
+| Loan | Credit needed | Reputation needed | Career days | Term | Minimum APR |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Bridge Credit | 520 | 5.0 | 30 | 78 weeks | 8% |
+| Fleet Upgrade | 680 | 6.5 | 60 | 104 weeks | 14% |
+| Career Ladder | 740 | 8.0 | 90 | 156 weeks | 18% |
+
+Credit points:
+
+| Event | Credit change |
+| --- | ---: |
+| On-time weekly payment | +2 |
+| Loan fully paid off | +6 |
+| Signing a new loan | -14, plus -8 for each loan you already hold |
+| Missed payment | -38 |
+| Default | -120 |
+
 Standard loan rules include:
 
 - You need at least 30 Career days before normal bank loans are available.
 - The minimum credit score is 520.
-- Debt-to-income limits apply.
+- The bank will not sign a loan if your combined weekly loan payments would pass 35% of your weekly salary. When your current payments are already above that line, the Monthly budget marks the loan row.
 - Standard users can hold 1 active standard loan.
 - Stronger credit and reputation can allow 2 active standard loans.
 - Loans use weekly payments over the loan term.
@@ -229,19 +241,27 @@ Standard loan rules include:
 
 Loan default is serious. It damages credit heavily and can also reduce reputation.
 
+### Paying a loan down early
+
+Each loan you hold is drawn as a route from the day you signed it to the day you will be debt-free. Under it, **Pay extra** takes any amount you type, with quick buttons for common amounts. Before you pay, it shows how many weeks earlier you will finish and how much interest you will save. Extra money goes straight to principal: your weekly payment stays the same and the loan ends sooner. **Pay off** closes the loan when you have the full balance in cash. Both open a confirmation before any money moves.
+
 ## Property
 
-Property purchases require money up front but can add rental income.
+Rental property turns savings into monthly income.
 
-Do not buy property only because it looks profitable. Make sure the down payment does not leave you unable to pay normal Career costs.
+You pay the down payment and the bank lends the rest of the price. Tenants' rent covers the mortgage payment and upkeep, and what is left is added to your payday. Each property card shows what you pay now, what you keep every month, where that number comes from, how long until the down payment has come back, and how much of your living costs the rent covers.
 
-Current property investment tiers are:
+| Property | Price | You pay now | Rent | Mortgage | Upkeep | You keep each month | Down payment back in | Most you can own |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Starter Duplex | $60,000 | $10,000 | $1,000 | $300 | $100 | $600 | about 17 weeks | 2 |
+| Small Apartment Block | $200,000 | $35,000 | $3,600 | $1,000 | $325 | $2,275 | about 15 weeks | 1 |
+| Urban Mixed-Use Complex | $600,000 | $90,000 | $9,000 | $2,100 | $600 | $6,300 | about 13 weeks | 1 |
 
-| Property tier | Purchase price | Down payment | Monthly net income |
-| --- | ---: | ---: | ---: |
-| Starter Duplex | $120,000 | $25,000 | $700 |
-| Small Apartment Blocks | $360,000 | $75,000 | $3,300 |
-| Urban Mixed-Use Complex | $980,000 | $210,000 | $9,600 |
+Career time runs on real UTC days, so these are real weeks. Each tier has an ownership limit so rent stays a bonus on top of flying pay rather than replacing it.
+
+If you are short of the down payment and a loan slot is free, the card offers the smallest loan that covers the gap. Make sure the down payment and any loan payment still leave room for medical checks, relocation, and normal living costs.
+
+Property bought before the October 2026 rebalance keeps the monthly income it was bought with.
 
 Property income is applied through the Career finance ledger. It belongs to Career Mode only.
 
@@ -265,7 +285,7 @@ When a personal event happens, it appears in the finance ledger and can be menti
 
 ## Common mistakes
 
-- Reading Account as a forecast. Account is history.
+- Reading the Ledger as a forecast. The Ledger is history.
 - Taking loans without checking weekly payment pressure.
 - Ignoring medical checks.
 - Buying property while short on cash.

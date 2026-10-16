@@ -118,7 +118,7 @@
           "public-api"
         ],
         "summary": "List airline flight activity",
-        "description": "Returns airline logbook activity, newest first. Inspect each status: a row records airline flight activity and is not automatically a successful completion.",
+        "description": "Returns airline logbook activity, newest first. A flagship key includes flights of all non-closed subsidiaries in its own group; a subsidiary or independent airline key includes only its own flights. Inspect each status: a row records airline flight activity and is not automatically a successful completion.",
         "operationId": "listVaFlights",
         "security": [
           {
@@ -1093,6 +1093,7 @@
       "Flight": {
         "type": "object",
         "required": [
+          "airlineIcao",
           "status",
           "flightNumber",
           "originIcao",
@@ -1107,6 +1108,13 @@
           "virtualPeriod"
         ],
         "properties": {
+          "airlineIcao": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "ICAO code of the airline that operated the flight. A flagship key includes non-closed subsidiaries."
+          },
           "status": {
             "type": "string"
           },
@@ -1259,6 +1267,7 @@
       "Schedule": {
         "type": "object",
         "required": [
+          "airlineIcao",
           "flightNumber",
           "originIcao",
           "destinationIcao",
@@ -1273,6 +1282,13 @@
           "updatedAt"
         ],
         "properties": {
+          "airlineIcao": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "ICAO code of the airline that operates the schedule. A flagship key includes non-closed subsidiaries."
+          },
           "flightNumber": {
             "type": "string"
           },

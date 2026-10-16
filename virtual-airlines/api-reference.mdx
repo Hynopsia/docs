@@ -258,10 +258,13 @@ curl \
   "https://flyhub.app/api/v1/va/flights?limit=25&offset=0"
 ```
 
+A flagship airline's API key also includes flights flown for all non-closed subsidiaries in its own group. A subsidiary's API key returns only that subsidiary's flights; an independent airline's key returns only its own flights. Use `airlineIcao` to tell operators apart.
+
 Each item contains:
 
 | Field | Meaning |
 | --- | --- |
+| `airlineIcao` | ICAO code of the airline that operated the flight. |
 | `status` | Current logbook entry status. Treat this as the result authority. |
 | `flightNumber` | Airline flight number. |
 | `originIcao` | Origin airport ICAO code. |
@@ -318,10 +321,13 @@ curl \
   "https://flyhub.app/api/v1/va/schedules?limit=100&offset=0"
 ```
 
+Group scope works like the flights endpoint: a flagship key includes the schedules of its non-closed subsidiaries, and `airlineIcao` names the operating airline.
+
 Each item contains:
 
 | Field | Meaning |
 | --- | --- |
+| `airlineIcao` | ICAO code of the airline that operates the schedule. |
 | `flightNumber` | Published airline flight number. |
 | `originIcao` | Route origin. |
 | `destinationIcao` | Route destination. |
@@ -353,7 +359,7 @@ For example, `31` (`1 + 2 + 4 + 8 + 16`) means Monday through Friday. Operating-
 
 ## `GET /api/v1/va/statistics`
 
-Returns one aggregate object. It is deliberately summary-only and has no pagination.
+Returns one aggregate object. It is deliberately summary-only and has no pagination. A flagship airline's API key aggregates flights, hours, fleet, schedules, contribution and reliability across all non-closed subsidiaries in its own group, matching the flights, fleet and schedules endpoints. `activePilots` counts the shared group roster. A subsidiary or independent airline key returns only its own totals.
 
 ```bash
 curl \
