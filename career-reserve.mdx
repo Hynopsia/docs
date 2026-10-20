@@ -1,6 +1,6 @@
 ---
 title: Career Reserve
-description: Go on standby, accept reserve calls, handle relocation, deadlines, and reserve pay.
+description: Go on standby, wait for Operations or call yourself in, get reserve call emails, and handle deadlines and reserve pay.
 ---
 
 # Career Reserve
@@ -16,6 +16,42 @@ When you go on reserve, FlyHub places you on a standby window.
 During that window, Operations can call you for a random assignment. A call is not guaranteed.
 
 If a call appears, you have a limited response window to accept it. This is the time you have to answer the call, not the time you have to finish the route.
+
+## How busy Operations is today
+
+Each day, Operations is quiet, normal, or short-staffed. Dispatch shows the day's state on the reserve panel, for example **Ops is short-staffed today. Calls are likely, so waiting is a good bet.**
+
+- Quiet day: calls are unlikely, but standby pay still counts.
+- Normal day: calls come in now and then.
+- Short-staffed day: calls are likely.
+
+The state changes at 00:00 UTC. Use it to decide whether to wait for a call or call yourself in.
+
+## Waiting or calling yourself in
+
+You can get reserve work in two ways.
+
+**Wait for Operations.** Stay on reserve and Operations calls you when it needs a pilot. When you accept a call from Operations, you report rested: the first leg adds 2 less fatigue.
+
+**Call yourself in.** Choose **Call me in now** to get a reserve call straight away. Pay is the same, but it has a cost:
+
+- You report rushed. The first leg adds 4 extra fatigue when you complete it.
+- If you decline the call, let it expire, or leave reserve before answering, you lose twice the normal reliability for your duty type.
+- After that, you can't call yourself in again for 1 hour. Operations can still call you.
+
+The button and the reserve panel show these costs before you choose. Calling yourself in is there for when you want to fly now. If you would rather keep it realistic, just wait for the call.
+
+See [Career Fatigue](/career-fatigue) for how fatigue affects your score.
+
+## Reserve call emails
+
+When Operations calls you on reserve, FlyHub also sends you an email, so you don't miss the call when FlyHub is closed. The email shows the route, aircraft, reserve pay, the time you must answer by, and any airline-paid jumpseat. Use **Open Dispatch** in the email to answer the call.
+
+- The email goes to the address on your FlyHub account.
+- You don't get an email when you call yourself in, because you are already in the app.
+- You get at most 3 reserve call emails a day.
+
+To stop these emails, use **Stop reserve call emails** at the bottom of any reserve call email, or turn off **Reserve calls** in [Career Mode Settings](/settings-career-mode). Calls still show in Dispatch and in your notifications.
 
 ## Duty types
 
@@ -64,7 +100,7 @@ Reserve pay is processed through Career payroll. See [Career Payroll and Ledger]
 3. Open Reserve.
 4. Review the standby terms.
 5. Confirm reserve duty.
-6. Watch notifications during the reserve window.
+6. Wait for Operations to call, or choose **Call me in now**.
 7. Accept the call if you want the assignment.
 8. Start before the report/start deadline.
 9. Complete the route before the route completion deadline.
@@ -87,11 +123,11 @@ After you accept a reserve call:
 
 - The assignment is created.
 - The reserve call is marked as accepted.
-- The flight is sent toward Calendar scheduling.
-- You schedule and lock the roster like other Career work.
+- The flights are added to My Flights automatically for the scheduled date.
+- Your reserve shift ends.
 - You fly it through Career My Flights.
 
-Reserve does not skip Calendar.
+If you called yourself in, the first leg adds extra fatigue. If you waited for Operations, the first leg adds less fatigue.
 
 ## Multi-leg calls
 
@@ -126,7 +162,7 @@ Reserve is useful when:
 Reserve is not ideal when:
 
 - You can only fly a very specific route.
-- You cannot check notifications.
+- You cannot check notifications or email.
 - You cannot accept within the response window.
 - You cannot start before the report/start deadline.
 - You are trying to plan a fixed real-life streaming or flying session.
@@ -136,7 +172,8 @@ Reserve is not ideal when:
 - Treating the response window as the completion deadline.
 - Treating the Ready report window as the time allowed to finish a long-haul route.
 - Going on reserve and then ignoring notifications.
-- Expecting every reserve window to generate a call.
+- Expecting every reserve window to generate a call. Check how busy Operations is today.
+- Calling yourself in, then declining because you don't like the route. That costs double reliability and locks call-ins for an hour.
+- Calling yourself in again and again while already tired. Each rushed report adds fatigue.
 - Accepting a call without checking the origin airport.
-- Forgetting that accepted reserve flights still go through Calendar.
 - Missing a needed jumpseat before departure.
