@@ -120,7 +120,15 @@ The airline balance is the source of truth for the money. Pilot progression is s
 
 Use **Recover** when FlyHub marks an interrupted operation as recoverable. Read the recovery details before restarting it. A recovery can preserve the operation, while a cancellation or MAYDAY can close it with a different result.
 
-Normal, scheduled, and free flights generally move the aircraft to the operation's destination after a valid completion. Some event and charter flows keep the stored position according to their activity rules. The position shown by FlyHub after settlement is authoritative; do not manually assume that every special operation behaves like a scheduled route.
+An interrupted flight holds its aircraft until the pilot resumes or the flight is closed. When a recovery deadline applies, the airline's Fleet and Operations screens show it; after it the attempt is discarded and the aircraft released.
+
+A rejected flight also affects the aircraft:
+
+- **Crash** — FH$1,000,000 charge, 10 wear points on every system, and a 24-hour grounding.
+- **Cheating** — no pay, XP, or wear; the aircraft stays where it was before the flight.
+- **Other rejections** — no pay or XP; the aircraft is recorded where it actually landed, when known.
+
+Normal and scheduled flights generally move the aircraft to the operation's destination after a valid completion. Free flights do too, unless the airline lets Free Flights start anywhere without moving the aircraft; then it stays parked where it was. Some event and charter flows keep the stored position according to their activity rules. The position shown by FlyHub after settlement is authoritative; do not manually assume that every special operation behaves like a scheduled route.
 
 ## When the result does not match your expectation
 

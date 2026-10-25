@@ -5,7 +5,8 @@ description: Find the current airline API and Discord notification documentation
 
 The integration guides are now part of the Virtual Airlines documentation:
 
-- [API reference](./virtual-airlines/api-reference)
+- [API reference](./virtual-airlines/api-reference), including scopes and row budgets
+- [Finance report](https://docs.flyhub.app/virtual-airlines/api/finance): `GET /api/v1/va/finance` returns revenue, costs, net result and margin, the previous period, revenue and cost breakdowns, a daily or monthly series, highlights, and current cash. It needs the opt-in `finance:read` scope, which no key has unless an owner ticks it, and costs 20 rows of the hourly row budget.
 - [Discord webhooks](./virtual-airlines/webhooks)
 - [Manage connections in Ownership](./virtual-airlines/manage-ownership)
 

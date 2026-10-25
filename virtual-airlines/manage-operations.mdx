@@ -22,7 +22,7 @@ You need Operations access to view the workspace. Reviewing a low-scoring result
 Operations provides five views:
 
 - **Insights** — See recent operating totals, flight sources, and score distribution.
-- **Needs attention** — Find recent results below 7.0 that have not yet been reviewed.
+- **Needs attention** — Find flights scored under 7.0 in the last 30 days that have not been reviewed. This list is separate from your airline's strike rule.
 - **Active** — See flights that are in progress, interrupted, recoverable, or restored.
 - **Upcoming** — See flights that are ready or scheduled.
 - **Closed** — See operations that have reached an end state, including completed, settled, rejected, cancelled, abandoned, and expired flights.
@@ -61,7 +61,8 @@ Marking a result as reviewed:
 - records that the team checked it;
 - removes it from the unreviewed attention count when appropriate;
 - does not change the result, score, settlement, or logbook entry;
-- does not reopen, validate, correct, or recover the flight.
+- does not reopen, validate, correct, or recover the flight;
+- does not remove strikes. Strikes are counted separately in [People](./manage-people).
 
 Flight validation happens during flight completion. Operations only records the administrative review after the result exists.
 
@@ -80,9 +81,29 @@ The chart helps you spot trends; it is separate from the individual flight detai
 
 ## Statuses and recovery
 
-An **Active** operation may be running, interrupted, recoverable, or restored. A **Closed** operation may be completed, settled, rejected, cancelled, abandoned, or expired.
+Statuses use plain labels with a short hint underneath:
 
-Flight execution and recovery belong to the assigned pilot in **My Flights** and **Active Flight**. Managers cannot resume or recover another pilot's flight from Operations. If a flight is not recovered in time, it may no longer appear in Operations; this does not create a new flight record or settlement.
+| Label | Meaning |
+| --- | --- |
+| Flying | In progress. |
+| Interrupted | The sim or app stopped mid-flight. The aircraft is held until the pilot resumes or the flight is closed. |
+| Resuming | The pilot is restoring the saved position. |
+| Checking | Waiting for the flight report to be checked. |
+| Paid | Accepted and settled. |
+| Rejected | Failed validation. No pay. |
+| Cancelled | No pay and no cost. |
+| Abandoned | Closed before it finished. No pay. |
+| Expired | Never started in time. |
+
+Flight execution and recovery belong to the assigned pilot in **My Flights** and **Active Flight**. Managers cannot resume or recover another pilot's flight from Operations. When a recovery deadline applies to an interrupted flight, the hint shows until when the pilot can resume; after that the flight is closed and the aircraft released. A closed attempt does not create a new flight record or settlement.
+
+### Rejected flights
+
+A rejected flight's detail shows what the rejection did:
+
+- **Crash** — the airline pays FH$1,000,000, every aircraft system takes 10 wear points, and the aircraft is grounded for 24 hours.
+- **Cheating** (for example prohibited time acceleration or an invalid aircraft movement) — no pay, XP, or wear. The aircraft stays where it was before the flight.
+- **Other rejections** — no pay or XP. The aircraft is recorded where it actually landed, when that is known.
 
 ## Limits and timing
 

@@ -129,7 +129,7 @@ Flight settlement costs can include:
 
 | Cost | When to think about it |
 | --- | --- |
-| Fuel | Based on the fuel required and the current fuel-price multiplier. |
+| Fuel | Based on the fuel required and the current fuel-price multiplier. Departing from outside your network costs 25% more fuel and gets no handling discount. |
 | Airport and landing | The aircraft's size, weight, and landing count affect the charge. |
 | Passenger handling | Per recognized passenger. |
 | Cargo handling | Per recognized kilogram. |
@@ -143,7 +143,7 @@ Flight settlement costs can include:
 | Penalties and compensation | Can be added after a poor, disrupted, or passenger-impacting result. |
 | Abnormal maintenance | Extra maintenance when the operation creates an abnormal condition. |
 
-The daily lease is not charged a second time inside flight settlement. Aircraft lease, airport network fees, hub fees, and active schedule fees are recurring airline costs recorded separately.
+The daily lease is not charged a second time inside flight settlement. Aircraft lease, airport network fees, hub fees, active schedule fees, and program fees are recurring airline costs recorded separately. They are taken from airline cash every night at 00:10 UTC, even when the balance is already below zero. Route and schedule screens show **Flight profit** before these daily fees.
 
 ## Recurring network costs
 
@@ -151,7 +151,7 @@ The daily lease is not charged a second time inside flight settlement. Aircraft 
 
 Opening a route currently costs a distance-based one-time fee. It starts at FH$1,000 and rises with distance, reaching a ceiling of FH$30,000 at 8,000 NM and beyond.
 
-An active schedule also has a daily operating fee. The current formula is approximately 80% of (FH$30 plus FH$0.18 per nautical mile), or about FH$24 plus FH$0.144 per nautical mile. Even a very short schedule has a small daily charge. The schedule fee does not secretly multiply revenue or create demand; it is simply an operating commitment.
+An active schedule also has a daily operating fee, charged only on its UTC operating days. The current formula is approximately 80% of (FH$30 plus FH$0.18 per nautical mile), or about FH$24 plus FH$0.144 per nautical mile. Even a very short schedule has a small daily charge. The schedule fee does not secretly multiply revenue or create demand; it is simply an operating commitment.
 
 The quote shown by the current Network page is authoritative if these balances change.
 
@@ -161,9 +161,9 @@ Establishing an airport and designating a hub are separate decisions. A hub cost
 
 | Airport size | Establish | Hub extra | Daily network | Daily hub |
 | --- | ---: | ---: | ---: | ---: |
-| Large | FH$200,000 | FH$400,000 | FH$800 | FH$2,000 |
-| Medium | FH$100,000 | FH$200,000 | FH$400 | FH$800 |
-| Small | FH$40,000 | FH$80,000 | FH$160 | FH$280 |
+| Large | FH$100,000 | FH$200,000 | FH$800 | FH$2,000 |
+| Medium | FH$50,000 | FH$100,000 | FH$400 | FH$800 |
+| Small | FH$20,000 | FH$40,000 | FH$160 | FH$280 |
 
 These fees are commitments, not a guarantee of passengers. An airport can be strategically useful while a particular route from it is weak.
 
@@ -173,7 +173,7 @@ Aircraft are leased for operations. The creation flow displays the daily lease, 
 
 ### Standby pricing
 
-Commitments with no settled flight in 14 days drop to a standby charge until the next flight: active schedules and non-home airports pay 25% of their daily fee, and leased aircraft pay 40% of their daily lease. Nothing needs to be configured. Full charges return with the next flight.
+Commitments idle for 14 days or more drop to a standby charge until the next flight: active schedules and airport stations pay 25% of their daily fee (never the home airport), and leased aircraft pay 40% of their daily lease. Nothing needs to be configured, and they can still be flown. One flight restores the full price.
 
 ### Operating programs
 
@@ -187,7 +187,7 @@ Managers should separate three ideas:
 - **Flight net**: that operation's revenue minus its settlement costs.
 - **Airline cash flow**: flight results plus recurring charges, route openings, airport actions, leases, and other treasury movements in the selected period.
 
-An individual flight can be profitable while the airline loses money overall because several aircraft, airports, or schedules are being paid every day. Finance shows the cash after reserve, runway days, break-even activity, and projections to make that difference visible.
+An individual flight can be profitable while the airline loses money overall because several aircraft, airports, or schedules are being paid every day. Finance shows the cash after reserve, **If nobody flies** (days cash covers fixed costs with no flight income), break-even activity, and projections to make that difference visible. Overview and Programs show **Cash lasts at recent pace**, which includes the last 30 days of flying. See [Two runway numbers](./manage-finance#two-runway-numbers).
 
 Projections hold recent activity and current commitments roughly constant. Treat them as warnings and planning tools, not guaranteed future income.
 

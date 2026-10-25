@@ -2,8 +2,6 @@
 title: "FAQ"
 ---
 
-# FAQ & Troubleshooting
-
 Common questions and fixes. If you’re stuck, start here.
 
 ---

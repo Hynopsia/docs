@@ -25,13 +25,30 @@ The overview can also show:
 - the most recent flight-finance results;
 - daily fixed costs for leases, airports, active schedules, and operating programs;
 - maintenance already committed;
-- the 30-day reserve target and cash after reserve;
-- days of financial runway;
-- activity needed to reach break-even;
+- the reserve target (30 days of costs plus maintenance) and cash after reserve;
+- **If nobody flies**: how many days the cash lasts with no flight income;
+- **Flights to break even**: flights per week needed to cover fixed costs;
 - 30-, 60-, and 90-day cash projections;
 - active leases, airports, and schedules.
 
-Projections keep recent activity and current commitments constant. They are planning estimates, not guaranteed income.
+Projections assume the last 30 days of flying and today's fixed costs stay the same. They are planning estimates, not guaranteed income.
+
+### Two runway numbers
+
+| Figure | Where | What it means |
+| --- | --- | --- |
+| **If nobody flies** | Finance | Cash minus booked maintenance, divided by the full daily fixed costs. No flight income is counted. |
+| **Cash lasts at recent pace** | [Overview](./manage-overview) and [Programs](./manage-programs) | Cash divided by the airline's daily result over the last 30 days, flying included. **Covered by flying** means flights earn more than the airline spends each day. |
+
+The first is the worst case; the second is what happens if the airline keeps flying as it has been.
+
+### Daily fixed costs
+
+Fixed costs are aircraft leases, airport stations and hubs, scheduled routes, and operating programs. There are no staff costs. Finance lists them at full price, before standby discounts.
+
+They are charged from airline cash every night at **00:10 UTC**, even when the balance is already below zero. A schedule is only charged on its UTC operating days. When the next charge is pending, the page shows an estimate of what will be taken at 00:10 UTC.
+
+Anything idle for 14 days or more bills less until it flies again: schedules and airport stations pay 25% (never the home airport), and leased aircraft pay 40%. They can still be flown, and one flight restores the full price. See [Standby pricing](./manage-programs#standby-pricing).
 
 ## Settlements
 
@@ -53,7 +70,7 @@ The ledger uses 25 rows per page. An expanded movement shows up to 100 detail en
 
 In a group, cash is shared while Settlements and Ledger keep an **Airline** column so each result remains attributed to its operating airline. Current commitments use open operating airlines; historical results can include retired airlines.
 
-Periods and week boundaries use UTC. A newly completed flight or charge can take a short time to appear in the Finance overview.
+Financial periods are UTC calendar months, and week boundaries also use UTC. A newly completed flight or charge can take a short time to appear in the Finance overview.
 
 ## Empty states and recovery
 

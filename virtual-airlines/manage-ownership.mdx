@@ -22,13 +22,14 @@ For a group, the normal management context is the flagship airline. The plan cov
 The plan supports a larger active pilot roster:
 
 - the first 20 active pilots are included at no cost;
-- when the roster reaches 20, the airline can continue operating, but another pilot requires the plan;
+- when the roster reaches 20, the airline can continue operating, but pilot 21 requires the plan;
+- with more than 20 active pilots and no active plan, every airline in the group is suspended: no new flights or admissions until the plan is restored or the roster is back to 20;
 - the current plan price is **$15 USD per month**, plus applicable tax;
 - one plan covers the shared roster of the airline group rather than charging separately for each operating airline.
 
 The page can show active pilots, included pilots, the current billing state, the current period end, the plan price, and any action needed. A plan may be shown as active, trialing, needing payment attention, paused, ended, refunded, suspended, exempt, or managed by FlyHub.
 
-An overdue payment can have a short grace period. A paused, cancelled, or refunded plan does not provide capacity above the included roster. System and explicitly exempt airlines may follow different rules.
+An overdue payment has a seven-day grace period; if it ends unpaid, every airline in the group is suspended. A paused, cancelled, or refunded plan does not provide capacity above the included roster. System and explicitly exempt airlines may follow different rules.
 
 ### Start or manage the plan
 
@@ -45,11 +46,12 @@ Website connections let an approved external site read selected airline informat
 - create a connection key;
 - give it a descriptive name;
 - choose read-only scopes such as profile, pilots, flights, fleet, schedules, and statistics;
+- optionally add the **Finance report** scope (`finance:read`), which makes the airline's revenue, costs, profit, and cash visible wherever the key is used. It is off unless you tick it;
 - choose an expiry of 30 days, 90 days, one year, or no expiry;
 - copy the secret once;
 - revoke a key.
 
-You can have up to 10 active keys. The secret is shown only once, so save it before closing the dialog. Store it on your website's server, never in browser code, public source code, or Discord. A revoked key stops working immediately, cannot be restored from Ownership, and does not work for a closed airline.
+You can have up to 10 active keys. Each key can read 5,000 rows an hour, and all keys of one airline share a ceiling of 15,000 rows an hour, so adding keys does not raise how much the airline can read. The secret is shown only once, so save it before closing the dialog. Store it on your website's server, never in browser code, public source code, or Discord. A revoked key stops working immediately, cannot be restored from Ownership, and does not work for a closed airline.
 
 For the complete endpoint catalog, response shapes, scopes, pagination rules, and safe key-rotation pattern, see [Virtual Airlines API Reference](./api-reference). For Discord event types, payloads, retries, and troubleshooting, see [Virtual Airlines Webhooks](./webhooks).
 
@@ -108,4 +110,4 @@ If billing, an integration, or a retirement summary cannot load, use **Retry** o
 
 ## Cancellation and preserved records
 
-Overdue payments have seven days of grace. Scheduled cancellation retains coverage until its effective end. At 20 or fewer active members, the free plan remains available. Above 20 without coverage, new reservations and admissions are blocked; existing members, pending applications, balances, reputation, history, and accepted reservations remain under their normal rules. See [the full billing guide](./billing) before changing the plan.
+Overdue payments have seven days of grace. Scheduled cancellation retains coverage until its effective end. At 20 or fewer active members, the free plan remains available. Above 20 without coverage, every airline in the group is suspended and new reservations and admissions are blocked; existing members, pending applications, balances, reputation, history, and accepted reservations remain under their normal rules. See [the full billing guide](./billing) before changing the plan.

@@ -31,12 +31,25 @@ Before publishing, FlyHub sanitizes content and removes unsafe scripts, forms, h
 
 - Use **Save identity** to save the identity fields.
 - Upload a logo or wide logo to replace its current preview.
-- Change **Home base** through the confirmation step. Changing it costs FH$1,000,000 and the airport must be in the shared network.
+- Change **Home base** through the confirmation step. Changing it costs FH$1,000,000 and the airport must be in the shared network. See [Home base changes](#home-base-changes).
 - Use **Publish** to make a new content revision visible to pilots.
 - Use **Publish policy** to publish the flight, admission, and moderation policy together.
 - Switching from HTML & CSS to the Basic Editor removes advanced structure and styling after confirmation.
 
 The banner position can be adjusted from the public profile with the position controls. The page does not provide a visible delete action for branding assets or a full draft/rollback history.
+
+### Home base changes
+
+The new home is added to Airports as a hub (or reactivated) and starts paying daily airport and hub fees. The old home stays in your network as a hub and keeps paying, unless you already have 10 hubs; then it becomes a regular airport.
+
+### Flight and moderation policy
+
+- **Free Flight position exception**: if Free Flights may start anywhere but the fleet position policy does not, a Free Flight does not move the aircraft. It stays parked where it was, so schedules can only use it from there.
+- **Automatic moderation**: the strike and activity rules below run only while it is on.
+- **Minimum monthly flights**: pilots under this number in a finished UTC month are removed automatically and lose their roles. New joiners skip their first month. Set 0 to disable.
+- **Last activity**: pilots with no completed VA flight in this many days are removed automatically and lose their roles. Pilots who never flew count from when they joined. Set 0 to disable.
+
+Only completed VA flights count toward these rules. The owner is never removed automatically.
 
 ## Permissions and groups
 

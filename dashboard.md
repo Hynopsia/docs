@@ -3,8 +3,6 @@ title: "Dashboard"
 description: "Understand the Free Flight Dashboard, next mission card, airline rotation, monthly airline choice, stats, and quick links."
 ---
 
-# Dashboard
-
 The Dashboard is the main hub for Free Flight Mode.
 
 <Frame>

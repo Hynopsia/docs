@@ -3,8 +3,6 @@ title: "VIP Ops"
 description: "Use FlyHub VIP Ops for charter-board missions, real-world event charters, multi-leg chains, returning clients, manual VIP bids, private tails, and VIP progression."
 ---
 
-# VIP Ops
-
 VIP Ops is a premium Free Flight feature for private charter operations.
 
 Use it when you want client missions, charter reputation, returning clients, VIP chains, and private aircraft operations.

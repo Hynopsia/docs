@@ -47,7 +47,9 @@ Current cost bands are:
 | Medium | FH$50,000 | FH$100,000 | FH$400 | FH$800 |
 | Large | FH$100,000 | FH$200,000 | FH$800 | FH$2,000 |
 
-The form is the final authority if the current economy or account rules change.
+Daily station and hub costs are taken from airline cash every night at 00:10 UTC, even below zero. A station other than the home airport with no paid flight for 14 days drops to 25% until the next flight.
+
+If you cannot afford a change or have hit the hub limit, the confirm button stays disabled and the page says why, including how much cash is missing. The form is the final authority if the current economy or account rules change.
 
 ## Edit, remove, or restore a station
 
@@ -59,7 +61,9 @@ If the page offers **Reactivate**, use it to return a removed station to the act
 
 ## Group behavior and related pages
 
-Airports and their treasury impact are shared by the group. Routes and schedules are still managed for an individual operating airline in [Network](./manage-network). Use [Identity and Profile](./manage-identity-profile) to change an airline's home base after the required station exists.
+Departing from an airport outside your network costs 25% more fuel and gets no handling discount. An active station reduces departure handling and arrival landing charges by 12%.
+
+Airports and their treasury impact are shared by the group. Routes and schedules are still managed for an individual operating airline in [Network](./manage-network). Use [Identity and Profile](./manage-identity-profile) to change an airline's home base after the required station exists. The new home becomes a hub, and the old home stays a paying hub unless you are already at 10 hubs.
 
 Adding or editing a station can require both network and financial access even when the visible form mainly looks like a network task. A station change does not automatically create routes or aircraft assignments.
 

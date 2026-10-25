@@ -22,26 +22,32 @@ The overview can show:
 - active routes compared with the total;
 - routes with current health data;
 - passenger demand and cargo demand;
-- the share of demand already committed;
-- average load factor;
+- the share of demand already taken by all airlines;
+- average load factor (payload ÷ aircraft capacity);
 - route contribution when finance figures are available;
 - reputation and its change from the previous period.
 
 ### Route health
 
-Route rows can include a recommendation signal, evidence weeks, aircraft load, used demand, net contribution, recent weeks, carried volume, and result. A recommendation is guidance only; it does not edit a route, change a schedule, or reserve demand automatically.
+Route rows can include a recommendation signal, evidence weeks, aircraft load, **Demand flown**, **Flight profit**, recent weeks, carried volume, and result.
 
-If a route has no health observation yet, the page explains that a demand reservation is needed before a weekly observation can be calculated.
+- **Aircraft load** is payload ÷ aircraft capacity.
+- **Demand flown** is how much of the route's weekly demand the airline actually carried.
+- **Flight profit** is the route's flight results for the week, before daily schedule, airport, and route fees. A recommendation is guidance only; it does not edit a route, change a schedule, or reserve demand automatically.
+
+If a route has no health observation yet, book a flight on it to start its weekly numbers.
 
 ### Demand pools
 
-Demand is shown separately for passengers and cargo. An airport can show available, committed, airline-committed, remaining, and used percentages for each of eight directions: north, northeast, east, southeast, south, southwest, west, and northwest.
+Demand pools are weekly (ISO week) and shared by every airline; each booking takes from them. Demand is shown separately for passengers and cargo. An airport can show available, taken, remaining, and used percentages for each of eight directions: north, northeast, east, southeast, south, southwest, west, and northwest.
 
 Use the airport search to find an airport by code, name, or city. The page can show a radial chart and a directional table for the selected airport.
 
 ### Reputation
 
-The reputation view can show overall reputation out of 10, reliability, operations, passenger experience, community strength, recent periods, and change over time. If no reputation history exists, the view explains that no history is available yet.
+The reputation view can show overall reputation out of 10, recent periods, and change over time. Reputation moves weekly toward a target built from flight scores (45%), airline age (20%), 90-day profit margin (20%), and activity (15%); higher reputation means better fares. See [Reputation ceiling](./manage-programs#reputation-ceiling).
+
+Reliability, operations, passenger experience, and community strength are side indicators on a 0–100 scale. They do not change the reputation score. If no reputation history exists, the view explains that no history is available yet.
 
 ## Filters and actions
 
@@ -49,7 +55,7 @@ Use the current view controls to:
 
 - refresh the analysis;
 - page through routes and airports;
-- sort route rows by load, demand used, or net result;
+- sort route rows by load, demand flown, or flight profit;
 - filter for attention, opportunity, stability, or missing data;
 - search airports;
 - open a route or airport detail.

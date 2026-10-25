@@ -18,7 +18,7 @@ The workspace can remember your last airline selection. In a group, the selected
 
 ## What it shows
 
-- **Needs attention**: recent issues, especially low-scoring flights that still need review.
+- **Needs attention**: flights scoring under 7.0. They stay here until a manager marks them reviewed in Operations.
 - **Active flights**: current or recoverable operations.
 - **Fleet serviceable**: aircraft that are operational and not in a maintenance-blocked state.
 - **Open routes**: routes currently open for operation.
@@ -27,7 +27,14 @@ The workspace can remember your last airline selection. In a group, the selected
 - **Active pilots**: active memberships for the selected airline.
 - **90-day history**: completed flights, flight quality, financial performance, and resource health when available.
 
-With finance access, a **What limits the airline** strip also shows the airline's current bottleneck with a direct action, plus **Runway**, **Break-even**, **Reputation** against its ceiling, and **Standby savings**. See [Programs](./manage-programs#sustainability).
+With finance access, a **What limits the airline** strip also shows the airline's current bottleneck with a direct action, plus:
+
+- **Cash lasts at recent pace**: cash divided by the daily result of the last 30 days of flying, after fixed costs. **Covered by flying** means the airline earns more than it spends. This is not the same as Finance's **If nobody flies**, which counts no flight income; see [Two runway numbers](./manage-finance#two-runway-numbers).
+- **Flights to break even**: your 30-day average flights a week against the number needed to cover fixed costs.
+- **Reputation**: out of 10, with the airline's current cap. See [Programs](./manage-programs#reputation-ceiling).
+- **Standby savings**: what idle schedules, stations, and leased aircraft save per day. They can still fly.
+
+See [Programs](./manage-programs#sustainability).
 
 The queue lists a short set of issues and current or upcoming flights. The health panel links to Finance, Fleet, Network, Operations, and People.
 

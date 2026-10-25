@@ -24,9 +24,9 @@ The top of the page answers whether the airline can carry its commitments.
 | Item | What it shows |
 | --- | --- |
 | What limits the airline today | The one thing holding the airline back right now, with a button to the page that fixes it. |
-| Runway | How many days the cash lasts at the current daily net. |
-| Break-even | Flights per week needed to cover fixed costs, compared with flights actually flown. |
-| Reputation | Current reputation against its ceiling, and how much programs add to what the market perceives. |
+| Cash lasts | Cash divided by the daily loss over the last 30 days of flying, after flight income and fixed costs. **Covered by flying** means the airline earns more than it spends. |
+| Break-even | Flights per week needed to cover fixed costs (leases, airport stations, scheduled routes, and programs), against your 30-day average. |
+| Reputation | Current reputation out of 10, its cap, and how much programs add to what the market perceives. |
 | Programs | Total program fees per day, and the next contract to end. |
 
 The limit is checked in this order, and the first one that applies is shown:
@@ -42,7 +42,7 @@ The limit is checked in this order, and the first one that applies is shown:
 | Reputation | Reputation is below 4 and no program is running. | Contract catering, crew training, or a campaign. |
 | Growth | The operation covers its costs. | Reinvest the margin in programs. |
 
-The same strip appears on the management [Overview](./manage-overview).
+The same strip appears on the management [Overview](./manage-overview). **Cash lasts** assumes the airline keeps flying as it has been. Finance's **If nobody flies** is the worst case with no flight income; see [Two runway numbers](./manage-finance#two-runway-numbers).
 
 ## Program branches
 
@@ -127,7 +127,9 @@ Every catering, crew, maintenance, and ground level also raises the reputation c
 4. Review the price per day, the setup fee, the total over the term, and the estimated value per month.
 5. Select **Contract and pay**.
 
-The setup fee is paid when you sign. The daily fee is charged with the airline's other fixed costs. A contract starts after a short lead time of one to four days, shown in the dialog.
+To contract, the airline needs the setup fee plus 7 days of the daily fee in cash. If it is short, the button is disabled and the dialog says how much more is needed.
+
+The setup fee is paid when you sign. The daily fee is charged every night at 00:10 UTC with the airline's other fixed costs, even if cash goes below zero. A contract starts after a short lead time of one to four days, shown in the dialog.
 
 The dialog estimates whether the program pays for itself at the airline's current flying. If the fee outweighs the direct return, it says so. Programs that raise the reputation ceiling can still be worth it for the long term.
 
@@ -139,7 +141,7 @@ Prices scale with the size of the operation and move weekly with the **supplier 
 
 - **Renew**: opens 14 days before a contract ends. The renewal starts the day after the current contract and has no setup fee.
 - **Upgrade**: contracting the next level replaces the running contract after the new level's lead time.
-- **End**: ends the contract tonight. Fees already paid are not refunded.
+- **End**: asks for confirmation first. The contract stops tonight: its effects and reputation-cap bonus end with today. A contract that has not started yet is cancelled and never starts. The setup fee and fees already paid are not refunded.
 
 When a contract lapses, its effects stop the same day. The airline keeps the level for 14 days, so it can still contract the next level or renew without starting the ladder again.
 
@@ -153,13 +155,24 @@ Effects apply to every flight settled while the contract runs. From one branch o
 
 ## Reputation ceiling
 
-Airline reputation can rise only up to its ceiling. The base ceiling is **7 out of 10**.
+Reputation runs from 0 to 10, and every airline starts at 1.0. Once a week it moves toward a target built from:
+
+| Part | Weight |
+| --- | ---: |
+| Flight scores | 45% |
+| Airline age | 20% |
+| 90-day profit | 20% |
+| Activity | 15% |
+
+It rises at most 0.10 a week (slower above 3) and can drop up to 0.30 a week. Higher reputation means better fares.
+
+Airline reputation can rise only up to its ceiling (the cap). The base ceiling is **7 out of 10**.
 
 Catering, crew training, maintenance, and ground handling levels raise the ceiling while they are active, up to 10. Reaching the top of the reputation scale needs both a strong operating record and investment in programs.
 
 ## Standby pricing
 
-Routes, stations, and aircraft with no settled flight in 14 days are charged a fraction of their daily cost until the next flight. Nothing needs to be configured.
+Schedules, stations, and leased aircraft idle for 14 days or more are charged a fraction of their daily cost until the next flight. Nothing needs to be configured, and they can still be flown.
 
 | Commitment | Standby charge |
 | --- | --- |
@@ -167,11 +180,20 @@ Routes, stations, and aircraft with no settled flight in 14 days are charged a f
 | Airport or hub (not the home base) | 25% of its daily fee |
 | Leased aircraft | 40% of its daily lease |
 
-The page shows how many schedules, stations, and aircraft are in standby and how much that saves per day. Full charges return with the next flight.
+The home airport never drops to the standby rate. The page shows how many schedules, stations, and aircraft are at idle rates and how much that saves per day. One flight restores the full price.
 
-## Empire value
+## Empire score
 
-**Empire value** measures what the airline has built, not what sits in the bank. It adds up the fleet, the network, reputation weighted by pilots, and active programs. Use it to follow long-term progress when cash is being reinvested.
+**Empire score** is a score in points for what the airline has built. It is not cash and cannot be spent. It adds up:
+
+| Part | How it counts |
+| --- | --- |
+| Fleet in service | Daily lease × 60 per aircraft, × 20 for aircraft at the idle rate. |
+| Network | Opening fees paid for airport stations, hubs, and open routes. |
+| Reputation × pilots | Reputation × 20,000 × pilots who flew in the last 30 days. |
+| Programs | Daily fee × 30 for each running program. |
+
+Use it to follow long-term progress when cash is being reinvested.
 
 ## In Finance
 

@@ -3,8 +3,6 @@ title: "Active Flight"
 description: "Use the Active Flight page to prepare, file, track, and manage a booked FlyHub flight."
 ---
 
-# Active Flight
-
 The Active Flight page is where you manage the flight you are about to fly or are currently tracking.
 
 Use this page to review the route, file your flight plan, connect telemetry, read the OFP, change aircraft before dispatch, take notes, start tracking, and finish or abort the flight.

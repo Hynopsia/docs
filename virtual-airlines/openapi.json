@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "FlyHub Virtual Airlines API",
-    "version": "2026-07-21",
+    "version": "2026-10-25",
     "description": "Read-only airline information and Discord notification payloads for Virtual Airlines integrations. Resources are scoped to the airline that issued the fhva_live bearer key."
   },
   "servers": [
@@ -60,8 +60,16 @@
           },
           "503": {
             "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
           }
-        }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          }
+        ]
       }
     },
     "/api/v1/va/pilots": {
@@ -91,6 +99,9 @@
           },
           {
             "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
           }
         ],
         "responses": {
@@ -108,6 +119,9 @@
           },
           "503": {
             "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
           }
         }
       }
@@ -118,7 +132,7 @@
           "public-api"
         ],
         "summary": "List airline flight activity",
-        "description": "Returns airline logbook activity, newest first. A flagship key includes flights of all non-closed subsidiaries in its own group; a subsidiary or independent airline key includes only its own flights. Inspect each status: a row records airline flight activity and is not automatically a successful completion.",
+        "description": "Returns airline logbook activity, newest first. A flagship key includes flights of all non-closed subsidiaries in its own group; a subsidiary or independent airline key includes only its own flights. Inspect each status: a row records airline flight activity and is not automatically a successful completion. Completed and diverted rows include the pilot (display name and public avatar), landing metrics, load, network, simulator, and airport names; those fields are null on rejected and corrected rows. Page deep logbooks with cursor instead of offset; sync new entries with order=asc and the stored nextCursor.",
         "operationId": "listVaFlights",
         "security": [
           {
@@ -139,6 +153,27 @@
           },
           {
             "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/Cursor"
+          },
+          {
+            "$ref": "#/components/parameters/Order"
+          },
+          {
+            "$ref": "#/components/parameters/Since"
+          },
+          {
+            "$ref": "#/components/parameters/Until"
+          },
+          {
+            "$ref": "#/components/parameters/Aircraft"
+          },
+          {
+            "$ref": "#/components/parameters/FlightStatus"
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
           }
         ],
         "responses": {
@@ -156,6 +191,57 @@
           },
           "503": {
             "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          }
+        }
+      }
+    },
+    "/api/v1/va/flights/live": {
+      "get": {
+        "tags": [
+          "public-api"
+        ],
+        "summary": "List flights in progress",
+        "description": "Returns the airline's flights in progress right now, newest first, up to 100. Not paginated. Requires flights:read and uses the same group scope as the flights endpoint. Each request costs 5 rows of the hourly row budget. Results are cached for about 30 seconds, so polling faster returns the same data. No positions, altitudes, or speeds are returned. Offline-tracked flights appear only when the pilot shares them on the live map.",
+        "operationId": "listVaLiveFlights",
+        "security": [
+          {
+            "vaApiKey": []
+          }
+        ],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines/api/flights-live",
+          "metadata": {
+            "title": "List flights in progress",
+            "sidebarTitle": "Live flights"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LiveFlightsResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
           }
         }
       }
@@ -187,6 +273,9 @@
           },
           {
             "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
           }
         ],
         "responses": {
@@ -204,6 +293,9 @@
           },
           "503": {
             "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
           }
         }
       }
@@ -235,6 +327,9 @@
           },
           {
             "$ref": "#/components/parameters/Offset"
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
           }
         ],
         "responses": {
@@ -252,6 +347,9 @@
           },
           "503": {
             "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
           }
         }
       }
@@ -280,6 +378,187 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/StatisticsResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          }
+        ]
+      }
+    },
+    "/api/v1/va/insights": {
+      "get": {
+        "tags": [
+          "public-api"
+        ],
+        "summary": "Read airline insights",
+        "description": "Totals, monthly activity, top airports, routes and aircraft, and network, simulator and landing breakdowns in one object. Requires statistics:read and costs 20 rows. Results refresh about once a minute.",
+        "operationId": "getVaInsights",
+        "security": [
+          {
+            "vaApiKey": []
+          }
+        ],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines/api/insights",
+          "metadata": {
+            "title": "Read airline insights",
+            "sidebarTitle": "Insights"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Period"
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/InsightsResponse"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/va/finance": {
+      "get": {
+        "tags": [
+          "public-api"
+        ],
+        "summary": "Read the finance report",
+        "description": "Investor-style profit and loss: revenue, costs, net result and margin, the previous period for comparison, revenue and cost breakdowns, a daily (or monthly, beyond 92 days) series, highlights and current cash. Requires the opt-in finance:read scope and costs 20 rows. Defaults to the last 30 days. Results refresh about once a minute.",
+        "operationId": "getVaFinance",
+        "security": [
+          {
+            "vaApiKey": []
+          }
+        ],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines/api/finance",
+          "metadata": {
+            "title": "Read the finance report",
+            "sidebarTitle": "Finance"
+          }
+        },
+        "parameters": [
+          {
+            "name": "period",
+            "in": "query",
+            "description": "Reporting period. month is the current UTC calendar month to date; 7d to 365d are rolling; all starts at the first recorded transaction. Defaults to 30d.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "all",
+                "month",
+                "7d",
+                "30d",
+                "90d",
+                "365d"
+              ],
+              "default": "30d"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/FinanceResponse"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/va/leaderboard": {
+      "get": {
+        "tags": [
+          "public-api"
+        ],
+        "summary": "Rank airline pilots",
+        "description": "Pilots ranked by hours, flights, distance, average score or average landing rate over a period. Requires pilots:read. Results refresh about once a minute.",
+        "operationId": "getVaLeaderboard",
+        "security": [
+          {
+            "vaApiKey": []
+          }
+        ],
+        "x-hidden": true,
+        "x-mint": {
+          "href": "/virtual-airlines/api/leaderboard",
+          "metadata": {
+            "title": "Rank airline pilots",
+            "sidebarTitle": "Leaderboard"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LeaderboardMetric"
+          },
+          {
+            "$ref": "#/components/parameters/Period"
+          },
+          {
+            "$ref": "#/components/parameters/LeaderboardLimit"
+          },
+          {
+            "$ref": "#/components/parameters/IfNoneMatch"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LeaderboardResponse"
+          },
+          "304": {
+            "$ref": "#/components/responses/NotModified"
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
@@ -851,12 +1130,126 @@
       "Offset": {
         "name": "offset",
         "in": "query",
-        "description": "Number of records to skip. The API uses 0 by default and caps values at 10000.",
+        "description": "Number of records to skip. The API uses 0 by default and caps values at 10000. For flights, use cursor instead for deep or incremental paging.",
         "schema": {
           "type": "integer",
           "minimum": 0,
           "maximum": 10000,
           "default": 0
+        }
+      },
+      "FlightStatus": {
+        "name": "status",
+        "in": "query",
+        "description": "Optional filter on the logbook status. Omit it to receive every status, including rejected flights. Unknown values are ignored.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "completed",
+            "diverted",
+            "rejected",
+            "corrected"
+          ]
+        }
+      },
+      "Cursor": {
+        "name": "cursor",
+        "in": "query",
+        "description": "Opaque nextCursor from a previous flights page. Replaces offset, has no ceiling and skips the exact total. An invalid cursor is ignored.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Order": {
+        "name": "order",
+        "in": "query",
+        "description": "desc (default) pages newest first; asc pages oldest first, which an incremental sync uses together with a stored cursor.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "desc",
+            "asc"
+          ],
+          "default": "desc"
+        }
+      },
+      "Since": {
+        "name": "since",
+        "in": "query",
+        "description": "Only entries recorded at or after this ISO timestamp.",
+        "schema": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "Until": {
+        "name": "until",
+        "in": "query",
+        "description": "Only entries recorded before this ISO timestamp.",
+        "schema": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "Aircraft": {
+        "name": "aircraft",
+        "in": "query",
+        "description": "Only entries flown with this registration (case-insensitive).",
+        "schema": {
+          "type": "string",
+          "example": "HK-5000"
+        }
+      },
+      "Period": {
+        "name": "period",
+        "in": "query",
+        "description": "Reporting period. month is the current UTC calendar month; 7d to 365d are rolling. Unknown values fall back to all.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "all",
+            "month",
+            "7d",
+            "30d",
+            "90d",
+            "365d"
+          ],
+          "default": "all"
+        }
+      },
+      "LeaderboardMetric": {
+        "name": "metric",
+        "in": "query",
+        "description": "Ranking metric. score and landing need at least 3 flights in the period.",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "hours",
+            "flights",
+            "distance",
+            "score",
+            "landing"
+          ],
+          "default": "hours"
+        }
+      },
+      "LeaderboardLimit": {
+        "name": "limit",
+        "in": "query",
+        "description": "Number of ranked pilots, 1–100.",
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 10
+        }
+      },
+      "IfNoneMatch": {
+        "name": "If-None-Match",
+        "in": "header",
+        "description": "ETag from an earlier response. When the body is unchanged the API returns 304 and charges one row.",
+        "schema": {
+          "type": "string"
         }
       }
     },
@@ -892,6 +1285,38 @@
         "schema": {
           "type": "integer"
         }
+      },
+      "ETag": {
+        "description": "Weak validator of the response body. Send it back in If-None-Match; an unchanged body returns 304 and costs one row.",
+        "schema": {
+          "type": "string",
+          "example": "W/\"q8ZK2yE0p3l6tB0mXx1cWQ9dTnR4aSfh\""
+        }
+      },
+      "RateLimitRowLimit": {
+        "description": "Rows one API key can read per hour.",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "RateLimitRowRemaining": {
+        "description": "Rows left this hour, the lower of the key and its airline allowance.",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "RateLimitRowReset": {
+        "description": "ISO timestamp when the hourly row window resets.",
+        "schema": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "RateLimitRowCost": {
+        "description": "Rows this response consumed: the rows returned for a list, a fixed cost for single objects, 1 for a 304.",
+        "schema": {
+          "type": "integer"
+        }
       }
     },
     "schemas": {
@@ -903,7 +1328,7 @@
         "properties": {
           "apiVersion": {
             "type": "string",
-            "example": "2026-07-21"
+            "example": "2026-10-25"
           }
         }
       },
@@ -925,8 +1350,23 @@
             "maximum": 100
           },
           "total": {
-            "type": "integer",
-            "minimum": 0
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Records matching the filters. Null on cursor pages of flights and on the leaderboard."
+          },
+          "hasMore": {
+            "type": "boolean",
+            "description": "Whether another page exists after this one."
+          },
+          "nextCursor": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Flights only. Opaque position to pass as cursor for the next page. With order=asc it is always returned, so an incremental sync can store it."
           }
         }
       },
@@ -1033,6 +1473,7 @@
         "type": "object",
         "required": [
           "displayName",
+          "avatarUrl",
           "rank",
           "joinedAt",
           "lastActivityAt",
@@ -1045,6 +1486,14 @@
         "properties": {
           "displayName": {
             "type": "string"
+          },
+          "avatarUrl": {
+            "description": "Public, unsigned FlyHub avatar URL, or null.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
           },
           "rank": {
             "type": [
@@ -1105,7 +1554,18 @@
           "blockMinutes",
           "distanceNm",
           "score",
-          "virtualPeriod"
+          "virtualPeriod",
+          "pilot",
+          "landingRateFpm",
+          "landingGForce",
+          "landingRating",
+          "passengers",
+          "cargoKg",
+          "network",
+          "simulator",
+          "origin",
+          "destination",
+          "createdAt"
         ],
         "properties": {
           "airlineIcao": {
@@ -1116,7 +1576,13 @@
             "description": "ICAO code of the airline that operated the flight. A flagship key includes non-closed subsidiaries."
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "completed",
+              "diverted",
+              "rejected",
+              "corrected"
+            ]
           },
           "flightNumber": {
             "type": "string"
@@ -1175,6 +1641,101 @@
               "string",
               "null"
             ]
+          },
+          "pilot": {
+            "description": "Pilot who flew it. null on rejected and corrected rows.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PublicPilot"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "landingRateFpm": {
+            "description": "Touchdown vertical speed in feet per minute (negative while descending). null on rejected and corrected rows or when not recorded.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "landingGForce": {
+            "description": "Touchdown G-force, rounded to two decimals.",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "landingRating": {
+            "description": "FlyHub landing rating, for example greased, great, average, or hard.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "passengers": {
+            "description": "Passengers carried, from the dispatch load.",
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "cargoKg": {
+            "description": "Cargo weight in kilograms, from the dispatch load.",
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "network": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "vatsim",
+              "ivao",
+              "offline",
+              null
+            ],
+            "description": "vatsim or ivao when flown on a network, offline when flown off-network, null when unknown."
+          },
+          "simulator": {
+            "description": "Simulator name reported by the FlyHub tracker.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "origin": {
+            "description": "Origin airport details.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AirportRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "destination": {
+            "description": "Destination airport details.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AirportRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When FlyHub recorded the logbook entry. The since/until filters and cursors use this time."
           }
         }
       },
@@ -1528,6 +2089,764 @@
             }
           }
         }
+      },
+      "PublicPilot": {
+        "type": "object",
+        "description": "Public pilot identity: a display name and a public avatar URL only. User IDs are never exposed.",
+        "required": [
+          "displayName",
+          "avatarUrl"
+        ],
+        "properties": {
+          "displayName": {
+            "type": "string"
+          },
+          "avatarUrl": {
+            "description": "Public, unsigned FlyHub avatar URL, or null when the pilot has no avatar.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          }
+        }
+      },
+      "AirportRef": {
+        "type": "object",
+        "required": [
+          "icao",
+          "name",
+          "city",
+          "countryCode"
+        ],
+        "properties": {
+          "icao": {
+            "type": "string"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "city": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "countryCode": {
+            "description": "ISO 3166-1 alpha-2 country code.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "LiveFlight": {
+        "type": "object",
+        "required": [
+          "airlineIcao",
+          "flightNumber",
+          "originIcao",
+          "destinationIcao",
+          "origin",
+          "destination",
+          "aircraftRegistration",
+          "aircraftTypeIcao",
+          "pilot",
+          "trackingMode",
+          "network",
+          "phase",
+          "offBlockAt",
+          "progressPercent",
+          "etaAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "airlineIcao": {
+            "description": "ICAO code of the operating airline.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "flightNumber": {
+            "type": "string"
+          },
+          "originIcao": {
+            "type": "string"
+          },
+          "destinationIcao": {
+            "type": "string"
+          },
+          "origin": {
+            "description": "Origin airport details.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AirportRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "destination": {
+            "description": "Destination airport details.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AirportRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "aircraftRegistration": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "aircraftTypeIcao": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "pilot": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PublicPilot"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "trackingMode": {
+            "type": "string",
+            "enum": [
+              "online",
+              "offline"
+            ],
+            "description": "online is the live desktop tracker; offline is checkpoint-based offline tracking."
+          },
+          "network": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "vatsim",
+              "ivao",
+              "offline",
+              null
+            ],
+            "description": "vatsim or ivao when the pilot is connected right now, offline for offline-tracked flights, null otherwise."
+          },
+          "phase": {
+            "type": "string",
+            "enum": [
+              "preflight",
+              "pushback",
+              "taxi",
+              "takeoff",
+              "climb",
+              "cruise",
+              "descent",
+              "landing",
+              "parked"
+            ],
+            "description": "Coarse flight phase."
+          },
+          "offBlockAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "progressPercent": {
+            "description": "Coarse route progress from 0 to 100.",
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 100
+          },
+          "etaAt": {
+            "description": "Estimated arrival: derived from ground speed while airborne, otherwise the planned arrival.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "description": "Time of the last tracker update.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "Insights": {
+        "type": "object",
+        "description": "Aggregates over completed and diverted flights that count for statistics, in the same group scope as flights.",
+        "required": [
+          "period",
+          "since",
+          "totals",
+          "flightsByMonth",
+          "topAirports",
+          "topRoutes",
+          "topAircraftTypes",
+          "networks",
+          "simulators",
+          "landingRatings"
+        ],
+        "properties": {
+          "period": {
+            "type": "string",
+            "enum": [
+              "all",
+              "month",
+              "7d",
+              "30d",
+              "90d",
+              "365d"
+            ]
+          },
+          "since": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "Start of the period, or null for all time."
+          },
+          "totals": {
+            "type": "object",
+            "properties": {
+              "flights": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "pilots": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "airports": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "blockHours": {
+                "type": "number"
+              },
+              "distanceNm": {
+                "type": "number"
+              },
+              "passengers": {
+                "type": "number"
+              },
+              "cargoKg": {
+                "type": "number"
+              },
+              "averageScore": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "averageLandingRateFpm": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            }
+          },
+          "flightsByMonth": {
+            "type": "array",
+            "description": "UTC calendar months, oldest first, up to the last 24.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "month": {
+                  "type": "string",
+                  "example": "2026-10"
+                },
+                "flights": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "blockHours": {
+                  "type": "number"
+                },
+                "distanceNm": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "topAirports": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "properties": {
+                "icao": {
+                  "type": "string"
+                },
+                "departures": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "arrivals": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "movements": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "topRoutes": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "properties": {
+                "originIcao": {
+                  "type": "string"
+                },
+                "destinationIcao": {
+                  "type": "string"
+                },
+                "flights": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "topAircraftTypes": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "properties": {
+                "aircraftTypeIcao": {
+                  "type": "string"
+                },
+                "flights": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "blockHours": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "networks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "network": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "vatsim",
+                    "ivao",
+                    "offline",
+                    null
+                  ]
+                },
+                "flights": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "simulators": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "properties": {
+                "simulator": {
+                  "type": "string"
+                },
+                "flights": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "landingRatings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "rating": {
+                  "type": "string"
+                },
+                "flights": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "LeaderboardEntry": {
+        "type": "object",
+        "required": [
+          "position",
+          "pilot",
+          "flights",
+          "blockHours",
+          "distanceNm",
+          "averageScore",
+          "averageLandingRateFpm",
+          "bestLandingRateFpm",
+          "lastFlightAt"
+        ],
+        "properties": {
+          "position": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "pilot": {
+            "$ref": "#/components/schemas/PublicPilot"
+          },
+          "flights": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "blockHours": {
+            "type": "number"
+          },
+          "distanceNm": {
+            "type": "number"
+          },
+          "averageScore": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "averageLandingRateFpm": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Average touchdown rate (negative). Closest to zero ranks first for metric=landing."
+          },
+          "bestLandingRateFpm": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "lastFlightAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "Finance": {
+        "type": "object",
+        "description": "Profit and loss from the airline ledger, in the same group scope as statistics: a flagship key covers the whole group. Launch capital and group transfers are excluded because they are not performance.",
+        "required": [
+          "period",
+          "currency",
+          "from",
+          "to",
+          "bucket",
+          "summary",
+          "previous",
+          "cashBalance",
+          "revenueBreakdown",
+          "costBreakdown",
+          "series",
+          "highlights"
+        ],
+        "properties": {
+          "period": {
+            "type": "string",
+            "enum": [
+              "all",
+              "month",
+              "7d",
+              "30d",
+              "90d",
+              "365d"
+            ]
+          },
+          "currency": {
+            "type": "string",
+            "const": "FH$"
+          },
+          "from": {
+            "type": "string",
+            "format": "date",
+            "description": "First UTC day included."
+          },
+          "to": {
+            "type": "string",
+            "format": "date",
+            "description": "Last UTC day included (today)."
+          },
+          "bucket": {
+            "type": "string",
+            "enum": [
+              "day",
+              "month"
+            ],
+            "description": "Size of each series entry: days up to 92 days, months beyond."
+          },
+          "summary": {
+            "type": "object",
+            "required": [
+              "revenue",
+              "costs",
+              "netResult",
+              "operatingMarginPercent"
+            ],
+            "properties": {
+              "revenue": {
+                "type": "number",
+                "description": "Amount in FH$."
+              },
+              "costs": {
+                "type": "number",
+                "description": "Amount in FH$."
+              },
+              "netResult": {
+                "type": "number",
+                "description": "Revenue minus costs, in FH$."
+              },
+              "operatingMarginPercent": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "description": "Net result as a share of revenue; null when there was no revenue."
+              }
+            }
+          },
+          "previous": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "revenue",
+              "costs",
+              "netResult",
+              "operatingMarginPercent"
+            ],
+            "properties": {
+              "revenue": {
+                "type": "number",
+                "description": "Amount in FH$."
+              },
+              "costs": {
+                "type": "number",
+                "description": "Amount in FH$."
+              },
+              "netResult": {
+                "type": "number",
+                "description": "Revenue minus costs, in FH$."
+              },
+              "operatingMarginPercent": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "description": "Net result as a share of revenue; null when there was no revenue."
+              }
+            },
+            "description": "The same length of time just before; month compares with the same days of last month. Null for all."
+          },
+          "cashBalance": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Current airline cash in FH$ (shared across a group)."
+          },
+          "revenueBreakdown": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "key",
+                "label",
+                "amount",
+                "sharePercent"
+              ],
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number",
+                  "description": "Amount in FH$."
+                },
+                "sharePercent": {
+                  "type": "number",
+                  "description": "Share of total revenue or costs."
+                }
+              }
+            },
+            "description": "Revenue by source, largest first: passengers, cargo, ancillary, contracts."
+          },
+          "costBreakdown": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "key",
+                "label",
+                "amount",
+                "sharePercent"
+              ],
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number",
+                  "description": "Amount in FH$."
+                },
+                "sharePercent": {
+                  "type": "number",
+                  "description": "Share of total revenue or costs."
+                }
+              }
+            },
+            "description": "Costs by group, largest first: fleet, fuel, routes and schedules, airports, crew/handling/service, operating programs, penalties and incidents, other."
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "period",
+                "revenue",
+                "costs",
+                "netResult"
+              ],
+              "properties": {
+                "period": {
+                  "type": "string",
+                  "description": "YYYY-MM-DD for day buckets, YYYY-MM for month buckets."
+                },
+                "revenue": {
+                  "type": "number",
+                  "description": "Amount in FH$."
+                },
+                "costs": {
+                  "type": "number",
+                  "description": "Amount in FH$."
+                },
+                "netResult": {
+                  "type": "number",
+                  "description": "Amount in FH$."
+                }
+              }
+            }
+          },
+          "highlights": {
+            "type": "object",
+            "required": [
+              "bestDay",
+              "worstDay",
+              "profitableDays",
+              "totalDays",
+              "averageDailyResult"
+            ],
+            "properties": {
+              "bestDay": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "date",
+                  "netResult"
+                ],
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "netResult": {
+                    "type": "number",
+                    "description": "Amount in FH$."
+                  }
+                }
+              },
+              "worstDay": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "required": [
+                  "date",
+                  "netResult"
+                ],
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "netResult": {
+                    "type": "number",
+                    "description": "Amount in FH$."
+                  }
+                }
+              },
+              "profitableDays": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "totalDays": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "averageDailyResult": {
+                "type": "number",
+                "description": "Amount in FH$."
+              }
+            }
+          }
+        }
       }
     },
     "responses": {
@@ -1545,6 +2864,21 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/RateLimitReset"
+          },
+          "ETag": {
+            "$ref": "#/components/headers/ETag"
+          },
+          "X-RateLimit-Row-Limit": {
+            "$ref": "#/components/headers/RateLimitRowLimit"
+          },
+          "X-RateLimit-Row-Remaining": {
+            "$ref": "#/components/headers/RateLimitRowRemaining"
+          },
+          "X-RateLimit-Row-Reset": {
+            "$ref": "#/components/headers/RateLimitRowReset"
+          },
+          "X-RateLimit-Row-Cost": {
+            "$ref": "#/components/headers/RateLimitRowCost"
           }
         },
         "content": {
@@ -1581,6 +2915,21 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/RateLimitReset"
+          },
+          "ETag": {
+            "$ref": "#/components/headers/ETag"
+          },
+          "X-RateLimit-Row-Limit": {
+            "$ref": "#/components/headers/RateLimitRowLimit"
+          },
+          "X-RateLimit-Row-Remaining": {
+            "$ref": "#/components/headers/RateLimitRowRemaining"
+          },
+          "X-RateLimit-Row-Reset": {
+            "$ref": "#/components/headers/RateLimitRowReset"
+          },
+          "X-RateLimit-Row-Cost": {
+            "$ref": "#/components/headers/RateLimitRowCost"
           }
         },
         "content": {
@@ -1624,6 +2973,21 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/RateLimitReset"
+          },
+          "ETag": {
+            "$ref": "#/components/headers/ETag"
+          },
+          "X-RateLimit-Row-Limit": {
+            "$ref": "#/components/headers/RateLimitRowLimit"
+          },
+          "X-RateLimit-Row-Remaining": {
+            "$ref": "#/components/headers/RateLimitRowRemaining"
+          },
+          "X-RateLimit-Row-Reset": {
+            "$ref": "#/components/headers/RateLimitRowReset"
+          },
+          "X-RateLimit-Row-Cost": {
+            "$ref": "#/components/headers/RateLimitRowCost"
           }
         },
         "content": {
@@ -1667,6 +3031,21 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/RateLimitReset"
+          },
+          "ETag": {
+            "$ref": "#/components/headers/ETag"
+          },
+          "X-RateLimit-Row-Limit": {
+            "$ref": "#/components/headers/RateLimitRowLimit"
+          },
+          "X-RateLimit-Row-Remaining": {
+            "$ref": "#/components/headers/RateLimitRowRemaining"
+          },
+          "X-RateLimit-Row-Reset": {
+            "$ref": "#/components/headers/RateLimitRowReset"
+          },
+          "X-RateLimit-Row-Cost": {
+            "$ref": "#/components/headers/RateLimitRowCost"
           }
         },
         "content": {
@@ -1710,6 +3089,21 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/RateLimitReset"
+          },
+          "ETag": {
+            "$ref": "#/components/headers/ETag"
+          },
+          "X-RateLimit-Row-Limit": {
+            "$ref": "#/components/headers/RateLimitRowLimit"
+          },
+          "X-RateLimit-Row-Remaining": {
+            "$ref": "#/components/headers/RateLimitRowRemaining"
+          },
+          "X-RateLimit-Row-Reset": {
+            "$ref": "#/components/headers/RateLimitRowReset"
+          },
+          "X-RateLimit-Row-Cost": {
+            "$ref": "#/components/headers/RateLimitRowCost"
           }
         },
         "content": {
@@ -1753,6 +3147,21 @@
           },
           "X-RateLimit-Reset": {
             "$ref": "#/components/headers/RateLimitReset"
+          },
+          "ETag": {
+            "$ref": "#/components/headers/ETag"
+          },
+          "X-RateLimit-Row-Limit": {
+            "$ref": "#/components/headers/RateLimitRowLimit"
+          },
+          "X-RateLimit-Row-Remaining": {
+            "$ref": "#/components/headers/RateLimitRowRemaining"
+          },
+          "X-RateLimit-Row-Reset": {
+            "$ref": "#/components/headers/RateLimitRowReset"
+          },
+          "X-RateLimit-Row-Cost": {
+            "$ref": "#/components/headers/RateLimitRowCost"
           }
         },
         "content": {
@@ -1816,6 +3225,223 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "LiveFlightsResponse": {
+        "description": "Flights in progress right now (up to 100).",
+        "headers": {
+          "Cache-Control": {
+            "$ref": "#/components/headers/CacheControl"
+          },
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimitLimit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimitRemaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimitReset"
+          },
+          "ETag": {
+            "$ref": "#/components/headers/ETag"
+          },
+          "X-RateLimit-Row-Limit": {
+            "$ref": "#/components/headers/RateLimitRowLimit"
+          },
+          "X-RateLimit-Row-Remaining": {
+            "$ref": "#/components/headers/RateLimitRowRemaining"
+          },
+          "X-RateLimit-Row-Reset": {
+            "$ref": "#/components/headers/RateLimitRowReset"
+          },
+          "X-RateLimit-Row-Cost": {
+            "$ref": "#/components/headers/RateLimitRowCost"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "data",
+                "meta"
+              ],
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LiveFlight"
+                  }
+                },
+                "meta": {
+                  "$ref": "#/components/schemas/Meta"
+                }
+              }
+            }
+          }
+        }
+      },
+      "InsightsResponse": {
+        "description": "Airline insights.",
+        "headers": {
+          "Cache-Control": {
+            "$ref": "#/components/headers/CacheControl"
+          },
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimitLimit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimitRemaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimitReset"
+          },
+          "ETag": {
+            "$ref": "#/components/headers/ETag"
+          },
+          "X-RateLimit-Row-Limit": {
+            "$ref": "#/components/headers/RateLimitRowLimit"
+          },
+          "X-RateLimit-Row-Remaining": {
+            "$ref": "#/components/headers/RateLimitRowRemaining"
+          },
+          "X-RateLimit-Row-Reset": {
+            "$ref": "#/components/headers/RateLimitRowReset"
+          },
+          "X-RateLimit-Row-Cost": {
+            "$ref": "#/components/headers/RateLimitRowCost"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "data",
+                "meta"
+              ],
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/Insights"
+                },
+                "meta": {
+                  "$ref": "#/components/schemas/Meta"
+                }
+              }
+            }
+          }
+        }
+      },
+      "LeaderboardResponse": {
+        "description": "Ranked pilots.",
+        "headers": {
+          "Cache-Control": {
+            "$ref": "#/components/headers/CacheControl"
+          },
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimitLimit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimitRemaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimitReset"
+          },
+          "ETag": {
+            "$ref": "#/components/headers/ETag"
+          },
+          "X-RateLimit-Row-Limit": {
+            "$ref": "#/components/headers/RateLimitRowLimit"
+          },
+          "X-RateLimit-Row-Remaining": {
+            "$ref": "#/components/headers/RateLimitRowRemaining"
+          },
+          "X-RateLimit-Row-Reset": {
+            "$ref": "#/components/headers/RateLimitRowReset"
+          },
+          "X-RateLimit-Row-Cost": {
+            "$ref": "#/components/headers/RateLimitRowCost"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "data",
+                "pagination",
+                "meta"
+              ],
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LeaderboardEntry"
+                  }
+                },
+                "meta": {
+                  "$ref": "#/components/schemas/Meta"
+                },
+                "pagination": {
+                  "$ref": "#/components/schemas/Pagination"
+                }
+              }
+            }
+          }
+        }
+      },
+      "NotModified": {
+        "description": "The body has not changed since the ETag sent in If-None-Match. Costs one row."
+      },
+      "FinanceResponse": {
+        "description": "Airline finance report.",
+        "headers": {
+          "Cache-Control": {
+            "$ref": "#/components/headers/CacheControl"
+          },
+          "X-RateLimit-Limit": {
+            "$ref": "#/components/headers/RateLimitLimit"
+          },
+          "X-RateLimit-Remaining": {
+            "$ref": "#/components/headers/RateLimitRemaining"
+          },
+          "X-RateLimit-Reset": {
+            "$ref": "#/components/headers/RateLimitReset"
+          },
+          "ETag": {
+            "$ref": "#/components/headers/ETag"
+          },
+          "X-RateLimit-Row-Limit": {
+            "$ref": "#/components/headers/RateLimitRowLimit"
+          },
+          "X-RateLimit-Row-Remaining": {
+            "$ref": "#/components/headers/RateLimitRowRemaining"
+          },
+          "X-RateLimit-Row-Reset": {
+            "$ref": "#/components/headers/RateLimitRowReset"
+          },
+          "X-RateLimit-Row-Cost": {
+            "$ref": "#/components/headers/RateLimitRowCost"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "data",
+                "meta"
+              ],
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/Finance"
+                },
+                "meta": {
+                  "$ref": "#/components/schemas/Meta"
+                }
+              }
             }
           }
         }

@@ -3,8 +3,6 @@ title: "Profile and Logbook"
 description: "Understand the Free Flight profile, XP, career stats, passport, type ratings, achievements, pinned badges, and flight entries."
 ---
 
-# Profile and Logbook
-
 Your Free Flight profile is your pilot record.
 
 Use it to review your XP, rank, stats, badges, type ratings, achievements, passport, and every completed Free Flight logbook entry.

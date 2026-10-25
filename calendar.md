@@ -3,8 +3,6 @@ title: "Calendar"
 description: "Plan Free Flight bookings on a monthly roster, move flights between days, and view route maps."
 ---
 
-# Calendar
-
 Calendar lets you plan when to fly your Free Flight bookings.
 
 It shows a monthly roster, pending queue, selected-day panel, and route map.

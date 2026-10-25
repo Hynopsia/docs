@@ -3,8 +3,6 @@ title: Scoring and XP
 description: Learn how FlyHub scores flights, applies penalties, awards XP, and ranks pilots in online and offline tracking modes.
 ---
 
-# Scoring and XP
-
 FlyHub uses scoring to measure how safely and realistically a flight was completed.
 
 There are two separate results:

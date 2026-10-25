@@ -47,6 +47,26 @@ The list can show the aircraft, station, maintenance condition, flights, income,
 
 Details can include recent flights, maintenance work, movements, and component events. A retired aircraft is not part of the active Fleet list, but its historical records can remain available elsewhere.
 
+## Why an aircraft can't fly
+
+A blocked aircraft always shows its reason: one line in the list, and the full list under **Why [registration] can't fly** in its detail panel. Each reason says what clears it. Holds that end on their own show a live countdown.
+
+| Reason | What it means | What clears it |
+| --- | --- | --- |
+| Crash hold | Grounded for 24 hours after a crash. | Releases on its own, then FlyHub checks whether maintenance is needed. |
+| Interrupted flight | A flight stopped before it finished. | Held until the pilot resumes or the flight is closed. When a recovery deadline applies, the countdown shows it; after it the attempt is discarded and the aircraft released. |
+| In flight / Reserved | A pilot is flying it or has booked it. | Ends with the flight. An unstarted booking is released when its hold ends. |
+| In maintenance | Service work is under way. | Return it to service once the 24-hour work period ends. |
+| System below 20% | A tracked system is grounded. | Schedule maintenance (move it to a hub first if needed). |
+| Mandatory maintenance | Health under 40% at a hub. | Service it at that hub. |
+| Grounded by a manager | A manager changed its status, with the reason if one was given. | A manager returns it to service. |
+| Temporarily unavailable | A timed hold. | Releases on its own. |
+| Ferry to a hub | Health under 40% away from a hub. Only a payload-free ferry is allowed. | Fly it empty to a hub, or move it there. |
+| Maintenance due | A system is under 40%, or a check limit (hours or cycles) was reached. | Service it, or use **Fly anyway for 7 days**. |
+| Maintenance scheduled | Work is booked. | Start it from the aircraft detail. |
+
+If a status has no recorded cause, the page says so. Contact FlyHub support with the registration.
+
 ## Lease an aircraft
 
 Select **Lease aircraft** to choose from the available FlyHub leasing catalogue.
@@ -58,7 +78,11 @@ Select **Lease aircraft** to choose from the available FlyHub leasing catalogue.
 5. Review the daily cost and terms.
 6. Confirm the lease.
 
-The current lease flow uses a minimum 30-day term and a daily cost fixed when the lease is signed. Returning an aircraft before the minimum term can incur a penalty. The page shows the lessor, minimum end date, daily cost, and an estimated penalty; the final amount is calculated when the return is confirmed.
+Leases are rolling. The daily rent is fixed when you sign and keeps running every day until you return the aircraft; a lease never ends on its own. The first 30 days are a minimum term: returning after that date is free, while returning before it costs an extra 30 days of rent on top of the rent already paid. Fleet shows the daily rent, the date the aircraft becomes free to return, and the early-return fee.
+
+To sign, the airline needs enough cash for 30 days of the new lease plus 7 days of its current running costs (leases, airport and hub fees, schedule fees) and any booked maintenance. The lease screen shows this amount and disables signing when the balance is short.
+
+A leased aircraft that has been in the fleet for more than 14 days and has no settled flight in the last 14 days is billed at 40% of its daily rent while parked. Its next settled flight returns it to the full rate.
 
 Fleet does not provide a direct purchase action. New aircraft are acquired through the available lease or launch flow.
 
@@ -96,13 +120,18 @@ If a photo is rejected, use a supported format, a landscape image, and the size 
 From **Overview**, choose an active airport in the airline's network as the destination. Search by ICAO code or airport name, then select one of the displayed stations.
 
 - Moving to an established active hub is free.
-- Moving to another active network airport can cost FH$.
-- The cost is charged when the move is confirmed.
+- Moving to another active network airport costs a distance fee, shown before you confirm.
+- The fee is charged when the move is confirmed.
+- Instead of paying, a pilot can fly the aircraft there empty.
 - The destination must belong to the active network.
 - A maintenance transfer must end at an active hub.
 - A maintenance ferry operates without passengers or cargo.
 
 The aircraft must be available for a move. A reserved or active flight, or an incompatible maintenance state, can block the action.
+
+### Fuel
+
+Fuel on board carries over between flights. Only fuel added on top is billed. The fuel price depends on where the flight departs: hub ×0.85, other network airport ×1.00, outside the network ×1.25. Programs can shift these prices.
 
 ## Maintain an aircraft
 
@@ -115,9 +144,21 @@ Maintenance is currently an immediate 24-hour service flow:
 
 The workspace can show **Serviceable**, **Monitor**, **Due**, **Grounded**, **Ferry required**, **Due at hub**, **Scheduled**, and **In progress**.
 
+### Health and wear
+
+- Aircraft health is a weighted mix of its tracked systems: airframe 32%, engines 34%, gear 19%, brakes 15%.
+- Each system shows **Monitor** under 65%, **Due** under 40%, and **Grounded** under 20%.
+- Every flight wears the systems. Firm landings (over 250 fpm) and low scores add extra wear. **Health** shows what caused the last flight's wear.
+- Below 90% health the aircraft gets fewer bookings and costs more per flight. At 40% that reaches up to 34% fewer passengers and cargo and up to +35% aircraft cost.
+
+### Maintenance price
+
+Servicing returns every tracked system to 95%. Lower health costs more. The price is locked in when you schedule, and charged when the aircraft returns to service after the 24-hour work period.
+
 Maintenance rules include:
 
-- below 90% condition can reduce demand;
+- maintenance becomes due when any system drops under 40% or the airframe reaches its next check hours or cycles;
+- while maintenance is due, pilots can't book the aircraft unless a manager chooses **Fly anyway for 7 days**. This accepts the risk: wear keeps building and the penalties above still apply. It is refused below 55% health;
 - below 40% condition requires maintenance;
 - an aircraft away from a hub may need a ferry first;
 - an aircraft due at a hub must be maintained there;
@@ -128,9 +169,9 @@ Fleet does not provide a future-date maintenance calendar. When an aircraft need
 
 ## Return a leased aircraft
 
-Before selecting **Return lease**, resolve all reserved or active flights. The aircraft must be available or grounded, and the acting staff member must have the required aircraft, lease, and financial access.
+Before selecting **Return aircraft**, resolve all reserved or active flights. The aircraft must be available or grounded, and the acting staff member must have the required aircraft, lease, and financial access.
 
-Review the minimum end date and penalty estimate. After confirmation, the aircraft leaves the active fleet and its history remains available. There is no direct undo action on the page.
+The confirmation shows what is charged now: nothing after the minimum term, or 30 days' extra rent before it. After confirmation, daily rent stops, the aircraft leaves the active fleet and its history remains available. There is no direct undo action on the page.
 
 ## Transfer an aircraft within a group
 
@@ -151,7 +192,6 @@ Common reasons an action is unavailable include:
 - insufficient group funds;
 - a duplicate registration;
 - an invalid configuration;
-- an active lease inside its minimum term;
 - a destination outside the network;
 - a missing permission in the selected operating airline.
 

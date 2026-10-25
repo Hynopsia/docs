@@ -19,31 +19,33 @@ Network access is available to Owners, Managers, Operations, Schedules Managers,
 
 ## Network summary and schedule list
 
-The summary can show available balance, active schedules, completed flights, gross revenue, and net result.
+The summary can show available balance, active schedules, completed flights, gross revenue, and **Flight profit**. Flight profit counts flight settlements only, before daily schedule, airport, and route opening fees.
 
 Each schedule can show:
 
 - flight number and state;
 - origin, destination, and distance;
 - passenger or cargo type;
-- operating days;
+- operating days (UTC);
 - eligible aircraft;
 - estimated duration;
 - completed flights and gross revenue.
 
 Search by flight number or airport. Filter current schedules, active schedules, suspended schedules, the retired archive, or all available records. Sort by completed flights or gross revenue and use the page controls to browse more results.
 
-Select a schedule to open its details, including operating days, duration range, daily operating cost, eligible aircraft, completed results, and flights that are available, claimed, or in progress.
+Select a schedule to open its details, including operating days, duration range, daily fee, flight profit, eligible aircraft, and flights that are available, claimed, or in progress.
 
 ## Create or edit a schedule
 
 1. Select **New schedule** or choose **Edit** on an existing schedule.
 2. Select different origin and destination airports that are active in the group's network.
 3. Choose passenger or cargo.
-4. Set the flight-number suffix and operating days.
+4. Set the flight-number suffix and operating days. Days are UTC days.
 5. Choose aircraft types, categories, sizes, or dynamic inclusions and exclusions.
 6. Review the duration and cost estimate.
 7. Save the schedule.
+
+Two schedules can share a flight number when they fly different routes, for example an outbound and a return leg. The same flight number on the same route is only allowed once.
 
 Before saving, FlyHub checks the airports, days, aircraft eligibility, airline state, number format, distance, and duration. The saved duration is recalculated from the current operating rules. Schedules with open flights cannot be edited until those flights are resolved.
 
@@ -55,7 +57,9 @@ You can select concrete types or use dynamic rules based on category, size, and 
 
 ## Route cost and lifecycle
 
-An existing origin–destination–operation combination can be reused. A suspended route may be reopened when you have route access. Opening a new route requires sufficient group funds and the required route and finance access; FlyHub charges the current opening fee when it creates the route.
+An existing origin–destination–operation combination can be reused. A suspended route may be reopened when you have route access. Opening a new route requires sufficient group funds and the required route and finance access; FlyHub charges the opening fee from airline cash when it creates the route. The fee is one-time and based on distance, up to FH$30,000. If cash is short, the save button stays disabled and the page says how much more is needed.
+
+Each active schedule also has a daily fee, charged at 00:10 UTC only on its UTC operating days, even if cash is below zero. A schedule with no flight for 14 days pays 25% until it flies again.
 
 Schedules can be **Active**, **Suspended**, or **Retired**.
 
@@ -68,7 +72,7 @@ Schedules can be **Active**, **Suspended**, or **Retired**.
 
 **Export** downloads a CSV of non-retired schedules, including dynamic rules and duration information.
 
-**Import** accepts FlyHub and Newsky CSV files. The page validates the complete file and shows a preview before you confirm. The import replaces the selected operating airline's current schedules, preserves existing reservations and completed history, and removes future unclaimed inventory from schedules being replaced. It does not change other operating airlines.
+**Import** accepts FlyHub and Newsky CSV files. The page validates the complete file and shows a preview before you confirm. One flight number can fly several routes; identical repeated rows are skipped and counted in the preview. The same flight number and route with different details is reported so you can keep one. The import replaces the selected operating airline's current schedules, preserves existing reservations and completed history, and removes future unclaimed inventory from schedules being replaced. It does not change other operating airlines.
 
 The import dialog validates the file before applying it. Follow the size and schedule limits shown in the dialog, and review the preview before confirming the replacement.
 
