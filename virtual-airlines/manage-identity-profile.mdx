@@ -44,7 +44,13 @@ The new home is added to Airports as a hub (or reactivated) and starts paying da
 
 ### Flight and moderation policy
 
-- **Free Flight position exception**: if Free Flights may start anywhere but the fleet position policy does not, a Free Flight does not move the aircraft. It stays parked where it was, so schedules can only use it from there.
+Flight rules and pilot rules are saved together with **Publish policy**.
+
+- **Free flights can start anywhere**: passenger, cargo, and VIP free flights can depart from any airport. The aircraft stays parked where it was, so scheduled flights still find it there.
+- **Tour flights can start anywhere**: the same for tour legs. The aircraft must still be free and allowed on the tour.
+- **Where aircraft must be**: choose **Aircraft must be at the departure airport**, **Aircraft can start anywhere**, or **Only charters and events can start anywhere**. A booked or flying aircraft is never available. Charters and events never move the aircraft.
+- **Flight plan remarks**: text printed on every new booking's SimBrief flight plan (OFP).
+- **Minimum flights**, **Minimum hours**, and **Minimum average score**: what a pilot needs across every FlyHub virtual airline before they can apply. 0 means no minimum.
 - **Automatic moderation**: the strike and activity rules below run only while it is on.
 - **Minimum monthly flights**: pilots under this number in a finished UTC month are removed automatically and lose their roles. New joiners skip their first month. Set 0 to disable.
 - **Last activity**: pilots with no completed VA flight in this many days are removed automatically and lose their roles. Pilots who never flew count from when they joined. Set 0 to disable.

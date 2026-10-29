@@ -21,13 +21,13 @@ You need Operations access to view the workspace. Reviewing a low-scoring result
 
 Operations provides five views:
 
-- **Insights** — See recent operating totals, flight sources, and score distribution.
+- **Operations dashboard** — See the current workload, flight types, and flight scores.
 - **Needs attention** — Find flights scored under 7.0 in the last 30 days that have not been reviewed. This list is separate from your airline's strike rule.
-- **Active** — See flights that are in progress, interrupted, recoverable, or restored.
-- **Upcoming** — See flights that are ready or scheduled.
-- **Closed** — See operations that have reached an end state, including completed, settled, rejected, cancelled, abandoned, and expired flights.
+- **Active now** — See flights that are flying, interrupted, or resuming.
+- **Upcoming** — See flights that are published or booked but haven't started.
+- **Completed** — See flights that have finished one way or another: paid, rejected, cancelled, abandoned, or expired.
 
-The summary at the top can show the number of items needing attention, active operations, upcoming operations, and closed operations. Some categories can overlap. For example, a closed result below 7.0 can remain in **Needs attention** until a manager marks it as reviewed.
+The summary at the top shows how many flights need attention, are active now, are upcoming, and are completed. Some categories can overlap. For example, a completed flight below 7.0 can remain in **Needs attention** until a manager marks it as reviewed.
 
 ## Filter and find operations
 
@@ -45,10 +45,12 @@ Select a row to open its details. Depending on the flight, the detail panel can 
 - aircraft registration, type, and current position when available;
 - pilot and reservation;
 - score and result status;
-- settlement status;
-- virtual operating period;
-- actual destination and any recorded rejection reason;
-- recent operational events.
+- pay status, and the month whose results the flight counts toward;
+- the outcome, such as Completed as planned, Arrived late, Diverted, or Emergency landing;
+- the actual destination;
+- for a rejected flight, why it was rejected and what that cost (see below);
+- recent operational events;
+- buttons to open the pilot profile and the flight's logbook report.
 
 The detail view is for inspection. It does not give a manager control of another pilot's active flight.
 
@@ -68,7 +70,13 @@ Flight validation happens during flight completion. Operations only records the 
 
 ## Insights and history
 
-**Insights** can show a lifecycle summary, flight-source distribution, and score bands such as 9–10, 8–8.9, 7–7.9, below 7, and unscored. The detailed breakdown is based on the recent operations loaded for the workspace and should not be treated as an unlimited historical export.
+The **Operations dashboard** has three charts:
+
+- **Current workload** counts every flight by where it is now: needs attention, active, upcoming, or closed.
+- **Flight types** counts flights planned to depart in the last 30 days, by where they came from (schedule, charter, free flight, and so on).
+- **Flight scores** counts flights checked in the last 30 days in the bands 9.0–10.0, 8.0–8.9, 7.0–7.9, below 7.0, no score, and voided for a rule breach.
+
+Flight types and scores always cover the same 30 days, whatever page of flights you are looking at. If an airline has more than 5,000 flights in that period, the dashboard says so and counts the first 5,000.
 
 The operational history panel can cover:
 
@@ -99,11 +107,11 @@ Flight execution and recovery belong to the assigned pilot in **My Flights** and
 
 ### Rejected flights
 
-A rejected flight's detail shows what the rejection did:
+A rejected flight shows **Why it was rejected** once, in plain words, followed by what the rejection cost:
 
-- **Crash** — the airline pays FH$1,000,000, every aircraft system takes 10 wear points, and the aircraft is grounded for 24 hours.
-- **Cheating** (for example prohibited time acceleration or an invalid aircraft movement) — no pay, XP, or wear. The aircraft stays where it was before the flight.
-- **Other rejections** — no pay or XP. The aircraft is recorded where it actually landed, when that is known.
+- **Crash** — no pay or XP. The detail shows the amount the airline was charged, how many condition points every aircraft part lost, and when the aircraft's grounding ends. These numbers are read from the saved result, so they always match what was actually applied (currently FH$1,000,000, 10 points, and 24 hours).
+- **Rule breach** — the recorder caught time acceleration that the airline's rules don't allow, or an aircraft movement a real flight can't make (for example slewing or teleporting). The flight is voided: no score, pay, XP, or wear, and the aircraft stays where it was before the flight. Lists show these flights as **Rule breach** or **Voided** instead of a score.
+- **Other rejections** — for example the wrong route, or an offline report when the airline only accepts live tracking. No pay or XP. The aircraft is recorded where it actually landed, when that is known.
 
 ## Limits and timing
 
@@ -117,7 +125,7 @@ The page's current controls are the final authority if these limits change.
 
 ## Loading, empty, and recovery states
 
-Operations can show separate loading states for permission checks, the operation list, and historical data. Empty states distinguish between no current operations, no upcoming work, no closed operations, no results for a search, and no history for the selected period.
+Operations can show separate loading states for permission checks, the operation list, and historical data. Each list has its own empty message that says what would appear there; for example **Nobody is flying right now** on Active now, or a note to start a schedule or offer a charter on Upcoming. A search with no matches says so and suggests checking the flight number or airport code.
 
 If the list cannot load, use **Retry** or reload Operations. If a review action is unavailable, confirm that the result is below 7.0, is still eligible for review, and that your role includes the required access. Follow the recovery instruction shown by the page.
 

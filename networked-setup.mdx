@@ -1,0 +1,124 @@
+---
+title: "Networked Setup"
+description: "Run your simulator on one PC and FlyHub Desktop on another."
+---
+
+FlyHub Desktop can track a simulator running on another PC on your home network. This is useful for dual-PC setups, for example when a second PC handles streaming, charts, or FlyHub.
+
+Networked setup works with:
+
+- Microsoft Flight Simulator 2020 and 2024
+- Prepar3D
+- X-Plane 11 and 12
+
+## Before you start
+
+- Both PCs must be on the same local network.
+- You need the IP address of the simulator PC. On the simulator PC, open Command Prompt, run `ipconfig`, and note the **IPv4 Address** (for example `192.168.1.20`).
+- A fixed IP address for the simulator PC is recommended. Otherwise the address can change after a router restart.
+
+## Microsoft Flight Simulator and Prepar3D
+
+These simulators use their own SimConnect server, so no FlyHub software is needed on the simulator PC.
+
+### 1. Set up SimConnect on the simulator PC
+
+Open `SimConnect.xml` on the simulator PC with a text editor. Common locations:
+
+| Simulator | File |
+| --- | --- |
+| MSFS 2020 (Microsoft Store) | `%LOCALAPPDATA%\Packages\Microsoft.FlightSimulator_8wekyb3d8bbwe\LocalCache\SimConnect.xml` |
+| MSFS 2020 (Steam) | `%APPDATA%\Microsoft Flight Simulator\SimConnect.xml` |
+| MSFS 2024 (Microsoft Store) | `%LOCALAPPDATA%\Packages\Microsoft.Limitless_8wekyb3d8bbwe\LocalCache\SimConnect.xml` |
+| MSFS 2024 (Steam) | `%APPDATA%\Microsoft Flight Simulator 2024\SimConnect.xml` |
+| Prepar3D | `%APPDATA%\Lockheed Martin\Prepar3D v5\SimConnect.xml` (use your version folder) |
+
+Add this entry inside the `<SimBase.Document>` element. Replace the address with the simulator PC's IP address. Port `500` is an example; any free port works.
+
+```xml
+<SimConnect.Comm>
+    <Descr>Static IP4 port</Descr>
+    <Protocol>IPv4</Protocol>
+    <Scope>global</Scope>
+    <Address>192.168.1.20</Address>
+    <Port>500</Port>
+    <MaxClients>64</MaxClients>
+    <MaxRecvSize>41088</MaxRecvSize>
+</SimConnect.Comm>
+```
+
+Save the file and restart the simulator. If Windows Firewall asks, allow the simulator on private networks.
+
+If the file does not exist yet, create it with the standard `SimBase.Document` wrapper. See the official SimConnect.xml documentation for [MSFS 2020](https://docs.flightsimulator.com/html/Programming_Tools/SimConnect/SimConnect_XML_Definition.htm) and [MSFS 2024](https://docs.flightsimulator.com/msfs2024/retail/programming-apis/simconnect/simconnect-xml-definition/index.md). Prepar3D uses the same format.
+
+### 2. Connect FlyHub
+
+On the PC running FlyHub Desktop:
+
+1. Open **Settings > Simulator**.
+2. In **Networked setup**, turn on **Simulator on another PC**.
+3. Choose your simulator.
+4. Enter the simulator PC's IP address and the port from `SimConnect.xml`.
+5. Click **Save connection**.
+
+FlyHub connects as soon as the simulator is running.
+
+## X-Plane
+
+X-Plane needs the FlyHub telemetry plugin on the simulator PC, with network mode turned on. FlyHub reads the loaded aircraft from the plugin, so you do not need a network share or mapped drive.
+
+### 1. Install the plugin on the simulator PC
+
+The easiest way is to let FlyHub prepare the plugin:
+
+1. On the PC running FlyHub Desktop, open **Settings > Simulator**.
+2. In **Networked setup**, turn on **Simulator on another PC** and choose **X-Plane 11 / 12**.
+3. Click **Save plugin** and choose a folder, such as a USB drive or a shared folder.
+4. On the simulator PC, copy the saved `FlyHubTelemetry` folder into `X-Plane 12\Resources\plugins` (or `X-Plane 11\Resources\plugins`). Replace the existing `FlyHubTelemetry` folder if there is one.
+5. Start X-Plane. When Windows Firewall asks about X-Plane, allow it on **private networks**.
+
+The saved copy already has network mode turned on.
+
+<Note>
+If FlyHub Desktop is also installed on the simulator PC, you can install the plugin from **Settings > Simulator > X-Plane installations** instead. Then turn on network mode in X-Plane from **Plugins > FlyHub > Allow FlyHub on another PC**. Network mode stays on after plugin updates.
+</Note>
+
+### 2. Check network mode in X-Plane
+
+In X-Plane, open the **Plugins** menu, then **FlyHub**. **Allow FlyHub on another PC (port 52000)** should be checked. The port shown here is the one FlyHub needs.
+
+### 3. Connect FlyHub
+
+On the PC running FlyHub Desktop:
+
+1. Open **Settings > Simulator**.
+2. In **Networked setup**, make sure **X-Plane 11 / 12** is selected.
+3. Enter the simulator PC's IP address and port `52000`.
+4. Click **Save connection**.
+
+FlyHub connects once X-Plane has loaded a flight.
+
+### Recover Flight with X-Plane
+
+To put the aircraft back in position after a crash, FlyHub sends one message to X-Plane's own network port. On the simulator PC, open X-Plane **Settings > Network**, turn on the incoming connections switch at the bottom of the page (**Accept incoming connections**), and keep the receive port at `49000`.
+
+## Switch back to one PC
+
+Turn off **Simulator on another PC** and click **Save connection**. FlyHub goes back to finding the simulator on the same PC.
+
+## Things to know
+
+- You cannot change the connection during a flight. Finish or close the flight first.
+- FlyHub cannot see the simulator's process on another PC. If the connection drops mid-flight, FlyHub waits for it to come back and offers Recover Flight if it does not.
+- The [Scenery Scanner](/scenery-scanner) scans the PC that runs FlyHub Desktop, not the simulator PC.
+
+## Troubleshooting
+
+If FlyHub does not connect:
+
+- Check the IP address and port. The simulator PC's address can change after a restart.
+- Make sure both PCs are on the same network, and not on a guest network.
+- Check that Windows Firewall on the simulator PC allows the simulator (MSFS, Prepar3D, or X-Plane) on private networks.
+- For MSFS and Prepar3D, check that `SimConnect.xml` is in the right folder, and restart the simulator after editing it.
+- For X-Plane, check that **Plugins > FlyHub > Allow FlyHub on another PC** is checked and that a flight is loaded.
+- Antivirus software can also block the connection. Allow the simulator there too.

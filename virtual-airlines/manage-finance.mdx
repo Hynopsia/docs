@@ -1,6 +1,6 @@
 ---
 title: Manage Airline Finance
-description: Review the cash position, flight results, commitments, and transaction history of a Virtual Airline.
+description: Review the cash position, monthly results, paid flights, fixed costs, break-even, and transaction history of a Virtual Airline.
 ---
 
 # Manage Airline: Finance
@@ -17,72 +17,87 @@ Finance is available to active airline or group members with finance access. Own
 
 ## Financial overview
 
-The header shows **Available cash**, **Revenue**, **Costs**, and **Net** for the selected period. Values are shown in FH$. Choose a specific period or **All periods**; the combined view includes up to 12 periods.
+The header shows **Available cash** and the **Revenue**, **Costs**, and **Net** for the month you pick, for example **Revenue · October 2026**. The current month is marked **so far**. Pick a month or **All time** (up to 12 months). Values are in FH$.
 
-The overview can also show:
+When something limits the airline, a **What limits the airline today** line shows what it is and a button to the page that fixes it. It is the same line as on [Programs](./manage-programs#sustainability) and the management [Overview](./manage-overview).
 
-- financial periods and their revenue, costs, and net result;
-- the most recent flight-finance results;
-- daily fixed costs for leases, airports, active schedules, and operating programs;
-- maintenance already committed;
-- the reserve target (30 days of costs plus maintenance) and cash after reserve;
-- **If nobody flies**: how many days the cash lasts with no flight income;
-- **Flights to break even**: flights per week needed to cover fixed costs;
-- 30-, 60-, and 90-day cash projections;
-- active leases, airports, and schedules.
+Below it, **Cash movement** charts the last 30 days: money in, money out, and the cash balance per UTC day, plus where the money went.
 
-Projections assume the last 30 days of flying and today's fixed costs stay the same. They are planning estimates, not guaranteed income.
+The overview also shows:
+
+- **Monthly results**: revenue, costs, and net for each UTC calendar month;
+- the latest **Paid flights**;
+- **Cash lasts**, **Fixed costs per day**, **Break-even**, and the **Cash forecast** in the side panel;
+- what the airline pays for: leased aircraft, airport stations, schedules, programs, and lease contracts.
+
+Forecasts assume the last 30 days of flying and today's fixed costs stay the same. They are planning estimates, not guaranteed income.
+
+### Shared numbers with Programs
+
+Finance and [Programs](./manage-programs) use the same numbers under the same names:
+
+| Name | What it means |
+| --- | --- |
+| **Fixed costs per day** | What the airline is charged every night whether it flies or not: aircraft leases, airport stations, schedule fees, and program fees, after standby discounts. |
+| **Average net per flight** | What a paid flight left after its own costs and crew pay, averaged over the last 30 days. |
+| **Break-even** | Flights a week needed to pay the fixed costs per day at the average net per flight. |
+| **Cash lasts** | Cash divided by what the airline loses each day at the 30-day pace, flight income included. **Covered by flying** means flights earn at least the fixed costs. |
 
 ### Two runway numbers
 
-| Figure | Where | What it means |
-| --- | --- | --- |
-| **If nobody flies** | Finance | Cash minus booked maintenance, divided by the full daily fixed costs. No flight income is counted. |
-| **Cash lasts at recent pace** | [Overview](./manage-overview) and [Programs](./manage-programs) | Cash divided by the airline's daily result over the last 30 days, flying included. **Covered by flying** means flights earn more than the airline spends each day. |
+**Cash lasts** is what happens if the airline keeps flying as it has been. **If nobody flies** is the worst case. Finance shows both, plus the reserve:
 
-The first is the worst case; the second is what happens if the airline keeps flying as it has been.
+| Name | What it means |
+| --- | --- |
+| **Net per day** | Flight income at the 30-day pace minus fixed costs per day. |
+| **If nobody flies** | The worst case: cash minus booked maintenance, divided by fixed costs per day, with no flight income. |
+| **30-day reserve** | 30 days of fixed costs plus booked maintenance. **Cash above reserve** or **Short of reserve** compares it with cash. |
 
-### Daily fixed costs
+Under **Break-even**, Finance says what to do next: how many more flights a week cover fixed costs, or that flights lose money on average and fares or per-flight costs need a look.
 
-Fixed costs are aircraft leases, airport stations and hubs, scheduled routes, and operating programs. There are no staff costs. Finance lists them at full price, before standby discounts.
+### Fixed costs per day
 
-They are charged from airline cash every night at **00:10 UTC**, even when the balance is already below zero. A schedule is only charged on its UTC operating days. When the next charge is pending, the page shows an estimate of what will be taken at 00:10 UTC.
+Fixed costs are aircraft leases, airport stations and hubs, schedule fees, and program fees. There are no staff costs. Finance shows what is actually charged, after standby discounts, and when anything is on standby it also shows how much standby saves and the full price.
+
+They are charged from airline cash every night at **00:10 UTC**, even when the balance is already below zero. A schedule is only charged on its UTC operating days. When lease or airport station fees are still to be charged, the page shows an estimate at full price.
 
 Anything idle for 14 days or more bills less until it flies again: schedules and airport stations pay 25% (never the home airport), and leased aircraft pay 40%. They can still be flown, and one flight restores the full price. See [Standby pricing](./manage-programs#standby-pricing).
 
-## Settlements
+Booked maintenance is not a daily cost. It is paid once when it runs, and Finance lists it under fixed costs so you can plan for it.
 
-The **Settlements** view lists completed flight finances. It can show the airline, flight, settlement date, revenue, operating costs, crew payroll, net result, and a **View breakdown** link.
+## Paid flights
 
-Select **View breakdown** to open the flight's Economy record in the VA logbook. **Net** is the final flight result. Do not add crew payroll to the operating cost a second time when interpreting the total.
+The **Paid flights** view lists the finances of every accepted flight: airline, flight, date, revenue, costs, crew pay, net, and a **View breakdown** link.
 
-The list uses 25 records per page. If a completed flight has no available report, the page explains that the report is unavailable.
+Select **View breakdown** to open the flight's Economy record in the VA logbook. **Costs** already include crew pay; **Net** is revenue minus costs.
+
+The list uses 25 flights per page. If a completed flight has no report, the page says the report is unavailable.
 
 ## Ledger
 
-The **Ledger** is the transaction history. Search by flight or account, filter credits and debits, and filter by period or operating airline when the airline belongs to a group.
+The **Ledger** lists every money movement. Search by flight, airport, or cost type, choose **Money in**, **Money out**, or both, and filter by month or by airline when the airline belongs to a group.
 
-Positive movements are credits; negative movements are debits. Flight movements can be expanded to show their accounting details. Recurring lease, airport, schedule, and program charges are grouped by UTC day, while route openings are grouped by UTC week.
+Each flight is one row; open **Breakdown** to see each cost and income line. Lease, airport station, and schedule fees are added up per UTC day, and route openings per UTC week; open **Breakdown** to see each charge. One-off movements such as starting money, program setup fees, cabin refits, or early lease returns show a short note on what they are.
 
-The ledger uses 25 rows per page. An expanded movement shows up to 100 detail entries. Use the page controls to move through older results.
+The ledger uses 25 rows per page. An expanded row shows up to 100 lines. Use the page controls to move through older results.
 
 ## Groups and dates
 
-In a group, cash is shared while Settlements and Ledger keep an **Airline** column so each result remains attributed to its operating airline. Current commitments use open operating airlines; historical results can include retired airlines.
+In a group, cash is shared while Paid flights and Ledger keep an **Airline** column so you can see which airline flew or paid. Current commitments use open operating airlines; historical results can include retired airlines.
 
-Financial periods are UTC calendar months, and week boundaries also use UTC. A newly completed flight or charge can take a short time to appear in the Finance overview.
+Months are UTC calendar months, and week boundaries also use UTC. A newly completed flight or charge can take a short time to appear in the Finance overview.
 
 ## Empty states and recovery
 
-- **No financial periods** means the airline has not created a financial period from completed flights or recurring charges yet.
-- **No settled flights** means no completed flight result is available for the selected view.
-- **No transactions match** means the period, movement filter, or search text returned no rows.
+- **No monthly results yet** means no flight or daily fee has been recorded yet.
+- **No paid flights yet** means no accepted flight has been paid in the selected view.
+- **No transactions match** means the month, money in or out filter, or search text found nothing.
 - If Finance fails to load, use **Try again** or **Refresh finance**.
 
 If the page still fails, reload the management workspace and follow the recovery instruction shown by the page.
 
 ## Read Finance with the economy model
 
-Finance answers where the airline's money went; it does not decide whether a route is attractive for you. Compare flight net with recurring leases, airport and hub fees, active schedule fees, program fees, route openings, and the reserve target. A profitable flight can still sit inside an airline that is losing cash overall when its fixed commitments are too large.
+Finance answers where the airline's money went; it does not decide whether a route is attractive for you. Compare flight net with fixed costs per day (leases, airport stations, schedule fees, program fees), route openings, and the 30-day reserve. A profitable flight can still sit inside an airline that is losing cash overall when its fixed commitments are too large.
 
 Read [Virtual Airlines Economy and Ticket Pricing](./economy-and-pricing) before interpreting a settlement and [From Dispatch to Settlement](./flight-lifecycle) to understand why the final recognized payload and score can differ from the first Dispatch quote.

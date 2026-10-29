@@ -20,26 +20,46 @@ Market audit is available to active airline members with network-management visi
 The overview can show:
 
 - active routes compared with the total;
-- routes with current health data;
+- routes with weekly numbers;
 - passenger demand and cargo demand;
-- the share of demand already taken by all airlines;
-- average load factor (payload ÷ aircraft capacity);
-- route contribution when finance figures are available;
+- the share of demand already booked by all airlines;
+- average load factor (how full aircraft flew, against a 65% target);
+- route profit when finance figures are available;
 - reputation and its change from the previous period.
 
-### Route health
+### Routes
 
-Route rows can include a recommendation signal, evidence weeks, aircraft load, **Demand flown**, **Flight profit**, recent weeks, carried volume, and result.
+Each route row shows its **Load factor**, **Pool share**, **Profit**, and **Status** for the latest week.
 
-- **Aircraft load** is payload ÷ aircraft capacity.
-- **Demand flown** is how much of the route's weekly demand the airline actually carried.
-- **Flight profit** is the route's flight results for the week, before daily schedule, airport, and route fees. A recommendation is guidance only; it does not edit a route, change a schedule, or reserve demand automatically.
+- **Load factor** is how full the aircraft flew (payload ÷ capacity) on completed flights. Cancelled and expired bookings do not count. The bar marks the 65% target.
+- **Pool share** is how much of the origin airport's weekly pool in that direction your route carried, for example 1.3K of SKBO's southwest pool of 6.3K (21%). Every airline flying that direction shares the same pool.
+- **Profit** is the result of the route's flights for the week, before daily schedule, airport, and route fees.
 
-If a route has no health observation yet, book a flight on it to start its weekly numbers.
+Select a route to see its status, the reason in plain numbers, a suggested next step, and a week-by-week table. Weeks with no completed flights show as **Not flown** instead of 0%.
 
-### Demand pools
+| Status | Meaning | Suggested step |
+| --- | --- | --- |
+| **Losing money** | Below zero for three flown weeks in a row. | Check aircraft cost, schedule, and price before cutting the route. |
+| **Lost money this week** | One negative week. Not enough to suspend the route. | Wait for next week's result. |
+| **No flights** | Nothing was flown on the route in the latest week. | Fly it, or move its aircraft to a busier route. |
+| **Plane too big** | The last two flown weeks were below 65% full. | Try a smaller aircraft or fewer weekly flights. |
+| **Room to grow** | Profitable, 90%+ full, and demand is still unserved. | Add a flight or use a bigger aircraft. |
+| **On track** | Nothing in the numbers calls for a change. | None. |
+| **Not flown yet** | The route has no weekly numbers. | Complete a flight on it. |
 
-Demand pools are weekly (ISO week) and shared by every airline; each booking takes from them. Demand is shown separately for passengers and cargo. An airport can show available, taken, remaining, and used percentages for each of eight directions: north, northeast, east, southeast, south, southwest, west, and northwest.
+A status is guidance only; it does not edit a route, change a schedule, or reserve demand automatically.
+
+### Airport demand
+
+Airport demand pools are weekly (ISO week) and shared by every airline; each booking takes from them. Demand is shown separately for passengers and cargo, for each of eight directions: north, northeast, east, southeast, south, southwest, west, and northwest.
+
+Each pool opens through the week: 3/7 on Monday, a day more each day, and all of it from Friday. Unused demand stays open. The page shows, for each airport and direction:
+
+- **Weekly pool**: the full week's demand;
+- **Taken**: what all airlines have booked this week;
+- **Open now**: what can still be booked today.
+
+See [Daily release](./economy-and-pricing#daily-release) for an example.
 
 Use the airport search to find an airport by code, name, or city. The page can show a radial chart and a directional table for the selected airport.
 
@@ -55,8 +75,8 @@ Use the current view controls to:
 
 - refresh the analysis;
 - page through routes and airports;
-- sort route rows by load, demand flown, or flight profit;
-- filter for attention, opportunity, stability, or missing data;
+- sort route rows by load factor, pool share, or profit;
+- filter for **Needs a look**, **Room to grow**, **On track**, or **Not flown yet**;
 - search airports;
 - open a route or airport detail.
 

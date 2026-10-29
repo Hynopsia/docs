@@ -36,17 +36,29 @@ Only recognized or carried payload earns income. Empty seats, unused cargo capac
 
 Passenger and cargo demand is not based only on the aircraft's maximum size. FlyHub moves through several layers:
 
-1. The weekly market creates finite directional demand around airports.
-2. A route receives a share of that market based on route importance and destination opportunity.
-3. The airline competes for part of the opportunity through its price, reputation, frequency, and timing.
-4. The current weekly and hourly manifest determines what is available at this moment.
+1. The weekly market creates finite directional demand around each airport: one pool per direction for passengers and one for cargo.
+2. Every airline draws from the same pool. There is no private slice per route or per airline: whoever flies the direction takes from it, and what one airline carries is no longer available to the others that week.
+3. The pool opens through the week (see [Daily release](#daily-release)), so the amount available to a departure depends on its day.
+4. The destination must be able to absorb the traffic: a flight is also capped by the destination's pool in the opposite direction.
 5. Aircraft seats, cargo limits, weight, condition, and configuration cap what can be offered safely.
-6. Cabin mix, reputation, condition, and other service factors adjust the likely demand.
+6. Your price, reputation, departure time, cabin and aircraft condition decide how full the flight sells. Demand you do not sell stays in the pool for other flights.
 7. The final quote and flight validation determine what is actually recognized and carried.
 
 The eight market directions are north, northeast, east, southeast, south, southwest, west, and northwest. Airport and route demand is directional, so a busy airport does not mean every direction or every city pair is equally strong.
 
-The market is shared. Other flights can commit part of the available demand. Oversupplying a route can also reduce its yield factor, which means adding seats can make the economics worse when the market cannot fill them.
+The market is shared. An active airline that flies a direction often can carry most of it, and that is intended: competing airlines have to price, schedule and serve better to win it back. Oversupplying a route can also reduce its yield factor, which means adding seats can make the economics worse when the market cannot fill them.
+
+### Daily release
+
+Each weekly pool opens gradually so a single large departure early in the week cannot empty a direction for everyone:
+
+| Day (UTC) | Mon | Tue | Wed | Thu | Fri–Sun |
+| --- | --- | --- | --- | --- | --- |
+| Share of the week open | 3/7 (43%) | 4/7 (57%) | 5/7 (71%) | 6/7 (86%) | All |
+
+Demand nobody uses stays open for later days, so the weekly total is never reduced. The day that counts is the earlier of the departure and the moment you book, so booking a Friday flight on Monday only sees Monday's share. The pool resets with the next ISO week.
+
+**Example:** Bogotá (SKBO) has 6,700 cargo units a week toward the southwest (Quito, Guayaquil, Cali). On Monday 2,870 are open to every airline. A freighter taking 1,300 on Monday leaves 1,570 for anyone else that day, and Tuesday opens another 960.
 
 ## Reference fare versus final ticket price
 
@@ -106,6 +118,8 @@ Ordinary passenger aircraft can have several cabin classes. Occupied premium eco
 - First: 3.5 times economy
 
 These are revenue weights for occupied passengers, not extra seats. Premium cabins are also more sensitive to reputation, aircraft condition, and comfort. A full economy cabin can still outperform an empty first-class cabin.
+
+Premium seats also take more cabin space: premium economy uses 1.25 economy seats of space, business 2 and first 3 (see [cabin space](./manage-fleet#cabin-space)). A filled premium seat earns a little more per unit of space than economy, so premium cabins pay off when the airline's reputation fills them, and cost capacity when it doesn't.
 
 ## Cargo pricing and weight
 
@@ -187,7 +201,7 @@ Managers should separate three ideas:
 - **Flight net**: that operation's revenue minus its settlement costs.
 - **Airline cash flow**: flight results plus recurring charges, route openings, airport actions, leases, and other treasury movements in the selected period.
 
-An individual flight can be profitable while the airline loses money overall because several aircraft, airports, or schedules are being paid every day. Finance shows the cash after reserve, **If nobody flies** (days cash covers fixed costs with no flight income), break-even activity, and projections to make that difference visible. Overview and Programs show **Cash lasts at recent pace**, which includes the last 30 days of flying. See [Two runway numbers](./manage-finance#two-runway-numbers).
+An individual flight can be profitable while the airline loses money overall because several aircraft, airports, or schedules are being paid every day. Finance shows the cash after reserve, **If nobody flies** (days cash covers fixed costs with no flight income), break-even activity, and projections to make that difference visible. Overview, Finance and Programs show **Cash lasts**, which includes the last 30 days of flying. See [Two runway numbers](./manage-finance#two-runway-numbers).
 
 Projections hold recent activity and current commitments roughly constant. Treat them as warnings and planning tools, not guaranteed future income.
 

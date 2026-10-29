@@ -5,7 +5,7 @@ description: Review applications, manage the roster, and assign staff roles for 
 
 # Manage Airline: People
 
-Use **People** to manage membership applications, the active roster, staff roles, and workforce activity. This is an administrative page; the public profile's [Pilots](./airline-pilots) tab is read-only.
+Use **People** to manage membership applications, the active roster, staff roles, and pilot activity. This is an administrative page; the public profile's [Pilots](./airline-pilots) tab is read-only.
 
 ## Open People
 
@@ -17,20 +17,20 @@ People uses the **shared group roster**. Applications, pilots, and staff roles b
 
 People is available to active members with People access. Owner, Manager, and Pilots Manager roles normally have it. Pilot-only roles cannot manage People. Membership actions require membership-management access, and assigning or revoking staff roles requires role-management access.
 
-## Workforce dashboard
+## Pilot overview
 
-The dashboard summarizes:
+The **Pilot overview** tab summarizes:
 
 - active pilots;
 - pending applications;
 - pilots inactive for 30 days or more;
 - staff members.
 
-It can also show roster activity, pilot scores, flight contribution, rank distribution, membership status, pilot performance history, and participation history. Use the 30-day, 90-day, one-year, or founding range when available. Scores and participation are based on accepted VA flights.
+It can also show roster activity, pilot scores, **Airline XP** by pilot, rank distribution, membership status, pilot performance history, and participation history. Use the 30-day, 90-day, one-year, or founding range when available. Scores and participation are based on accepted VA flights.
 
 ## Applications
 
-Applications contains pending membership requests. Select an applicant to review their profile, accepted flights, block time, score, strikes, contribution points, current applicant rank, application date, last flight, and inactivity information.
+Applications contains pending membership requests. Select an applicant to review their profile, accepted flights, block time, score, strikes, Airline XP, current applicant rank, application date, last flight, and inactivity information.
 
 ### Accept an application
 
@@ -47,7 +47,9 @@ Select **Reject**, provide a reason of at least three characters, and confirm. T
 
 ## Roster actions
 
-The roster includes active and suspended members. Search by name or rank and use **Previous** and **Next** to browse 25 records per page.
+The roster includes active and suspended members. Search by name or rank and use **Previous** and **Next** to browse 25 pilots per page. The number at the end of each row is **days idle**: days since the pilot's last flight or airline activity.
+
+**Airline XP** on a pilot record is the XP that pilot has earned on this airline's flights. Migrated hours never add to it.
 
 - **Suspend** an active pilot with a reason.
 - **Restore** a suspended pilot; the interface asks for a reason.
@@ -61,7 +63,7 @@ A pilot's record shows **Last VA flight N days ago** (completed or diverted VA f
 
 When the airline turns on automatic moderation, the record also shows the rules that apply to that pilot:
 
-- **Strikes** appear as "N of M", where M is the next step (suspension or removal). A strike is an accepted flight scored under the airline's warning rating. Strikes reset each UTC month.
+- **Strikes** appear as "N of M", where M is the next step (suspension or removal). A strike is an accepted flight scored under the airline's warning rating. Strikes reset each UTC month; the record names the month being counted (for example, October 2026).
 - **Inactivity** — the pilot is removed automatically after the set number of days without a completed VA flight.
 - **Monthly minimum** — the record shows how many VA flights the pilot has this month against the minimum; pilots below it are removed at month end.
 
@@ -69,9 +71,9 @@ The Owner is never auto-moderated. With automatic moderation off, none of these 
 
 ## Ranks and staff roles
 
-**Ranks** is an informational view showing pilot counts, flights, hours, and average score by rank. It does not manually promote or demote pilots.
+**Ranks** is a read-only view showing pilot counts, flights, hours, and average score by rank. Rank requirements, promotions, honorary ranks, and rank locks are managed in [Rewards](./manage-rewards); use **Edit ranks in Rewards** if your role includes Rewards.
 
-**Staff roles** shows active staff roles and the sections each role includes. Users with role-management access can **Grant** or **Revoke** an eligible role for an active member. The Owner role cannot be changed from People; ownership is managed in [Ownership](./manage-ownership).
+**Staff roles** lists every active member who holds a staff role, with the same total shown on the tab, and the sections each role includes. Users with role-management access can **Grant** or **Revoke** an eligible role for an active member. The Owner role cannot be changed from People; ownership is managed in [Ownership](./manage-ownership).
 
 ## Limits and safeguards
 
@@ -81,6 +83,6 @@ Actions that change membership or roles require confirmation. Revocations and de
 
 ## Loading, empty, and error states
 
-If no airline is selected, choose one from the management workspace. If your role does not include People, ask the Founder or Manager for access. Empty states distinguish applications, roster, ranks, and staff lists when data is available.
+If no airline is selected, choose one from the management workspace. If your role does not include People, ask the Founder or Manager for access. Each list has its own empty message, such as **No applications waiting** or **No staff yet**, and a search with no results says so.
 
 If a list or history fails to load, refresh the relevant view or reload the page. A temporary loading problem should not be interpreted as a membership decision. Follow the recovery instruction shown by the page.

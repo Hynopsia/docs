@@ -19,21 +19,29 @@ Network access is available to Owners, Managers, Operations, Schedules Managers,
 
 ## Network summary and schedule list
 
-The summary can show available balance, active schedules, completed flights, gross revenue, and **Flight profit**. Flight profit counts flight settlements only, before daily schedule, airport, and route opening fees.
+The summary strip shows each figure with its period underneath:
 
-Each schedule can show:
+| Figure | Period | What it counts |
+| --- | --- | --- |
+| **Airline cash** | Right now | The cash shared by your airline group. |
+| **Flying** | Right now | Schedules that publish flights, out of all schedules including paused and retired. |
+| **Flights flown** | All time | Settled flights on schedules still listed on this page. |
+| **Revenue** | All time | Ticket and cargo income from those flights. |
+| **Flight profit** | All time | Settled flight results, before the schedule fee, airport fees, and route opening fees. |
 
-- flight number and state;
-- origin, destination, and distance;
-- passenger or cargo type;
+Deleted schedules drop out of these totals; retired schedules stay in them.
+
+Each schedule row shows:
+
+- flight number and status (**Flying**, **Paused**, or **Retired**);
+- route, with passenger or cargo, distance, and estimated duration underneath;
 - operating days (UTC);
 - eligible aircraft;
-- estimated duration;
-- completed flights and gross revenue.
+- flights flown and revenue, both all time.
 
-Search by flight number or airport. Filter current schedules, active schedules, suspended schedules, the retired archive, or all available records. Sort by completed flights or gross revenue and use the page controls to browse more results.
+Search by flight number, airport, or aircraft type. The status filter shows **Flying and paused** by default, or only **Flying**, **Paused**, **Retired**, or **All schedules**. Sort by flights or revenue and use the page controls to browse more results. When nothing matches, the page says whether the search or filter is the cause and offers **Clear search and filter**. If the network has fewer than two airports, it points you to Airports first.
 
-Select a schedule to open its details, including operating days, duration range, daily fee, flight profit, eligible aircraft, and flights that are available, claimed, or in progress.
+Select a schedule to open its details: its status and what to do next, operating days, duration, the fee per flying day, all-time flights and profit, aircraft estimates, and any upcoming flights (waiting for a pilot, or booked and flying).
 
 ## Create or edit a schedule
 
@@ -53,24 +61,26 @@ Before saving, FlyHub checks the airports, days, aircraft eligibility, airline s
 
 Passenger aircraft can serve passenger schedules, cargo aircraft can serve cargo schedules, and Combi aircraft can support both. A type marked **Other** is not usable until it has a valid classification.
 
-You can select concrete types or use dynamic rules based on category, size, and type. Dynamic rules can include matching aircraft added to the fleet later. If no active aircraft are eligible, add or configure an eligible aircraft in [Fleet](./manage-fleet) before saving.
+You can pick exact aircraft types, or a whole size or category. With a size or category, aircraft of that kind you lease later join the schedule automatically. If no active aircraft are eligible, add or configure an eligible aircraft in [Fleet](./manage-fleet) before saving.
 
 ## Route cost and lifecycle
 
 An existing origin–destination–operation combination can be reused. A suspended route may be reopened when you have route access. Opening a new route requires sufficient group funds and the required route and finance access; FlyHub charges the opening fee from airline cash when it creates the route. The fee is one-time and based on distance, up to FH$30,000. If cash is short, the save button stays disabled and the page says how much more is needed.
 
-Each active schedule also has a daily fee, charged at 00:10 UTC only on its UTC operating days, even if cash is below zero. A schedule with no flight for 14 days pays 25% until it flies again.
+Each flying schedule also has a fee per flying day, charged at 00:10 UTC only on its UTC operating days, even if cash is below zero. If the route has no completed flight for 14 days, the fee drops to 25% until someone flies it again.
 
-Schedules can be **Active**, **Suspended**, or **Retired**.
+Schedules are **Flying**, **Paused**, or **Retired**.
 
-- **Suspend** stops new operations and cancels unclaimed upcoming flights. Claimed flights continue.
-- **Enable** reactivates a suspended schedule when the airline, route, airports, and aircraft remain valid.
-- **Retire** permanently archives the schedule and cannot be undone. It is blocked while flights are claimed or in progress.
-- **Delete** removes the schedule and future unclaimed inventory while preserving completed flights and logbook records.
+- **Pause** stops new flights and cancels upcoming flights that no pilot has booked. Booked flights still fly.
+- **Enable** makes a paused schedule fly again when the airline, route, airports, and aircraft are still valid.
+- **Retire** stops the schedule for good and moves it to the Retired list, where its flights and earnings stay on record. It can't be undone.
+- **Delete** removes the schedule and its totals from the Network page for good. Pilots' logbooks keep the flights they already flew. Use it for schedules created by mistake; retire a schedule that has flown if you want to keep its record here.
+
+Retire and Delete are both unavailable while a pilot has a booked or in-progress flight on the schedule. Wait until those flights finish or are cancelled. Upcoming flights that no pilot has booked are cancelled by either action. If you delete the last schedule on a route, the route is paused and stops charging.
 
 ## Import and export
 
-**Export** downloads a CSV of non-retired schedules, including dynamic rules and duration information.
+**Export** downloads a CSV of flying and paused schedules, including size or category picks and duration information.
 
 **Import** accepts FlyHub and Newsky CSV files. The page validates the complete file and shows a preview before you confirm. One flight number can fly several routes; identical repeated rows are skipped and counted in the preview. The same flight number and route with different details is reported so you can keep one. The import replaces the selected operating airline's current schedules, preserves existing reservations and completed history, and removes future unclaimed inventory from schedules being replaced. It does not change other operating airlines.
 

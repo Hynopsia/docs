@@ -27,7 +27,7 @@ The workspace can let authorized staff:
 - choose automatic or manual-by-staff achievements;
 - attach or remove an approved badge image;
 - grant or revoke honorary ranks, achievements, and manual aircraft access;
-- review pilots and their progress;
+- review pilots and what each still needs for their next regular rank;
 - search and page through the pilot list.
 
 Tour-completion badges are separate from Rewards. A pilot earns a tour badge by completing every required leg of a published tour; staff do not award tour badges from this page. General pilot achievements shown in a personal profile are also separate from airline achievements.
@@ -36,9 +36,9 @@ Tour-completion badges are separate from Rewards. A pilot earns a tour badge by 
 
 Regular ranks are earned automatically when the pilot meets every requirement shown. Configure the required completed flights, required hours, and aircraft-access rules. The pilot receives the highest regular rank for which they qualify. The requirements work together, so a pilot must meet both the flight and hour requirement when both are configured.
 
-You can also create honorary ranks and assign them manually. System ranks such as **Cadet** and **Staff Team** cannot be removed. Staff Team is assigned automatically to members with an active staff role and cannot be assigned manually.
+You can also create honorary ranks and assign them manually. Built-in ranks such as **Cadet** and **Staff Team** are marked **Built-in** and cannot be deleted. Staff Team is assigned automatically to members with an active staff role and cannot be assigned manually.
 
-Changing a requirement does not remove a rank a pilot has already earned. Removing a custom rank can recalculate the affected pilots' regular ranks. You can lock a pilot's rank. A locked pilot gets no automatic promotions until you unlock it. Unlocking recalculates their rank from their record.
+To change the order of ranks, drag a rank in the list or use its up and down arrows. Changing a requirement does not remove a rank a pilot has already earned. Deleting a custom rank removes it from the pilots who hold it and moves them to the highest remaining rank they qualify for. You can lock a pilot's rank. A locked pilot gets no automatic promotions until you unlock it. Unlocking recalculates their rank from their record.
 
 ## Create a custom achievement
 
@@ -47,13 +47,15 @@ Changing a requirement does not remove a rank a pilot has already earned. Removi
 3. Choose **Automatic** or **Manual by staff**.
 4. For an automatic achievement, set a completed-flight threshold, an hours threshold, or both.
 5. Add an approved badge image when desired.
-6. Save and activate the achievement when it is ready for the public profile.
+6. Save the achievement and leave **Can still be earned** on when it is ready for the public profile.
+
+To stop using an achievement, open it and select **Retire achievement**. Pilots can no longer earn it and it leaves the list; award history is kept. Retiring cannot be undone.
 
 Manual achievements cannot use automatic thresholds. Automatic achievements need at least one threshold. An active achievement can appear in the airline's public **Tours & Awards** catalog, but it does not appear in a pilot's earned rewards until it is granted or automatically awarded.
 
 ## Award pilots and manage access
 
-An authorized manager can select an active pilot, review the available progress, and award a manual achievement or honorary rank. Staff can also grant manual access to all aircraft or to a specific aircraft type. Rank access rules can match purpose, size, category, or type and can include explicit exclusions. FlyHub's general type ratings remain separate from airline Rewards.
+An authorized manager can select an active pilot, review the available progress, and award a manual achievement or honorary rank. Staff can also grant **extra aircraft access** to all aircraft or to one aircraft type, so a pilot can fly it even if their rank does not include it. Rank access rules can tick groups by purpose, size, or category; ticked groups also cover matching aircraft added later. Unticking a single type inside a ticked group keeps that type excluded. FlyHub's general type ratings remain separate from airline Rewards.
 
 Awarding, revoking, locking, unlocking, or granting access requires a reason. The reason is kept with the airline's management history. Before repeating an action, confirm that the pilot is still active and that the reward or access rule is still available.
 
@@ -67,7 +69,8 @@ The public profile shows an aggregate count of pilots who earned an active achie
 - Achievement names are 2–100 characters.
 - Achievement descriptions are up to 2,000 characters.
 - Flight and hour thresholds can be as high as 1,000,000, subject to current validation.
-- The pilot roster shows up to 25 pilots per page in the workspace.
+- The pilot roster shows up to 25 pilots per page. The pilot and award totals count every pilot, not just the current page.
+- Each pilot row shows the flights and hours still needed for the next regular rank, **Highest rank reached**, or **Rank locked**.
 - Badge artwork accepts PNG, JPEG, or WebP files up to 2 MiB with the proportions and minimum dimensions required by the form.
 - A pilot can pin up to eight earned reward badges on their personal profile.
 
