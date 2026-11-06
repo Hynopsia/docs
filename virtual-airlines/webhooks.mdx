@@ -93,6 +93,7 @@ FlyHub maps selected airline activity to public event names. The event name is i
 | `schedule.changed` | Operations | A published route or schedule changes. | Flight number, route, operation type, operating days, block time, eligible aircraft, and status. |
 | `finance.flight_settled` | Operations | A flight settlement is recorded. | Flight context when available, net result, and currency. |
 | `announcement.published` | Community | Airline content is published. | Content kind, version, and publication status. |
+| `maintenance.update` | Operations | Maintenance news: a service starts, an aircraft is back in service, or a fleet notice arrives. | Registration, type, hangar, service type and expected hours, or health and findings fixed and deferred. |
 
 The same action can produce a different public event depending on the resulting state. For example, a membership application that is immediately accepted can produce `pilot.joined`, while a pending application produces `pilot.applied`.
 

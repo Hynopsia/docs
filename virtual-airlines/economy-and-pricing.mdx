@@ -88,7 +88,9 @@ The reference fare is not what every passenger automatically pays. Think of it a
 
 ## Your price multiplier
 
-The airline's ticket price multiplier normally ranges from 0.50× to 2.00×. A 1.00× policy starts at the market reference. A 0.75× policy is an introductory discount, while a 1.50× policy is a premium price.
+The airline's ticket price multiplier normally ranges from 0.50× to 2.00×. A 1.00× policy starts at the market reference. A 0.75× policy is an introductory discount, while a 1.50× policy is a premium price. Cargo has its own multiplier with the same range.
+
+You set both when you create the airline, and you can change them at any time under **Virtual Airlines → Identity & profile → Policies → Pricing**. Move the **Ticket prices** or **Cargo prices** slider, then select **Publish policy**. You need the manage policies or manage airline profile permission. New prices apply to bookings made after you publish. Flights already booked keep the price they were quoted.
 
 Price changes two things at the same time:
 
@@ -187,7 +189,7 @@ Aircraft are leased for operations. The creation flow displays the daily lease, 
 
 ### Standby pricing
 
-Commitments idle for 14 days or more drop to a standby charge until the next flight: active schedules and airport stations pay 25% of their daily fee (never the home airport), and leased aircraft pay 40% of their daily lease. Nothing needs to be configured, and they can still be flown. One flight restores the full price.
+Commitments idle for 14 days or more drop to a standby charge until the next flight: active schedules and airport stations pay 25% of their daily fee (never the home airport), and leased aircraft pay 40% of their daily lease. Airport stations with fewer than 3 flights in or out in 30 days pay 50%. Nothing needs to be configured, and they can still be flown. For schedules and aircraft, one flight restores the full price; an airport returns to full price at 3 flights in 30 days.
 
 ### Operating programs
 
@@ -217,7 +219,7 @@ For a new airline:
 
 1. Keep the fleet small enough that daily leases do not consume the runway.
 2. Start near the market reference or use a modest introductory discount while reputation is low.
-3. Choose aircraft that fit observed demand instead of filling every route with the largest airframe.
+4. Keep aircraft in good condition; condition below 40% requires maintenance, and a healthy aircraft receives stronger demand. Book [services](./manage-maintenance) into quiet gaps and choose the cheapest option that solves the problem.
 4. Keep aircraft in good condition; condition below 40% requires maintenance, and a healthy aircraft receives stronger demand.
 5. Watch route contribution and load factor before adding frequency, airports, or hubs.
 6. Keep a reserve for recurring charges and a bad week.

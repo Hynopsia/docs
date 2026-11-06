@@ -198,6 +198,7 @@
           "virtual-airlines/manage-fleet",
           "virtual-airlines/manage-group",
           "virtual-airlines/manage-identity-profile",
+          "virtual-airlines/manage-maintenance",
           "virtual-airlines/manage-management-history",
           "virtual-airlines/manage-market",
           "virtual-airlines/manage-network",

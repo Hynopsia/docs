@@ -1,0 +1,188 @@
+---
+title: Manage Airline Maintenance
+description: Service options, hangar bays, findings, deferred items, reliability, and the maintenance planner.
+---
+
+# Manage Airline: Maintenance
+
+Every flight wears your aircraft. Maintenance is where you decide when, where, and how much to fix, trading downtime against money against reliability. Nothing is charged without being shown first, and an airline that ignores maintenance for a while keeps flying, just less well.
+
+You find maintenance in two places:
+
+- **Fleet → Aircraft control → Health** for one aircraft: its systems, service options, findings, open items, who wore it, and its history.
+- **Fleet → Maintenance** for the whole fleet: hangars, the waiting list, decisions, suggestions, the 7-day planner, reliability, and pilots.
+
+You need the **maintenance** or **aircraft** permission to act. Buying hangar bays and returning an aircraft to service also need **finance**.
+
+## Health and wear
+
+- Aircraft health is a weighted mix of four systems: airframe 32%, engines 34%, landing gear 19%, brakes 15%.
+- Each system reads **Good** at 65% or more, **Wearing** under 65%, **Service due** under 40%, and **Grounded** under 20%.
+- Every flight wears the systems. Hours and cycles wear every aircraft; landings over 300 fpm add more the firmer they are, and low scores and heavy landing weights add wear too. A smooth pilot keeps an airliner above 80% for about 75 flights, an average one for about 45, and one who lands at 500-600 fpm for about 15. **Health** shows what caused the last flight's wear.
+- Systems age: as an aircraft builds up cycles, each system wears a little faster, up to 50% faster after about 4,000 cycles. A heavy check resets this.
+- Below 90% health the aircraft gets fewer bookings and costs more per flight. At 40% that reaches up to 34% fewer passengers and cargo and up to +35% aircraft cost.
+
+Maintenance becomes **due** when a system drops under 40%, the aircraft reaches its next check (hours or cycles), or a deferred item becomes overdue. While due, pilots can't book it unless you choose **Fly anyway for 7 days** (refused below 55% health). Under 40% overall, the aircraft must be serviced at a hub, or ferried there empty first.
+
+## Service options
+
+Select **Plan service** on the aircraft's **Health** tab. The options sit side by side, each with its price, time, health afterwards per system, next check, and how likely the crew is to find something.
+
+| Service | Time | What it does | Good for |
+| --- | --- | --- | --- |
+| **Quick check** | 6 h | Systems below 85% go up to 85%. Extends the check limit by about 50 hours or 20 cycles. | Getting it back for tonight's flights |
+| **Targeted repair** | 3–10 h (bigger aircraft take longer) | One system to 95%. The others stay as they are. | Only the brakes or gear are low |
+| **Standard service** | 24 h | Every system to at least 95%. Next check in 200 hours or 60 cycles. | The normal service |
+| **Heavy check** | 72 h | Everything to 100%, aging reset, next check in 300 hours or 90 cycles. Only at your maintenance base. | Busy aircraft and quiet weeks |
+
+A system never goes down during maintenance: one that is already above the target keeps its value.
+
+### Price
+
+The price follows the aircraft type and how many health points are actually restored, so worn aircraft cost more and small aircraft cost little. A Cessna service costs a few hundred FH$; an A320 standard service at 80% health costs about FH$32,000, a 777 about FH$125,000. Services at your maintenance base are 15% cheaper, and a new airline's first heavy check is free.
+
+The price is set again when work starts, so a service booked for later reflects the aircraft's condition at that moment. It is charged when the aircraft returns to service, together with any findings you chose to fix.
+
+### Start now or book for later
+
+- **Start now** starts work immediately when the aircraft is at an active hub, isn't booked for a flight, and a bay is free.
+- **Book for later** lets you pick a time up to 30 days ahead and any active hub. Flights before the service can still be booked; flights that overlap the service window can't.
+
+If work can't start yet, the service waits and starts on its own as soon as it can. The aircraft detail says why it is waiting:
+
+| Waiting line | What it means |
+| --- | --- |
+| Booked for … | The booked time hasn't come yet. |
+| Waiting for a bay at … | Every bay at that hub is busy. |
+| Starts when it reaches … | The aircraft isn't at the service hub yet. Fly it or move it there. |
+| Starts after its booked flight | It is booked or flying. |
+| Can't start: … | Something else is in the way, for example a heavy check away from the base. |
+
+You can cancel a booked or running service at any time. Nothing is charged, and any findings already found stay on the aircraft.
+
+When the work time is over and every finding is decided, the aircraft returns to service by itself within a minute, or you can select **Return to service**. An airline that can't pay keeps the aircraft in the hangar until it can.
+
+## Hangars and your maintenance base
+
+Every active hub has hangar bays. A bay holds one aircraft while work is under way; bays are shared by all airlines in a group.
+
+| Hub size | Bays |
+| --- | ---: |
+| Small | 1 |
+| Medium | 2 |
+| Large | 3 |
+| Your maintenance base | +1 |
+
+You can buy up to 3 extra bays per hub in **Fleet → Maintenance**. Each costs more than the last: FH$40,000 / 60,000 / 90,000 for a small / medium / large hub, times the number of bays already bought plus one. Bays are a one-time purchase with no daily fee.
+
+Your **maintenance base** is one of your hubs. Heavy checks only happen there, it has an extra bay, and services there are 15% cheaper. Until you choose one, your home airport is the base if it is a hub. Change it with **Set as base**.
+
+## Findings
+
+When work starts, the crew inspects the aircraft and may find something: up to 3 findings per service, at most one per system. Heavy checks look hardest, so they find the most but fix it cheaply. Quick checks and targeted repairs find the least.
+
+Each finding is a row with two choices:
+
+- **Fix**: adds its hours and cost to the service. Extra time from findings is capped at 24 hours per service.
+- **Defer**: fly with it for a number of flights. The row says exactly what deferring does.
+
+Some findings must be fixed. A single-engine aircraft can't fly with an engine fault, and anything overdue must be fixed. Notes are cosmetic and need no decision.
+
+If you don't decide, the aircraft waits up to 24 hours after the work is done, then every undecided finding is deferred. If the aircraft already carries 3 deferred items, it is fixed instead.
+
+### What a deferred item does
+
+| Effect | Example |
+| --- | --- |
+| Faster wear | Worn brake units: brakes wear 1.5× |
+| Health cap | Control surface play: services can't raise the airframe above 80% |
+| Running cost | APU inoperative: +2% on each flight's cost (ground power) |
+| Leg limit | Pressurization fault: legs under 2 h only |
+| Passengers notice | Cabin wear: counts against reliability |
+
+Every flight counts a deferral down. With 2 flights left you get a reminder. When it runs out the item becomes **overdue**, the aircraft becomes **Maintenance due**, and the next service must fix it. Some items grow if left too long: a ground handling dent becomes corrosion, and corrosion becomes a structural repair.
+
+An aircraft can carry at most **3 deferred items**. Any service can fix them; a targeted repair fixes the items on its own system.
+
+### One system for every aircraft
+
+Findings work the same way from a Cessna 152 to an A380. Each aircraft type has a profile (size, piston, turboprop or jet, number of engines, fixed or retractable gear, pressurized or not, APU, passenger, cargo or VIP cabin), and each finding only appears on aircraft it fits. A Cessna can get fouled spark plugs; an A380 can get a borescope finding on its No. 3 engine. Repair time grows with aircraft size, and repair cost follows the aircraft's own service price.
+
+### What makes findings more likely
+
+- Firm landings, especially for gear and brakes.
+- Many cycles or hours since the last service.
+- High total cycles (age).
+- A crash in the last 180 days.
+- Very short or very long legs.
+- Items already deferred.
+
+Careful flying shows: an aircraft flown gently turns up fewer findings. A service with no findings makes the next one slightly luckier; a finding resets that.
+
+The **Maintenance provider** program makes findings rarer and cheaper to fix. Level 3 (Heavy maintenance partner) also fixes one finding a month for free. See [Programs](./manage-programs).
+
+### Pilot write-ups
+
+Some findings appear between services:
+
+- A landing over **600 fpm** creates a **Hard landing inspection**: inspect the gear within 2 flights.
+- Rarely, a pilot writes something up after a flight, such as a bird strike, a lightning strike, or an inoperative APU.
+
+The finding names the pilot and the landing rate. If the flight is later deleted, its write-up goes too.
+
+### Fleet notices
+
+About once every two months, FlyHub may issue a fleet notice, such as a gear inspection on high-cycle aircraft or an engine mount check on turbine aircraft. It lands on every matching aircraft with about 20 flights to comply, and any service can fix it.
+
+## Reliability
+
+Reliability is the share of flights your aircraft flew in good order over the last 30 and 90 days. These lower it:
+
+| On a flight | Counts as |
+| --- | --- |
+| Flown while maintenance was due (fly anyway) | 1 lost flight |
+| Flown with an overdue item | 1 lost flight |
+| A mayday | 3 lost flights |
+| Flown with a worn cabin | ¼ of a flight |
+| Flown with deferred items | ⅒ of a flight |
+
+Reliability feeds your airline's [reputation](./reputation-and-progress): the reputation reliability score can't be higher than maintenance reliability, and low reliability trims the flight-quality part of reputation (90% reliable costs 0.2 points, 50% costs 1 point, at most 2).
+
+## Planning tools
+
+**Fleet → Maintenance** brings it together:
+
+- **Hangars**: each hub's bays, what is in them, when each aircraft is ready, and the waiting list.
+- **Waiting on you**: findings that need a decision.
+- **Suggestions**: aircraft that need attention, with the service that solves it most cheaply, for example a targeted repair when one system lags, or a quick check for an overdue item. Suggestions never act on their own.
+- **Forecast**: how many aircraft come due in the next 7 days at their current pace, against your bays.
+- **7-day planner**: booked flights and services on one timeline per aircraft, so you can book services into quiet gaps.
+- **Deferred and overdue items** across the fleet.
+- **Gentlest landers**: pilots ranked by how much wear they cause per flight, with their average landing and firm landings over the last 30 days. Each aircraft's **Health** tab has the same table as **Who wore it**.
+
+Aircraft also earn **milestones**, such as 1,000 airframe hours, 500 cycles, Heavy check #2, or several clean services in a row.
+
+## Alerts
+
+Managers with maintenance access get Inbox notifications when:
+
+- findings need a decision;
+- work is done but findings are still undecided;
+- a booked service starts, or an aircraft is back in service;
+- a pilot writes something up;
+- a deferred item has 2 flights left, becomes overdue, or grows into something bigger;
+- a fleet notice arrives.
+
+Each notification opens the aircraft or the Maintenance view. Discord channels can also receive **Maintenance news** (service started, back in service, fleet notices). See [Webhooks](./webhooks).
+
+## Questions
+
+**Why did my price change between booking and start?** The price is set again when work starts, from the aircraft's condition at that moment and the hub where it is serviced.
+
+**Why can't I defer this finding?** It is required (a single-engine aircraft can't defer an engine fault), it is overdue, or the aircraft already carries 3 deferred items.
+
+**Why won't my aircraft return to service?** The work time isn't over, a finding is undecided, or the airline can't pay yet. The **Health** tab says which.
+
+**Why is my booked service still waiting?** Read the waiting line: all bays are busy, the aircraft isn't at the hub, or it is on a flight. Buy a bay, move the aircraft, or wait; it starts on its own.
+
+**Why can't pilots book a long flight?** A deferred item limits leg length. Fix it at the next service.

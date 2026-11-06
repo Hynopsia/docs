@@ -46,9 +46,15 @@ The new home is added to Airports as a hub (or reactivated) and starts paying da
 
 Flight rules and pilot rules are saved together with **Publish policy**.
 
-- **Free flights can start anywhere**: passenger, cargo, and VIP free flights can depart from any airport. The aircraft stays parked where it was, so scheduled flights still find it there.
-- **Tour flights can start anywhere**: the same for tour legs. The aircraft must still be free and allowed on the tour.
-- **Where aircraft must be**: choose **Aircraft must be at the departure airport**, **Aircraft can start anywhere**, or **Only charters and events can start anywhere**. A booked or flying aircraft is never available. Charters and events never move the aircraft.
+- **Where aircraft must be**: the base rule for every flight. A booked or flying aircraft is never available.
+  - **Aircraft must be at the departure airport**: every flight needs a free aircraft parked at its departure airport, charters and events included. If none is there, pilots can't book it.
+  - **Only charters and events can start anywhere**: charters and events can use any free aircraft and leave it where it was parked. Every other flight needs the aircraft at its departure airport.
+  - **Aircraft can start anywhere**: any free aircraft can start any flight at any airport.
+- **Exceptions**: flights that can start anywhere without moving the aircraft, whatever the base rule.
+  - **Free flights can start anywhere**: passenger, cargo, and VIP free flights. The aircraft stays parked where it was, so scheduled flights still find it there.
+  - **Tour flights can start anywhere**: the same for tour legs. The aircraft must still be free and allowed on the tour.
+- **What pilots get**: a summary under these settings showing where each flight type can start and where the aircraft ends up.
+- Charters and events never move the aircraft, in any mode.
 - **Flight plan remarks**: text printed on every new booking's SimBrief flight plan (OFP).
 - **Minimum flights**, **Minimum hours**, and **Minimum average score**: what a pilot needs across every FlyHub virtual airline before they can apply. 0 means no minimum.
 - **Automatic moderation**: the strike and activity rules below run only while it is on.

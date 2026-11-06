@@ -58,14 +58,15 @@ A blocked aircraft always shows its reason: one line in the list, and the full l
 | Crash hold | Grounded for 24 hours after a crash. | Releases on its own, then FlyHub checks whether maintenance is needed. |
 | Interrupted flight | A flight stopped before it finished. | Held until the pilot resumes or the flight is closed. When a recovery deadline applies, the countdown shows it; after it the attempt is discarded and the aircraft released. |
 | In flight / Reserved | A pilot is flying it or has booked it. | Ends with the flight. An unstarted booking is released when its hold ends. |
-| In maintenance | Service work is under way. | Return it to service once the 24-hour work period ends. |
+| In maintenance | Service work is under way. | It returns to service on its own when the work and every finding decision are done. |
 | System below 20% | A tracked system is grounded. | Schedule maintenance (move it to a hub first if needed). |
 | Mandatory maintenance | Health under 40% at a hub. | Service it at that hub. |
 | Grounded by a manager | A manager changed its status, with the reason if one was given. | A manager returns it to service. |
 | Temporarily unavailable | A timed hold. | Releases on its own. |
 | Ferry to a hub | Health under 40% away from a hub. Only a payload-free ferry is allowed. | Fly it empty to a hub, or move it there. |
-| Maintenance due | A system is under 40%, or a check limit (hours or cycles) was reached. | Service it, or use **Fly anyway for 7 days**. |
-| Maintenance scheduled | Work is booked. | Start it from the aircraft detail. |
+| Maintenance due | A system is under 40%, a check limit (hours or cycles) was reached, or a deferred item is overdue. | Service it, or use **Fly anyway for 7 days**. |
+| Maintenance booked | A service is booked. Flights overlapping the service window can't be booked. | It starts on its own; **Start now** once its time has come. |
+| Legs under N h only | A deferred finding limits flight length. | Fix it at the next service. |
 
 If a status has no recorded cause, the page says so. Contact FlyHub support with the registration.
 
@@ -152,37 +153,14 @@ Fuel on board carries over between flights. Only fuel added on top is billed. Th
 
 ## Maintain an aircraft
 
-Maintenance is currently an immediate 24-hour service flow:
+Maintenance has its own page: [Maintenance](./manage-maintenance). In short:
 
-1. Schedule maintenance.
-2. Start it at an active hub.
-3. Wait for the unavailable period to finish.
-4. Return the aircraft to service.
+- Open an aircraft's **Health** tab and select **Plan service** to compare a **Quick check** (6 h), **Targeted repair** (one system), **Standard service** (24 h), and **Heavy check** (72 h, at your maintenance base). Start now or book a time at any hub.
+- Each hub has hangar bays. When they are full, a booked service waits and starts on its own.
+- The crew may find something during the service. You choose to fix it now or defer it for a number of flights.
+- **Fleet → Maintenance** shows hangars, decisions waiting, suggestions, a 7-day planner, reliability, and the gentlest landers.
 
-Aircraft health can read **Good**, **Service soon**, **Maintenance due**, **Ferry to a hub**, **Service at hub**, **In maintenance**, or **Grounded**. Maintenance work reads **Maintenance booked** or **In maintenance**.
-
-### Health and wear
-
-- Aircraft health is a weighted mix of its tracked systems: airframe 32%, engines 34%, gear 19%, brakes 15%.
-- Each system shows **Good** at 65% or more, **Wearing** under 65%, **Service due** under 40%, and **Grounded** under 20%.
-- Every flight wears the systems. Firm landings (over 250 fpm) and low scores add extra wear. **Health** shows what caused the last flight's wear.
-- Below 90% health the aircraft gets fewer bookings and costs more per flight. At 40% that reaches up to 34% fewer passengers and cargo and up to +35% aircraft cost.
-
-### Maintenance price
-
-Servicing returns every tracked system to 95%. Lower health costs more. The price is locked in when you schedule, and charged when the aircraft returns to service after the 24-hour work period.
-
-Maintenance rules include:
-
-- maintenance becomes due when any system drops under 40% or the airframe reaches its next check hours or cycles;
-- while maintenance is due, pilots can't book the aircraft unless a manager chooses **Fly anyway for 7 days**. This accepts the risk: wear keeps building and the penalties above still apply. It is refused below 55% health;
-- below 40% condition requires maintenance;
-- an aircraft away from a hub may need a ferry first;
-- an aircraft due at a hub must be maintained there;
-- maintenance blocks new reservations until it finishes;
-- completing maintenance restores components to the service level defined by the current operating rules and updates the aircraft's hours and cycles.
-
-Fleet does not provide a future-date maintenance calendar. When an aircraft needs service, schedule it from Fleet and follow the status shown there.
+Aircraft health can read **Good**, **Service soon**, **Maintenance due**, **Ferry to a hub**, **Service at hub**, **In maintenance**, or **Grounded**. While maintenance is due, pilots can't book the aircraft unless a manager chooses **Fly anyway for 7 days** (refused below 55% health).
 
 ## Return a leased aircraft
 
@@ -220,7 +198,7 @@ The public profile Fleet tab is read-only and may show a group-wide fleet with f
 
 Dispatch only lists aircraft that are eligible for the selected operation. It checks the aircraft purpose, type, station, availability, condition, maintenance status, and route requirements. A maintenance ferry in Dispatch is a special no-passenger/no-cargo flight; it is not the same as an administrative Fleet move.
 
-Fleet does not provide direct purchase, individual aircraft retirement, future maintenance scheduling, or flight-execution controls. Use [Dispatch](./dispatch), [My Flights](./my-flights), and [Operations](./manage-operations) for those parts of the experience.
+Fleet does not provide direct purchase, individual aircraft retirement, or flight-execution controls. Use [Dispatch](./dispatch), [My Flights](./my-flights), and [Operations](./manage-operations) for those parts of the experience.
 
 ## Loading, empty, and recovery states
 

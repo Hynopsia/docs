@@ -17,7 +17,7 @@ Airport management requires the appropriate network and financial access. The pa
 
 ## Airport network overview
 
-The summary shows active airports, hubs used out of 10, **Airport fees** (what the next nightly charge takes, after the 25% rate for quiet airports, with the full rate alongside), and airline cash right now.
+The summary shows active airports, hubs used out of 10, **Airport fees** (what the next nightly charge takes, after the reduced rates for low-traffic and quiet airports, with the full rate alongside), and airline cash right now.
 
 Right under it, three short notes explain what each role gives you: an airport in your network, a hub, and the home airport.
 
@@ -27,7 +27,7 @@ Each row in the list shows:
 - ICAO code, name, city, and country;
 - **Size**: small, medium, or large, which sets the costs below;
 - **Flights, 30 days**: completed departures and arrivals at the airport by any airline in your group over the last 30 days;
-- **Fee per night**: what the airport is actually charged. A quiet airport shows the reduced amount and "Quiet · 25% of" the full rate;
+- **Fee per night**: what the airport is actually charged. A low-traffic airport shows "Low traffic · 50%" and a quiet airport shows "Quiet · 25% of" the full rate;
 - **Role**: Home, Hub, or Removed.
 
 Filter by airport name, ICAO, IATA, or your code, and choose active airports, hubs only, removed airports, or all. The list shows 20 airports per page. Open an airport's statistics or gate assignments from its row. You can have up to 10 hubs.
@@ -50,7 +50,15 @@ Current cost bands are:
 | Medium | FH$50,000 | FH$100,000 | FH$400 | FH$800 |
 | Large | FH$100,000 | FH$200,000 | FH$800 | FH$2,000 |
 
-Daily station and hub costs are taken from airline cash every night at 00:10 UTC, even below zero. An airport other than the home airport that has been in the network for more than 14 days and has had no completed flight by your group in the last 14 days is charged 25% until the next flight. The Fee per night column and the Airport fees figure already include this.
+Daily station and hub costs are taken from airline cash every night at 00:10 UTC, even below zero. Every airport except the home airport pays according to how much your group uses it, counting completed departures and arrivals:
+
+| Use | Nightly fee |
+| --- | ---: |
+| 3 or more flights in or out in the last 30 days | Full |
+| Fewer than 3 in the last 30 days | 50% |
+| None in the last 14 days (airport in the network for more than 14 days) | 25% |
+
+The Fee per night column and the Airport fees figure already include this. As a rule of thumb, an airport needs about 3 flights a month to cover its nightly fee, and many more to earn back its setup cost, so open airports where you already plan schedules.
 
 If you cannot afford a change or have hit the hub limit, the confirm button stays disabled and the page says why, including how much cash is missing. The form is the final authority if the current economy or account rules change.
 
@@ -59,6 +67,8 @@ If you cannot afford a change or have hit the hub limit, the confirm button stay
 Open an airport and select **Edit** to update its network details or hub status. A home base must be an active station in the shared network before it can be selected as the airline's home airport.
 
 Select **Remove** only when the airport is no longer needed. You can only remove it if no flying or paused schedule uses it; retire or delete that schedule in Network first. Past flights and free flights to or from the airport don't block removal. Removing an airport stops its nightly fee and keeps its past flights and statistics.
+
+If you remove an airport within 30 days of paying to open it (or to make it a hub) and no completed flight has used it since, half of what you paid goes back to airline cash. The removal dialog shows the amount when this applies. Imported airports are not refunded.
 
 To add a removed airport back, show **Removed airports**, edit it, and pay the one-time cost again at the current price.
 
