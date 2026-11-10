@@ -28,10 +28,12 @@ Payroll is not paid after every flight. Flights, bonuses, expenses, and deductio
 
 Payroll can include:
 
-- Eligible Career flight hours.
+- Eligible Career flight hours, with at least 1 hour paid per leg.
+- The weekly guarantee: at least 4 paid hours in any week you fly.
 - Contract hourly rate.
+- Performance pay from your weekly reviews.
 - Rank pay.
-- Airline tier and regional pay adjustments.
+- Airline tier and the airline's pay market.
 - Training pay multiplier.
 - Reserve pay.
 - Bid Board bonus.
@@ -50,18 +52,36 @@ Payroll can include:
 
 For the economy model behind pay and costs, see [Career Economy and Airline Tiers](/career-economy-tiers).
 
+## How your rate is built
+
+The **Next paycheck** panel in Finance shows the formula for your own contract:
+
+```text
+tier base × rank × pay market = contract rate
+contract rate × (1 + seniority + union) × performance = what you earn per hour
+```
+
+Under it, FlyHub lists the next ways your rate goes up: when your next seniority step lands, how a strong week moves performance pay, and what your next promotion pays. If minimum credit or the weekly guarantee added paid hours this week, the panel says so.
+
+See [How your pay is calculated](/career-economy-tiers#how-your-pay-is-calculated) for every number in the formula.
+
 ## Main pay modifiers
 
 | Modifier | What it does |
 | --- | --- |
 | Rank | Higher ranks pay more than lower ranks. |
 | Airline tier | Higher-tier airlines generally pay better. |
-| Region | Airline region affects the pay band. |
+| Pay market | The airline's home country sets the market (0.68x to 1.15x). |
+| Tax-free base | No income tax when you are based in a tax-free country such as the UAE or Qatar. |
 | Training status | Some training contracts pay a reduced rate. |
 | Reserve | Accepted reserve calls pay 2.0x hourly pay. |
 | Bid Board | Eligible awarded bid-board flying can add a 15% bonus. |
 | On-time completion | Eligible on-time work can add an additional bonus. |
-| Seniority | Longer continuous employment can add a seniority bonus. |
+| Seniority | +1% every 8 weeks at your airline, up to 10%. |
+| Union | Members add +1% every 2 months, up to 5%. |
+| Performance | Weekly reviews move it between 92% and 110%. It follows you to every airline. |
+| Minimum credit | Every leg pays at least 1 hour. |
+| Weekly guarantee | A week with at least one leg pays at least 4 hours. |
 
 ## Ledger glossary
 
@@ -88,8 +108,12 @@ The ledger records individual finance events.
 | Loan interest | Interest charged on debt. |
 | Loan repayment | Principal or scheduled repayment on a loan. |
 | Penalty | Career penalty, cancellation cost, resignation cost, or similar deduction. |
-| Training cost | Pilot share of type-rating or training cost. |
-| Signing bonus | Half of a signing bonus at signature, the other half after 30 days on the line, or a retention bonus from a counter-offer. |
+| Training cost | A type rating or training you pay for yourself, such as an extra type from an internal request. |
+| Training bond repayment | The share of an airline-paid type rating you repay when you leave before its 26-week bond ends. |
+| Pension: 5% of this week's pay | Your weekly Pilot Pension savings, taken from payroll. See [Career Pilot Pension](/career-pension). |
+| Pension loan / Pension loan repayment | Money you borrowed from your pension, and the weekly payment back into it. |
+| Pension hardship withdrawal / Pension cash-out | Money taken out of your pension while grounded, or early with a penalty and tax. |
+| Signing bonus | Half of a signing bonus at signature, the other half after 30 days on the line, or a retention bonus from a counter-offer or retention counter. |
 | Bonus repayment | The unearned part of a signing or retention bonus, charged when you leave before your contract term or commitment ends. |
 | Property purchase | Down payment or purchase cost for Career property. |
 | Adjustment | Manual or system correction. |

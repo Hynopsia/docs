@@ -1,6 +1,6 @@
 ---
 title: Career Economy and Airline Tiers
-description: Understand Career Mode airline tiers, pay bands, regional economy, job requirements, union dues, penalties, medical costs, and financial pressure.
+description: Understand Career Mode airline tiers, the pay formula, seniority and performance pay, pay markets and tax-free bases, job requirements, union dues, penalties, medical costs, and financial pressure.
 ---
 
 Career Mode economy is built around airline tier, region, rank, contract status, and your pilot history.
@@ -41,67 +41,99 @@ Meeting the requirement only means you can apply. Acceptance still depends on re
 
 See [Career Job Market](/career-job-market#acceptance-chances) for the application chance guide.
 
-## Base pay by tier and rank
+## How your pay is calculated
 
-Career pay starts from annual compensation bands. FlyHub converts annual pay into hourly and weekly estimates using 900 compensated hours per year.
+Career pay is one formula. There are no random pay ranges: two pilots in the same seat at the same airline earn the same contract rate, and everything above that is earned.
 
-The table below shows the global base annual bands before regional multipliers, interviews, seniority bonuses, training pay, and special offer adjustments.
+```text
+contract rate = tier base × rank × region
+you earn      = contract rate × (1 + seniority + union) × performance
+```
+
+Your [pay slip](/career-payroll-ledger#how-your-rate-is-built) shows every part of this formula for your own contract, plus the next ways your rate goes up.
+
+### Tier base and rank
+
+Hourly contract rates before the pay market factor:
 
 | Tier | First Officer | Senior First Officer | Captain | Senior Captain |
 | --- | ---: | ---: | ---: | ---: |
-| 1-star | $30,000-$50,000 | $33,600-$56,000 | $50,000-$80,000 | $56,000-$89,600 |
-| 2-star | $50,000-$80,000 | $56,000-$89,600 | $80,000-$120,000 | $89,600-$134,400 |
-| 3-star | $70,000-$100,000 | $78,400-$112,000 | $100,000-$150,000 | $112,000-$168,000 |
-| 4-star | $100,000-$160,000 | $112,000-$179,200 | $160,000-$250,000 | $179,200-$280,000 |
-| 5-star | $150,000-$250,000 | $168,000-$280,000 | $250,000-$400,000 | $280,000-$448,000 |
+| 1-star | $57.80 | $66.30 | $85.00 | $95.20 |
+| 2-star | $79.56 | $91.26 | $117.00 | $131.04 |
+| 3-star | $102.00 | $117.00 | $150.00 | $168.00 |
+| 4-star | $136.00 | $156.00 | $200.00 | $224.00 |
+| 5-star | $180.20 | $206.70 | $265.00 | $296.80 |
 
-These are not guaranteed salaries. They are the base bands used to generate offers and contracts.
+Each rank earns a share of the Captain rate: First Officer 68%, Senior First Officer 78%, Captain 100%, Senior Captain 112%. A promotion is always a real raise, and promotion offers are at least 10% above your current rate.
 
-Your final pay can change because of:
+Each tier pays about 30% more than the one below it. A 5-star Captain earns about 1.8 times a 3-star Captain, so a move to a major is a big step up without being a cliff.
 
-- Airline region.
-- Specific airline pay profile.
-- Interview result.
-- Rank.
-- Training contract.
-- Approved internal type-rating training.
-- Seniority bonus.
-- Promotion offer.
-- Job offer raise logic.
+FlyHub shows yearly figures using 900 paid hours a year. A 5-star Captain contract is about $238,500 a year before region, seniority and performance.
 
-## Regional pay multipliers
+### Pay markets
 
-Airline region changes pay.
+Pay follows the **airline's home country**, the way real pilot pay follows the employer's labour market. Every country belongs to one of 19 pay markets:
 
-| Region | Pay multiplier |
-| --- | ---: |
-| North America | 1.24x |
-| South America | 0.76x |
-| Europe | 1.12x |
-| Middle East | 1.18x |
-| Africa | 0.72x |
-| Asia Pacific | 1.00x |
-| Oceania | 1.14x |
-| Global | 1.00x |
+| Pay market | Examples | Pay factor | Living costs | Typical tax |
+| --- | --- | ---: | ---: | ---: |
+| United States | US, Puerto Rico, Guam | 1.15x | 1.08x | 16% |
+| Switzerland, Nordics & Luxembourg | CH, NO, SE, DK, IS, FI, LU | 1.12x | 1.15x | 20% |
+| Hong Kong & Singapore | HK, SG, Macau | 1.10x | 1.12x | 10% |
+| Western Europe | GB, IE, DE, NL, BE, FR, AT | 1.05x | 1.06x | 19% |
+| Gulf | AE, QA, SA, BH, OM, KW | 1.05x | 1.10x | **Tax-free** |
+| Australia & New Zealand | AU, NZ | 1.05x | 1.10x | 20% |
+| Canada | CA | 1.00x | 1.04x | 17% |
+| East Asia | JP, CN, KR, TW | 1.00x | 0.98x | 15% |
+| Israel | IL | 0.98x | 1.08x | 20% |
+| Southern Europe | ES, IT, PT, GR, MT, CY | 0.90x | 0.95x | 17% |
+| Turkey & Levant | TR, JO, LB, IQ | 0.82x | 0.80x | 15% |
+| Central & Eastern Europe | PL, CZ, HU, RO, BG, the Baltics | 0.80x | 0.82x | 15% |
+| Caribbean | DO, JM, TT, BS, KY, BM | 0.80x | 1.00x | 12% |
+| Pacific Islands | FJ, PG, NC, PF | 0.80x | 0.95x | 12% |
+| South Africa | ZA | 0.78x | 0.80x | 18% |
+| Latin America | MX, BR, CO, AR, CL, PE, Central America | 0.75x | 0.75x | 12% |
+| South & Southeast Asia | IN, ID, PH, VN, TH, MY | 0.72x | 0.70x | 12% |
+| Balkans, Russia & CIS | RS, RU, UA, KZ, GE | 0.70x | 0.72x | 13% |
+| Africa | EG, ET, KE, MA, NG | 0.68x | 0.70x | 12% |
 
-This means the same tier and rank can pay differently in different regions.
+- **Pay** follows the airline. A Swiss airline pays the Swiss factor even if you were born elsewhere.
+- **Living costs and tax** follow where you are based, so a lower-paying market is usually cheaper to live in too.
+- Airlines without a home country use a neutral 1.00x.
 
-## Regional costs and taxes
+The job board shows each offer's pay market, its tax, and about how much you keep each week after tax, so you can compare a tax-free Gulf offer with a higher gross offer elsewhere.
 
-Regions also affect living costs and tax/social contribution estimates.
+### What changes your contract rate
 
-| Region | Cost multiplier | Base tax/social rate |
-| --- | ---: | ---: |
-| North America | 1.08x | 14% |
-| South America | 0.78x | 8% |
-| Europe | 1.06x | 18% |
-| Middle East | 1.12x | 2% |
-| Africa | 0.70x | 7% |
-| Asia Pacific | 0.96x | 10% |
-| Oceania | 1.10x | 16% |
-| Global | 1.00x | 12% |
+- **Interview.** Your interview score sets the offer between 95% and 105% of the formula. One quiz never defines a career.
+- **Contract Negotiation and related Pilot Skills.** They raise the pay on new offers.
+- **Training contracts.** Market training pays 50% of the rate while training is active.
 
-Some countries have their own effective tax override. High-cost bases can also increase housing and commuting pressure.
+Stored airline pay profiles no longer change pay: every airline of the same tier uses the same formula.
+
+## What progression costs
+
+Skills, type ratings, line-check rechecks and base moves are priced in hours of your own pay, so a goal costs the same flying at every tier. Housing, property and airline stakes stay in dollars. See [What progression costs](/career-finance#what-progression-costs).
+
+## Pilot Pension
+
+Every payday, 5% of your weekly base pay goes into your pension. Higher-tier airlines add a bigger match: 0% at 1-star, 1% at 2-star, 2% at 3-star, 4% at 4-star and 5% at 5-star. The match vests after 8 weeks at the airline. See [Career Pilot Pension](/career-pension).
+
+## Living costs and taxes
+
+Living costs and taxes follow the country of your base:
+
+- **Living costs** use your base's pay market (see the table above). Big hubs such as New York, London, Paris, Zurich, Dubai, Tokyo, Hong Kong, Singapore and Sydney cost more again.
+- **Tax and social contributions** start from the market's typical rate, or the country's own rate where FlyHub has one (for example the US, UK, Germany, France and Australia). Higher incomes then add up to a few percentage points. Tax never goes above 28%.
+
+### Tax-free bases
+
+Some countries have no personal income tax. When your base is in one of them, your weekly payroll has **no income tax at all**, and your pay slip says so:
+
+- The Gulf: United Arab Emirates, Qatar, Saudi Arabia, Bahrain, Oman, Kuwait.
+- Brunei and Monaco.
+- The Bahamas, Bermuda, the Cayman Islands, the British Virgin Islands, Turks and Caicos, Anguilla, and Vanuatu.
+
+Tax-free does not mean cheap: Gulf hubs such as Dubai and Doha are high-cost bases, so rent and daily costs are higher. The gross pay factor is a little lower than the United States, but take-home is usually higher.
 
 ## Protected weekly take-home
 
@@ -139,21 +171,47 @@ This helps new Career pilots survive the early grind without removing the need t
 
 Training contracts from normal market offers can pay 50% of the full employment rate while training is active.
 
-Internal type-rating requests are different. If your current employer approves the request, the airline pays for the rating and you keep your current salary during training.
+Internal type-rating requests are different. If your current employer approves the request, you keep your current salary during training, but you pay for that extra rating yourself. Ratings the airline needs you on are paid by the airline under a 26-week training bond. See [Who pays for a rating](/career-type-ratings-training#who-pays-for-a-rating).
 
-## Seniority pay bonus
+### Pay protection after the 2026 rebalance
 
-Seniority can increase pay over time.
+When Career pay was rebalanced in November 2026, nobody lost more than 15% on the day. If your new contract rate was lower than that, you keep a **protected rate** that steps down by up to 10% each payday until it reaches your new contract rate. Only weeks you fly count, so time away never uses up your protection. Your pay slip shows the protected rate and how many paydays are left. A promotion never lowers your pay: protection carries into the new rank and keeps stepping down toward the higher rank's rate. Moving to another airline ends protection and pays the new formula right away.
 
-Every 8 weeks of continuous employment adds a 1% seniority bonus. The seniority bonus caps at 20%.
+## Seniority pay
 
-Changing employers resets company-specific seniority, and moving up more than one tier can cost you rank, so a higher hourly rate is not the only thing to consider. See [Rank when you change airline](/career-ranks-promotions#rank-when-you-change-airline).
+Every 8 weeks of continuous employment at your airline adds 1% to your pay, up to 10%. The **Seniority** Pilot Skill makes a step every 7 weeks, and at rank 2 it lifts the cap to 13%.
+
+Seniority belongs to your airline. Changing employers resets it, and moving up more than one tier can cost you rank, so a higher hourly rate is not the only thing to consider. That is the real choice in Career: stay and build seniority, or jump to a better airline and start again. See [Rank when you change airline](/career-ranks-promotions#rank-when-you-change-airline).
+
+## Performance pay
+
+Performance pay rewards how you fly, and it **follows you to every airline**.
+
+Every weekly performance review moves it:
+
+| Week's average score | Change |
+| --- | ---: |
+| 9.0 or higher | +1% |
+| 8.0 to 8.9 | +0.5% |
+| 7.5 to 7.9 | No change |
+| Below 7.5 | -1% |
+
+It stays between 92% and 110% of your rate. A week without Career flights changes nothing. The weekly performance report tells you how it moved.
+
+## Minimum credit and the weekly guarantee
+
+- **Every leg pays at least 1 hour.** A 25-minute hop pays an hour, so short regional and Caravan legs are worth flying.
+- **Fly at least one leg in a pay week and you are paid for at least 4 hours.** The guarantee tops up your weekly pay at your current rate. A week without flights pays nothing extra.
+
+## Extra pay per flight
+
+Stacking bonuses on a leg (the on-time bonus and Special Airports pay) are added on top of its base pay. Together they can add up to **60% of that leg's base pay**. If they stack above that, each is scaled down so the total is exactly 60%. Reserve calls keep their full 2.0x duty rate, and flat payments such as adverse-weather hazard pay and weekly stipends are not part of the cap.
 
 ## Union dues
 
 Union dues are charged monthly at 1.8% of your contract base pay, with a minimum of $40 and a maximum of $600 a month. Higher-tier airlines pay more, so their dues are higher too, but dues stay a small share of your salary at every tier.
 
-Members also earn a union pay step: +2% hourly pay for every 2 months of continuous membership with the same airline, up to 12%. Membership also helps with strikes, firing protection, promotion requirements and recall after an inactivity dismissal.
+Members also earn a union pay step: +1% hourly pay for every 2 months of continuous membership with the same airline, up to 5%. It adds to your seniority pay. Membership also helps with strikes, firing protection, promotion requirements and recall after an inactivity dismissal.
 
 
 See [My Company](/career-company#union) for the full union guide.
@@ -189,7 +247,7 @@ Leaving before your term ends also means repaying the unearned part of any signi
 
 ## Switching costs by tier
 
-Relocation, medical, psychological and processing costs scale with the airline tier and the regional pay multiplier. Moving to a 1-star airline in a low-pay region costs a few thousand dollars; moving to a 5-star airline in North America can cost well over $10,000.
+Relocation, medical, psychological and processing costs scale with the airline tier and the airline's pay market. Moving to a 1-star airline in a low-pay market costs a few thousand dollars; moving to a 5-star airline in North America can cost well over $10,000.
 
 The hiring package on each offer shows how much of that the airline pays. Airline-initiated offers always pay at least half of every cost. See [Hiring packages](/career-applications-offers#hiring-packages).
 
@@ -203,7 +261,7 @@ The hiring package on each offer shows how much of that the airline pays. Airlin
 | 4-star | $20,000 | $30,000 |
 | 5-star | $25,000 | $30,000 |
 
-Regional pay levels adjust the amount. No signing bonus is above $30,000.
+The airline's pay market adjusts the amount. No signing bonus is above $30,000.
 
 ## Medical check costs
 

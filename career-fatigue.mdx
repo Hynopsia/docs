@@ -56,7 +56,14 @@ Accommodation and meals multiply together. Home and hotel bonuses do not stack: 
 
 Premium accommodation plus premium meals gives **0.8 × 1.35 × 1.20 ≈ 1.30 points/hour**, instead of 0.80. With no further Career flying or changes in benefits, 15 fatigue clears in roughly **11.5 hours**, compared with **18.75 hours** at the base rate.
 
-The combined multiplier is capped at ×1.80. Illness can reduce recovery. If benefits change during a rest period, the recovery calculation accounts for the time each benefit was active; the rate used for that period can differ from your current setup's multiplier. The dashboard shows points per hour to two decimal places, and Personal Operations also explains the current multiplier.
+Home, hotel and meals together reach at most ×1.80, and they always count in full. Recovery skills (Recovery Planning, Layover Hotel, Layover Routine) multiply on top of that. Any recovery above ×1.80 counts at half its value, up to ×2.00, or ×2.20 with Recovery Planning rank 2. So a better home, hotel or meal plan never stops helping, even for a pilot with every recovery skill.
+
+| Pilot | Basic rental, basic meals | Owned home, basic meals | Owned home, premium meals | Premium hotel, premium meals |
+| --- | ---: | ---: | ---: | ---: |
+| No recovery skills | ×1.00 | ×1.50 | ×1.80 | ×1.62 |
+| Every recovery skill | ×1.35 | ×1.91 | ×2.12 | ×1.99 |
+
+Illness can reduce recovery. If benefits change during a rest period, the recovery calculation accounts for the time each benefit was active; the rate used for that period can differ from your current setup's multiplier. The dashboard shows points per hour to two decimal places, and Personal Operations also explains the current multiplier.
 
 Short-turn pressure is intentionally forgiving for normal airline rotations:
 
@@ -135,14 +142,20 @@ For the full money-and-readiness view, see [Pilot Life and Personal Operations](
 
 Fatigue penalties are gradual.
 
+The deduction grows a little with every point of fatigue instead of jumping in whole points. Below 16 there is none. From 16 it is (fatigue − 15) ÷ 6 points, rounded to one decimal, up to 4.
+
 | Fatigue pressure | Career scoring effect |
 | --- | --- |
 | 0-10 | No penalty |
 | 10-16 | Warning only |
-| 16-22 | -1 point |
-| 22-30 | -2 points |
-| 30-40 | -3 points |
-| 40+ | -4 points |
+| 16 | -0.2 points |
+| 18 | -0.5 points |
+| 21 | -1.0 point |
+| 27 | -2.0 points |
+| 33 | -3.0 points |
+| 39+ | -4.0 points (the maximum) |
+
+Fatigue Risk Management starts all of this two points later.
 
 Fatigue penalties apply only to Career scoring systems such as:
 
@@ -152,6 +165,19 @@ Fatigue penalties apply only to Career scoring systems such as:
 - Weekly performance.
 - Reputation calculations.
 - Airline evaluations.
+
+## Late-game fatigue skills
+
+Wellbeing skills such as Sleep Hygiene, Circadian Management, Long-Haul or Short-Haul Rhythm, Fitness Program and Night Operations make each flight add less fatigue. They stack, but with diminishing returns: the first 15% counts in full, anything beyond it counts at half, and the total is never more than 35%.
+
+A pilot with every fatigue skill can fly roughly half as much again before a deduction starts. They are never fully immune.
+
+| Pattern | No skills: first deduction | Every fatigue skill: first deduction |
+| --- | ---: | ---: |
+| 20 × 30 min hops, 10 min turns | Leg 10 | Leg 14-15 |
+| The same hops on a Duty Line | Leg 10 | Leg 16-17 |
+| 6 × 14 h long-hauls at 4× sim rate, 30 min turns | Leg 4 | Leg 6 |
+| One 14 h long-haul a day, 10 h layovers | Never | Never, and much fresher (peak about 7 instead of 22) |
 
 ## Recent activity
 
@@ -239,7 +265,7 @@ Result:
 
 Penalty:
 
-Later flights can receive fatigue deductions, rising up to about -2 points in this example.
+Later flights receive fatigue deductions that start small and grow to about -2.3 points by the last leg.
 
 This is the kind of pattern fatigue is meant to discourage: many short flights with almost no rest between them.
 
@@ -299,7 +325,7 @@ If those same two daily sim-rate long-hauls are flown back-to-back every day ins
 
 - Final fatigue: about 32.2.
 - Penalized departures: 3 out of 14.
-- Later flights can receive -1 to -2 point deductions.
+- Later flights receive deductions that grow from a few tenths to nearly -3 points.
 
 Spacing matters. Sim rate is allowed, but stacking compressed long-haul duty with no rest still creates fatigue.
 

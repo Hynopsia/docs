@@ -1,6 +1,6 @@
 ---
 title: Career Type Ratings and Training
-description: Learn how Career type ratings, starter training, optional internal requests, training costs, and currency work.
+description: Learn how Career type ratings, starter training, optional internal requests, rating prices, training bonds, and currency work.
 ---
 
 Type ratings control which aircraft families your Career pilot can fly.
@@ -56,7 +56,8 @@ The offer and contract show:
 - Aircraft family.
 - Required training flights.
 - Minimum score average.
-- Pilot cost share.
+- Rating price and who pays it.
+- Training bond, if the airline pays.
 - Training pay rate.
 - Base and airline.
 
@@ -98,41 +99,94 @@ Possible statuses include:
 - **Training offer ready** — the airline approved it; open the offer to begin.
 - **Training in progress** — finish the program before requesting another rating.
 
-Approved internal training is fully company-paid. You keep your current salary and seniority, and you do not pay a pilot type-rating share. External market training can still require you to pay the pilot share shown in its offer.
+An internal request is for an extra type you choose yourself, so it is **self-funded**: you pay the rating price when you accept the training offer, and there is no training bond. You keep your current salary and seniority while you train.
+
+For example, a pilot flying the 737 and 777 for a cargo airline can request the Caravan to mix short feeder legs into their flying. The airline does not need them on the Caravan, so the pilot pays for it. See [Who pays for a rating](#who-pays-for-a-rating).
 
 ## When your airline retires your aircraft
 
 Airlines change their fleets. If your airline stops flying every aircraft family you are rated on (for example, it retires the 757 and you only fly the 757), you are not left stuck:
 
-- **Free transition type rating.** As soon as the schedule update that retires your aircraft goes live, the airline sends you a company-paid training offer on one of its current aircraft. It shows up in your notifications and in the Job Market. Pick the type you want. You keep your pay, rank and seniority, and it does not use up your 100-hour request.
+- **Free transition type rating.** As soon as the schedule update that retires your aircraft goes live, the airline sends you a training offer it pays for in full on one of its current aircraft. It shows up in your notifications and in the Job Market. Pick the type you want. You keep your pay, rank and seniority, and it does not use up your 100-hour request.
 - **Leave at no cost.** While you have no aircraft to fly at your airline, you can resign or accept another airline's offer with no early exit penalty, no reputation hit and no bonus repayment.
 - **No inactivity penalty.** Months where you could not fly because of the fleet change do not count against you.
 
 If you decline or let the transition offer expire, it comes back 7 days later: open **Career > My Company** and it will be waiting while you are still without a flyable aircraft.
 
-## Type-rating cost
+## Type-rating price
 
-Career type-rating prices depend on the aircraft family:
+A type rating is priced in **hours of your own pay**, so the same rating costs the same amount of flying at every airline. A rating that costs a 1-star First Officer a few thousand dollars costs a 5-star Captain much more in dollars, but the same number of hours.
 
-| Aircraft family group | Typical price |
+| Rating | Hours of your pay |
 | --- | ---: |
-| Turboprops, including ATR | $5,000 |
-| Regional jets, including Embraer regional families | $10,000 |
-| Narrowbodies, including A320 and 737 families | $15,000 |
-| Widebodies, including the 787 family | $20,000 |
-| Flagship heavy aircraft, including 747 and A380 families | $25,000 |
+| Narrowbody, turboprop or regional type | 30 h |
+| Widebody type | 45 h |
+| Differences course (you hold a family that shares training) | 25% of the above |
 
-The exact price shown in the offer is the price that applies. If FlyHub adds a new aircraft family before it receives a reviewed price, it temporarily uses the $15,000 standard-family price. Aircraft added to an existing family inherit that family's price.
+Widebody types include the A300, A310, A330, A340, A350, A380, 747, 767, 777, 787, MD-11, DC-10 and L-1011 families. Everything else uses the 30-hour price.
 
-External market training normally requires you to pay the displayed type-rating price. Internal type training with your current airline is company-paid.
+The price is your contract hourly rate times the hours, rounded to $10. It always uses your full contract rate, even while you are on training pay. Between jobs it uses the rate of your last contract, so resigning does not make anything cheaper. A pilot who has never had a contract pays the lowest rate in the game.
+
+### Differences courses
+
+Some families share most of their training. If you already hold a **current** rating on one family in a group, the next one in the same group is a **differences course** at 25% of the normal price. An expired rating does not count until you restore it with recurrency. Job Market cards, offers and the type request list show the saving, for example "Differences course: 11.25 h of pay instead of 45 h".
+
+- Airbus fly-by-wire: A320, A330, A340, A350 and A380.
+- A300 and A310.
+- 757 and 767.
+- 777 and 787.
+- Embraer E-Jet and ERJ.
+- MD-80, MD-90, DC-9 and 717.
+
+### Examples
+
+| Rating | At $104/h | At $305/h |
+| --- | ---: | ---: |
+| Narrowbody (30 h) | $3,120 | $9,150 |
+| Widebody (45 h) | $4,680 | $13,730 |
+| Narrowbody differences (7.5 h) | $780 | $2,290 |
+| Widebody differences (11.25 h) | $1,170 | $3,430 |
+
+The offer always shows the exact price, in dollars and in hours of your pay.
+
+## Who pays for a rating
+
+| Situation | Who pays | Training bond |
+| --- | --- | --- |
+| A new-hire seat that needs a new type, including Job Market offers | Airline, 100% | Yes, 26 weeks |
+| A transition after your airline retires your fleet | Airline, 100% | Yes, 26 weeks |
+| A type offer sent to you by airline operations | Airline, 100% | Yes, 26 weeks |
+| A promotion that moves you to a new type | Airline, 100% | Yes, 26 weeks |
+| An extra type you ask for with an internal request | You | No |
+| Your first job (starter training) | Included | No |
+
+### The training bond
+
+When the airline pays for your rating, you sign a **26-week training bond** for that amount. The bond is printed on your contract, and offers show it before you accept.
+
+The 26 weeks start on the day your rating is awarded, not the day you sign. If you leave or are dismissed while you are still in training, you owe nothing for the bond.
+
+After the award, if you leave before the bond ends, you repay the share for the weeks that are left. Leave 13 weeks in and you repay about half. My Company shows what is left on the bond and the date it ends.
+
+| How you leave | Bond repayment |
+| --- | --- |
+| You resign | Yes, for the weeks left |
+| You leave for another airline | Yes, for the weeks left |
+| You are dismissed for strikes or inactivity | Yes, for the weeks left |
+| Your airline shuts down | Nothing |
+| Your airline retires your fleet | Nothing |
+| You are recalled through the union | Nothing |
+| The airline ends your contract for its own reasons | Nothing |
+
+The resignation dialog in My Company and the contract step of an outside offer show the repayment before you confirm. It appears in the ledger as **Training bond repayment**. After 26 weeks, the bond is done and nothing is owed. You get a **Training bond cleared** notification when that happens.
+
+Some outside offers include **We buy out your training bond** in the hiring package. If you accept one, the new airline pays what you still owe and you are charged nothing for the bond. Bigger airlines offer this more often.
 
 Before accepting training, check:
 
-- Total rating cost.
-- Whether the training is external or company-paid.
-- Pilot share.
-- Your balance.
-- Loan availability.
+- The rating price, in dollars and hours.
+- Who pays, and whether a bond applies.
+- Your balance, if you pay it yourself.
 - Training pay.
 - Required performance average.
 
@@ -176,7 +230,9 @@ A purchased rating stays current when you fly that aircraft family at least once
 
 If a rating expires, it is not removed. You can restore it by flying the family again or by completing simulator recurrency.
 
-Simulator recurrency costs 10% of each expired self-funded rating's price. One session restores all expired ratings and the total session fee is capped at $2,500. Retraining for aircraft families operated by your current airline is free.
+Simulator recurrency costs 10% of each expired rating's current price. One session restores all expired ratings, and the whole session is capped at **8 hours of your pay**. The recurrency dialog shows the cap in dollars. An offer quotes recurrency before joining at your own pay rate, the same amount you are charged. Reinstating a rating before you join an airline that flies it uses the same price. Retraining for aircraft families operated by your current airline is free.
+
+Example: at $104 an hour the session cap is $830. At $305 an hour it is $2,440. SOP Discipline and Checklist Discipline lower the fee further.
 
 Line checks and medical checks are separate from normal type-rating training. If you miss required checks or fail a line check, you can be grounded until the issue is fixed.
 
@@ -184,7 +240,8 @@ For compliance rules, see [Career Compliance](/career-compliance).
 
 ## Common mistakes
 
-- Accepting external training without checking the displayed price.
+- Leaving an airline early without checking what is left on a training bond.
+- Requesting an extra type without checking its self-funded price.
 - Forgetting that training can limit Dispatch to one aircraft family.
 - Assuming a type rating is useful at every airline.
 - Ignoring the required average score.
