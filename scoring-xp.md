@@ -27,7 +27,7 @@ The score shown in the logbook is the **final score**, not only the raw touchdow
 
 The final score can include:
 
-- Original landing score.
+- Touchdown deduction (from the landing G-force, see [Landing score](#landing-score)).
 - Runway alignment and touchdown-zone analysis.
 - Operational penalties.
 - Approach and landing penalties.
@@ -82,32 +82,65 @@ For online flights, FlyHub primarily evaluates landing impact through **touchdow
 
 Vertical speed is still shown in the flight report, but G-force is the better measure of what the aircraft actually experienced at touchdown. A touchdown can look low in feet per minute but still hit hard because of aircraft attitude, bounce, sink rate changes, runway slope, or gear compression.
 
-| Touchdown result | General G-force range | Meaning |
+Every flight starts at **10.00**. The touchdown G-force sets the landing score, and every other penalty is then subtracted from it. In the flight report, any points lost on the touchdown show up as their own **Touchdown** row in the penalties list, next to rows like Altimeter Procedure or Runway Alignment. The row shows the band you landed in, your G-force and vertical speed, and how many points it cost.
+
+| Touchdown band | Touchdown G-force | Deduction |
 | :--- | :--- | :--- |
-| Great touchdown | Up to about 1.4 G | Controlled touchdown with low impact. |
-| Good touchdown | About 1.4 G to 1.8 G | Normal landing impact. |
-| Firm touchdown | About 1.8 G to 2.2 G | Acceptable but clearly firm. |
-| Hard touchdown | Above about 2.2 G | Strong impact and larger score deductions. |
+| Butter (too soft) | Below 1.05 G | 0 to 0.50, growing as the touchdown gets softer. Reaches 0.50 at 0.85 G or less. See [Why butter landings are penalized](#why-butter-landings-are-penalized). |
+| Great | 1.05 G to 1.40 G | None. This is the target range. |
+| Good | 1.40 G to 1.70 G | 0 to 1.00, growing with G-force. |
+| Firm | 1.70 G to 2.00 G | 1.00 to 1.30. |
+| Hard | 2.00 G to 2.20 G | 1.30 to 1.60. |
+| Very hard | 2.20 G to 2.50 G | 1.60 to 2.00. |
+| Severe | 2.50 G to 3.00 G | 3.00. |
+| Structural | Above 3.00 G | Landing score drops to 0. |
+
+The landing score is rounded to one decimal. For example, a 1.00 G "greased" touchdown is in the Butter band and loses 0.10, so the flight starts from 9.90 before any other penalty.
+
+When difficult conditions are detected at touchdown, the Great band extends to 1.50 G and the Good band to 1.80 G. See [Difficult conditions compensation](#difficult-conditions-compensation).
 
 FlyHub also checks whether the touchdown was usable and safe. A soft touchdown is not automatically perfect if it causes a long float, poor runway placement, runway overrun risk, or weak directional control.
 
-## The "Butter" Myth
+## Why butter landings are penalized
 
-In real-world aviation, searching for the smoothest possible touchdown is not always good technique. A controlled positive touchdown is often safer, especially on wet, short, contaminated, or windy runways.
+In the sim community, a "butter" landing (a touchdown so soft you barely feel it) is often treated as the goal. Real airline pilots don't fly that way. They aim for a **firm, positive touchdown** at the right spot on the runway, and airline training treats a long, floating flare as a mistake. FlyHub scores landings the way an airline would, so a touchdown below **1.05 G** never earns a full 10.
 
-1. **Sensor delay**
-   A very soft touchdown may delay weight-on-wheels detection. That can delay spoiler deployment and reverse thrust, increasing the risk of a runway overrun.
+### What goes wrong with a butter landing
 
-2. **Stopping distance**
-   Floating to chase a smooth touchdown can waste thousands of feet of runway that should be used for braking.
+1. **You use up runway while floating**
+   A very soft touchdown usually means holding the flare and letting the aircraft float just above the runway. At typical airliner approach speeds you cover roughly 70 m (230 ft) every second. A few seconds of float can put the touchdown hundreds of meters past the touchdown zone. Published landing distances assume a normal flare and touchdown, so every meter you float comes out of your safety margin. Runway excursions and overruns are among the most common types of airliner accidents, and long, floated landings are a well-known cause.
 
-3. **Surface grip**
-   On wet runways, a positive touchdown helps the tires break through water and gain grip. A very soft touchdown can increase hydroplaning risk.
+2. **The aircraft is slow to "know" it has landed**
+   Ground spoilers, autobrakes and reverse thrust depend on the aircraft detecting that it is on the ground (weight-on-wheels sensors and wheel spin-up). A barely-there touchdown can delay that detection. Until the spoilers deploy, the wings are still producing lift, so the wheels carry less weight, braking is weaker, and the aircraft is more likely to skip or bounce.
 
-4. **Crosswinds**
-   A positive touchdown helps plant the aircraft on the runway so the tires can provide directional control.
+3. **Less grip on wet or contaminated runways**
+   On a wet runway, a positive touchdown pushes the tires through the water film so they can grip the pavement. A gentle touchdown lets the tires ride on the water, which increases the risk of hydroplaning. Aircraft manufacturers' training manuals specifically recommend a firm touchdown on wet and contaminated runways.
 
-FlyHub rewards controlled, safe landings. It does not reward floating forever just to make the touchdown feel soft.
+4. **Worse control in crosswinds and gusts**
+   Floating in a crosswind gives the wind more time to push the aircraft sideways or drift it off the centerline. Getting the wheels firmly on the ground lets the tires and nosewheel steering take over directional control.
+
+5. **Higher risk of tailstrikes and bounces**
+   Stretching the flare means pulling the nose higher while the airspeed bleeds away. That raises the risk of a tailstrike, and a late, soft touchdown with the wings still flying often turns into a bounce.
+
+6. **A firm landing is not a hard landing**
+   Airliners are built to take normal positive touchdowns on every flight. A firm landing is well inside the aircraft's design limits and does not damage it. Structural inspections only come into play at much higher impacts, which FlyHub scores in the Severe and Structural bands.
+
+Passengers do enjoy a smooth landing, and FlyHub doesn't punish soft-but-positive touchdowns: everything from 1.05 G to 1.40 G scores a full 10. What it doesn't reward is chasing the softest possible number at the cost of runway, braking and control.
+
+### How FlyHub scores it
+
+- Below **1.05 G** the touchdown is in the **Butter** band. The deduction starts at 0 and grows as the touchdown gets softer, up to **0.50** at **0.85 G** or less.
+- Because the landing score is rounded to one decimal, a touchdown just under 1.05 G can still round back to 10.00. Around 1.00 G costs 0.10.
+- The deduction shows up in the flight report as **Touchdown (Butter)**, with a link back to this section.
+- Floating usually costs more than the touchdown row alone. If you touched down past the touchdown zone, the [runway scoring](#runway-scoring) long-landing penalty applies on top.
+- Difficult conditions widen the upper bands, but the 1.05 G lower limit stays the same.
+
+### How to land in the target range
+
+- Fly a stable approach and aim for the touchdown zone markers, not for the softest touchdown.
+- Flare to stop the descent, not to stop the aircraft from touching down. Once the attitude is set, let the aircraft settle onto the runway.
+- Don't hold the aircraft off the runway to bleed the last few feet per minute.
+- On wet runways, short runways, or in gusty crosswinds, plan for a deliberately firm touchdown.
 
 ## Runway scoring
 
