@@ -132,7 +132,7 @@
           "public-api"
         ],
         "summary": "List airline flight activity",
-        "description": "Returns airline logbook activity, newest first. A flagship key includes flights of all non-closed subsidiaries in its own group; a subsidiary or independent airline key includes only its own flights. Inspect each status: a row records airline flight activity and is not automatically a successful completion. Completed and diverted rows include the pilot (display name and public avatar), landing metrics, load, network, simulator, and airport names; those fields are null on rejected and corrected rows. Page deep logbooks with cursor instead of offset; sync new entries with order=asc and the stored nextCursor.",
+        "description": "Returns airline logbook activity, newest first. A flagship key includes flights of all non-closed subsidiaries in its own group; a subsidiary or independent airline key includes only its own flights. Inspect each status: a row records airline flight activity and is not automatically a successful completion. Completed and diverted rows include the pilot (display name and public avatar), landing metrics, load, network, simulator, and airport names; those fields are null on rejected and corrected rows. Every row carries its operationType. Keys that also hold finance:read get each flight's settled economics (revenue, costs, net result). Page deep logbooks with cursor instead of offset; sync new entries with order=asc and the stored nextCursor.",
         "operationId": "listVaFlights",
         "security": [
           {
@@ -408,7 +408,7 @@
           "public-api"
         ],
         "summary": "Read airline insights",
-        "description": "Totals, monthly activity, top airports, routes and aircraft, and network, simulator and landing breakdowns in one object. Requires statistics:read and costs 20 rows. Results refresh about once a minute.",
+        "description": "Totals, monthly activity, top airports, routes and aircraft, and network, simulator and landing breakdowns, and flights per operation type over time, in one object. Requires statistics:read and costs 20 rows. Results refresh about once a minute.",
         "operationId": "getVaInsights",
         "security": [
           {
@@ -1563,6 +1563,8 @@
           "cargoKg",
           "network",
           "simulator",
+          "operationType",
+          "economics",
           "origin",
           "destination",
           "createdAt"
@@ -1710,6 +1712,65 @@
               "null"
             ]
           },
+          "operationType": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "schedule",
+              "charter",
+              "tour",
+              "free_flight",
+              "other",
+              null
+            ],
+            "description": "Kind of operation: schedule, charter, tour, free_flight (dispatched outside the schedule) or other. Null when the flight has no linked operation."
+          },
+          "economics": {
+            "description": "Settled economic result of the flight. Only filled for keys that also hold the opt-in finance:read scope; null otherwise, on rejected and corrected rows, and while a flight is not settled yet.",
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "revenue",
+                  "costs",
+                  "netResult",
+                  "currency"
+                ],
+                "properties": {
+                  "revenue": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "description": "Gross flight revenue."
+                  },
+                  "costs": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "description": "Operating cost of the flight."
+                  },
+                  "netResult": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "description": "Revenue minus costs."
+                  },
+                  "currency": {
+                    "type": "string",
+                    "description": "Always FH$."
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "origin": {
             "description": "Origin airport details.",
             "oneOf": [
@@ -1753,6 +1814,7 @@
           "airframeHours",
           "airframeCycles",
           "availableFrom",
+          "unavailableUntil",
           "maintenanceDueAt",
           "acquiredAt",
           "updatedAt"
@@ -1804,6 +1866,14 @@
               "null"
             ],
             "format": "date-time"
+          },
+          "unavailableUntil": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "Expected return-to-service time while the aircraft is out of service (maintenance work period or grounding). Null when the aircraft is not out of service. Can be in the past until completed work is signed off."
           },
           "maintenanceDueAt": {
             "type": [
@@ -2308,7 +2378,8 @@
           "topAircraftTypes",
           "networks",
           "simulators",
-          "landingRatings"
+          "landingRatings",
+          "flightsByOperation"
         ],
         "properties": {
           "period": {
@@ -2492,6 +2563,123 @@
                 "flights": {
                   "type": "integer",
                   "minimum": 0
+                }
+              }
+            }
+          },
+          "flightsByOperation": {
+            "type": "object",
+            "description": "Accepted flights per operation type over the period, the same data as the airline dashboard's completed-flights chart. Buckets are UTC days for month, 7d, 30d and 90d, and UTC months for 365d and all; empty buckets are included as zero.",
+            "required": [
+              "bucket",
+              "totals",
+              "series"
+            ],
+            "properties": {
+              "bucket": {
+                "type": "string",
+                "enum": [
+                  "day",
+                  "month"
+                ]
+              },
+              "totals": {
+                "type": "object",
+                "required": [
+                  "flights",
+                  "byType"
+                ],
+                "properties": {
+                  "flights": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "byType": {
+                    "type": "object",
+                    "required": [
+                      "schedule",
+                      "charter",
+                      "tour",
+                      "free_flight",
+                      "other"
+                    ],
+                    "properties": {
+                      "schedule": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "charter": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "tour": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "free_flight": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "other": {
+                        "type": "integer",
+                        "minimum": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "series": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "period",
+                    "flights",
+                    "byType"
+                  ],
+                  "properties": {
+                    "period": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "First UTC day of the bucket."
+                    },
+                    "flights": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "byType": {
+                      "type": "object",
+                      "required": [
+                        "schedule",
+                        "charter",
+                        "tour",
+                        "free_flight",
+                        "other"
+                      ],
+                      "properties": {
+                        "schedule": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "charter": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "tour": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "free_flight": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "other": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }

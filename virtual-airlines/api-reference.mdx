@@ -81,11 +81,11 @@ Give a key only the scopes it needs. Scopes cannot write to the airline.
 | --- | --- | --- |
 | `airline:read` | `airline` | Name, codes, home base, status, business model, application mode, summary, and counts. |
 | `pilots:read` | `pilots`, `leaderboard` | Active roster names, avatars, ranks, membership dates, activity, flights, hours, contribution points, and reliability; pilot rankings. |
-| `flights:read` | `flights`, `flights/live` | Public logbook activity (routes, aircraft, times, duration, distance, score, result status, pilot, landing, load, network, simulator) and flights in progress. |
+| `flights:read` | `flights`, `flights/live` | Public logbook activity (routes, aircraft, times, duration, distance, score, result status, pilot, landing, load, network, simulator, operation type) and flights in progress. |
 | `fleet:read` | `fleet` | Active aircraft registrations, types, stations, condition, maintenance state, hours, cycles, and availability. |
 | `schedules:read` | `schedules` | Published network schedules, routes, days, planned block time, eligible aircraft, and schedule status. |
 | `statistics:read` | `statistics`, `insights` | Aggregate airline, pilot, fleet, schedule, contribution, and reliability totals; monthly activity, top airports, routes and aircraft, and network, simulator, and landing breakdowns. |
-| `finance:read` | `finance` | Revenue, costs, net result, margin, revenue and cost breakdowns, daily or monthly results, and current cash. Opt-in: grant it only if you want your finances public. |
+| `finance:read` | `finance`, plus `economics` on `flights` | Revenue, costs, net result, margin, revenue and cost breakdowns, daily or monthly results, and current cash; with `flights:read` too, each flight's revenue, costs and net result. Opt-in: grant it only if you want your finances public. |
 
 The available scope names are shown in the Ownership integration screen. A key may contain one or more scopes, up to all seven. No key gets `finance:read` unless an owner ticks it when creating the key.
 
@@ -300,8 +300,20 @@ Each item contains:
 | `cargoKg` | Cargo weight in kilograms, from the dispatch load. |
 | `network` | `vatsim`, `ivao`, `offline` (flown off-network), or `null` when unknown. |
 | `simulator` | Simulator name reported by the FlyHub tracker, when recorded. |
+| `operationType` | `schedule`, `charter`, `tour`, `free_flight` (dispatched outside the schedule), or `other`. `null` when the entry has no linked operation. |
+| `economics` | `{ revenue, costs, netResult, currency }` for the flight, in FH$. Only for keys that also hold `finance:read`; see [Flight economics](#flight-economics). |
 | `origin` / `destination` | `{ icao, name, city, countryCode }` airport details. Name, city, and country can be `null` for an airport FlyHub does not know. |
 | `createdAt` | When FlyHub recorded the entry. `since`, `until`, and cursors use this time. |
+
+### Flight economics
+
+A key that holds both `flights:read` and the opt-in `finance:read` scope gets each flight's settled result:
+
+```json
+"economics": { "revenue": 28781.35, "costs": 12763.48, "netResult": 16017.87, "currency": "FH$" }
+```
+
+`revenue` is the flight's gross revenue, `costs` its operating cost, and `netResult` what the airline kept. `economics` is `null` for a key without `finance:read`, on `rejected` and `corrected` rows, and for a flight that has not been settled yet. A flight settled again after a correction shows the current settlement. The finance report totals also include costs that are not tied to one flight (leases, maintenance, fees), so the sum of per-flight results will not match `GET /finance`.
 
 Rejected rows stay in the list so an airline website can show them. The pilot, landing, load, network, and simulator fields are `null` on `rejected` and `corrected` rows, and any of them can be `null` on a completed row when FlyHub did not record the value.
 
@@ -394,7 +406,8 @@ Each item contains:
 | `maintenanceState` | Current maintenance state. |
 | `airframeHours` | Airframe time, rounded to one decimal place. |
 | `airframeCycles` | Airframe cycle count. |
-| `availableFrom` | Time at which the aircraft can become available, when applicable. |
+| `availableFrom` | Time at which the aircraft can become available, when applicable. This is `null` while the aircraft is in maintenance or grounded; use `unavailableUntil` for those cases. |
+| `unavailableUntil` | Expected return-to-service time while the aircraft is out of service, for example the end of the current maintenance work period or a grounding after an incident. `null` when the aircraft is not out of service. It can be in the past when the work has finished but has not been signed off yet. |
 | `maintenanceDueAt` | Maintenance due timestamp, when applicable. |
 | `acquiredAt` | Time the airline acquired the aircraft, when available. |
 | `updatedAt` | Last update time for the public record. |
@@ -494,6 +507,29 @@ curl \
 | `networks` | `{ network, flights }`, where `network` is `vatsim`, `ivao`, `offline`, or `null` when unknown. |
 | `simulators` | Up to 10 `{ simulator, flights }`. |
 | `landingRatings` | `{ rating, flights }` per FlyHub landing rating. |
+| `flightsByOperation` | Accepted flights per operation type over time; see below. |
+
+### Flights by operation type
+
+`flightsByOperation` is the same data as the **Completed flights over time** chart on the airline dashboard: accepted flights grouped by operation type.
+
+| Field | Meaning |
+| --- | --- |
+| `bucket` | `day` for `month`, `7d`, `30d`, and `90d`; `month` for `365d` and `all`. |
+| `totals` | `{ flights, byType }` over the whole period. |
+| `series` | `{ period, flights, byType }` per bucket, oldest first. `period` is the first UTC day of the bucket. Empty buckets are included as zero. |
+
+`byType` always has the keys `schedule`, `charter`, `tour`, `free_flight`, and `other`, matching `operationType` on flights. Flights are placed on their UTC on-block day. This chart counts accepted flights, so its totals can differ slightly from `totals.flights`, which counts completed and diverted flights that count for statistics.
+
+```json
+"flightsByOperation": {
+  "bucket": "day",
+  "totals": { "flights": 79, "byType": { "schedule": 45, "charter": 14, "tour": 3, "free_flight": 17, "other": 0 } },
+  "series": [
+    { "period": "2026-11-04", "flights": 14, "byType": { "schedule": 10, "charter": 3, "tour": 0, "free_flight": 1, "other": 0 } }
+  ]
+}
+```
 
 ## `GET /api/v1/va/leaderboard`
 

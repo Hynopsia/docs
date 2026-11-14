@@ -1,6 +1,6 @@
 ---
 title: Career Base and Current Location
-description: Understand the difference between base, current location, relocation, commuting, and jumpseat in Career Mode.
+description: Understand base, current location, trips and the home bonus, base standing, relocation, commuting, and jumpseat in Career Mode.
 ---
 
 Career Mode tracks both your base and your current location.
@@ -17,6 +17,7 @@ Base affects:
 - Dispatch options.
 - Company planning.
 - Relocation decisions.
+- Trips and the home bonus. See [Trips](#trips).
 - Some cost and commuting logic.
 
 You normally choose a base during onboarding or a job offer. You can also move base from My Company when the app allows it.
@@ -41,11 +42,103 @@ You can be based at one airport and located at another.
 Example:
 
 - Your base is KATL.
-- You finish a trip in KJFK.
-- Your current location is now KJFK.
-- The next assignment may require you to continue from KJFK or jumpseat back to base.
+- You fly from KATL to KJFK.
+- Your current location is now KJFK, and you are on a trip.
+- You can keep flying from KJFK, or head home to KATL to finish the trip and collect your home bonus.
 
 This makes Career Mode behave like a real roster instead of a loose route picker.
+
+## Trips
+
+Like a real line pilot, you leave your base, fly a few legs, and come home. FlyHub calls this a **trip**.
+
+- **Leaving your base starts a trip.** Your first Career flight that departs your base and lands somewhere else starts it.
+- **Getting home ends it.** The trip ends when you land at your base, or when the airline brings you home.
+- A flight that leaves your base and comes straight back to it does not start a trip.
+
+Every completed Career flight counts as one leg of your trip, including Bid Board, reserve, and Duty Line flights. Historical Operations flights do not count.
+
+The Dashboard shows where you stand, under your base:
+
+| Label | Meaning |
+| --- | --- |
+| **Home** | You are at your base. |
+| **Trip · leg 3 of 8** | You are on a trip. You have flown 3 of the 8 legs your trip can run. |
+| **Due home** | Your trip has used all its legs. Time to head home. |
+
+While you are on a trip, the Dashboard also shows a strip with one box per leg. Flown legs show the airport you landed at, and clean legs are underlined.
+
+### Home bonus
+
+Each **clean leg** on a trip adds to a home bonus. A clean leg is a Career flight scored **7.5/10 or better**.
+
+- Each clean leg adds **1.5%** of the trip's flight pay.
+- The bonus has a cap: **10%** to start, higher as your [base standing](#base-standing) grows.
+- The trip's flight pay is the normal hourly flight pay of every leg on the trip. Extras such as on-time or reserve pay are not part of it.
+- The bonus is paid only when the trip ends at your base.
+
+Example, based at KATL:
+
+| Leg | Score | Flight pay | Clean? |
+| --- | --- | --- | --- |
+| KATL → KJFK | 8.5 | $400 | Yes |
+| KJFK → KBOS | 6.9 | $400 | No |
+| KBOS → KATL | 8.5 | $400 | Yes |
+
+The trip had 3 legs, 2 of them clean, and $1,200 of flight pay. The home bonus is 2 × 1.5% = **3%**, so **$36** is paid when you land at KATL.
+
+During the trip, the Dashboard shows **Home bonus so far**: the percent you have earned and what it would pay if the trip ended now.
+
+When the trip ends, a **Trip complete** panel appears on the Dashboard with the route, legs, clean legs, bonus percent, and amount paid. The bonus goes straight to your Career balance and shows in the ledger as **Home bonus for a 3-leg trip (3%)**. You also get a notification.
+
+A MAYDAY leg counts as a leg of your trip, but never as a clean leg, and its pay does not add to the bonus.
+
+### How a trip can end
+
+| How you get home | Home bonus | Counts for base standing |
+| --- | --- | --- |
+| You fly the last leg into your base. | Paid | Yes |
+| Operations relocates you to your base after a flight. | Paid | Yes |
+| You are due home and take the free ride home from Jumpseat. | Paid | Yes |
+| You buy your own jumpseat ticket to your base. | Not paid | No |
+
+If you buy your own ticket home, the trip closes with no bonus and the Dashboard shows **Trip closed**. To keep the bonus, fly the last leg into base, or wait until you are due home for the free ride.
+
+### Trip length and due home
+
+A trip can run a set number of legs: **8** to start. Your [base standing](#base-standing) and the **Commuter** skill (+2 legs) make it longer.
+
+The limit counts **legs, not days**. Time offline does not use up your trip.
+
+When you have flown all the legs, you are **due home**:
+
+- **Dispatch only accepts plans that end at your base.** Generated itineraries and Duty Lines are planned to finish at your base. If no plan with your filters ends there, try a different number of flights or aircraft, or take the free ride home.
+- **The ride home is free.** In [Jumpseat](/career-jumpseat), every option to your base costs nothing and keeps your home bonus. If no airline flies there, the company arranges transport for you.
+- **Bid Board lines and reserve calls are not restricted.** They can still take you elsewhere, and those legs still count. Your bonus cap stays the same.
+- Pilots still in training are not held to the Dispatch rule.
+
+### Base standing
+
+Every trip that ends at your base with the bonus paid adds one completed trip to your **standing** at that base. A trip that closes because you bought your own ticket home does not count.
+
+| Standing | Completed trips at this base | Trip length | Home bonus cap |
+| --- | --- | --- | --- |
+| New at base | 0 | 8 legs | 10% |
+| Established | 10 | 9 legs | 12% |
+| Senior at base | 25 | 10 legs | 15% |
+
+The Commuter skill adds 2 legs on top of these.
+
+At home, the Dashboard shows your standing, how long your next trip can run, your bonus cap, and how many more trips you need for the next level.
+
+- **Moving base** closes any open trip without a bonus and keeps **half** of your completed trips, rounded down. For example, 11 trips become 5.
+- **Joining a new airline** starts your standing again from zero.
+
+### Rested at home
+
+Rest at least **10 hours** at your base before a departure, and that flight starts fresher: it adds up to **2 less fatigue**. This is the same relief as a rested reserve report, and the two do not stack.
+
+At home, the Dashboard shows **Rested at home** with **Yes**, or the UTC time from which you will be rested. See [Career Fatigue](/career-fatigue).
 
 ## Moving base
 
@@ -55,6 +148,7 @@ Before moving, review:
 
 - Available bases.
 - Cost.
+- Your base standing. A move keeps only half of it. See [Base standing](#base-standing).
 - Route network.
 - Employer fleet.
 - Your type ratings.
@@ -76,7 +170,7 @@ Jumpseat moves your current location without logging a flown Career assignment.
 
 Use Jumpseat when you need to:
 
-- Return to base.
+- Return to base. When you are due home, the ride to your base is free and keeps your home bonus. Before that, a ticket you buy home closes your trip without the bonus.
 - Reach an assignment origin.
 - Handle reserve relocation.
 - Position for a new contract.
@@ -92,12 +186,12 @@ How it works:
 - Your base is the airport your airline assigns you to.
 - Your current location is where your pilot is right now.
 - If those are different, FlyHub may consider you away from base for Dispatch and positioning.
-- Airline-assigned trips away from base do not create a hotel or overnight stay charge.
+- Airline-assigned flying away from base does not create a hotel or overnight stay charge.
 - If your next accepted assignment or active/upcoming booking starts from your current away airport, staying there is valid company positioning.
-- If you stay away from base for more than 48 hours with no company work from that airport, a small capped personal overstay cost can apply.
+- If you stay away from base for more than 48 hours with no company work from that airport, a small capped personal overstay cost can apply. Commuter and Crash Pad give you more time before it starts. This cost runs on real hours, unlike your trip length, which counts legs.
 - Explicit repositioning actions, such as Career Jumpseat, can still have a fare unless they are airline-sponsored.
 
-Returning to base ends the away period and changes your current location. It can help if future work starts from base, but you do not need to return only to avoid a normal overnight lodging charge.
+Returning to base ends the away period and your trip. You do not need to return just to avoid a normal overnight lodging charge. The reasons to come home are your [home bonus](#home-bonus), your [base standing](#base-standing), and a [rested start](#rested-at-home) to your next flight.
 
 For finance details, see [Career Finance](/career-finance#away-from-base-expenses) and [Career Payroll and Ledger](/career-payroll-ledger#away-from-base-ledger-entries).
 
@@ -108,4 +202,5 @@ For finance details, see [Career Finance](/career-finance#away-from-base-expense
 - Forgetting to jumpseat before an assignment.
 - Looking for routes from base when your current location is somewhere else.
 - Ignoring relocation requirements on reserve or job offers.
+- Buying your own jumpseat ticket home during a trip. It closes the trip with no home bonus. Fly the last leg into base, or wait until you are due home for the free ride.
 
