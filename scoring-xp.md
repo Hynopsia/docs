@@ -82,7 +82,7 @@ For online flights, FlyHub primarily evaluates landing impact through **touchdow
 
 Vertical speed is still shown in the flight report, but G-force is the better measure of what the aircraft actually experienced at touchdown. A touchdown can look low in feet per minute but still hit hard because of aircraft attitude, bounce, sink rate changes, runway slope, or gear compression.
 
-Every flight starts at **10.00**. The touchdown G-force sets the landing score, and every other penalty is then subtracted from it. In the flight report, any points lost on the touchdown show up as their own **Touchdown** row in the penalties list, next to rows like Altimeter Procedure or Runway Alignment. The row shows the band you landed in, your G-force and vertical speed, and how many points it cost.
+Every flight starts at **10.00**. The touchdown G-force sets the landing score, and every other penalty is then subtracted from it. In the flight report, any points lost on the touchdown show up as their own **Touchdown** card under Score Adjustments, next to cards like Altimeter Setting or Landing Accuracy. Cards are sorted by how many points they cost. Each one says what happened, shows the key numbers, gives a tip for next time, and keeps the raw data under **Technical data**.
 
 | Touchdown band | Touchdown G-force | Deduction |
 | :--- | :--- | :--- |
@@ -98,6 +98,12 @@ Every flight starts at **10.00**. The touchdown G-force sets the landing score, 
 The landing score is rounded to one decimal. For example, a 1.00 G "greased" touchdown is in the Butter band and loses 0.10, so the flight starts from 9.90 before any other penalty.
 
 When difficult conditions are detected at touchdown, the Great band extends to 1.50 G and the Good band to 1.80 G. See [Difficult conditions compensation](#difficult-conditions-compensation).
+
+### Go-arounds
+
+If you go around after touching the runway, FlyHub scores only your final landing. The touchdown you climbed away from does not count.
+
+The exception is a crash. If the earlier touchdown already met crash conditions, it stays the scored landing even if you climb away and land again. See [Crash detection](#crash-detection).
 
 FlyHub also checks whether the touchdown was usable and safe. A soft touchdown is not automatically perfect if it causes a long float, poor runway placement, runway overrun risk, or weak directional control.
 
@@ -159,6 +165,8 @@ FlyHub can score:
 - Whether difficult conditions, such as crosswind, affected the landing.
 
 Landing on the centerline and touching down in a reasonable zone helps protect the score. Touching down far down the runway, landing off-center, leaving the pavement, or overrunning the runway can create penalties even if the touchdown G-force was low.
+
+Microsoft Flight Simulator often reports a runway as ending exactly at its thresholds, without the paved overrun beyond them. When real-world runway data shows more than 150 m of pavement past the thresholds, FlyHub uses that pavement for the overrun check instead. A normal rollout onto that pavement is not counted as an overrun.
 
 ### Takeoff runway checks
 
@@ -587,7 +595,9 @@ Some flights are harder than others. FlyHub records the conditions present at to
 
 In normal conditions, the full-rating centerline allowance remains 4 meters. Under difficult conditions it increases to 8 meters. The landing-score bands also become slightly more forgiving: a landing remains in the great range up to 1.50g instead of 1.40g, and in the average range up to 1.80g instead of 1.70g. The measured touchdown G-force is not changed; only the scoring band is adjusted.
 
-Centerline penalty is calculated only beyond the applicable allowance and is capped. An active windshear window suppresses the centerline precision penalty completely. The flight report shows the detected wind, runway-surface condition, active triggers, centerline tolerance, and any landing-score relief that was applied. Missing simulator data does not invent a difficult-condition trigger.
+Centerline penalty is calculated only beyond the applicable allowance and is capped. An active windshear window suppresses the centerline precision penalty completely. Missing simulator data does not invent a difficult-condition trigger.
+
+In the flight report, a conditions banner names what made the landing harder in plain words, such as crosswind, windshear, or a slippery runway. When leniency applied, it says **Easier scoring** and shows the wider centerline allowance, the firmer touchdown allowed, and any points saved. If your landing was clean anyway, it says no help was needed. The raw wind, runway-surface, and trigger data is under **Technical data**.
 
 This does not erase unsafe flying. Runway excursions, overruns, aircraft strikes, crashes, and aircraft wind-limit violations are still assessed normally.
 

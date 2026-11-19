@@ -125,7 +125,8 @@ The **Maintenance provider** program makes findings rarer and cheaper to fix. Le
 
 Some findings appear between services:
 
-- A landing over **600 fpm** creates a **Hard landing inspection**: inspect the gear within 2 flights.
+- A **severe** landing (2.8 g or more, or 1,200 fpm or more) creates a **Hard landing inspection**: inspect the gear within 2 flights.
+- A **firm** landing (over 600 fpm or 2.0 g) is only logged. It never grounds the aircraft, but the gear wears a little faster until the next service that covers the gear checks it. A third firm landing before then needs the inspection.
 - Rarely, a pilot writes something up after a flight, such as a bird strike, a lightning strike, or an inoperative APU.
 
 The finding names the pilot and the landing rate. If the flight is later deleted, its write-up goes too.
@@ -161,6 +162,16 @@ Reliability feeds your airline's [reputation](./reputation-and-progress): the re
 - **Gentlest landers**: pilots ranked by how much wear they cause per flight, with their average landing and firm landings over the last 30 days. Each aircraft's **Health** tab has the same table as **Who wore it**.
 
 Aircraft also earn **milestones**, such as 1,000 airframe hours, 500 cycles, Heavy check #2, or several clean services in a row.
+
+## Autopilot
+
+Optional. In **Fleet → Maintenance**, **Autopilot → Settings** (needs maintenance or aircraft access). It checks every 10 minutes and books through your normal hangars and prices, so anything it books shows in the hangar and can be cancelled like your own bookings.
+
+- **Book services**: **Off**, **Safety only** (books only what can't fly without a service: overdue items, due checks, below the safe floor) or **Keep fleet healthy** (also what comes due within the days you choose, deferrals about to run out, and one weak system). It picks the cheapest service that solves the problem, for example a landing gear repair for an overdue gear inspection.
+- **Decide findings for me**: fixes findings up to the amount you set and defers pricier ones when they can wait. Items that must be fixed are always fixed. You can still change any decision.
+- **Guardrails**: a monthly budget, a balance it never goes below, the hubs it may use, and an option to keep one bay free for your own bookings. It never books a heavy check and never takes an aircraft that has a booked flight.
+- **Ferry jobs**: when an aircraft needs a hub, every pilot gets an Inbox job to fly it to the nearest allowed hub. The first pilot who books that route with that aircraft takes it, and the others are told who took it. If that pilot drops it, it opens again. If the aircraft moves another way, the job closes and pilots are told. Aircraft that are due need your risk acceptance to fly, so the autopilot leaves those to you.
+- **Monday summary**: a weekly Inbox note to everyone with maintenance access: what was booked and decided, what maintenance cost, what is waiting on you, firm and severe landings, and which hub kept aircraft waiting for a bay, with the price of another bay there.
 
 ## Alerts
 

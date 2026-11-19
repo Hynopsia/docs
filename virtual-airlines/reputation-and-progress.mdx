@@ -37,38 +37,79 @@ Programs and marketing campaigns can also add **perceived reputation**. The mark
 
 ## What moves overall reputation
 
-The current progression model weighs four broad parts of the airline's history:
+Every Monday the airline gets a **target** from five parts of its record:
 
-| Driver | Approximate importance | In everyday language |
+| Driver | Weight | In everyday language |
 | --- | ---: | --- |
-| Flight quality | 45% | Are flights completed well, with good operational results? |
-| Maturity | 20% | Has the airline existed long enough to show a pattern? |
-| Profitability | 20% | Has the airline kept a healthy recent operating margin? |
-| Sustained activity | 15% | Is it flying consistently across active days, rather than appearing once and disappearing? |
+| Flight quality | 40% | Are flights scored well? An average of 7.0 earns nothing, 9.5 earns full marks. |
+| Reliability | 20% | Does the airline finish what it books? |
+| Profitability | 15% | Has the last 90 days kept a healthy margin? About 50% earns full marks. |
+| Activity | 10% | Days flown and flights in the last 28 days. |
+| Track record | 15% | Lifetime flights flown. It keeps growing, more slowly the bigger it gets. |
 
-Reputation refreshes progressively rather than jumping after one good flight. Positive movement is currently capped at about +0.10 per refresh and becomes slower as the airline rises above roughly 3. Negative movement can be faster, reaching about −0.30 per refresh in a sufficiently poor period.
+Reputation then moves toward the target, and only in weeks the airline flies:
 
-The exact refresh timing and displayed values are authoritative in the current Market audit. A single excellent flight is helpful, but a repeated pattern is what builds durable trust.
+| Reputation | Most it can climb in a week |
+| --- | ---: |
+| Under 3 (New carrier) | +0.30 |
+| 3 to 5 (Regional name) | +0.18 |
+| 5 to 6 | +0.12 |
+| 6 to 7 | +0.08 |
+| 7 to 8 | +0.05 |
+| 8 and above | +0.03 |
 
-## The four reputation dimensions
+Those are the amounts for about 6 flights that week. Fewer flights earn less (2 flights earn about 60%), and busy weeks earn up to 1.25x, which is reached at about 10 flights. Flying more than that adds nothing. Gains also slow as the airline gets close to its target.
+
+A careful airline flying most days usually reaches 3 in about 6 weeks, 5 in about 4 months and 6 in about 6 months. 7 is the long game.
+
+**Breaks are safe.** A week without flights holds reputation where it is. After 4 idle weeks it fades by 0.10 a week, but idle time alone never takes it below 3. Low activity can slow a climb, but it never pulls reputation down.
+
+**Volume can't replace quality.** If flight quality is under 4 points (an average below about 8.0), the target stops at 4, however much the airline flies.
+
+**Reputation is lost faster than it is earned.** If flight quality, reliability or profit fall below what the airline's reputation shows, it can drop up to 0.40 a week.
+
+**World charters count.** Each completed world charter reservation adds +0.03 (up to +0.15 a week). Each failed or expired one costs 0.05 (up to 0.25 a week).
+
+The exact values are in the Market audit, including what next Monday's refresh would do right now.
+
+## Reputation tiers
+
+| Tier | Reputation | Fares passengers accept | Market capture | VIP cabin load |
+| --- | --- | ---: | ---: | ---: |
+| New carrier | 0 – 3 | 0.85× | 89% | 54% |
+| Regional name | 3 – 5 | 1.00× | 92% | 61% |
+| Established | 5 – 6.5 | 1.14× | 94% | 68% |
+| Trusted | 6.5 – 8 | 1.25× | 96% | 73% |
+| Flagship | 8 – 10 | 1.36× | 98% | 78% |
+
+Values are at the start of each tier and keep improving inside it. Flagship sits above the base ceiling of 7, so it needs Programs.
+
+## Where you see it
+
+- **Flight report:** each VA flight shows whether it lifted the airline's reputation or cost it reliability, compared with the airline's average.
+- **Market audit:** next Monday's change, the target built from the five pillars, the pillar holding you back, the time to the next tier and the tier ladder.
+- **Airline dashboard:** the tier and next Monday's change. Click it to see what the next tier changes.
+- **People:** each pilot's trust points for the last 90 days, and the "Who builds our reputation" board in Insights. A scored flight earns 0 to 1 point (score 7.0 to 9.5). An abandoned or rejected flight costs 1, an expired booking 0.5.
+
+## The score pillars
 
 ### Reliability
 
-Reliability is completion consistency. Cancelled, disrupted, abandoned, or expired operations make the airline look less dependable. Completing the flights the airline promises is the most direct way to protect this dimension.
+Reliability compares the flights the airline finished with the ones it let down: flights abandoned mid-air, flights rejected at validation, and booked flights that expired (these count half). **Cancelling before departure is free.**
 
-[Maintenance reliability](./manage-maintenance#reliability) caps it: flying while maintenance is due, flying with overdue items, worn cabins, and maydays lower it. Low maintenance reliability also trims the flight-quality part of overall reputation, by up to 2 points.
+[Maintenance reliability](./manage-maintenance#reliability) caps it: flying while maintenance is due, flying with overdue items, worn cabins, and maydays lower it. Low maintenance reliability also trims flight quality by up to 2 points.
 
-### Operations
+### Activity
 
-Operations reflects the airline's operating record: settled flights, operational discipline, and the absence of avoidable failures. A busy airline with weak execution does not automatically score well.
+Activity is days flown (12 or more in 28 days earns most of it) plus the number of flights in the last 28 days. It only helps reputation climb. It never pulls reputation down.
 
-### Passenger experience
+### Flight quality
 
-Passenger experience combines accepted flight quality with pricing satisfaction. A flight can succeed operationally and still create a weaker customer impression if the airline repeatedly prices far above what its reputation and market can support.
+Flight quality comes from the accepted flight scores of the last 90 days, minus the maintenance penalty.
 
 ### Community strength
 
-Community strength reflects active members and sustained participation. It is not just the number of accounts listed on the roster; inactive membership can weaken the picture of a living airline community.
+Community strength reflects active members and sustained participation. It is shown for context and does not change the score.
 
 ## What reputation changes
 

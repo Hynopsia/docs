@@ -48,6 +48,17 @@ If you saved custom SimBrief airframe profiles in FlyHub, FlyHub may ask which a
 
 Choose Default to use the normal aircraft ICAO, such as `A320` or `B738`.
 
+A few aircraft codes have no SimBrief type of their own. For these, FlyHub sends SimBrief's type for the same airframe, so the OFP is not rejected:
+
+| Booked aircraft | Sent to SimBrief as |
+| --- | --- |
+| `E75L`, `E75S` (Embraer 175) | `E175` |
+| `E45X` (ERJ-145XR) | `E145` |
+| `B74D` (747-400 domestic) | `B744` |
+| `C130` (C-130 Hercules) | `C30J` |
+
+Your booking keeps the original aircraft code.
+
 Choose a saved profile to use that SimBrief airframe's Internal ID instead. This is useful for aircraft variants such as Fenix A320 CFM, ToLiss A320 IAE, PMDG 737 variants, or other simulator-specific setups.
 
 For setup instructions, see [SimBrief Custom Airframe Profiles](/simbrief-custom-profiles).

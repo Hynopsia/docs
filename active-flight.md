@@ -371,6 +371,8 @@ Recovery only appears when FlyHub had enough telemetry to save a recovery snapsh
 
 Recovery snapshots expire after 6 hours.
 
+Time while the simulator was not running does not count as flight time. Any stretch longer than 5 minutes with no telemetry, such as the time between a crash and your recovery, is left out of the logged block time. After a restore, scoring pauses briefly while you stabilize the aircraft.
+
 For the full step-by-step recovery process, see [Recovery Wizard](/recovery-wizard).
 
 ## Overlay in the desktop app

@@ -174,15 +174,24 @@ FlyHub only keeps in-air recovery points where the aircraft was clean (gear and 
 
 After a successful restore, FlyHub shows Position restored.
 
-For about 30 seconds after restore, FlyHub pauses some checks such as slew and sim-rate detection. This gives you time to stabilize the aircraft after the restore.
+Right after the restore, scoring pauses so you can get the aircraft under control:
 
-After that short grace period, normal scoring rules apply again.
+- The pause always lasts the first 30 seconds.
+- After that, it ends once the aircraft has been stable for 10 seconds: in the air, no stall or overspeed warning, bank of 30° or less and vertical speed of 2,000 fpm or less.
+- It never lasts more than 2 minutes.
+- After the first 30 seconds, it does not cover flight below 1,000 ft AGL or on the ground. A landing or crash after a restore is always scored.
+
+When the pause ends, normal scoring rules apply again.
+
+If you fly without autothrottle, set cruise thrust right after the move so the aircraft keeps its speed.
 
 Continue flying normally and close the flight in FlyHub after landing.
 
 ## Microsoft Flight Simulator notes
 
 For Microsoft Flight Simulator, FlyHub restores the aircraft through SimConnect.
+
+FlyHub restores your true airspeed at the saved altitude, so an aircraft restored at cruise level keeps a realistic cruise speed instead of arriving too slow. FlyHub checks that both the position and the speed took. If the speed did not hold, FlyHub sends it again a few times before tracking resumes.
 
 Make sure:
 

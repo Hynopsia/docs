@@ -130,6 +130,7 @@ Type rating cards can show:
 - Aircraft codes included in that rating.
 - Current, expired, or training status.
 - Completed flights for that rating.
+- Hours flown on that rating.
 - Last flight date.
 - Awarded date when earned.
 - Requirements still needed.

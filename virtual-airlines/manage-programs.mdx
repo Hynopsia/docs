@@ -169,16 +169,17 @@ Effects apply to every flight settled while the contract runs. From one branch o
 
 ## Reputation ceiling
 
-Reputation runs from 0 to 10, and every airline starts at 1.0. Once a week it moves toward a target built from:
+Reputation runs from 0 to 10, and every airline starts at 1.0. Every Monday it moves toward a target built from:
 
 | Part | Weight |
 | --- | ---: |
-| Flight scores | 45% |
-| Airline age | 20% |
-| 90-day profit | 20% |
-| Activity | 15% |
+| Flight quality | 40% |
+| Reliability | 20% |
+| 90-day profit | 15% |
+| Activity | 10% |
+| Track record | 15% |
 
-It rises at most 0.10 a week (slower above 3) and can drop up to 0.30 a week. Higher reputation means more passengers and better fares.
+It climbs only in weeks the airline flies, by up to +0.30 a week while under 3 and more slowly at each tier above that. It can drop up to 0.40 a week. See [What moves overall reputation](./reputation-and-progress#what-moves-overall-reputation). Higher reputation means more passengers and better fares.
 
 In short: fly clean, well-scored flights every week to raise reputation, and run catering, crew, maintenance, or ground programs to raise the cap.
 
