@@ -132,7 +132,7 @@
           "public-api"
         ],
         "summary": "List airline flight activity",
-        "description": "Returns airline logbook activity, newest first. A flagship key includes flights of all non-closed subsidiaries in its own group; a subsidiary or independent airline key includes only its own flights. Inspect each status: a row records airline flight activity and is not automatically a successful completion. Completed and diverted rows include the pilot (display name and public avatar), landing metrics, load, network, simulator, and airport names; those fields are null on rejected and corrected rows. Every row carries its operationType. Keys that also hold finance:read get each flight's settled economics (revenue, costs, net result). Page deep logbooks with cursor instead of offset; sync new entries with order=asc and the stored nextCursor.",
+        "description": "Returns airline logbook activity, newest first. A flagship key includes flights of all non-closed subsidiaries in its own group; a subsidiary or independent airline key includes only its own flights. Inspect each status: a row records airline flight activity and is not automatically a successful completion. Completed and diverted rows include the pilot (display name and public avatar), landing metrics, load, network, simulator, and airport names; those fields are null on rejected and corrected rows. Every row carries its operationType. Keys that also hold finance:read get each flight's settled economics (revenue, costs, net result, and revenue and cost breakdowns). Page deep logbooks with cursor instead of offset; sync new entries with order=asc and the stored nextCursor.",
         "operationId": "listVaFlights",
         "security": [
           {
@@ -1736,7 +1736,9 @@
                   "revenue",
                   "costs",
                   "netResult",
-                  "currency"
+                  "currency",
+                  "revenueBreakdown",
+                  "costBreakdown"
                 ],
                 "properties": {
                   "revenue": {
@@ -1763,6 +1765,58 @@
                   "currency": {
                     "type": "string",
                     "description": "Always FH$."
+                  },
+                  "revenueBreakdown": {
+                    "type": "array",
+                    "description": "Revenue lines of the flight, as on the flight page: passengers, cargo, ancillary, contracts.",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "key",
+                        "label",
+                        "amount"
+                      ],
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "description": "Stable line key."
+                        },
+                        "label": {
+                          "type": "string",
+                          "description": "Name shown on the flight page."
+                        },
+                        "amount": {
+                          "type": "number",
+                          "description": "Positive FH$ amount."
+                        }
+                      }
+                    }
+                  },
+                  "costBreakdown": {
+                    "type": "array",
+                    "description": "Cost lines of the flight, as on the flight page: fuel, airportFees, handling, navigation, catering, aircraftOperating, maintenance, insurance, emissions, crewPayroll, conditionSurcharge, penalty, compensation, abnormalMaintenance.",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "key",
+                        "label",
+                        "amount"
+                      ],
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "description": "Stable line key."
+                        },
+                        "label": {
+                          "type": "string",
+                          "description": "Name shown on the flight page."
+                        },
+                        "amount": {
+                          "type": "number",
+                          "description": "Positive FH$ amount."
+                        }
+                      }
+                    }
                   }
                 }
               },
